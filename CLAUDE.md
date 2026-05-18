@@ -103,13 +103,10 @@
 
 ---
 
-## 마이그레이션 현재 상태 (2026-05-18 시점)
+## 마이그레이션 현재 상태 (2026-05-18 시점, partials/data/modules 마이그레이션 완료)
 
 현 코드베이스는 본 가이드의 **이전 단계**다. 다음 항목은 미적용 상태이며, 사용자가 작업 요청 시 본 가이드 방향으로 점진 이행한다:
 
-- `partials/` 미존재 → 헤더/푸터 6개 HTML에 복붙되어 있음
-- `data/` 미존재 → 공지·FAQ가 HTML에 박혀 있고 `index.html`/`community.html` 중복
-- `js/modules/` 미존재 → `js/header.js`, `js/observer.js`가 전역 스크립트
 - `css/components.css` 단일 파일 → `components/`로 분리 미진행
 - `@layer` 미적용
 

@@ -451,9 +451,9 @@ npx serve .
 
 현재 코드베이스에서 본 가이드를 적용해 나갈 순서:
 
-1. **partials 분리** (`header.html`, `footer.html`) + `include.js` 도입 → 6개 HTML의 중복 제거.
-2. **데이터 분리** (`notices.json`, `faqs.json`) + 렌더 모듈 도입 → `community.html`·`index.html` 동기화 문제 해결.
-3. **ES Module 전환** — `<script src>` → `type="module"`, 모듈 폴더 정리.
+1. ~~**partials 분리** (`header.html`, `footer.html`) + `include.js` 도입 → 6개 HTML의 중복 제거.~~ ✅ 완료
+2. ~~**데이터 분리** (`notices.json`, `faqs.json`) + 렌더 모듈 도입 → `community.html`·`index.html` 동기화 문제 해결.~~ ✅ 완료
+3. ~~**ES Module 전환** — `<script src>` → `type="module"`, 모듈 폴더 정리.~~ ✅ 완료
 4. **CSS 컴포넌트 분리** — 현재 단일 `components.css`를 `components/*.css`로 쪼개고 `@layer` 적용.
 5. **성능 보강** — preload, fetchpriority 추가.
 6. **(선택) SSG 도입** — 게시판 SEO가 중요해지는 시점에 Eleventy로 정적 빌드 전환.
