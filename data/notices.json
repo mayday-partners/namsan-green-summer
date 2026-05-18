@@ -1,0 +1,74 @@
+[
+  {
+    "id": "2026-05-20-launch",
+    "date": "2026-05-20",
+    "title": "2026 남산 그린 서머 페스티벌 공식 홈페이지 오픈!",
+    "category": "공지",
+    "pinned": true,
+    "link": null
+  },
+  {
+    "id": "2026-05-18-schedule",
+    "date": "2026-05-18",
+    "title": "2026 남산 그린 서머 페스티벌 일정 안내",
+    "category": "공지",
+    "pinned": false,
+    "link": null
+  },
+  {
+    "id": "2026-05-18-funwalk-recruit",
+    "date": "2026-05-18",
+    "title": "Fun&Walk 참가자 모집 안내",
+    "category": "공지",
+    "pinned": false,
+    "link": null
+  },
+  {
+    "id": "2026-05-15-lineup",
+    "date": "2026-05-15",
+    "title": "Green Night 공연 라인업 공개",
+    "category": "공지",
+    "pinned": false,
+    "link": null
+  },
+  {
+    "id": "2026-05-10-booking-open",
+    "date": "2026-05-10",
+    "title": "프로그램 사전 예약 오픈 안내",
+    "category": "공지",
+    "pinned": false,
+    "link": null
+  },
+  {
+    "id": "2026-05-02-traffic",
+    "date": "2026-05-02",
+    "title": "행사 당일 교통 통제 및 셔틀 운영 안내",
+    "category": "공지",
+    "pinned": false,
+    "link": null
+  },
+  {
+    "id": "2026-04-28-funwalk-deadline",
+    "date": "2026-04-28",
+    "title": "Fun&Walk 사전 예약 1차 마감 안내",
+    "category": "공지",
+    "pinned": false,
+    "link": null
+  },
+  {
+    "id": "2026-04-20-kit",
+    "date": "2026-04-20",
+    "title": "참가 키트 발송 일정 안내",
+    "category": "공지",
+    "pinned": false,
+    "link": null
+  },
+  {
+    "id": "2026-04-10-sponsor",
+    "date": "2026-04-10",
+    "title": "제휴 후원사 모집 안내",
+    "category": "공지",
+    "pinned": false,
+    "link": null
+  }
+]
