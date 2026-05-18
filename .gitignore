@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Reference materials (not part of the project)
+_ref/
+main-sample.png
+
+# Tooling artifacts
+.omc/
+.playwright-mcp/
+.claude/local/
+
+# Unused Pretendard variants (only woff2-subset is used by base.css)
+fonts/pretendard/woff-subset/
+fonts/pretendard/woff-dynamic-subset/
+fonts/pretendard/woff2-dynamic-subset/
+
+# Section images: only webp is referenced by CSS
+img/sections/*.png
+
+# Editor / OS
+*.log
+*~
