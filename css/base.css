@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/pretendard/woff2-subset/Pretendard-Light.subset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/pretendard/woff2-subset/Pretendard-Regular.subset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/pretendard/woff2-subset/Pretendard-Medium.subset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/pretendard/woff2-subset/Pretendard-SemiBold.subset.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/pretendard/woff2-subset/Pretendard-Bold.subset.woff2') format('woff2');
+}
+
+body {
+  font-family: var(--font-kr);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  color: var(--color-text);
+  background: var(--color-bg);
+  letter-spacing: -0.01em;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--space-10);
+}
+
+@media (max-width: 768px) {
+  .section { padding-block: var(--space-9); }
+}
+
+.eyebrow {
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-neon);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--color-white);
+  margin-block-start: var(--space-3);
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .section-title { font-size: var(--fs-2xl); }
+}
+
+.section-desc {
+  font-size: var(--fs-md);
+  color: var(--color-text-muted);
+  margin-block-start: var(--space-5);
+  max-width: 56ch;
+}
+
+::selection {
+  background: var(--color-neon);
+  color: var(--color-bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-neon);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.btn--primary:focus-visible {
+  outline-color: var(--color-white);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: var(--space-3);
+  background: var(--color-neon);
+  color: var(--color-bg);
+  padding: var(--space-3) var(--space-5);
+  z-index: 200;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  border-radius: var(--radius-sm);
+  transition: top var(--dur-fast) var(--ease-out);
+}
+.skip-link:focus {
+  top: var(--space-3);
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
