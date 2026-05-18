@@ -26,26 +26,7 @@
 <body>
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
 
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a href="../index.html" class="site-logo">
-        <span class="site-logo__dot"></span>
-        <span>NAMSAN GREEN SUMMER</span>
-      </a>
-      <nav class="site-nav" data-open="false">
-        <button class="site-nav__toggle" type="button" aria-label="메뉴" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-        <ul class="site-nav__list">
-          <li><a class="site-nav__link" href="event.html">행사안내</a></li>
-          <li><a class="site-nav__link" href="fun-and-walk.html">Fun&amp;Walk</a></li>
-          <li><a class="site-nav__link" href="green-night.html" aria-current="page">Green Night</a></li>
-          <li><a class="site-nav__link" href="green-garden.html">Green Garden</a></li>
-          <li><a class="site-nav__link" href="community.html">커뮤니티</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div data-include="/partials/header.html"></div>
 
   <main id="main">
     <section class="page-hero page-hero--night">
@@ -163,74 +144,8 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <nav class="site-footer__menu" aria-label="Sitemap">
-        <div>
-          <h4>행사안내</h4>
-          <ul>
-            <li><a href="event.html">행사개요</a></li>
-            <li><a href="event.html#schedule">행사일정</a></li>
-            <li><a href="event.html#location">오시는 길</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Fun&amp;Walk</h4>
-          <ul>
-            <li><a href="fun-and-walk.html">코스 안내</a></li>
-            <li><a href="fun-and-walk.html">참가 유의사항</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Green Night</h4>
-          <ul>
-            <li><a href="green-night.html">프로그램 안내</a></li>
-            <li><a href="green-night.html">타임테이블</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Green Garden</h4>
-          <ul>
-            <li><a href="green-garden.html">도슨트 투어</a></li>
-            <li><a href="green-garden.html">체험 프로그램</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>커뮤니티</h4>
-          <ul>
-            <li><a href="community.html">공지사항</a></li>
-            <li><a href="community.html#faq">FAQ</a></li>
-            <li><a href="community.html#refund">환불 안내</a></li>
-          </ul>
-        </div>
-      </nav>
+  <div data-include="/partials/footer.html"></div>
 
-      <div class="site-footer__grid">
-        <div>
-          <p class="site-footer__title">Host</p>
-          <p class="site-footer__text">주최 / 서울특별시<br>주관 / 남산공원관리사무소</p>
-        </div>
-        <div>
-          <p class="site-footer__title">Contact</p>
-          <p class="site-footer__text">namsan-festival@example.kr<br>02-0000-0000 (평일 10:00–18:00)</p>
-        </div>
-        <div>
-          <p class="site-footer__title">Follow</p>
-          <ul class="sns-list">
-            <li><a href="#" aria-label="Instagram">IG</a></li>
-            <li><a href="#" aria-label="YouTube">YT</a></li>
-            <li><a href="#" aria-label="Blog">B</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
-        <span>© 2026 Namsan Green Summer Festival</span>
-        <span>모든 권리 보유</span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="../js/header.js"></script>
-  <script src="../js/observer.js"></script>
+  <script type="module" src="/js/main.js"></script>
 </body>
 </html>
