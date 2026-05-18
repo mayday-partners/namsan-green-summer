@@ -6,8 +6,8 @@ import { renderNoticeList } from './modules/notice-list.js';
 import { renderFaqList } from './modules/faq-list.js';
 
 (async () => {
-  await mountIncludes();
-  initHeader();
-  await Promise.all([renderNoticeList(), renderFaqList()]);
-  initFadeIn();
+  try { await mountIncludes(); } catch (e) { console.error('[main] mountIncludes:', e); }
+  try { initHeader(); } catch (e) { console.error('[main] initHeader:', e); }
+  await Promise.allSettled([renderNoticeList(), renderFaqList()]);
+  try { initFadeIn(); } catch (e) { console.error('[main] initFadeIn:', e); }
 })();

@@ -1,5 +1,5 @@
 // js/modules/notice-list.js
-const DATA_URL = '/data/notices.json';
+const DATA_URL = new URL('../../data/notices.json', import.meta.url).href;
 const TEMPLATE_ID = 'tpl-notice-item';
 
 export async function renderNoticeList() {
@@ -12,20 +12,24 @@ export async function renderNoticeList() {
     return;
   }
 
-  let items;
+  let sorted;
   try {
     const res = await fetch(DATA_URL);
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-    items = await res.json();
+    const items = await res.json();
+    if (!Array.isArray(items)) throw new TypeError('expected array');
+    sorted = [...items].sort((a, b) => {
+      const pa = !!a.pinned, pb = !!b.pinned;
+      if (pa !== pb) return pa ? -1 : 1;
+      return (b.date ?? '').localeCompare(a.date ?? '');
+    });
   } catch (err) {
     console.error('[notice-list] load failed:', err);
+    slots.forEach(slot => {
+      slot.innerHTML = '<li role="alert" style="padding:1rem;color:#FF0F7B">공지사항을 불러오지 못했습니다.</li>';
+    });
     return;
   }
-
-  const sorted = [...items].sort((a, b) => {
-    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
-    return b.date.localeCompare(a.date);
-  });
 
   slots.forEach(slot => {
     const raw = slot.dataset.limit ?? 'all';
@@ -35,7 +39,8 @@ export async function renderNoticeList() {
     for (const item of list) {
       const node = tpl.content.cloneNode(true);
       const a = node.querySelector('a');
-      a.href = item.link ?? `/pages/community.html#${item.id}`;
+      if (!a) continue;
+      a.href = item.link ?? `pages/community.html#${item.id}`;
       const dateEl = node.querySelector('.notice__date');
       const titleEl = node.querySelector('.notice__title');
       if (dateEl) dateEl.textContent = formatDate(item.date);
@@ -47,5 +52,5 @@ export async function renderNoticeList() {
 }
 
 function formatDate(iso) {
-  return iso.replaceAll('-', '.');
+  return String(iso ?? '').replaceAll('-', '.');
 }
