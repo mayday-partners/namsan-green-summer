@@ -57,8 +57,9 @@
         "kakao": "7937392",
         "kakao_source": "https://place.map.kakao.com/7937392",
         "kakao_verified": "2026-05-19 — Kakao page: 서울역 1호선 7번출구, 지하철출구, 중구 남대문로5가 84-11",
-        "google": null,
-        "google_pending_note": "Google does not register subway exits individually. destination=address string still resolves to the station vicinity.",
+        "google": "ChIJA3CU42aifDURaq-3csGXvuc",
+        "google_source": "https://developers.google.com/maps/documentation/places/web-service/place-id",
+        "google_verified": "2026-05-19 — Google does not register subway exits as distinct places, so this Place ID points to 서울역 (the station itself). Google Maps routing will end at the main station; users then walk to Exit 7.",
         "naver": "21405889",
         "naver_source": "https://map.naver.com/p/entry/place/21405889",
         "naver_verified": "2026-05-19 — Naver page: 서울역7번출구, 지하철출구번호, 1·4·공항·경의중앙·GTX-A 환승"
