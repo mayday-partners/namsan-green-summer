@@ -1,4 +1,6 @@
 :root {
+  color-scheme: dark;
+
   --color-bg: #050816;
   --color-bg-elevated: #0c0f24;
   --color-bg-overlay: rgba(5, 8, 22, 0.72);
