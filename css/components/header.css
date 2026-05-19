@@ -14,7 +14,7 @@
 }
 
 .site-header.is-scrolled {
-  background: var(--color-bg-overlay);
+  background: var(--color-surface-overlay);
   backdrop-filter: saturate(140%) blur(16px);
   -webkit-backdrop-filter: saturate(140%) blur(16px);
   border-block-end-color: var(--color-border);
@@ -32,7 +32,7 @@
   font-family: var(--font-display);
   font-size: 1.25rem;
   letter-spacing: 0.06em;
-  color: var(--color-white);
+  color: var(--color-on-surface);
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -46,8 +46,8 @@ html.nav-open { overflow: hidden; }
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--color-neon);
-  box-shadow: 0 0 12px var(--color-neon);
+  background: var(--color-primary);
+  box-shadow: 0 0 12px var(--color-primary);
 }
 
 .site-nav__list {
@@ -58,7 +58,7 @@ html.nav-open { overflow: hidden; }
 .site-nav__link {
   font-size: var(--fs-sm);
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-on-surface-body);
   transition: color var(--dur-fast) var(--ease-out);
   position: relative;
 }
@@ -69,13 +69,13 @@ html.nav-open { overflow: hidden; }
   inset-inline: 0;
   bottom: -6px;
   height: 1px;
-  background: var(--color-neon);
+  background: var(--color-primary-text);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--dur-base) var(--ease-out);
 }
 
-.site-nav__link:hover { color: var(--color-neon); }
+.site-nav__link:hover { color: var(--color-primary-text); }
 .site-nav__link:hover::after { transform: scaleX(1); }
 
 .site-nav__toggle {
@@ -90,7 +90,7 @@ html.nav-open { overflow: hidden; }
   left: 4px;
   right: 4px;
   height: 1.5px;
-  background: var(--color-white);
+  background: var(--color-on-surface);
   transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-fast);
 }
 .site-nav__toggle span:nth-child(1) { top: 11px; }
@@ -105,7 +105,7 @@ html.nav-open { overflow: hidden; }
   .site-nav__list {
     position: fixed;
     inset: 0;
-    background: var(--color-bg);
+    background: var(--color-neutral);
     flex-direction: column;
     align-items: center;
     justify-content: center;

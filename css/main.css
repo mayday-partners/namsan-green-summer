@@ -13,6 +13,7 @@
 @import url('components/card.css')        layer(components);
 @import url('components/footer.css')      layer(components);
 @import url('components/image-slot.css')  layer(components);
+@import url('components/dark-section.css') layer(components);
 
 @import url('home.css')                   layer(pages);
 @import url('page.css')                   layer(pages);

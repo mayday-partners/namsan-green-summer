@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cards · Story</title>
+  <link rel="stylesheet" href="../../../css/main.css">
+  <style>
+    body { padding: 32px; }
+    .story-group + .story-group { margin-top: 40px; }
+    .story-group__label {
+      font-family: var(--font-en);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-on-surface-muted);
+      margin-bottom: 12px;
+    }
+    .story-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .story-program-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  </style>
+</head>
+<body>
+  <section class="story-group">
+    <div class="story-group__label">Light surface card — bg surface, on-surface text, shadow-card resting</div>
+    <div class="story-grid">
+      <a class="card" href="#">
+        <div class="card__media card__media--neutral"></div>
+        <div class="card__body">
+          <div class="eyebrow eyebrow--neon">GREEN GARDEN</div>
+          <div class="card__title">DOCENT FOREST WALK</div>
+          <div class="card__desc">남산의 식생과 생태를 천천히 들여다보는 도슨트 산책 프로그램입니다.</div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="card__media card__media--funwalk"></div>
+        <div class="card__body">
+          <div class="eyebrow eyebrow--blue">FUN &amp; WALK</div>
+          <div class="card__title">5KM ACTIVE WALK</div>
+          <div class="card__desc">남산 둘레길 5km 액티브 워킹 코스. 미스트 존, 친환경 굿즈 키트.</div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="card__media card__media--night"></div>
+        <div class="card__body">
+          <div class="eyebrow eyebrow--pink">GREEN NIGHT</div>
+          <div class="card__title">NEON SUMMER STAGE</div>
+          <div class="card__desc">라이브 무대, 라이트 인스톨레이션, 남산 정상 야경.</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="story-group">
+    <div class="story-group__label">Program cards (Hybrid dark surface on light page) — Overview section pattern</div>
+    <div class="story-program-grid">
+      <a class="program-card program-card--funwalk" href="#">
+        <div class="program-card__icon">01</div>
+        <div class="program-card__body">
+          <div class="program-card__title">Fun&amp;Walk</div>
+          <div class="program-card__desc">남산 둘레길 5km 액티브 워킹</div>
+        </div>
+      </a>
+      <a class="program-card program-card--night" href="#">
+        <div class="program-card__icon">02</div>
+        <div class="program-card__body">
+          <div class="program-card__title">Green Night</div>
+          <div class="program-card__desc">네온 그린/핑크 라이트 무대</div>
+        </div>
+      </a>
+      <a class="program-card program-card--garden" href="#">
+        <div class="program-card__icon">03</div>
+        <div class="program-card__body">
+          <div class="program-card__title">Green Garden</div>
+          <div class="program-card__desc">도슨트와 함께하는 힐링 산책</div>
+        </div>
+      </a>
+    </div>
+  </section>
+</body>
+</html>

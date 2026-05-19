@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site Header · Story</title>
+  <link rel="stylesheet" href="../../../css/main.css">
+  <style>
+    body { padding-bottom: 200px; min-height: 200vh; }
+    .story-spacer { height: 120vh; padding: 24px; color: var(--color-on-surface-muted); }
+    .story-spacer p { max-width: 520px; }
+    .story-hint {
+      padding: 24px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin: 24px;
+      color: var(--color-on-surface-body);
+    }
+    .story-hint code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <header class="site-header site-header--fallback">
+    <div class="container site-header__inner">
+      <a href="#" class="site-logo">
+        <span class="site-logo__dot"></span>
+        <span>NAMSAN GREEN SUMMER</span>
+      </a>
+      <nav class="site-nav" data-open="false">
+        <button class="site-nav__toggle" type="button" aria-label="메뉴" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#">행사안내</a></li>
+          <li><a class="site-nav__link" href="#">Fun&amp;Walk</a></li>
+          <li><a class="site-nav__link" href="#">Green Night</a></li>
+          <li><a class="site-nav__link" href="#">Green Garden</a></li>
+          <li><a class="site-nav__link" href="#">커뮤니티</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn--primary site-header__cta" href="#">참가신청 →</a>
+    </div>
+  </header>
+
+  <div class="story-hint">
+    <p>Header is <code>position: fixed</code>. Scroll down to see <code>.is-scrolled</code> state with surface backdrop blur.</p>
+    <p style="margin-top: 12px;">To preview <code>.is-scrolled</code> manually:
+      <code>document.querySelector('.site-header').classList.toggle('is-scrolled')</code>
+    </p>
+  </div>
+
+  <div class="story-spacer">
+    <p>Scroll down to see header transitions. Mobile (&lt; 768) shows hamburger; tap to toggle the drawer.</p>
+  </div>
+
+  <script>
+    // Auto-toggle .is-scrolled on real scroll for demo purposes
+    const h = document.querySelector('.site-header');
+    addEventListener('scroll', () => {
+      h.classList.toggle('is-scrolled', scrollY > 40);
+    }, { passive: true });
+  </script>
+</body>
+</html>

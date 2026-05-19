@@ -33,8 +33,8 @@ body {
   font-family: var(--font-kr);
   font-size: var(--fs-base);
   font-weight: 400;
-  color: var(--color-text);
-  background: var(--color-bg);
+  color: var(--color-on-surface-body);
+  background: var(--color-neutral);
   letter-spacing: -0.01em;
 }
 
@@ -59,7 +59,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-neon);
+  color: var(--color-primary-text);
 }
 
 .section-title {
@@ -67,7 +67,7 @@ body {
   font-size: var(--fs-3xl);
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: var(--color-white);
+  color: var(--color-on-surface);
   margin-block-start: var(--space-3);
   line-height: 1;
 }
@@ -78,24 +78,24 @@ body {
 
 .section-desc {
   font-size: var(--fs-md);
-  color: var(--color-text-muted);
+  color: var(--color-on-surface-muted);
   margin-block-start: var(--space-5);
   max-width: 56ch;
 }
 
 ::selection {
-  background: var(--color-neon);
-  color: var(--color-bg);
+  background: var(--color-primary);
+  color: var(--color-dark-surface);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-neon);
+  outline: 2px solid var(--color-primary-text);
   outline-offset: 4px;
   border-radius: 2px;
 }
 
 .btn--primary:focus-visible {
-  outline-color: var(--color-white);
+  outline-color: var(--color-dark-surface);
   outline-offset: 4px;
 }
 
@@ -103,8 +103,8 @@ body {
   position: fixed;
   top: -100px;
   left: var(--space-3);
-  background: var(--color-neon);
-  color: var(--color-bg);
+  background: var(--color-primary);
+  color: var(--color-dark-surface);
   padding: var(--space-3) var(--space-5);
   z-index: var(--z-skip-link);
   font-weight: 700;
@@ -114,6 +114,6 @@ body {
 }
 .skip-link:focus {
   top: var(--space-3);
-  outline: 2px solid var(--color-white);
+  outline: 2px solid var(--color-dark-surface);
   outline-offset: 2px;
 }

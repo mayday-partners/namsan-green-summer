@@ -1,4 +1,7 @@
-/* ===== HERO ===== */
+/* ===== HERO =====
+ * .hero는 Hybrid 다크 컨테이너. 라이트 페이지 위 이지만 hero 영역 자체는
+ * dark-surface 톤으로 photo + neon 무드 보존. 페이지 하단으로 neutral
+ * fade-out으로 라이트 페이지에 자연 연결. */
 .hero {
   position: relative;
   min-height: 100svh;
@@ -23,7 +26,7 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, transparent 50%, var(--color-bg) 100%),
+    linear-gradient(180deg, transparent 50%, var(--color-neutral) 100%),
     linear-gradient(90deg, rgba(5, 8, 22, 0.25) 0%, rgba(5, 8, 22, 0.55) 100%);
 }
 
@@ -40,7 +43,7 @@
   display: grid;
   gap: var(--space-2);
   align-content: end;
-  color: var(--color-white);
+  color: var(--color-on-dark);
   letter-spacing: 0.02em;
 }
 
@@ -48,7 +51,7 @@
   font-family: var(--font-display);
   font-size: var(--fs-display-hero);
   line-height: 1;
-  color: var(--color-white);
+  color: var(--color-on-dark);
 }
 
 .hero__display-kr {
@@ -57,18 +60,18 @@
   font-size: clamp(2.5rem, 7vw, 5rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
-  color: var(--color-white);
+  color: var(--color-on-dark);
 }
 
 .hero__display-kr--accent {
-  color: var(--color-neon);
+  color: var(--color-primary);
 }
 
 .hero__display-en-sub {
   font-family: var(--font-display);
   font-size: var(--fs-md);
   line-height: 1;
-  color: var(--color-neon);
+  color: var(--color-primary);
   letter-spacing: 0.1em;
   margin-block-start: var(--space-3);
 }
@@ -78,7 +81,7 @@
   background: rgba(5, 8, 22, 0.55);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid var(--color-border);
+  border: 1px solid rgba(230, 232, 240, 0.10);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   display: grid;
@@ -89,7 +92,7 @@
   display: grid;
   gap: var(--space-2);
   padding-block: var(--space-3);
-  border-block: 1px solid var(--color-border);
+  border-block: 1px solid rgba(230, 232, 240, 0.10);
 }
 .hero__card-meta > div { display: flex; gap: var(--space-3); align-items: baseline; }
 .hero__card-meta dt {
@@ -97,11 +100,11 @@
   font-size: var(--fs-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-on-dark-body);
   min-width: 48px;
 }
 .hero__card-meta dd {
-  color: var(--color-white);
+  color: var(--color-on-dark);
   font-weight: 500;
   font-size: var(--fs-sm);
 }
@@ -114,7 +117,7 @@
   font-size: var(--fs-xs);
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-on-dark-body);
   z-index: var(--z-overlay-fg);
 }
 
@@ -123,7 +126,7 @@
   .hero__bg { background-position: 35% center; }
   .hero__bg::after {
     background:
-      linear-gradient(180deg, rgba(5,8,22,0.25) 0%, rgba(5,8,22,0.6) 50%, var(--color-bg) 100%);
+      linear-gradient(180deg, rgba(5,8,22,0.25) 0%, rgba(5,8,22,0.6) 50%, var(--color-neutral) 100%);
   }
   .hero__inner { grid-template-columns: 1fr; padding-block: var(--space-6); gap: var(--space-5); }
   .hero__display { gap: var(--space-1); }
@@ -131,7 +134,9 @@
   .hero__scroll-hint { display: none; }
 }
 
-/* ===== PROGRAM CARDS (Overview) ===== */
+/* ===== PROGRAM CARDS (Overview) — Hybrid 다크 컨테이너 =====
+ * DESIGN.md "Program cards" 참조. 라이트 페이지 위에 다크 surface 카드를
+ * 띄워서 photo + neon 무드 보존. 카드 내부는 다크 컨텍스트로 작동. */
 .programs__head {
   display: flex;
   justify-content: space-between;
@@ -153,8 +158,8 @@
   display: grid;
   grid-template-columns: 48px 1fr;
   align-items: center;
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
+  background: var(--color-dark-surface);
+  border: 1px solid rgba(230, 232, 240, 0.10);
   border-radius: var(--radius-md);
   overflow: hidden;
   padding: var(--space-4) var(--space-5);
@@ -165,7 +170,7 @@
 }
 .program-card:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-dark);
 }
 
 .program-card__icon {
@@ -177,7 +182,7 @@
   font-family: var(--font-en);
   font-weight: 700;
   font-size: var(--fs-base);
-  color: var(--color-bg);
+  color: var(--color-dark-surface);
 }
 
 .program-card__body {
@@ -187,26 +192,26 @@
 }
 
 .program-card--funwalk { border-color: rgba(0, 163, 255, 0.3); }
-.program-card--funwalk .program-card__icon { background: var(--color-blue); }
-.program-card--funwalk:hover { border-color: var(--color-blue); box-shadow: 0 24px 64px rgba(0, 163, 255, 0.15); }
+.program-card--funwalk .program-card__icon { background: var(--color-tertiary); }
+.program-card--funwalk:hover { border-color: var(--color-tertiary); box-shadow: 0 24px 64px rgba(0, 163, 255, 0.15); }
 
 .program-card--night { border-color: rgba(255, 15, 123, 0.3); }
-.program-card--night .program-card__icon { background: var(--color-pink); }
-.program-card--night:hover { border-color: var(--color-pink); box-shadow: 0 24px 64px rgba(255, 15, 123, 0.15); }
+.program-card--night .program-card__icon { background: var(--color-secondary); }
+.program-card--night:hover { border-color: var(--color-secondary); box-shadow: 0 24px 64px rgba(255, 15, 123, 0.15); }
 
 .program-card--garden { border-color: rgba(168, 255, 0, 0.3); }
-.program-card--garden .program-card__icon { background: var(--color-neon); }
-.program-card--garden:hover { border-color: var(--color-neon); box-shadow: var(--shadow-glow); }
+.program-card--garden .program-card__icon { background: var(--color-primary); }
+.program-card--garden:hover { border-color: var(--color-primary); box-shadow: var(--shadow-glow); }
 
 .program-card__title {
   font-family: var(--font-display);
   font-size: var(--fs-md);
-  color: var(--color-white);
+  color: var(--color-on-dark);
   letter-spacing: 0.02em;
   margin: 0;
 }
 .program-card__desc {
-  color: var(--color-text-muted);
+  color: var(--color-on-dark-body);
   font-size: var(--fs-sm);
   line-height: 1.4;
   display: -webkit-box;
@@ -215,7 +220,8 @@
   overflow: hidden;
 }
 
-/* ===== PROGRAM PREVIEW (full-bleed photo section) ===== */
+/* ===== PROGRAM PREVIEW (full-bleed photo section) — Hybrid 다크 컨테이너 =====
+ * 풀-블리드 사진 + 다크 오버레이. 사진은 다크 톤이라 텍스트는 on-dark. */
 .preview {
   position: relative;
   isolation: isolate;
@@ -275,22 +281,22 @@
   line-height: 1;
   letter-spacing: 0.02em;
 }
-.preview--funwalk .preview__number { color: var(--color-blue); }
-.preview--night   .preview__number { color: var(--color-pink); }
-.preview--garden  .preview__number { color: var(--color-neon); }
+.preview--funwalk .preview__number { color: var(--color-tertiary); }
+.preview--night   .preview__number { color: var(--color-secondary); }
+.preview--garden  .preview__number { color: var(--color-primary); }
 
 .preview__title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 1;
-  color: var(--color-white);
+  color: var(--color-on-dark);
   letter-spacing: 0.02em;
   margin-block-start: var(--space-1);
 }
 
 .preview__lead {
   font-size: var(--fs-md);
-  color: var(--color-text);
+  color: var(--color-on-dark-body);
   line-height: 1.6;
   max-width: 44ch;
 }
@@ -303,7 +309,7 @@
 .preview__bullets li {
   position: relative;
   padding-inline-start: var(--space-6);
-  color: var(--color-text);
+  color: var(--color-on-dark-body);
   font-size: var(--fs-sm);
   line-height: 1.6;
 }
@@ -313,13 +319,13 @@
   left: 0;
   top: 0.35em;
   width: 16px; height: 16px;
-  background-color: var(--bullet-color, var(--color-neon));
+  background-color: var(--bullet-color, var(--color-primary));
   -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M6.2 12.4L2.6 8.8l1.2-1.2 2.4 2.4L12.2 4l1.2 1.2z'/></svg>") no-repeat center / contain;
           mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M6.2 12.4L2.6 8.8l1.2-1.2 2.4 2.4L12.2 4l1.2 1.2z'/></svg>") no-repeat center / contain;
 }
-.preview--funwalk .preview__bullets { --bullet-color: var(--color-blue); }
-.preview--night   .preview__bullets { --bullet-color: var(--color-pink); }
-.preview--garden  .preview__bullets { --bullet-color: var(--color-neon); }
+.preview--funwalk .preview__bullets { --bullet-color: var(--color-tertiary); }
+.preview--night   .preview__bullets { --bullet-color: var(--color-secondary); }
+.preview--garden  .preview__bullets { --bullet-color: var(--color-primary); }
 
 .preview__cta-group {
   display: flex;
@@ -344,9 +350,9 @@
   text-shadow: 0 4px 32px rgba(0,0,0,0.6);
   white-space: nowrap;
 }
-.preview--funwalk .preview__watermark { color: var(--color-blue); }
-.preview--night   .preview__watermark { color: var(--color-pink); }
-.preview--garden  .preview__watermark { color: var(--color-neon); }
+.preview--funwalk .preview__watermark { color: var(--color-tertiary); }
+.preview--night   .preview__watermark { color: var(--color-secondary); }
+.preview--garden  .preview__watermark { color: var(--color-primary); }
 
 @media (max-width: 900px) {
   .preview { padding-block: var(--space-8); min-height: auto; }
@@ -358,11 +364,11 @@
   .preview__watermark { white-space: normal; font-size: clamp(2.5rem, 12vw, 4rem); }
   .preview__overlay--ltr,
   .preview__overlay--rtl {
-    background: linear-gradient(180deg, rgba(5,8,22,0.3) 0%, rgba(5,8,22,0.85) 60%, var(--color-bg) 100%);
+    background: linear-gradient(180deg, rgba(5,8,22,0.3) 0%, rgba(5,8,22,0.85) 60%, var(--color-neutral) 100%);
   }
 }
 
-/* ===== NOTICE + FAQ (two column) ===== */
+/* ===== NOTICE + FAQ (two column) — 라이트 페이지 영역 ===== */
 .bottom-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -381,7 +387,7 @@
 .bottom-block__title {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  color: var(--color-white);
+  color: var(--color-on-surface);
   letter-spacing: 0.02em;
 }
 .bottom-block__more {
@@ -389,9 +395,9 @@
   font-size: var(--fs-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-on-surface-muted);
 }
-.bottom-block__more:hover { color: var(--color-neon); }
+.bottom-block__more:hover { color: var(--color-primary-text); }
 
 .bottom-list {
   display: grid;
@@ -404,7 +410,7 @@
   gap: var(--space-4);
   align-items: baseline;
   padding-block: var(--space-4);
-  color: var(--color-white);
+  color: var(--color-on-surface);
   font-size: var(--fs-sm);
   transition: color var(--dur-fast) var(--ease-out);
 }
@@ -414,13 +420,13 @@
   gap: var(--space-3);
   align-items: center;
 }
-.bottom-list a:hover { color: var(--color-neon); }
+.bottom-list a:hover { color: var(--color-primary-text); }
 
 .notice__icon {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-color: var(--color-text-muted);
+  background-color: var(--color-on-surface-muted);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
@@ -440,12 +446,12 @@
           mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M8 1C5.8 1 4 2.8 4 5h2c0-1.1 0.9-2 2-2s2 0.9 2 2c0 0.8-0.4 1.2-1.2 1.7C7.7 7.4 7 8 7 9.5V10h2v-0.5c0-0.4 0.2-0.6 1-1.1C11.1 7.7 12 6.7 12 5c0-2.2-1.8-4-4-4zM7 12h2v2H7z'/></svg>");
 }
 
-.bottom-list a:hover .notice__icon { background-color: var(--color-neon); }
+.bottom-list a:hover .notice__icon { background-color: var(--color-primary-text); }
 .bottom-list__meta {
   font-family: var(--font-en);
   font-size: var(--fs-xs);
   letter-spacing: 0.1em;
-  color: var(--color-text-muted);
+  color: var(--color-on-surface-muted);
 }
 
 /* Homepage-only overrides. `.page-home` is a deliberate parent-context

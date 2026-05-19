@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Slot · Story</title>
+  <link rel="stylesheet" href="../../../css/main.css">
+  <style>
+    body { padding: 32px; }
+    .story-label {
+      font-family: var(--font-en);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-on-surface-muted);
+      margin-bottom: 12px;
+    }
+    .story-note {
+      padding: 16px 20px;
+      background: var(--color-surface-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-on-surface-body);
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+    }
+    .story-note code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85em; background: var(--color-neutral); padding: 1px 6px; border-radius: 3px; }
+
+    /* Manual stand-in for the image-slot badge — designer dev tooling.
+       Production behavior is driven by ?spec=1 + js/modules/image-slot.js. */
+    .demo-slot {
+      position: relative;
+      isolation: isolate;
+      width: min(100%, 480px);
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--color-surface-alt), var(--color-neutral));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="story-label">image-slot · dev mode (?spec=1)</div>
+  <div class="story-note">
+    이 컴포넌트는 designer hand-off helper로, 실제 사이트에서 <code>?spec=1</code> URL 파라미터가 있을 때만 <code>js/modules/image-slot.js</code>가 활성화됩니다.
+    아래는 badge 마크업만 정적으로 시연한 것입니다. 실측은 메인 사이트의 <a href="../../../index.html?spec=1" target="_blank" rel="noopener">/index.html?spec=1</a> 또는 sub-page <code>?spec=1</code>로 확인하세요.
+  </div>
+
+  <div class="story-label">badge (manual mount — light page surface)</div>
+  <div class="demo-slot image-slot" data-image-slot="demo-id">
+    <div class="image-slot__badge">
+      <span class="image-slot__badge-id">demo-id</span>
+      <span class="image-slot__badge-px">1200×900</span>
+      <span class="image-slot__badge-target">4:3</span>
+    </div>
+  </div>
+
+  <div class="story-label">badge — missing spec entry (pink accent)</div>
+  <div class="demo-slot image-slot" data-image-slot="missing" data-image-slot-missing>
+    <div class="image-slot__badge">
+      <span class="image-slot__badge-id">missing</span>
+      <span class="image-slot__badge-px">—</span>
+      <span class="image-slot__badge-target">no spec</span>
+    </div>
+  </div>
+</body>
+</html>

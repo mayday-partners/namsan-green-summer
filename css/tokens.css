@@ -1,23 +1,54 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --color-bg: #050816;
-  --color-bg-elevated: #0c0f24;
-  --color-bg-overlay: rgba(5, 8, 22, 0.72);
-  --color-neon: #A8FF00;
-  --color-neon-soft: rgba(168, 255, 0, 0.18);
-  --color-pink: #FF0F7B;
-  --color-blue: #00A3FF;
-  --color-white: #FFFFFF;
-  --color-text: #E6E8F0;
-  --color-text-muted: #8A8FA3;
-  --color-border: rgba(230, 232, 240, 0.08);
+  /* ============================================================
+     DESIGN.md 1:1 매핑 — 19 colors (light baseline)
+     ============================================================ */
+
+  /* Brand accents — decorative motifs only on light surfaces */
+  --color-primary:   #A8FF00;   /* Neon Lime — Green Garden + CTA bg */
+  --color-secondary: #FF0F7B;   /* Hot Pink — Green Night */
+  --color-tertiary:  #00A3FF;   /* Sky Blue — Fun & Walk */
+
+  /* Light surface stack */
+  --color-neutral:     #F4F8EE;   /* Pale Garden — page background */
+  --color-surface:     #FFFFFF;   /* Pure paper — cards, panels */
+  --color-surface-alt: #FAFBF6;   /* Soft off-white — zone separation */
+
+  /* On-light text tiers */
+  --color-on-surface:        #0F1419;   /* Charcoal Ink — headings */
+  --color-on-surface-body:   #2D3340;   /* Body Slate — body copy */
+  --color-on-surface-muted:  #6B7280;   /* Cool Slate — metadata */
+
+  /* Darker accent text variants — for text use on light surfaces */
+  --color-primary-text:   #3E7A00;   /* Deep Lime  — 4.62:1 AA on surface */
+  --color-secondary-text: #B0094B;   /* Deep Pink  — 6.74:1 AA on surface */
+  --color-tertiary-text:  #0277BD;   /* Deep Blue  — 4.85:1 AA on surface */
+
+  /* Dark surface stack — section-scoped nocturnal containers */
+  --color-dark-surface:    #050816;   /* Midnight Ink */
+  --color-dark-surface-2:  #0C0F24;   /* Elevated Indigo */
+
+  /* On-dark text tiers (inside .dark-section) */
+  --color-on-dark:       #FFFFFF;
+  --color-on-dark-body:  #E6E8F0;
 
   /* External deep-link brand colors — scoped to .btn--map-* only */
-  --color-brand-kakao: #FAE100;
+  --color-brand-kakao:       #FAE100;
   --color-brand-google-blue: #1A73E8;
-  --color-brand-naver: #03C75A;
+  --color-brand-naver:       #03C75A;
 
+  /* ============================================================
+     Alpha-tinted utilities (CSS-only, not Color tokens per DESIGN.md
+     "Alpha-tinted utilities" — declared here for runtime reuse). */
+  --color-border:           rgba(15, 20, 25, 0.10);      /* hairline divider on light surfaces */
+  --color-border-on-dark:   rgba(230, 232, 240, 0.10);   /* hairline divider inside .dark-section */
+  --color-surface-overlay:  rgba(244, 248, 238, 0.72);   /* scrolled header backdrop (blur on this) */
+  --color-primary-soft:     rgba(168, 255, 0, 0.18);     /* focus ring fills, neon halos */
+
+  /* ============================================================
+     Typography
+     ============================================================ */
   --font-kr: 'Pretendard', system-ui, -apple-system, sans-serif;
   --font-en: 'Montserrat', sans-serif;
   --font-display: 'Anton', 'Montserrat', sans-serif;
@@ -32,6 +63,9 @@
   --fs-3xl: 4.5rem;
   --fs-display-hero: clamp(2.5rem, 7vw, 6rem);
 
+  /* ============================================================
+     Spacing scale
+     ============================================================ */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -46,14 +80,27 @@
   --container-max: 1280px;
   --container-pad: 1.25rem;
 
+  /* ============================================================
+     Radii
+     ============================================================ */
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 24px;
   --radius-pill: 999px;
 
+  /* ============================================================
+     Shadows
+     - shadow-glow : 네온 글로우 (CTA hover, brand 시그니처) — 변경 없음
+     - shadow-card : 라이트 페이지 카드 lift (신규 라이트 톤)
+     - shadow-dark : 다크 섹션 내부 카드 lift (기존 다크 카드 그림자 보존)
+     ============================================================ */
   --shadow-glow: 0 0 24px rgba(168, 255, 0, 0.45), 0 0 64px rgba(168, 255, 0, 0.18);
-  --shadow-card: 0 24px 64px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04);
+  --shadow-dark: 0 24px 64px rgba(0, 0, 0, 0.45);
 
+  /* ============================================================
+     Motion
+     ============================================================ */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-fast: 200ms;
@@ -73,9 +120,10 @@
   --z-header-fg: 110;    /* logo + hamburger sit above the mobile nav drawer */
   --z-skip-link: 200;
 
-  /* Card media placeholder gradients — shown before real images arrive.
-     Each pair is a darkened mix of the program accent. Referenced only by
-     .card__media--<program>. See DESIGN.md "Alpha-tinted utilities". */
+  /* Card media placeholder gradients — dark tones, used inside .program-card
+     dark containers (Hybrid pattern). See DESIGN.md "Card media placeholder
+     gradients". The dark palette is intentional — the cards themselves are
+     dark-surface even on light pages. */
   --card-media-funwalk:      linear-gradient(135deg, #001a2e, #003a66);
   --card-media-night:        linear-gradient(135deg, #2a0418, #66052f);
   --card-media-garden:       linear-gradient(135deg, #082a02, #1a5505);

@@ -90,10 +90,13 @@ function placeholderDataUrl(def) {
     def.current_status ? `(${def.current_status})` : ''
   ].filter(Boolean);
 
-  const NEON = '#A8FF00';
-  const BG = '#050816';
-  const MUTED = '#8A8FA3';
-  const WHITE = '#FFFFFF';
+  // Read brand colors from CSS tokens — keeps spec helper in sync with DESIGN.md.
+  // Placeholder stays dark (like .image-slot__badge) so designers can spot slots
+  // against the light page baseline by tonal contrast.
+  const tok = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const NEON = tok('--color-primary');
+  const BG = tok('--color-dark-surface');
+  const FG = tok('--color-on-dark');
 
   const baseFs = Math.max(20, Math.round(W / 36));
   const lineH = Math.round(baseFs * 1.6);
@@ -103,17 +106,19 @@ function placeholderDataUrl(def) {
 
   const texts = lines.map((t, i) => {
     const isTitle = i === 0;
+    const isFooter = i === lines.length - 1;
     const fs = isTitle ? Math.round(baseFs * 1.5) : baseFs;
-    const fill = isTitle ? NEON : (i === lines.length - 1 ? MUTED : WHITE);
+    const fill = isTitle ? NEON : FG;
+    const opacity = isFooter ? '0.55' : '1';
     const weight = isTitle ? '700' : '400';
-    return `<text x="${cx}" y="${startY + i * lineH}" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="${fs}" fill="${fill}" font-weight="${weight}">${escapeXml(t)}</text>`;
+    return `<text x="${cx}" y="${startY + i * lineH}" text-anchor="middle" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="${fs}" fill="${fill}" fill-opacity="${opacity}" font-weight="${weight}">${escapeXml(t)}</text>`;
   }).join('');
 
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">` +
       `<defs>` +
         `<pattern id="g" width="48" height="48" patternUnits="userSpaceOnUse">` +
-          `<path d="M48 0 L0 0 0 48" fill="none" stroke="${MUTED}" stroke-opacity="0.18" stroke-width="1"/>` +
+          `<path d="M48 0 L0 0 0 48" fill="none" stroke="${FG}" stroke-opacity="0.10" stroke-width="1"/>` +
         `</pattern>` +
       `</defs>` +
       `<rect width="100%" height="100%" fill="${BG}"/>` +

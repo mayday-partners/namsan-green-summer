@@ -1,8 +1,11 @@
 /* ===== Utilities (single-purpose helpers — BEM exception by intent) ===== */
+
+/* Used by notice-list.js / faq-list.js to render an inline error message
+ * inside the list slot when fetch fails or templates are missing. */
 .fallback-error {
   padding: var(--space-4);
-  color: var(--color-pink);
+  color: var(--color-secondary-text);
   font-size: var(--fs-sm);
 }
-.text-neon { color: var(--color-neon); }
+
 .mt-7 { margin-block-start: var(--space-7); }

@@ -1,0 +1,234 @@
+/* Design System Catalog UI — 카탈로그 chrome 전용.
+ * 프로덕션 CSS(css/main.css)와 완전 격리. 카탈로그 안의 iframe stories는
+ * css/main.css를 자체적으로 link하여 진짜 컴포넌트를 렌더. */
+
+:root {
+  color-scheme: light;
+  --ds-bg: #F4F8EE;
+  --ds-surface: #FFFFFF;
+  --ds-surface-alt: #FAFBF6;
+  --ds-text: #0F1419;
+  --ds-text-body: #2D3340;
+  --ds-text-muted: #6B7280;
+  --ds-border: rgba(15, 20, 25, 0.10);
+  --ds-accent: #3E7A00;     /* primary-text — for catalog UI chrome only */
+  --ds-neon: #A8FF00;        /* brand mark on logo */
+  --ds-font: 'Pretendard', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --ds-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --ds-sidebar-w: 260px;
+  --ds-toolbar-h: 56px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--ds-font);
+  color: var(--ds-text-body);
+  background: var(--ds-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+ds-catalog {
+  display: grid;
+  grid-template-columns: var(--ds-sidebar-w) 1fr;
+  height: 100vh;
+}
+
+/* ============================================
+   Sidebar
+   ============================================ */
+.ds-sidebar {
+  background: var(--ds-surface);
+  border-right: 1px solid var(--ds-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.ds-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 20px 18px;
+  border-bottom: 1px solid var(--ds-border);
+}
+.ds-sidebar__brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ds-neon);
+  box-shadow: 0 0 10px var(--ds-neon);
+  flex-shrink: 0;
+}
+.ds-sidebar__brand-name {
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  color: var(--ds-text);
+  line-height: 1.2;
+}
+.ds-sidebar__brand-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ds-text-muted);
+  margin-top: 2px;
+}
+
+.ds-sidebar__group { padding: 16px 12px; }
+.ds-sidebar__group + .ds-sidebar__group { border-top: 1px solid var(--ds-border); }
+.ds-sidebar__group-title {
+  font-family: var(--ds-font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ds-text-muted);
+  padding: 0 8px 8px;
+}
+.ds-sidebar__list { display: flex; flex-direction: column; gap: 2px; }
+.ds-sidebar__link {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: var(--ds-text-body);
+  transition: background 120ms, color 120ms;
+}
+.ds-sidebar__link:hover {
+  background: var(--ds-surface-alt);
+  color: var(--ds-text);
+}
+.ds-sidebar__link[aria-current='page'] {
+  background: var(--ds-bg);
+  color: var(--ds-accent);
+  font-weight: 600;
+}
+
+.ds-sidebar__footer {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-top: 1px solid var(--ds-border);
+  font-size: 0.7rem;
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+.ds-sidebar__footer a { color: var(--ds-accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+/* ============================================
+   Main canvas
+   ============================================ */
+.ds-main {
+  display: grid;
+  grid-template-rows: var(--ds-toolbar-h) 1fr;
+  background: var(--ds-bg);
+  min-width: 0;
+}
+
+.ds-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--ds-border);
+  background: var(--ds-surface);
+}
+.ds-toolbar__title {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--ds-text);
+}
+.ds-toolbar__meta {
+  font-family: var(--ds-font-mono);
+  font-size: 0.75rem;
+  color: var(--ds-text-muted);
+}
+.ds-toolbar__spacer { flex: 1; }
+.ds-toolbar__viewports {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--ds-bg);
+  border-radius: 8px;
+}
+.ds-toolbar__vp {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  letter-spacing: 0.04em;
+}
+.ds-toolbar__vp[aria-pressed='true'] {
+  background: var(--ds-surface);
+  color: var(--ds-text);
+  box-shadow: 0 1px 3px rgba(15, 20, 25, 0.08);
+}
+.ds-toolbar__open {
+  font-size: 0.75rem;
+  font-family: var(--ds-font-mono);
+  color: var(--ds-accent);
+  padding: 6px 10px;
+  border: 1px solid var(--ds-border);
+  border-radius: 6px;
+}
+.ds-toolbar__open:hover { background: var(--ds-surface-alt); }
+
+ds-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--ds-bg);
+  overflow: auto;
+}
+.ds-canvas__inner {
+  margin: 24px auto;
+  background: var(--ds-surface);
+  border: 1px solid var(--ds-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: width 200ms ease, max-width 200ms ease;
+  box-shadow: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04);
+}
+.ds-canvas__inner[data-viewport='mobile']  { width: 390px;  }
+.ds-canvas__inner[data-viewport='tablet']  { width: 768px;  }
+.ds-canvas__inner[data-viewport='desktop'] { width: min(1280px, calc(100% - 48px)); }
+
+.ds-canvas__frame {
+  width: 100%;
+  height: calc(100vh - var(--ds-toolbar-h) - 48px);
+  border: 0;
+  display: block;
+  background: var(--ds-bg);
+}
+
+.ds-canvas__empty {
+  padding: 48px;
+  text-align: center;
+  color: var(--ds-text-muted);
+  font-family: var(--ds-font-mono);
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   Mobile catalog UI (< 900)
+   ============================================ */
+@media (max-width: 900px) {
+  ds-catalog {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .ds-sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--ds-border);
+    max-height: 240px;
+  }
+  .ds-toolbar__vp { padding: 5px 8px; }
+}

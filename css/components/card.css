@@ -1,32 +1,41 @@
-/* ===== Card ===== */
+/* ===== Card =====
+ * 본 카드는 라이트 페이지의 라이트 surface 카드. 프로그램 카드(.program-card)는
+ * Hybrid 다크 컨테이너로 별도 정의 (DESIGN.md "Program cards" 단락 참조).
+ * .card__media gradient/--card-media-* 토큰은 라이트 카드 안에 들어가지만
+ * 이미지 fallback이라 가려지는 영역이므로 placeholder gradient는 dark 톤 유지.
+ */
 .card {
   position: relative;
   display: block;
-  background: var(--color-bg-elevated);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-card);
   transition: transform var(--dur-base) var(--ease-out),
               border-color var(--dur-base) var(--ease-out),
               box-shadow var(--dur-base) var(--ease-out);
 }
 .card:hover {
   transform: translateY(-4px);
-  border-color: var(--color-neon-soft);
-  box-shadow: var(--shadow-card);
+  border-color: var(--color-primary-text);
+  box-shadow: var(--shadow-card), 0 0 0 1px var(--color-primary-text);
 }
 
 .card__media {
   aspect-ratio: 4/3;
-  background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg));
+  background: linear-gradient(135deg, var(--color-surface-alt), var(--color-neutral));
   overflow: hidden;
 }
 .card__body { padding: var(--space-6); }
 
-.eyebrow--blue { color: var(--color-blue); }
-.eyebrow--pink { color: var(--color-pink); }
-.eyebrow--neon { color: var(--color-neon); }
-.eyebrow--white { color: var(--color-white); }
+/* Eyebrows on light card surface — use darker variants for AA contrast.
+ * .eyebrow--default 는 program identity 없는 neutral eyebrow.
+ * (이전 .eyebrow--white 클래스는 라이트 baseline에서 의미가 깨졌으므로 rename됨.) */
+.eyebrow--blue    { color: var(--color-tertiary-text); }
+.eyebrow--pink    { color: var(--color-secondary-text); }
+.eyebrow--neon    { color: var(--color-primary-text); }
+.eyebrow--default { color: var(--color-on-surface); }
 
 .card__media--funwalk      { background: var(--card-media-funwalk); }
 .card__media--night        { background: var(--card-media-night); }
@@ -37,11 +46,11 @@
 .card__title {
   font-family: var(--font-display);
   font-size: var(--fs-xl);
-  color: var(--color-white);
+  color: var(--color-on-surface);
   letter-spacing: 0.02em;
 }
 .card__desc {
   margin-block-start: var(--space-3);
-  color: var(--color-text-muted);
+  color: var(--color-on-surface-muted);
   font-size: var(--fs-sm);
 }

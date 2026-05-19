@@ -1,0 +1,89 @@
+/* ===== Dark Section (nocturnal-mood container) =====
+ * DESIGN.md "Dark section" 컴포넌트. 라이트 페이지 위 *섹션 단위*로
+ * 다크 surface를 띄워 Green Night/photo 무드를 보존하는 컨벤션.
+ * 페이지 단위 다크 모드가 아니라 컨테이너 단위로만 사용.
+ *
+ * 사용 예:
+ *   <section class="dark-section">
+ *     <div class="dark-section__inner">
+ *       <p class="dark-section__eyebrow">GREEN NIGHT</p>
+ *       <h2 class="dark-section__title">여름밤을 핑크빛 네온으로</h2>
+ *       ...
+ *     </div>
+ *   </section>
+ */
+
+.dark-section {
+  background: var(--color-dark-surface);
+  color: var(--color-on-dark-body);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7) var(--space-6);
+  margin-block: var(--space-5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle pink/neon radial glow — Green Night ambient. Use the modifiers below
+ * to switch the glow color per section identity. */
+.dark-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 75% 30%, rgba(255, 15, 123, 0.18), transparent 55%);
+  pointer-events: none;
+}
+.dark-section--neon::after  { background: radial-gradient(circle at 75% 30%, rgba(168, 255, 0, 0.18), transparent 55%); }
+.dark-section--blue::after  { background: radial-gradient(circle at 75% 30%, rgba(0, 163, 255, 0.18), transparent 55%); }
+.dark-section--pink::after  { background: radial-gradient(circle at 75% 30%, rgba(255, 15, 123, 0.18), transparent 55%); }
+
+.dark-section__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.dark-section__eyebrow {
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-block-end: var(--space-3);
+}
+.dark-section--neon  .dark-section__eyebrow { color: var(--color-primary); }
+.dark-section--blue  .dark-section__eyebrow { color: var(--color-tertiary); }
+.dark-section--pink  .dark-section__eyebrow { color: var(--color-secondary); }
+
+.dark-section__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--color-on-dark);
+  margin-block-end: var(--space-4);
+}
+
+.dark-section__body {
+  color: var(--color-on-dark-body);
+  max-width: 56ch;
+  margin-block-end: var(--space-5);
+}
+
+/* Elevated card inside a dark section — uses dark-surface-2 for one more tier. */
+.dark-card-elevated {
+  background: var(--color-dark-surface-2);
+  color: var(--color-on-dark-body);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  margin-block-start: var(--space-5);
+}
+.dark-card-elevated__title {
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-block-end: var(--space-2);
+}

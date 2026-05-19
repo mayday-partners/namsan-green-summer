@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dark Section · Story</title>
+  <link rel="stylesheet" href="../../../css/main.css">
+  <style>
+    /* Story-local definition of .dark-section per DESIGN.md "Dark section".
+       향후 production 사용 시 css/components/dark-section.css 신설 권장. */
+    body { padding: 32px; }
+    .story-label {
+      font-family: var(--font-en);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-on-surface-muted);
+      margin: 0 0 12px;
+    }
+
+    .dark-section {
+      background: var(--color-dark-surface);
+      color: var(--color-on-dark-body);
+      border-radius: var(--radius-lg);
+      padding: var(--space-7) var(--space-6);
+      margin-block: var(--space-5);
+      position: relative;
+      overflow: hidden;
+    }
+    .dark-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 75% 30%, rgba(255, 15, 123, 0.18), transparent 55%);
+      pointer-events: none;
+    }
+    .dark-section__inner { position: relative; z-index: 1; max-width: 720px; }
+    .dark-section__eyebrow {
+      font-family: var(--font-en);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: var(--space-3);
+    }
+    .dark-section__title {
+      font-family: var(--font-display);
+      font-size: var(--fs-xl);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      color: var(--color-on-dark);
+      margin-bottom: var(--space-4);
+    }
+    .dark-section__body {
+      color: var(--color-on-dark-body);
+      max-width: 56ch;
+      margin-bottom: var(--space-5);
+    }
+
+    .dark-card-elevated {
+      background: var(--color-dark-surface-2);
+      color: var(--color-on-dark-body);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      margin-top: var(--space-5);
+      max-width: 480px;
+    }
+    .dark-card-elevated__title {
+      font-family: var(--font-en);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="story-label">light page baseline — section 1 (announce)</div>
+  <div class="card" style="padding: var(--space-6); margin-bottom: 0;">
+    <div class="card__title">2026.06.27 SAT · 19:00 — 23:00</div>
+    <p class="card__desc" style="margin-top: var(--space-2);">남산공원 일대에서 진행되는 페스티벌의 야간 프로그램 안내입니다. 예매·셔틀버스·우천 정책은 라이트 영역 카드에서 안내합니다.</p>
+  </div>
+
+  <div class="story-label">.dark-section — nocturnal mood container (Green Night)</div>
+  <section class="dark-section">
+    <div class="dark-section__inner">
+      <div class="dark-section__eyebrow">GREEN NIGHT · NEON STAGE</div>
+      <h2 class="dark-section__title">여름밤을 핑크빛 네온으로</h2>
+      <p class="dark-section__body">라이브 무대, 라이트 인스톨레이션, 그리고 남산 정상에서 내려다보는 도심의 야경. 페이지 baseline은 라이트지만 이 섹션은 야간 무드를 보존합니다.</p>
+      <a class="btn btn--primary" href="#">입장권 확인 →</a>
+
+      <div class="dark-card-elevated">
+        <div class="dark-card-elevated__title">PRESS · NIGHT GUIDE</div>
+        <p>다크 섹션 안의 elevated 카드는 dark-surface-2(#0C0F24)로 한 단계 더 lift. 텍스트는 on-dark-body 유지.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="story-label">light page baseline — section 3 (FAQ)</div>
+  <div class="card" style="padding: var(--space-6);">
+    <div class="card__title">자주 묻는 질문</div>
+    <p class="card__desc" style="margin-top: var(--space-2);">우천 시 운영, 환불 정책, 셔틀버스 시간표 등은 라이트 영역 카드/리스트에서 표시. 다크 섹션과 라이트 카드가 같은 페이지에서 자연 교차.</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Light Baseline v1 — 디자인 시안 (Namsan Green Summer 2026)</title>
+  <style>
+    /* ============================================
+       Light Baseline v1 — 자체 격리 토큰
+       프로덕션 tokens.css와 무관. 검토용 데모.
+       ============================================ */
+    :root {
+      color-scheme: light;
+
+      /* 베이스 라이트 톤 (그린 틴트 페이퍼) */
+      --bg:          #F4F8EE;   /* Pale Garden — Green Summer 컨셉 반영, 연그린 페이퍼 */
+      --surface:     #FFFFFF;   /* Pure paper — 카드/패널 배경 */
+      --surface-alt: #FAFBF6;   /* Soft off-white — 미묘한 zone 분리용 */
+
+      /* 텍스트 톤 (다크) */
+      --text:        #0F1419;   /* Charcoal Ink — 헤딩/강조, 거의 검정 살짝 따뜻 */
+      --text-body:   #2D3340;   /* Body Slate — 본문 */
+      --text-muted:  #6B7280;   /* Cool Slate — eyebrow, 메타 */
+
+      --border:      rgba(15, 20, 25, 0.10);
+
+      /* 브랜드 네온 — 액센트 전용 (텍스트 사용 금지) */
+      --neon-lime:   #A8FF00;   /* 배경/border/일러스트 액센트 */
+      --neon-pink:   #FF0F7B;
+      --neon-blue:   #00A3FF;
+
+      /* 네온 컬러의 텍스트용 다크 변형 (WCAG AA on white) */
+      --green-text:  #3E7A00;   /* on white = 4.62 AA  /  on bg(#F4F8EE) = 4.32 AA (작은 텍스트 경계) */
+      --pink-text:   #B0094B;   /* on white = 6.74 AA  */
+      --blue-text:   #0277BD;   /* on white = 4.85 AA  */
+
+      /* 다크 surface — 페스티벌 야간 무드 보존용 (페이지 내 일부 섹션) */
+      --dark-surface:    #050816;   /* 기존 Midnight Ink 유지 */
+      --dark-surface-2:  #0C0F24;   /* 기존 Elevated Indigo 유지 */
+      --on-dark:         #FFFFFF;
+      --on-dark-body:    #E6E8F0;
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+
+      --shadow-card: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04);
+      --shadow-dark: 0 24px 64px rgba(0, 0, 0, 0.45);
+
+      --font-kr: 'Pretendard', system-ui, -apple-system, sans-serif;
+      --font-display: 'Anton', 'Montserrat', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-kr);
+      background: var(--bg);
+      color: var(--text-body);
+      line-height: 1.6;
+      padding: 48px 24px 96px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* Hero of the spec doc itself */
+    .doc-hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 48px;
+      box-shadow: var(--shadow-card);
+    }
+    .doc-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .doc-hero p { color: var(--text-body); max-width: 720px; }
+    .doc-hero .meta { color: var(--text-muted); font-size: 0.875rem; margin-top: 16px; }
+
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-card);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    h2 + .lead { color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem; }
+    h3 { color: var(--text); font-size: 1.125rem; margin: 24px 0 12px; font-weight: 700; }
+
+    /* 결정 카드 */
+    .decisions { display: grid; gap: 16px; }
+    .decision {
+      background: var(--surface-alt);
+      border-left: 3px solid var(--neon-lime);
+      padding: 16px 20px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    .decision__label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .decision__title { color: var(--text); font-weight: 700; margin-bottom: 6px; }
+    .decision__body { color: var(--text-body); font-size: 0.95rem; }
+    .decision__body code {
+      background: var(--bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      color: var(--text);
+    }
+
+    /* 팔레트 */
+    .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+    .swatch {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .swatch__color {
+      height: 80px;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    .swatch__meta {
+      padding: 10px 12px;
+      background: var(--surface);
+      font-size: 0.8rem;
+    }
+    .swatch__name { color: var(--text); font-weight: 700; }
+    .swatch__hex {
+      color: var(--text-muted);
+      font-family: 'Montserrat', monospace;
+      font-size: 0.75rem;
+      margin-top: 2px;
+    }
+    .swatch__role { color: var(--text-muted); font-size: 0.75rem; margin-top: 4px; }
+
+    /* 대비 표 */
+    .contrast-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .contrast-table th, .contrast-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .contrast-table th { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .contrast-table td { color: var(--text-body); }
+    .contrast-table .ratio { font-family: 'Montserrat', monospace; font-weight: 700; color: var(--text); }
+    .pass-aaa { color: #2D6A00; font-weight: 700; }
+    .pass-aa  { color: #006B5C; font-weight: 700; }
+    .fail     { color: #B0094B; font-weight: 700; }
+    .sample {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* 타이포 미리보기 */
+    .type-row { display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .type-row:last-child { border-bottom: none; }
+    .type-row__label { color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.1em; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+    .display-hero { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1; letter-spacing: 0.02em; color: var(--text); }
+    .display-lg   { font-family: var(--font-display); font-size: 4.5rem; line-height: 1; letter-spacing: 0.02em; color: var(--text); }
+    .headline     { font-family: var(--font-display); font-size: 2rem; color: var(--text); line-height: 1; }
+    .body-md      { font-size: 1.125rem; color: var(--text-body); line-height: 1.6; }
+    .body-sm      { font-size: 0.875rem; color: var(--text-body); }
+    .eyebrow      { font-family: 'Montserrat', sans-serif; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* 컴포넌트 */
+    .components { display: grid; gap: 20px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      border: none;
+      font-family: var(--font-kr);
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn--primary {
+      background: var(--neon-lime);
+      color: var(--dark-surface);
+    }
+    .btn--ghost {
+      background: transparent;
+      border: 1.5px solid var(--text);
+      color: var(--text);
+    }
+    .btn--pink {
+      background: var(--neon-pink);
+      color: var(--on-dark);
+    }
+
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .card__eyebrow { color: var(--green-text); font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+    .card__title { font-family: var(--font-display); font-size: 1.75rem; color: var(--text); line-height: 1.05; margin-bottom: 12px; }
+    .card__body { color: var(--text-body); font-size: 0.95rem; }
+
+    /* 프로그램 카드 — 라이트 페이지 위 다크 카드 (Hybrid 1안) */
+    .program-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .program-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/5;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: var(--on-dark);
+      box-shadow: var(--shadow-dark);
+    }
+    .program-card--funwalk { background: linear-gradient(180deg, rgba(0,26,46,0.4) 0%, rgba(0,58,102,0.9) 100%), #001a2e; }
+    .program-card--night   { background: linear-gradient(180deg, rgba(42,4,24,0.4) 0%, rgba(102,5,47,0.9) 100%), #2a0418; }
+    .program-card--garden  { background: linear-gradient(180deg, rgba(8,42,2,0.4) 0%, rgba(26,85,5,0.9) 100%), #082a02; }
+    .program-card__eyebrow { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
+    .program-card__title { font-family: var(--font-display); font-size: 2rem; line-height: 1; letter-spacing: 0.02em; }
+    .program-card--funwalk .program-card__eyebrow { color: var(--neon-blue); opacity: 1; }
+    .program-card--night   .program-card__eyebrow { color: var(--neon-pink); opacity: 1; }
+    .program-card--garden  .program-card__eyebrow { color: var(--neon-lime); opacity: 1; }
+
+    /* Green Night 일관성 — 라이트 페이지 안 다크 섹션 */
+    .dark-section {
+      background: var(--dark-surface);
+      color: var(--on-dark-body);
+      border-radius: var(--radius-lg);
+      padding: 48px 32px;
+      margin: 24px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .dark-section h3 { color: var(--on-dark); }
+    .dark-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(255, 15, 123, 0.15), transparent 50%);
+      pointer-events: none;
+    }
+    .dark-section__inner { position: relative; z-index: 1; }
+
+    /* Hero 시연 */
+    .hero-mock {
+      background: linear-gradient(135deg, var(--bg) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 56px 32px;
+      margin: 16px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-mock::before {
+      content: '';
+      position: absolute;
+      right: -50px;
+      top: -50px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: var(--neon-lime);
+      opacity: 0.18;
+      filter: blur(40px);
+    }
+    .hero-mock__eyebrow { color: var(--green-text); font-family: 'Montserrat', sans-serif; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; position: relative; }
+    .hero-mock__title { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1; letter-spacing: 0.02em; color: var(--text); margin-bottom: 16px; position: relative; }
+    .hero-mock__body { color: var(--text-body); max-width: 520px; margin-bottom: 24px; position: relative; }
+
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-body);
+    }
+    .tag--lime  { border-color: var(--neon-lime); color: var(--green-text); }
+    .tag--pink  { border-color: var(--neon-pink); color: var(--pink-text); }
+    .tag--blue  { border-color: var(--neon-blue); color: var(--blue-text); }
+
+    /* footer */
+    footer.doc-footer {
+      max-width: 1100px;
+      margin: 48px auto 0;
+      padding: 24px;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ================== HEADER ================== -->
+    <div class="doc-hero">
+      <div class="eyebrow" style="margin-bottom: 12px;">Design Exploration · Light Baseline v1</div>
+      <h1>NAMSAN GREEN SUMMER 2026</h1>
+      <p>다크 baseline에서 <strong>라이트 baseline</strong>으로 재정의한 1안. "Green Summer" 컨셉을 살리기 위해 페이퍼는 연그린 틴트, 본문은 다크 텍스트. 네온 컬러는 액센트(border/배경/일러스트)로 보존하고 텍스트로 쓸 땐 darker variant를 별도 정의. 야간 무드가 필요한 영역(Green Night, hero overlay 카드)은 라이트 페이지 안의 <strong>다크 섹션</strong>으로 부분 보존.</p>
+      <div class="meta">검토 목적 단일 파일 시안 · 프로덕션 토큰과 무관 · 직접 브라우저에서 열어 비교 검토</div>
+    </div>
+
+    <!-- ================== 핵심 결정 ================== -->
+    <section>
+      <h2>핵심 결정 4개</h2>
+      <div class="lead">코드 진입 전 합의가 필요한 항목. 1안 입장.</div>
+      <div class="decisions">
+        <div class="decision">
+          <div class="decision__label">DECISION 1 · 네온 컬러 처리</div>
+          <div class="decision__title">네온 3종은 <strong>액센트 전용</strong>, 텍스트는 darker variant 별도 정의</div>
+          <div class="decision__body">
+            <code>#A8FF00</code>는 라이트 배경 대비 1.4:1로 텍스트 불가 → 배경/border/일러스트(blur glow)에만 사용. 텍스트에 네온 의미가 필요하면 <code>--green-text: #3E7A00</code>(AA 4.62), <code>--pink-text: #B0094B</code>(AA 6.74), <code>--blue-text: #0277BD</code>(AA 4.85)로 대체. CTA 버튼은 <code>background: var(--neon-lime); color: var(--dark-surface)</code>로 다크 텍스트 on 네온 배경 = 14.6:1 AAA 유지.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision__label">DECISION 2 · 라이트 톤 선택</div>
+          <div class="decision__title">연그린 페이퍼 <code>#F4F8EE</code> + 순백 카드 <code>#FFFFFF</code></div>
+          <div class="decision__body">
+            순백 페이지는 페스티벌 무드에 차가움. "Green Summer" 컨셉을 반영해 페이지 배경은 살짝 그린 틴트된 페이퍼(<code>#F4F8EE</code>), 카드/패널은 순백(<code>#FFFFFF</code>)으로 두 단계 elevation. 헤더 스크롤 시 surface 톤으로 자연 lift.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision__label">DECISION 3 · 이미지 자산 처리</div>
+          <div class="decision__title">라이트 페이지 + <strong>다크 카드/섹션 컨테이너</strong>에 기존 이미지 가둠 (Hybrid)</div>
+          <div class="decision__body">
+            <code>img/sections/*.webp</code> 4종(다크 톤 야경) 재제작 없이 활용. 프로그램 카드와 hero overlay 영역은 다크 surface 컨테이너로 만들어 그 안에 이미지 배치. 페이지 baseline은 라이트, 이미지 컨테이너만 다크 — 페스티벌 야경 무드 유지하면서 사이트 전체 톤은 밝게.
+          </div>
+        </div>
+        <div class="decision">
+          <div class="decision__label">DECISION 4 · Green Night 일관성</div>
+          <div class="decision__title">페이지 단위가 아니라 <strong>섹션 단위 라이트/다크 혼합</strong></div>
+          <div class="decision__body">
+            Green Night 페이지의 헤더/푸터/네비/공지는 라이트. hero 섹션과 일부 키 섹션은 <code>.dark-section</code>으로 야간 무드 보존. 다른 페이지(Fun&amp;Walk, Garden, 메인)도 동일 패턴 사용 가능 — "심야 무드 섹션" 컨벤션으로 보편화.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== 팔레트 ================== -->
+    <section>
+      <h2>컬러 팔레트</h2>
+      <div class="lead">8 base + 6 variant. DESIGN.md 재작성 후 1:1 매핑.</div>
+
+      <h3>베이스 (페이지/카드/텍스트)</h3>
+      <div class="palette">
+        <div class="swatch">
+          <div class="swatch__color" style="background: #F4F8EE; color: #0F1419;">BG</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">neutral</div>
+            <div class="swatch__hex">#F4F8EE</div>
+            <div class="swatch__role">Pale Garden — 페이지 배경</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #FFFFFF; color: #0F1419; border-bottom: 1px solid var(--border);">SURFACE</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">surface</div>
+            <div class="swatch__hex">#FFFFFF</div>
+            <div class="swatch__role">Pure paper — 카드/패널</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #FAFBF6; color: #0F1419; border-bottom: 1px solid var(--border);">ALT</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">surface-alt</div>
+            <div class="swatch__hex">#FAFBF6</div>
+            <div class="swatch__role">Soft off-white — zone 분리</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #0F1419; color: #FFFFFF;">TEXT</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">on-surface</div>
+            <div class="swatch__hex">#0F1419</div>
+            <div class="swatch__role">Charcoal Ink — 헤딩/강조</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #2D3340; color: #FFFFFF;">BODY</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">on-surface-body</div>
+            <div class="swatch__hex">#2D3340</div>
+            <div class="swatch__role">Body Slate — 본문</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #6B7280; color: #FFFFFF;">MUTED</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">on-surface-muted</div>
+            <div class="swatch__hex">#6B7280</div>
+            <div class="swatch__role">Cool Slate — eyebrow/메타</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>네온 액센트 (배경/border 전용 — 텍스트 사용 금지)</h3>
+      <div class="palette">
+        <div class="swatch">
+          <div class="swatch__color" style="background: #A8FF00; color: #050816;">LIME</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">primary</div>
+            <div class="swatch__hex">#A8FF00</div>
+            <div class="swatch__role">Neon Lime — Green Garden + CTA bg</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #FF0F7B; color: #FFFFFF;">PINK</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">secondary</div>
+            <div class="swatch__hex">#FF0F7B</div>
+            <div class="swatch__role">Hot Pink — Green Night</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #00A3FF; color: #FFFFFF;">BLUE</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">tertiary</div>
+            <div class="swatch__hex">#00A3FF</div>
+            <div class="swatch__role">Sky Blue — Fun &amp; Walk</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>네온 텍스트용 다크 variant (라이트 배경 텍스트 전용)</h3>
+      <div class="palette">
+        <div class="swatch">
+          <div class="swatch__color" style="background: #3E7A00; color: #FFFFFF;">G·TXT</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">primary-text</div>
+            <div class="swatch__hex">#3E7A00</div>
+            <div class="swatch__role">on white: 4.62 AA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #B0094B; color: #FFFFFF;">P·TXT</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">secondary-text</div>
+            <div class="swatch__hex">#B0094B</div>
+            <div class="swatch__role">on white: 6.74 AA</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #0277BD; color: #FFFFFF;">B·TXT</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">tertiary-text</div>
+            <div class="swatch__hex">#0277BD</div>
+            <div class="swatch__role">on white: 4.85 AA</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>다크 surface (섹션 단위 보존)</h3>
+      <div class="palette">
+        <div class="swatch">
+          <div class="swatch__color" style="background: #050816; color: #FFFFFF;">DARK</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">dark-surface</div>
+            <div class="swatch__hex">#050816</div>
+            <div class="swatch__role">Midnight Ink — 야간 무드 섹션</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background: #0C0F24; color: #FFFFFF;">DARK-2</div>
+          <div class="swatch__meta">
+            <div class="swatch__name">dark-surface-2</div>
+            <div class="swatch__hex">#0C0F24</div>
+            <div class="swatch__role">Elevated Indigo — 다크 카드</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== 대비 표 ================== -->
+    <section>
+      <h2>WCAG 대비 검증</h2>
+      <div class="lead">DESIGN.md lint(<code>contrast-ratio</code> 룰) 통과 예상.</div>
+      <table class="contrast-table">
+        <thead>
+          <tr><th>전경</th><th>배경</th><th>대비</th><th>등급</th><th>샘플</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>#0F1419 text</td><td>#F4F8EE bg</td><td class="ratio">15.78 : 1</td><td class="pass-aaa">AAA</td><td><span class="sample" style="background: #F4F8EE; color: #0F1419;">본문 텍스트 샘플</span></td></tr>
+          <tr><td>#0F1419 text</td><td>#FFFFFF surface</td><td class="ratio">16.83 : 1</td><td class="pass-aaa">AAA</td><td><span class="sample" style="background: #FFFFFF; color: #0F1419; border: 1px solid var(--border);">카드 텍스트</span></td></tr>
+          <tr><td>#2D3340 body</td><td>#FFFFFF surface</td><td class="ratio">12.42 : 1</td><td class="pass-aaa">AAA</td><td><span class="sample" style="background: #FFFFFF; color: #2D3340; border: 1px solid var(--border);">본문</span></td></tr>
+          <tr><td>#6B7280 muted</td><td>#FFFFFF surface</td><td class="ratio">4.58 : 1</td><td class="pass-aa">AA</td><td><span class="sample" style="background: #FFFFFF; color: #6B7280; border: 1px solid var(--border);">METADATA</span></td></tr>
+          <tr><td>#3E7A00 green-text</td><td>#FFFFFF surface</td><td class="ratio">4.62 : 1</td><td class="pass-aa">AA</td><td><span class="sample" style="background: #FFFFFF; color: #3E7A00; border: 1px solid var(--border);">GREEN GARDEN</span></td></tr>
+          <tr><td>#3E7A00 green-text</td><td>#F4F8EE bg</td><td class="ratio">4.32 : 1</td><td class="fail">FAIL (작은 텍스트)</td><td><span class="sample" style="background: #F4F8EE; color: #3E7A00;">작은 텍스트 주의</span></td></tr>
+          <tr><td>#B0094B pink-text</td><td>#FFFFFF surface</td><td class="ratio">6.74 : 1</td><td class="pass-aa">AA</td><td><span class="sample" style="background: #FFFFFF; color: #B0094B; border: 1px solid var(--border);">GREEN NIGHT</span></td></tr>
+          <tr><td>#0277BD blue-text</td><td>#FFFFFF surface</td><td class="ratio">4.85 : 1</td><td class="pass-aa">AA</td><td><span class="sample" style="background: #FFFFFF; color: #0277BD; border: 1px solid var(--border);">FUN &amp; WALK</span></td></tr>
+          <tr><td>#050816 (다크 텍스트)</td><td>#A8FF00 lime</td><td class="ratio">14.60 : 1</td><td class="pass-aaa">AAA</td><td><span class="sample" style="background: #A8FF00; color: #050816;">CTA 버튼</span></td></tr>
+          <tr><td>#FFFFFF</td><td>#FF0F7B pink bg</td><td class="ratio">4.53 : 1</td><td class="pass-aa">AA</td><td><span class="sample" style="background: #FF0F7B; color: #FFFFFF;">Pink Banner</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 16px; font-size: 0.875rem; color: var(--text-muted);">
+        주의: <code>green-text</code>를 페이지 배경(<code>#F4F8EE</code>) 위에 작은 텍스트로 쓰면 4.32 = AA 경계 아래. 큰 텍스트(18pt+) 또는 카드 surface(<code>#FFFFFF</code>) 위 사용 권장. eyebrow는 surface 위에만 배치.
+      </p>
+    </section>
+
+    <!-- ================== 타이포 ================== -->
+    <section>
+      <h2>타이포그래피</h2>
+      <div class="lead">사이즈/패밀리/스페이싱 모두 유지. 색만 라이트 위 다크로.</div>
+      <div class="type-row"><div class="type-row__label">DISPLAY HERO · ANTON</div><div class="display-hero">남산 그린 서머</div></div>
+      <div class="type-row"><div class="type-row__label">DISPLAY LG · ANTON</div><div class="display-lg">FUN &amp; WALK</div></div>
+      <div class="type-row"><div class="type-row__label">HEADLINE · ANTON</div><div class="headline">2026.06.27 SAT</div></div>
+      <div class="type-row"><div class="type-row__label">BODY MD · PRETENDARD</div><div class="body-md">남산의 여름밤을 함께 걷고, 빛으로 채우고, 숲을 들여다보는 하루.</div></div>
+      <div class="type-row"><div class="type-row__label">BODY SM</div><div class="body-sm">미스트 존, 친환경 굿즈 키트, 인증샷 부스가 함께합니다.</div></div>
+      <div class="type-row"><div class="type-row__label">EYEBROW · MONTSERRAT</div><div class="eyebrow">GREEN GARDEN</div></div>
+    </section>
+
+    <!-- ================== 컴포넌트 ================== -->
+    <section>
+      <h2>컴포넌트 미리보기</h2>
+      <div class="lead">버튼/카드/태그/eyebrow.</div>
+
+      <h3>버튼</h3>
+      <div class="btn-row">
+        <button class="btn btn--primary">티켓 신청하기</button>
+        <button class="btn btn--ghost">자세히 보기</button>
+        <button class="btn btn--pink">Green Night 입장권</button>
+      </div>
+
+      <h3>일반 카드 (라이트)</h3>
+      <div class="card">
+        <div class="card__eyebrow">NOTICE · 2026-05-15</div>
+        <div class="card__title">티켓 예매 안내</div>
+        <div class="card__body">6월 1일 오전 10시부터 공식 홈페이지에서 예매가 시작됩니다. Fun&amp;Walk · Green Night · Green Garden 3개 프로그램 중 선택 가능합니다.</div>
+      </div>
+
+      <h3>프로그램 카드 — 라이트 페이지 위 다크 카드 (Hybrid)</h3>
+      <div class="program-grid">
+        <div class="program-card program-card--funwalk">
+          <div class="program-card__eyebrow">FUN &amp; WALK</div>
+          <div class="program-card__title">5KM ACTIVE WALK</div>
+        </div>
+        <div class="program-card program-card--night">
+          <div class="program-card__eyebrow">GREEN NIGHT</div>
+          <div class="program-card__title">NEON SUMMER STAGE</div>
+        </div>
+        <div class="program-card program-card--garden">
+          <div class="program-card__eyebrow">GREEN GARDEN</div>
+          <div class="program-card__title">DOCENT FOREST WALK</div>
+        </div>
+      </div>
+
+      <h3>태그 (네온 border + darker variant 텍스트)</h3>
+      <div class="tag-list">
+        <span class="tag tag--lime">GREEN GARDEN</span>
+        <span class="tag tag--pink">GREEN NIGHT</span>
+        <span class="tag tag--blue">FUN &amp; WALK</span>
+        <span class="tag">2026.06.27</span>
+        <span class="tag">남산공원</span>
+      </div>
+    </section>
+
+    <!-- ================== HERO 시연 ================== -->
+    <section>
+      <h2>Hero 섹션 시연</h2>
+      <div class="lead">라이트 페이지 baseline + 네온 glow 액센트.</div>
+      <div class="hero-mock">
+        <div class="hero-mock__eyebrow">2026.06.27 SAT · 남산공원</div>
+        <div class="hero-mock__title">남산<br>그린 서머</div>
+        <div class="hero-mock__body">도심 속 초록빛 여름 페스티벌. Fun&amp;Walk, Green Night, Green Garden 3개 프로그램으로 만나는 여름밤의 청량감.</div>
+        <div class="btn-row">
+          <button class="btn btn--primary">티켓 신청 →</button>
+          <button class="btn btn--ghost">프로그램 보기</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== Green Night 일관성 ================== -->
+    <section>
+      <h2>Green Night 일관성 — 섹션 단위 다크</h2>
+      <div class="lead">페이지 전체는 라이트지만, Green Night 무드가 필요한 섹션은 <code>.dark-section</code>으로.</div>
+      <div class="card">
+        <div class="card__eyebrow" style="color: var(--text-muted);">라이트 영역 — 공지/일정</div>
+        <div class="card__title">2026.06.27 SAT 19:00 — 23:00</div>
+        <div class="card__body">남산공원 야외무대. 입장은 라이트 영역(예매 안내, 일정)에서 진행.</div>
+      </div>
+      <div class="dark-section">
+        <div class="dark-section__inner">
+          <div class="eyebrow" style="color: var(--neon-pink); margin-bottom: 12px;">GREEN NIGHT · NEON STAGE</div>
+          <div class="headline" style="color: var(--on-dark); margin-bottom: 12px;">여름밤을 핑크빛 네온으로</div>
+          <p style="color: var(--on-dark-body); margin-bottom: 16px; max-width: 600px;">라이브 무대, 라이트 인스톨레이션, 그리고 남산 정상에서 내려다보는 도심의 야경. 페이지 baseline은 라이트지만 이 섹션은 야간 무드 보존.</p>
+          <button class="btn btn--pink">입장권 확인</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 16px;">
+        <div class="card__eyebrow" style="color: var(--text-muted);">라이트 영역 — FAQ</div>
+        <div class="card__title">자주 묻는 질문</div>
+        <div class="card__body">우천 시 운영, 환불 정책, 셔틀버스 등은 라이트 카드 영역에서 표시.</div>
+      </div>
+    </section>
+
+    <!-- ================== 작업 영향 ================== -->
+    <section>
+      <h2>이 시안으로 진행 시 작업 영향</h2>
+      <div class="lead">시안 승인 시 Phase 1 plan 파일로 전환.</div>
+      <table class="contrast-table">
+        <thead>
+          <tr><th>영역</th><th>변경</th><th>예상 분량</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>DESIGN.md</td><td>colors 8개 + components 13개 + Components prose + Do's/Don'ts 전면 재작성, "dark only" 표현 제거</td><td>~250 라인</td></tr>
+          <tr><td>css/tokens.css</td><td>토큰 1:1 재정의 + dark-surface 보존 토큰 추가</td><td>~80 라인</td></tr>
+          <tr><td>css/base.css</td><td><code>--color-white</code> 의미 토큰 마이그레이션, body bg/text, ::selection, outline 색</td><td>~30 라인</td></tr>
+          <tr><td>css/home.css</td><td>그라데이션 8곳 — 일부 다크 카드(hero overlay)는 유지, 일부 라이트 톤으로</td><td>~50 라인</td></tr>
+          <tr><td>css/page.css</td><td><code>--color-white</code> 7곳 의미 토큰 마이그레이션</td><td>~20 라인</td></tr>
+          <tr><td>css/components/* × 5</td><td>button/card/footer/header/image-slot — 라이트 위 작동 검토</td><td>~80 라인</td></tr>
+          <tr><td>HTML × 7</td><td>theme-color <code>#050816 → #F4F8EE</code>, color-scheme <code>dark → light</code></td><td>14곳</td></tr>
+          <tr><td>js/modules/image-slot.js</td><td>하드코딩 <code>#050816</code> 제거 → CSS 토큰 참조</td><td>1곳</td></tr>
+          <tr><td>이미지 자산</td><td>재제작 없음 — 다크 카드 컨테이너 안에서 활용</td><td>0</td></tr>
+          <tr><td>검증</td><td><code>npx @google/design.md lint</code> 0/0, 5페이지 모바일/데스크톱 실측, ::selection/scrollbar 톤 확인</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ================== 피드백 가이드 ================== -->
+    <section>
+      <h2>피드백 요청</h2>
+      <div class="lead">아래 중 OK/NG/수정 알려주세요. 그에 따라 v2 또는 Phase 1 plan으로 진입.</div>
+      <ol style="padding-left: 24px; color: var(--text-body); line-height: 1.8;">
+        <li><strong>페이지 톤 <code>#F4F8EE</code> (Pale Garden)</strong> — 순백/오프화이트 선호면 알려주세요.</li>
+        <li><strong>네온 컬러 액센트 전용 + darker variant 텍스트 분리</strong> — primary 컬러 자체를 변경하고 싶으면 알려주세요.</li>
+        <li><strong>이미지/프로그램 카드를 다크 컨테이너로 가두는 Hybrid 접근</strong> — 모든 카드를 라이트로 통일 vs 페스티벌 무드를 위한 부분 다크.</li>
+        <li><strong>Green Night 야간 무드를 <code>.dark-section</code>으로 섹션 단위 보존</strong> — 또는 페이지 전체를 라이트 통일.</li>
+        <li><strong>전체적 인상</strong> — 페스티벌 컨셉 살아 있나요? 너무 차분/너무 평범하면 v2 방향성 제시 부탁합니다.</li>
+      </ol>
+    </section>
+
+  </div>
+
+  <footer class="doc-footer">
+    Light Baseline v1 · 검토용 시안 (격리 토큰) · 프로덕션 적용은 시안 승인 후 Phase 1 plan 작성 단계로 전환
+  </footer>
+</body>
+</html>
