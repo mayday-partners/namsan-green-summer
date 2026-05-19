@@ -22,7 +22,7 @@ export async function renderFaqList() {
   } catch (err) {
     console.error('[faq-list] load failed:', err);
     slots.forEach(slot => {
-      slot.innerHTML = '<p role="alert" style="padding:1rem;color:#FF0F7B">자주 묻는 질문을 불러오지 못했습니다.</p>';
+      slot.innerHTML = '<p role="alert" class="fallback-error">자주 묻는 질문을 불러오지 못했습니다.</p>';
     });
     return;
   }

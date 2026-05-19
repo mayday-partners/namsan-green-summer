@@ -26,7 +26,7 @@ export async function renderNoticeList() {
   } catch (err) {
     console.error('[notice-list] load failed:', err);
     slots.forEach(slot => {
-      slot.innerHTML = '<li role="alert" style="padding:1rem;color:#FF0F7B">공지사항을 불러오지 못했습니다.</li>';
+      slot.innerHTML = '<li role="alert" class="fallback-error">공지사항을 불러오지 못했습니다.</li>';
     });
     return;
   }

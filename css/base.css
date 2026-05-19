@@ -117,3 +117,9 @@ body {
   outline: 2px solid var(--color-white);
   outline-offset: 2px;
 }
+
+.fallback-error {
+  padding: var(--space-4);
+  color: var(--color-pink);
+  font-size: var(--fs-sm);
+}

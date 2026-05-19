@@ -15,7 +15,7 @@ export async function mountIncludes(root = document) {
       el.outerHTML = html;
     } catch (err) {
       console.error('[include]', url, err);
-      el.innerHTML = `<p role="alert" style="padding:1rem;color:#FF0F7B">콘텐츠 로딩 실패: ${url}</p>`;
+      el.innerHTML = `<p role="alert" class="fallback-error">콘텐츠 로딩 실패: ${url}</p>`;
     }
   }));
 }
