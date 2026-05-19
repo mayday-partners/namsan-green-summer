@@ -12,11 +12,18 @@ import { renderFaqList } from './modules/faq-list.js';
   resolveHashAfterRender();
 })();
 
+window.addEventListener('hashchange', resolveHashAfterRender);
+
 function resolveHashAfterRender() {
   if (!location.hash) return;
   let target;
-  try { target = document.querySelector(location.hash); } catch {}
+  try {
+    target = document.querySelector(location.hash);
+  } catch (err) {
+    console.warn('[main] invalid hash selector:', location.hash, err);
+    return;
+  }
   if (!target) return;
   if (target instanceof HTMLDetailsElement) target.open = true;
-  target.scrollIntoView({ behavior: 'instant', block: 'start' });
+  target.scrollIntoView({ behavior: 'auto', block: 'start' });
 }

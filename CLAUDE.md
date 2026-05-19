@@ -18,7 +18,7 @@
 1. **헤더/푸터 마크업을 페이지마다 복붙 금지** — `partials/header.html`, `partials/footer.html` 단일 편집. 새 페이지에는 `<site-header>...fallback...</site-header>` / `<site-footer></site-footer>` 커스텀 엘리먼트 사용. fallback nav는 최소 마크업 (로고 + 메뉴 5개)으로 유지 — 메뉴 항목 변경 시 fallback 6곳 + partial 1곳 모두 갱신.
 2. **게시판 항목(공지/FAQ 등)을 HTML에 직접 작성 금지** — `data/*.json`에만 추가. 마크업은 `<template>` 또는 모듈 렌더 함수로만 생성.
 3. **같은 데이터를 두 페이지에 복사 금지** — `index.html` 미리보기와 `community.html` 전체 목록이 같은 JSON을 다른 `data-limit`으로 호출해야 한다.
-4. **인라인 `style` 속성 금지** — 색상/그라데이션은 컴포넌트 modifier 또는 CSS 변수로. (현재 `event.html` 카드들에 위반 있음, 작업 시 정리)
+4. **인라인 `style` 속성 금지** — 색상/그라데이션은 컴포넌트 modifier 또는 CSS 변수로.
 5. **`<script type="module">` 사용. 전역 `<script src>` 금지**, 전역 변수 금지.
 6. **`tokens.css`에 없는 색상 직접 사용 금지** — 토큰 먼저 추가 → 컴포넌트 적용.
 7. **`!important` 금지** (접근성 fallback 제외).
@@ -39,7 +39,7 @@
 - 명명: **BEM** (`block__element--modifier`).
 - 컴포넌트 1개 = 파일 1개 (`css/components/<block>.css`).
 - 페이지 전용은 `css/pages/<name>.css`.
-- 진입점: `css/main.css` 하나만 HTML이 link. `@layer reset, tokens, base, layouts, components, pages, utilities;` 순서.
+- 진입점: `css/main.css` 하나만 HTML이 link. `@layer reset, tokens, base, components, pages, utilities;` 순서.
 - 간격은 `var(--space-*)`, 색상은 `var(--color-*)` 토큰만 사용.
 - 셀렉터 중첩 3단계 이하.
 - 반응형 break: `768px`(모바일), `900px`(태블릿 메인 그리드), `1440px`(데스크톱 와이드).

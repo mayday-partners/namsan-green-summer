@@ -80,7 +80,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="faq">
       <div class="container">
         <div class="sub-head fade-in">
           <p class="sub-head__eyebrow">FAQ</p>
@@ -91,7 +91,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="refund">
       <div class="container">
         <div class="sub-head fade-in">
           <p class="sub-head__eyebrow">Refund</p>
@@ -122,8 +122,8 @@
 
   <site-footer></site-footer>
 
-  <!-- Full-list shape (date, title, arrow). index.html defines a different shape for the same ID. -->
-  <template id="tpl-notice-item">
+  <!-- Full-list shape (date, title, arrow). index.html uses tpl-notice-preview for the preview shape. -->
+  <template id="tpl-notice-full">
     <li>
       <a class="notice__item">
         <span class="notice__date"></span>

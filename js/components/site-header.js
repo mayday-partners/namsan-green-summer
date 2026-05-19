@@ -19,7 +19,16 @@ function normalizeFallbackLinks(root) {
 }
 
 class SiteHeader extends HTMLElement {
+  #ac = null;
+  #hydrated = false;
+
   async connectedCallback() {
+    // Already hydrated from a previous mount? Skip the fetch but re-bind handlers.
+    if (this.#hydrated) {
+      this.#attachHandlers();
+      this.#markCurrent();
+      return;
+    }
     // Reset any nav-open lock that may have survived bfcache restore.
     document.documentElement.classList.remove('nav-open');
     // Normalize fallback nav hrefs immediately so subpath deploys
@@ -30,6 +39,7 @@ class SiteHeader extends HTMLElement {
       if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
       const html = await res.text();
       this.innerHTML = rewriteAbsolutePaths(html);
+      this.#hydrated = true;
       this.#attachHandlers();
       this.#markCurrent();
     } catch (err) {
@@ -38,16 +48,29 @@ class SiteHeader extends HTMLElement {
     }
   }
 
+  disconnectedCallback() {
+    this.#ac?.abort();
+    this.#ac = null;
+  }
+
   #attachHandlers() {
+    // Abort prior listeners if re-attaching
+    this.#ac?.abort();
+    this.#ac = new AbortController();
+    const { signal } = this.#ac;
+
     const header = this.querySelector('.site-header');
+    if (!header) {
+      console.error('[site-header] .site-header not found — partial injection may have failed');
+      return;
+    }
     const nav = this.querySelector('.site-nav');
     const toggle = this.querySelector('.site-nav__toggle');
-    if (!header) return;
 
     const onScroll = () => {
       header.classList.toggle('is-scrolled', window.scrollY > 8);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
     onScroll();
 
     if (toggle && nav) {
@@ -56,17 +79,21 @@ class SiteHeader extends HTMLElement {
         toggle.setAttribute('aria-expanded', String(open));
         document.documentElement.classList.toggle('nav-open', open);
       };
-      toggle.addEventListener('click', () => setNavOpen(nav.dataset.open !== 'true'));
+      toggle.addEventListener('click', () => setNavOpen(nav.dataset.open !== 'true'), { signal });
       nav.querySelectorAll('.site-nav__link').forEach(link =>
-        link.addEventListener('click', () => setNavOpen(false))
+        link.addEventListener('click', () => setNavOpen(false), { signal })
       );
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && nav.dataset.open === 'true') setNavOpen(false);
-      });
+      }, { signal });
       const mql = window.matchMedia('(min-width: 769px)');
       const onChange = (e) => { if (e.matches) setNavOpen(false); };
-      if (mql.addEventListener) mql.addEventListener('change', onChange);
-      else if (mql.addListener) mql.addListener(onChange); // Safari < 14
+      if (mql.addEventListener) {
+        mql.addEventListener('change', onChange, { signal });
+      } else if (mql.addListener) {
+        mql.addListener(onChange); // Safari < 14 — no AbortController support
+        signal.addEventListener('abort', () => mql.removeListener(onChange), { once: true });
+      }
     }
   }
 
@@ -77,14 +104,23 @@ class SiteHeader extends HTMLElement {
       try {
         const linkPath = new URL(a.href, here).pathname;
         if (linkPath === herePath) a.setAttribute('aria-current', 'page');
-      } catch {}
+      } catch (err) {
+        console.warn('[site-header] markCurrent failed for link:', a.href, err);
+      }
     });
   }
 }
 
 customElements.define('site-header', SiteHeader);
 
-// bfcache restore safeguard — clear nav-open lock that may have persisted.
+// bfcache restore safeguard — full reset of nav state.
 window.addEventListener('pageshow', (e) => {
-  if (e.persisted) document.documentElement.classList.remove('nav-open');
+  if (!e.persisted) return;
+  document.documentElement.classList.remove('nav-open');
+  document.querySelectorAll('site-header .site-nav').forEach(nav => {
+    nav.dataset.open = 'false';
+  });
+  document.querySelectorAll('site-header .site-nav__toggle').forEach(t => {
+    t.setAttribute('aria-expanded', 'false');
+  });
 });

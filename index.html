@@ -204,7 +204,7 @@
               <h3 class="bottom-block__title">공지사항</h3>
               <a class="bottom-block__more" href="pages/community.html">More →</a>
             </div>
-            <ul class="bottom-list" data-notice-list data-limit="4"></ul>
+            <ul class="bottom-list" data-notice-list data-limit="4" data-render="preview"></ul>
           </div>
 
           <div class="fade-in" data-delay="1">
@@ -222,8 +222,8 @@
 
   <site-footer></site-footer>
 
-  <!-- Preview shape (title, meta). community.html defines a different shape for the same ID. -->
-  <template id="tpl-notice-item">
+  <!-- Preview shape (title, meta). community.html uses tpl-notice-full for the full shape. -->
+  <template id="tpl-notice-preview">
     <li>
       <a class="notice__item">
         <span class="notice__title"></span>

@@ -51,8 +51,7 @@ python3 -m http.server 8000
 │  └─ footer.html
 ├─ data/                      ← 콘텐츠 데이터 (게시판 SSOT)
 │  ├─ notices.json
-│  ├─ faqs.json
-│  └─ schedule.json
+│  └─ faqs.json
 ├─ css/
 │  ├─ tokens.css              ← Settings (변수)
 │  ├─ reset.css               ← Generic
@@ -62,29 +61,23 @@ python3 -m http.server 8000
 │  │  ├─ footer.css
 │  │  ├─ button.css
 │  │  ├─ card.css
-│  │  ├─ faq.css
-│  │  ├─ notice-list.css
 │  │  └─ ...
 │  ├─ pages/
-│  │  ├─ home.css
-│  │  └─ page.css
 │  └─ main.css                ← @layer + @import 진입점
 ├─ js/
 │  ├─ main.js                 ← ES Module 진입점
+│  ├─ components/
+│  │  ├─ site-header.js       ← <site-header> 커스텀 엘리먼트
+│  │  └─ site-footer.js       ← <site-footer> 커스텀 엘리먼트
 │  └─ modules/
-│     ├─ include.js           ← partials 주입
-│     ├─ header.js            ← 헤더 스크롤·모바일 토글
 │     ├─ observer.js          ← fade-in IntersectionObserver
 │     ├─ notice-list.js       ← 공지사항 렌더
-│     ├─ faq-list.js          ← FAQ 렌더
-│     └─ render.js            ← 공통 템플릿 헬퍼
+│     └─ faq-list.js          ← FAQ 렌더
 ├─ img/
 ├─ fonts/
 ├─ README.md
 └─ CLAUDE.md
 ```
-
-> 현재 단계에서는 `partials/`, `data/`, `js/modules/`가 아직 존재하지 않을 수 있다. 신규 작업 시 본 구조로 점진 이행한다.
 
 ---
 
@@ -120,7 +113,7 @@ ITCSS + BEM + CSS Cascade Layers 조합:
 
 ```css
 /* css/main.css — 모든 페이지가 이 파일 하나만 link */
-@layer reset, tokens, base, layouts, components, pages, utilities;
+@layer reset, tokens, base, components, pages, utilities;
 
 @import url('reset.css')                    layer(reset);
 @import url('tokens.css')                   layer(tokens);

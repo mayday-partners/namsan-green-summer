@@ -1,16 +1,13 @@
 // js/modules/notice-list.js
 const DATA_URL = new URL('../../data/notices.json', import.meta.url).href;
-const TEMPLATE_ID = 'tpl-notice-item';
+const TEMPLATES = {
+  preview: 'tpl-notice-preview',
+  full:    'tpl-notice-full',
+};
 
 export async function renderNoticeList() {
   const slots = document.querySelectorAll('[data-notice-list]');
   if (!slots.length) return;
-
-  const tpl = document.getElementById(TEMPLATE_ID);
-  if (!tpl) {
-    console.error('[notice-list] template missing:', TEMPLATE_ID);
-    return;
-  }
 
   let sorted;
   try {
@@ -18,6 +15,13 @@ export async function renderNoticeList() {
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const items = await res.json();
     if (!Array.isArray(items)) throw new TypeError('expected array');
+
+    items.forEach((item, i) => {
+      if (!item.id)    console.warn('[notice-list] item[%d] missing id; anchor will break', i, item);
+      if (!item.date)  console.warn('[notice-list] item[%d] missing date; will sort to bottom', i, item);
+      if (!item.title) console.warn('[notice-list] item[%d] missing title; will show fallback text', i, item);
+    });
+
     sorted = [...items].sort((a, b) => {
       const pa = !!a.pinned, pb = !!b.pinned;
       if (pa !== pb) return pa ? -1 : 1;
@@ -32,23 +36,37 @@ export async function renderNoticeList() {
   }
 
   slots.forEach(slot => {
-    const raw = slot.dataset.limit ?? 'all';
-    const limit = parseLimit(raw);
-    const list = limit === Infinity ? sorted : sorted.slice(0, limit);
+    try {
+      const mode = slot.dataset.render === 'preview' ? 'preview' : 'full';
+      const tpl = document.getElementById(TEMPLATES[mode]);
+      if (!tpl) {
+        console.error('[notice-list] template missing for mode "%s": #%s', mode, TEMPLATES[mode]);
+        slot.innerHTML = '<li role="alert" class="fallback-error">공지사항을 표시할 수 없습니다 (template missing).</li>';
+        return;
+      }
 
-    const frag = document.createDocumentFragment();
-    for (const item of list) {
-      const node = tpl.content.cloneNode(true);
-      const a = node.querySelector('a');
-      if (!a) continue;
-      a.href = safeLink(item.link) ?? `pages/community.html#${item.id}`;
-      const dateEl = node.querySelector('.notice__date');
-      const titleEl = node.querySelector('.notice__title');
-      if (dateEl) dateEl.textContent = formatDate(item.date);
-      if (titleEl) titleEl.textContent = item.title;
-      frag.appendChild(node);
+      const raw = slot.dataset.limit ?? 'all';
+      const limit = parseLimit(raw);
+      const list = limit === Infinity ? sorted : sorted.slice(0, limit);
+
+      const frag = document.createDocumentFragment();
+      for (const item of list) {
+        if (!item.id) continue;
+        const node = tpl.content.cloneNode(true);
+        const a = node.querySelector('a');
+        if (!a) continue;
+        a.href = safeLink(item.link) ?? `pages/community.html#${item.id}`;
+        const dateEl = node.querySelector('.notice__date');
+        const titleEl = node.querySelector('.notice__title');
+        if (dateEl) dateEl.textContent = formatDate(item.date);
+        if (titleEl) titleEl.textContent = item.title ?? '(제목 없음)';
+        frag.appendChild(node);
+      }
+      slot.replaceChildren(frag);
+    } catch (err) {
+      console.error('[notice-list] render failed for slot:', slot, err);
+      slot.innerHTML = '<li role="alert" class="fallback-error">공지사항 표시 중 오류가 발생했습니다.</li>';
     }
-    slot.replaceChildren(frag);
   });
 }
 
@@ -68,10 +86,14 @@ function parseLimit(raw) {
 
 function safeLink(raw) {
   if (!raw) return null;
+  let u;
   try {
-    const u = new URL(raw, location.origin);
-    if (u.protocol === 'http:' || u.protocol === 'https:') return raw;
-  } catch {}
-  console.warn('[notice-list] unsafe link rejected:', raw);
+    u = new URL(raw, location.origin);
+  } catch (err) {
+    console.warn('[notice-list] safeLink could not parse URL:', raw, err);
+    return null;
+  }
+  if (u.protocol === 'http:' || u.protocol === 'https:') return raw;
+  console.warn('[notice-list] unsafe link rejected (non-http(s) protocol):', raw);
   return null;
 }
