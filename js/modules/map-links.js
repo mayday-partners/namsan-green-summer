@@ -45,6 +45,7 @@ export function buildNaverLink(venue) {
   const name = venue?.primary?.name;
   if (!name) return null;
   const appname = location.origin || 'https://namsangreensummer.com';
+  const placeId = venue?.primary?.place_ids?.naver;
   const c = venue?.primary?.coordinates;
   const hasCoords = c && c.lat != null && c.lng != null;
 
@@ -59,7 +60,13 @@ export function buildNaverLink(venue) {
     return `nmap://route/public?${params.toString()}`;
   }
 
-  // Priority 2: search fallback (no coords needed)
+  // Priority 2: Place ID — exact match, cross-platform.
+  // Mobile uses Universal Links to open the Naver Maps app when installed.
+  if (placeId) {
+    return `https://map.naver.com/p/entry/place/${placeId}`;
+  }
+
+  // Priority 3: search fallback (no place ID, no coords)
   if (isMobile()) {
     const params = new URLSearchParams({ query: name, appname });
     return `nmap://search?${params.toString()}`;
