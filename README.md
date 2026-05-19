@@ -474,6 +474,8 @@ npx serve .
 | SSL | GitHub 자동 (Let's Encrypt) | Cloudflare 자동 |
 | 사이트 base | `/namsan-green-summer/` | `/` |
 | 자동 배포 트리거 | `main` push 시 GH Pages action | `main` push 시 Cloudflare Pages build |
+| 프로젝트 URL | — | `https://namsan-green-summer.pages.dev/` (Pages 기본 도메인, 백업 URL) |
+| PR 프리뷰 | 없음 | PR마다 `https://<hash>.namsan-green-summer.pages.dev/` 자동 발급 |
 
 ### 14-2. subpath 호환 메커니즘
 
@@ -498,11 +500,17 @@ GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로
 4. nav 클릭 시 `/namsan-green-summer/pages/...`로 라우팅
 
 #### Cloudflare (프로덕션)
-1. Cloudflare Pages에 GitHub repo 연결 (Build command 비움, output dir `/`)
-2. Cloudflare DNS 영역에 `namsangreensummer.com` A/AAAA 또는 CNAME 설정
-3. Gabia DNS 관리에서 네임서버를 Cloudflare가 안내한 2개로 변경
-4. `https://namsangreensummer.com/` 접속
-5. 동일하게 fetch 4종이 200 (이번엔 `/partials/...` 형태)
+1. Cloudflare에 도메인 zone 추가 → 네임서버 2개 발급
+2. Gabia DNS에서 네임서버를 위 2개로 변경 (전파 ~1시간)
+3. Cloudflare Pages 프로젝트 생성 → GitHub repo 연결:
+   - Framework preset: **None**
+   - Build command: `exit 0`
+   - Build output directory: 비움
+   - Production branch: `main`
+4. Pages 프로젝트 → Custom Domains → `namsangreensummer.com` 추가 (CF가 CNAME flattening 자동 처리, A/AAAA 수동 설정 불필요)
+5. SSL/TLS → Overview → 모드를 **Full** 이상으로 설정
+6. `https://namsangreensummer.com/` 접속
+7. fetch 4종이 200 (이번엔 `/partials/...` 형태)
 
 ### 14-4. 환경별 차이 없는 코드 작성 원칙
 
@@ -512,15 +520,80 @@ GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로
 - **CSS의 `url()` 참조는 CSS 파일 위치 기준 상대** (브라우저가 자동 처리, 변경 불요)
 - **외부 폼/링크는 도메인 포함 절대 URL** (`https://forms.example.com/...`) — 영향 없음
 
-### 14-5. 도메인 전환 시 체크리스트
+### 14-5. 도메인 전환 체크리스트 (현황: 2026-05-19 시점)
 
-테스트(GH Pages) → 프로덕션(Cloudflare/namsangreensummer.com) 전환 시:
+테스트(GH Pages) → 프로덕션(Cloudflare/namsangreensummer.com) 전환 진행 상태:
 
-- [ ] Cloudflare Pages 프로젝트 생성 + GitHub repo 연결
-- [ ] Cloudflare에 `namsangreensummer.com` 추가 → 네임서버 2개 안내 받음
-- [ ] Gabia에 네임서버 변경 (DNS 전파 ~수 시간)
-- [ ] Cloudflare Pages 프로젝트에 `namsangreensummer.com` Custom Domain 연결
-- [ ] SSL/TLS 모드 "Full (Strict)" 권장
-- ~~[ ] OG/SNS 메타 태그 점검 (현재 `og:image`는 페이지마다 `/img/sections/hero.webp`, 절대 URL 아님 — 카카오/페이스북 일부에서 인식 안 될 수 있음 → 향후 페이지별 절대 URL OG 이미지 권장)~~ ✅
-- ~~[ ] `robots.txt`, `sitemap.xml` 추가 (현재 없음 — 프로덕션 SEO 필요 시)~~ ✅
+- [x] Cloudflare 가입 + `namsangreensummer.com` zone 추가 (Free 플랜)
+- [x] Gabia에 네임서버 변경 (`eugene.ns.cloudflare.com`, `paloma.ns.cloudflare.com`)
+- [x] Cloudflare Pages 프로젝트 생성 + GitHub repo 연결
+- [x] Pages 프로젝트에 `namsangreensummer.com` Custom Domain 연결 (apex)
+- [x] SSL/TLS 모드 설정 (현재 **Full** — "Full (Strict)" 갱신 권장)
+- [x] OG/SNS 메타 태그 (모든 페이지 `og:image` 절대 URL 적용 완료)
+- [x] 루트 `404.html` 추가 (`.html` 매칭 실패 시 index.html catchall 방지)
+- [ ] `www.namsangreensummer.com` Custom Domain 추가 + apex로 301
+- [ ] `pages.dev` 서브도메인 `X-Robots-Tag: noindex` (CF Transform Rules)
+- [ ] `robots.txt`, `sitemap.xml` 추가 (현재 없음)
+- [ ] `_headers` 파일로 캐시 정책 / CSP 추가
 - [ ] Lighthouse 측정: LCP < 2.5s, CLS < 0.1, INP < 200ms
+
+### 14-6. Cloudflare Pages 프로젝트 정보
+
+> 계정 / 권한 등 민감 정보는 repo에 두지 않는다. 별도 인수인계 문서(Notion/Wiki/패스워드 매니저) 참조.
+
+| 항목 | 값 |
+|---|---|
+| 프로젝트 이름 | `namsan-green-summer` |
+| pages.dev URL | `https://namsan-green-summer.pages.dev/` |
+| Production branch | `main` |
+| Framework preset | None |
+| Build command | `exit 0` |
+| Build output directory | (빈 칸 = 저장소 루트) |
+| Root directory | (빈 칸) |
+| 자동 배포 | `main` push → production / PR → preview URL |
+| Custom domains | `namsangreensummer.com` (apex) / `www.namsangreensummer.com` (예정) |
+| Cloudflare 네임서버 | `eugene.ns.cloudflare.com`, `paloma.ns.cloudflare.com` |
+| 도메인 등록기관 | Gabia (DNS 관리는 Cloudflare로 위임) |
+| SSL 인증서 | Cloudflare 자동 (Google Trust Services, 90일 자동 갱신) |
+
+**무료 플랜 한도** (참고): 빌드 500회/월, 파일 20,000개, 대역폭/요청 무제한.
+
+### 14-7. Cloudflare Pages 동작 특이점
+
+배포 환경에서만 발생하는 동작. 디버깅 시 자주 막히는 지점.
+
+1. **`.html` 자동 drop (308 redirect)**
+   - `/pages/event.html` 요청 시 자동으로 `/pages/event`로 308 리다이렉트. 페이지 동작에 문제 없음(브라우저/fetch 자동 follow).
+   - GH Pages 호환을 위해 코드의 `.html` 확장자는 **유지**한다. 제거 시 GH Pages 깨짐.
+   - 클린 URL(`/community` 형태) 미도입 결정 — 위 호환성 + SEO 손실(308 1회)은 무시 가능 수준.
+
+2. **404 처리**
+   - 매칭되는 정적 자산이 없으면 루트 `404.html`을 404 상태로 서빙.
+   - `404.html` 없을 때는 CF가 index.html을 200으로 fallback (SEO 위험). 본 저장소는 `404.html`을 포함하므로 정상 동작.
+   - 404 페이지는 `<meta name="robots" content="noindex, follow">` 포함.
+
+3. **자동 보안 헤더**
+   - CF가 다음을 자동 부여: `x-content-type-options: nosniff`, `referrer-policy: strict-origin-when-cross-origin`. 별도 `_headers` 작성 없이 기본 적용.
+
+4. **AI 봇 차단 (기본 활성)**
+   - CF 대시보드 → AI 크롤러 제어 → "모든 페이지에서 차단".
+   - Googlebot 등 검색 봇은 영향 없음. GPTBot 등 AI 학습 봇만 차단.
+
+5. **`*.pages.dev` 중복 인덱싱 위험**
+   - 프로젝트의 `namsan-green-summer.pages.dev`가 SEO상 prod 도메인과 동일 콘텐츠.
+   - 권장: CF 대시보드 → Rules → Transform Rules에서 hostname이 `pages.dev` 포함이면 `X-Robots-Tag: noindex` 응답 헤더 추가.
+
+6. **`_headers` 미사용 (현재)**
+   - 향후 CSP, 캐시 정책(JSON `no-cache`, 정적 자산 장기 캐시) 추가 시 저장소 루트 `_headers` 파일 작성.
+
+### 14-8. 운영 / 비상 대응
+
+| 상황 | 조치 |
+|---|---|
+| **롤백** | CF Pages → Deployments → 이전 성공 배포 → "Rollback to this deployment" |
+| **캐시 퍼지** | CF 대시보드 → Caching → Configuration → "Purge Everything" (또는 특정 URL Purge) |
+| **빌드 실패** | Deployments → 실패 배포 → Build log 확인. `exit 0` 외 명령 없으므로 보통 GitHub 권한 / repo 접근 / 파일 크기 한도(5MB) 이슈 |
+| **SSL 발급 지연** | Custom Domain 추가 후 보통 5-15분. 1시간 후에도 미발급이면 SSL/TLS → Edge Certificates 상태 확인 |
+| **도메인 장애 시 우회** | `*.pages.dev` URL은 도메인/SSL과 분리. 임시 안내 가능 |
+| **DNS 변경** | CF 대시보드 → DNS → Records. 가비아 DNS 패널은 NS 위임 후 무효 |
+| **Cloudflare 대시보드 접속 불가** | 계정 소유자 부재 시 인수인계 문서 참조. 2FA 백업 코드 필요 |
