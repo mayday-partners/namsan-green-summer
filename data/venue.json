@@ -1,77 +1,73 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-05-19",
-  "notes": "지도 딥링크용 장소 데이터. 단일 진실원(SSOT). 좌표는 WGS84 (lat, lng). 각 좌표 필드는 사용 시 lat/lng 명시적으로 매핑할 것 — 카카오/구글은 lat,lng 순서, 네이버 모바일웹(sx/sy ex/ey)은 x=lng/y=lat 순서로 다름.",
+  "notes": "지도 딥링크용 장소 데이터. 단일 진실원(SSOT). 좌표는 WGS84 (lat, lng). 페이지 슬롯은 [data-map-links] 단독 → default_venue 사용, [data-map-links=\"<key>\"] → venues 키 직접 지정.",
   "coordinate_policy": {
     "system": "WGS84",
     "decimal_places": "6 이상 권장 (~0.1m 정밀도)",
-    "verification": "각 좌표는 카카오맵 또는 구글맵에서 직접 확인 후 _verified=true 로 표기"
+    "verification": "각 좌표는 카카오맵/네이버지도/구글맵에서 직접 확인 후 _verified=true 로 표기"
   },
-  "primary": {
-    "id": "baekbeom_square",
-    "name": "남산 백범광장",
-    "name_en": "Baekbeom Square",
-    "description": "행사 메인 시작 지점. 백범 김구 동상이 있는 남산공원의 광장.",
-    "address": {
-      "road": "서울특별시 중구 퇴계로 8길 49-4",
-      "road_en": "49-4, Toegye-ro 8-gil, Jung-gu, Seoul",
-      "jibun": "서울특별시 중구 회현동1가 100-115",
-      "postal": "04633"
-    },
-    "coordinates": {
-      "lat": null,
-      "lng": null,
-      "_verified": false,
-      "_verification_note": "사용자 확인 필요. 카카오맵(map.kakao.com)에서 '백범광장' 검색 → 정보 카드 또는 URL의 좌표 추출. Place ID로 좌표 없이도 카카오 호출은 가능."
-    },
-    "place_ids": {
-      "kakao": "8381397",
-      "kakao_source": "https://place.map.kakao.com/8381397",
-      "kakao_verified": "2026-05-19 — Kakao search '남산 백범광장' result A: 문화유적, 별점 4.6, 67 리뷰, 회현동1가 100-115",
-      "google": "ChIJDXyPRF-ifDURo-L1LXIXqj8",
-      "google_source": "https://developers.google.com/maps/documentation/places/web-service/place-id",
-      "google_verified": "2026-05-19 — Google Place ID Finder marker on 남산공원 백범광장, 서울 중구 회현동 삼일대로 231",
-      "naver": "1982441579",
-      "naver_source": "https://map.naver.com/p/entry/place/1982441579",
-      "naver_verified": "2026-05-19 — Naver place entry: 백범광장공원, 자연공원, 회현역 4번 출구 255m, 남산공원길 649"
-    }
-  },
-  "course_points": [
-    {
+  "default_venue": "baekbeom_square",
+  "venues": {
+    "baekbeom_square": {
       "id": "baekbeom_square",
-      "name": "백범광장",
-      "type": "start",
-      "lat": null,
-      "lng": null,
-      "_verified": false
+      "name": "남산 백범광장",
+      "name_en": "Baekbeom Square",
+      "description": "행사 메인 시작 지점. 백범 김구 동상이 있는 남산공원의 광장.",
+      "address": {
+        "road": "서울특별시 중구 회현동 삼일대로 231",
+        "road_en": "Samil-daero 231, Hoehyeon-dong, Jung-gu, Seoul",
+        "jibun": "서울특별시 중구 회현동1가 100-115",
+        "postal": "04633"
+      },
+      "coordinates": {
+        "lat": 37.5548599,
+        "lng": 126.9792405,
+        "_verified": true,
+        "_source": "2026-05-19 — Google Maps page URL `!3d37.5548599!4d126.9792405`"
+      },
+      "place_ids": {
+        "kakao": "8381397",
+        "kakao_source": "https://place.map.kakao.com/8381397",
+        "kakao_verified": "2026-05-19 — Kakao page: 백범광장, 문화유적, 별점 4.6, 67 리뷰",
+        "google": "ChIJDXyPRF-ifDURo-L1LXIXqj8",
+        "google_source": "https://developers.google.com/maps/documentation/places/web-service/place-id",
+        "google_verified": "2026-05-19 — Place ID Finder marker on 남산공원 백범광장, deep-link returns 59-min transit route",
+        "naver": "1982441579",
+        "naver_source": "https://map.naver.com/p/entry/place/1982441579",
+        "naver_verified": "2026-05-19 — Naver page: 백범광장공원, 자연공원, 회현역 4번 출구 255m"
+      }
     },
-    {
+    "namsan_library": {
       "id": "namsan_library",
       "name": "남산도서관",
-      "type": "waypoint",
-      "address": "서울특별시 용산구 소월로 109 (후암동 30-84)",
-      "lat": 37.552925,
-      "lng": 126.9792253,
-      "_verified": false,
-      "_verification_note": "단일 검색 출처 (검증 필요). 카카오맵 재확인 권장."
-    },
-    {
-      "id": "northern_circular_road",
-      "name": "북측순환로 진입점",
-      "type": "waypoint",
-      "lat": null,
-      "lng": null,
-      "_verified": false
-    },
-    {
-      "id": "baekbeom_square_finish",
-      "name": "백범광장 (피니시)",
-      "type": "finish",
-      "lat": null,
-      "lng": null,
-      "_verified": false
+      "name_en": "Namsan Library",
+      "description": "Green Garden 도슨트 만남 장소. 서울특별시교육청 운영 공립 도서관.",
+      "address": {
+        "road": "서울특별시 용산구 소월로 109",
+        "road_en": "Sowol-ro 109, Yongsan-gu, Seoul",
+        "jibun": "서울특별시 용산구 후암동 30-84",
+        "postal": null
+      },
+      "coordinates": {
+        "lat": 37.5530394,
+        "lng": 126.9814272,
+        "_verified": true,
+        "_source": "2026-05-19 — Google Maps page URL `!3d37.5530394!4d126.9814272`"
+      },
+      "place_ids": {
+        "kakao": "17806970",
+        "kakao_source": "https://place.map.kakao.com/17806970",
+        "kakao_verified": "2026-05-19 — Kakao page: 서울특별시교육청 남산도서관, 도서관, 별점 3.8, 68 리뷰, 매일 07:00–22:00",
+        "google": "ChIJn_pxNlmifDURVPNBJg7M9mM",
+        "google_source": "https://developers.google.com/maps/documentation/places/web-service/place-id",
+        "google_verified": "2026-05-19 — Google Place ID Finder marker on 서울특별시교육청 남산도서관, 용산구 소월로 109",
+        "naver": "11592008",
+        "naver_source": "https://map.naver.com/p/entry/place/11592008",
+        "naver_verified": "2026-05-19 — Naver page: 서울특별시교육청 남산도서관, 리뷰 1,662, 용산구 후암동"
+      }
     }
-  ],
+  },
   "reference_points": {
     "_purpose": "검증된 주변 좌표 참고용. 실제 페스티벌 지점 좌표 확인 시 거리 비교에 사용.",
     "namsan_peak": {
