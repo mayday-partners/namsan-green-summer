@@ -1,0 +1,4 @@
+{
+  "kakao_js_key": "REPLACE_WITH_YOUR_KAKAO_JS_KEY",
+  "_note": "Copy this file to data/config.json and fill in your own Kakao Developers JavaScript app key. The real config.json is gitignored. Protect the key by registering your Web domain in the Kakao Developers Console (앱 → 플랫폼 → Web)."
+}
