@@ -20,10 +20,11 @@
 3. **같은 데이터를 두 페이지에 복사 금지** — `index.html` 미리보기와 `community.html` 전체 목록이 같은 JSON을 다른 `data-limit`으로 호출해야 한다.
 4. **인라인 `style` 속성 금지** — 색상/그라데이션은 컴포넌트 modifier 또는 CSS 변수로.
 5. **`<script type="module">` 사용. 전역 `<script src>` 금지**, 전역 변수 금지.
-6. **`tokens.css`에 없는 색상 직접 사용 금지** — 토큰 먼저 추가 → 컴포넌트 적용.
+6. **`DESIGN.md`/`tokens.css`에 없는 색상·spacing·radius·typography 직접 사용 금지** — `DESIGN.md` 먼저 등록 → `tokens.css`에 동일 이름으로 매핑 → 컴포넌트 적용.
 7. **`!important` 금지** (접근성 fallback 제외).
 8. **빌드 도구·npm 의존성 추가 금지** — 사용자가 명시 승인하기 전까지 No-build 원칙 유지.
 9. **외부 URL이 필요한 메타 (`og:image`, `og:url`, `canonical`) 절대 URL 사용** — 프로덕션 도메인 `https://namsangreensummer.com` 기준. 페이지-상대 또는 root-absolute 금지 (SNS 봇이 못 찾음).
+10. **디자인 시스템은 `DESIGN.md` SSOT** — 색상/타이포/spacing/radius/컴포넌트는 `DESIGN.md` (Google Stitch alpha spec)를 먼저 갱신한 뒤 CSS 반영. lint(`npx @google/design.md lint DESIGN.md`)가 **0 errors / 0 warnings** 통과해야 머지.
 
 ---
 
@@ -40,7 +41,7 @@
 - 컴포넌트 1개 = 파일 1개 (`css/components/<block>.css`).
 - 페이지 전용은 `css/pages/<name>.css`.
 - 진입점: `css/main.css` 하나만 HTML이 link. `@layer reset, tokens, base, components, pages, utilities;` 순서.
-- 간격은 `var(--space-*)`, 색상은 `var(--color-*)` 토큰만 사용.
+- 간격은 `var(--space-*)`, 색상은 `var(--color-*)` 토큰만 사용. 모든 CSS 토큰은 `DESIGN.md` YAML과 **1:1 매핑** 유지 (이름·값 모두).
 - 셀렉터 중첩 3단계 이하.
 - 반응형 break: `768px`(모바일), `900px`(태블릿 메인 그리드), `1440px`(데스크톱 와이드).
 
@@ -88,7 +89,9 @@
 | `style="background: linear-gradient(...)"` | 컴포넌트 modifier class + `tokens.css` 색상 |
 | `<script src="js/header.js">` 추가 | `js/components/<X>.js`에 customElements.define 후 `main.js`에서 import |
 | analytics/GA를 `partials/*.html`에 `<script>` 직접 삽입 | `innerHTML`/`outerHTML` 주입 시 `<script>`는 미실행 — `js/main.js`에 import하거나 페이지 HTML inline 추가 |
-| 새 색상 헥스값 컴포넌트에 직접 작성 | `tokens.css`에 의미 토큰 먼저 추가 |
+| 새 색상 헥스값 컴포넌트에 직접 작성 | `DESIGN.md` `colors:` 등록 → `tokens.css` 의미 토큰 추가 → 컴포넌트 적용 |
+| `DESIGN.md`/`tokens.css`가 어긋남 (이름/값 불일치) | 둘을 같은 PR에서 동시 갱신, lint 통과 확인 |
+| 새 컴포넌트를 CSS만 작성 | `DESIGN.md` `components:` 등록 + Components prose 1단락 동시 작성 |
 | 같은 공지를 `index.html`/`community.html` 둘에 입력 | 한 JSON에 1번, `data-limit` 속성으로 다르게 호출 |
 | `el.innerHTML = jsonData.title` | `el.textContent = jsonData.title` |
 | 날짜를 `"2026.05.20"` 형태로 JSON 저장 | `"2026-05-20"` 저장, 표시 시 `formatDate()` |
@@ -108,6 +111,32 @@
 ## 마이그레이션 현재 상태 (2026-05-19 시점, CSS @layer + components 분리 완료)
 
 partials/data/modules/CSS 마이그레이션 완료. 현 코드베이스는 본 가이드와 일치한다.
+
+---
+
+## 디자인 시스템 (DESIGN.md)
+
+- **SSOT**: 루트 [`DESIGN.md`](./DESIGN.md) — [Google Stitch DESIGN.md alpha spec](https://github.com/google-labs-code/design.md) 준수.
+- 현재 정의: 8 colors / 8 typography / 4 rounding / 9 spacing / 13 components.
+- 섹션 순서 강제: Overview → Colors → Typography → Layout → Elevation & Depth → Shapes → Components → Do's and Don'ts.
+
+### 변경 워크플로우
+
+1. **새 토큰**(색상/폰트/spacing/radius) 필요 → `DESIGN.md` YAML 먼저 수정 → `css/tokens.css`에 동일 이름으로 매핑.
+2. **새 컴포넌트** 추가 → `DESIGN.md` `components:` 등록 + Components prose 1단락 작성 → `css/components/<X>.css` 작성.
+3. **변경 후 검증**: `npx @google/design.md lint DESIGN.md` → **0 errors / 0 warnings** 통과 필수.
+4. **WCAG**: 새 bg/text 쌍은 **4.5:1 (AA) 이상**. lint의 `contrast-ratio` 룰이 자동 검증.
+5. **orphaned-tokens**: 모든 color 토큰은 최소 1개 컴포넌트에서 참조되어야 함. 사용처 없는 토큰은 추가 금지.
+
+### 디자이너 핸드오프 vs 디자인 시스템
+
+- **디자인 시스템(규칙)** → `DESIGN.md`
+- **이미지 자산(콘텐츠)** → [`docs/IMAGE_SPEC.md`](./docs/IMAGE_SPEC.md) + `data/image-slots.json` + `?spec=1` 모드
+- 두 문서는 상호 보완. 시스템 변경 시 `DESIGN.md`, 자산 변경 시 `IMAGE_SPEC.md`.
+
+### lint 자동 허용
+
+`.claude/settings.json`에 `Bash(npx @google/design.md lint:*)` 화이트리스트 등록. 매번 승인 없이 검증 실행 가능.
 
 ---
 
