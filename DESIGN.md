@@ -265,10 +265,10 @@ Two-column section on the homepage (`bottom-grid`, 1:1). Each list is a vertical
 
 ### Hero Display
 
-Homepage `<section class="hero">` splits into two zones: a left `hero__display` (typographic poster) and a right `hero__card` (event metadata + single CTA). The display zone stacks four elements vertically:
+Homepage `<section class="hero">` splits into two zones: a left `hero__display` (typographic poster) and a right `hero__card` (event metadata + single CTA). The display zone stacks three element types vertically (the Korean title repeats across three lines but uses one class):
 
-1. `hero__display-num` — Anton "2026" at `display-hero` (clamp 2.5–6rem, white).
-2. `hero__display-kr` — Pretendard 900 three-line Korean title ("남산 / 그린 서머 / 페스티벌") at `clamp(2.5rem, 7vw, 5rem)`, line-height 0.95.
+1. `hero__display-num` — Anton "2026" at `display-hero` token (`--fs-display-hero`, fluid 2.5–6rem, white).
+2. `hero__display-kr` — Pretendard 900 three-line Korean title ("남산 / 그린 서머 / 페스티벌"). Uses its own fluid range `clamp(2.5rem, 7vw, 5rem)` (capped 1rem below `display-hero` so the numeric reads as the lead marquee), line-height 0.95.
 3. `hero__display-en-sub` — Anton "NAMSAN GREEN SUMMER FESTIVAL" at `body-md`, neon, wide tracking.
 
 The card zone shrinks to 280 px on desktop and contains only date/place metadata + the primary CTA. On screens ≤ 900 px the two zones stack with display first.
