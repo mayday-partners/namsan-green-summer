@@ -13,6 +13,10 @@
   --color-text-muted: #8A8FA3;
   --color-border: rgba(230, 232, 240, 0.08);
 
+  /* External deep-link brand colors — scoped to .btn--map-* only */
+  --color-brand-kakao: #FAE100;
+  --color-brand-google-blue: #1A73E8;
+
   --font-kr: 'Pretendard', system-ui, -apple-system, sans-serif;
   --font-en: 'Montserrat', sans-serif;
   --font-display: 'Anton', 'Montserrat', sans-serif;
