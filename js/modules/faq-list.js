@@ -52,12 +52,15 @@ export async function renderFaqList() {
           const li = document.createElement('li');
           const a = document.createElement('a');
           a.href = `pages/community.html#faq-${item.id}`;
+          const icon = document.createElement('span');
+          icon.className = 'notice__icon notice__icon--faq';
+          icon.setAttribute('aria-hidden', 'true');
           const title = document.createElement('span');
           title.textContent = item.question ?? '(질문 없음)';
           const tag = document.createElement('span');
           tag.className = 'bottom-list__meta';
           tag.textContent = `FAQ ${String(i + 1).padStart(2, '0')}`;
-          a.append(title, tag);
+          a.append(icon, title, tag);
           li.append(a);
           frag.append(li);
           return;
