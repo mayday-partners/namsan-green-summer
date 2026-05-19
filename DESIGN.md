@@ -181,7 +181,7 @@ These derive from base colors and are applied via `rgba()` or layer opacity rath
 Three families, each with a strict role. Never substitute one family into another's role.
 
 - **Anton — display** Festival-poster condensed sans. English / numerals only — *never* set Korean text in Anton (the Hangul fallback breaks the visual texture). Used for the H1 hero, program numbers (01/02/03), program watermarks, and section titles.
-- **Pretendard — body (Korean)** Korean-optimized sans. Carries all body copy, list items, table cells, and form labels. Weights subset-shipped: 300 / 400 / 500 / 600 / 700. Default body letter-spacing is `-0.01em` (Korean tightens better than English at this scale).
+- **Pretendard — body (Korean) + display weight** Korean-optimized sans. Carries all body copy, list items, table cells, and form labels. Weights subset-shipped: 300 / 400 / 500 / 600 / 700 / 900. The 900 (Black) weight is reserved for the homepage hero display (`hero-display-kr`); body copy never uses 900. Default body letter-spacing is `-0.01em` (Korean tightens better than English at this scale).
 - **Montserrat — English label** Used exclusively for English eyebrows, metadata, date/time labels, breadcrumbs, footer column headings, and breadcrumb trails. Always uppercase with 0.2em – 0.3em letter-spacing.
 
 ### Hierarchy (most-used levels)
@@ -262,6 +262,16 @@ Fixed (`position: fixed`, top 0, `height: 72px` desktop / `60px` mobile). Three 
 ### Notice / FAQ lists
 
 Two-column section on the homepage (`bottom-grid`, 1:1). Each list is a vertical stack with hairline dividers (`border-block-end`). List item rows are `grid-template-columns: 1fr auto` (title left, date right). Hover swaps title text to `primary`.
+
+### Hero Display
+
+Homepage `<section class="hero">` splits into two zones: a left `hero__display` (typographic poster) and a right `hero__card` (event metadata + single CTA). The display zone stacks four elements vertically:
+
+1. `hero__display-num` — Anton "2026" at `display-hero` (clamp 2.5–6rem, white).
+2. `hero__display-kr` — Pretendard 900 three-line Korean title ("남산 / 그린 서머 / 페스티벌") at `clamp(2.5rem, 7vw, 5rem)`, line-height 0.95.
+3. `hero__display-en-sub` — Anton "NAMSAN GREEN SUMMER FESTIVAL" at `body-md`, neon, wide tracking.
+
+The card zone shrinks to 280 px on desktop and contains only date/place metadata + the primary CTA. On screens ≤ 900 px the two zones stack with display first.
 
 ### Info table (`info-grid`)
 
