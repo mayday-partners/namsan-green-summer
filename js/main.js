@@ -4,10 +4,11 @@ import './components/site-footer.js';
 import { initFadeIn } from './modules/observer.js';
 import { renderNoticeList } from './modules/notice-list.js';
 import { renderFaqList } from './modules/faq-list.js';
+import { initImageSlots } from './modules/image-slot.js';
 
 (async () => {
   // Custom elements self-hydrate; no orchestration needed for partials.
-  await Promise.allSettled([renderNoticeList(), renderFaqList()]);
+  await Promise.allSettled([renderNoticeList(), renderFaqList(), initImageSlots()]);
   try { initFadeIn(); } catch (e) { console.error('[main] initFadeIn:', e); }
   resolveHashAfterRender();
 })();

@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "updated": "2026-05-19",
+  "production_url": "https://namsangreensummer.com",
+  "spec_mode": "?spec=1",
+  "notes": "디자이너 핸드오프용 이미지 슬롯 인벤토리. 사이트 URL 끝에 ?spec=1을 붙이면 각 슬롯에 라벨 placeholder가 표시됩니다. 본 파일은 단일 진실원(SSOT)입니다.",
+  "format_policy": {
+    "primary": "webp",
+    "fallback": "png",
+    "og_share": ["png", "jpg"],
+    "color_space": "sRGB",
+    "webp_quality": "80~85",
+    "strip_metadata": true
+  },
+  "slots": [
+    {
+      "id": "hero-main",
+      "page": "/",
+      "section": ".hero__bg — 홈 풀블리드 히어로 배경",
+      "render": "background-cover",
+      "priority": "P1",
+      "lcp": true,
+      "alt": "남산을 배경으로 한 그린 서머 페스티벌 메인 비주얼",
+      "current_file": "img/sections/hero.webp",
+      "current_status": "임시 이미지 (540×380, 비표준 비율)",
+      "art_direction": [
+        { "media": "(min-width: 901px)", "ratio": "16:9", "widths": [1280, 1920, 2560], "focus": "left center", "note": "데스크톱: 우상단에 360px 폭 텍스트 카드 오버레이. 좌측 60%에 메인 피사체 배치." },
+        { "media": "(max-width: 900px)", "ratio": "4:5",  "widths": [540, 768],          "focus": "35% center",   "note": "모바일: 텍스트 카드가 하단(약 55svh 위치)으로 이동. 상단 절반에 피사체." }
+      ]
+    },
+    {
+      "id": "preview-funwalk",
+      "page": "/",
+      "section": ".preview__bg--funwalk — 홈 Fun&Walk 프리뷰 풀블리드 배경",
+      "render": "background-cover",
+      "priority": "P1",
+      "lcp": false,
+      "alt": "남산 둘레길을 걷는 사람들의 활동적인 모습",
+      "current_file": "img/sections/funwalk.webp",
+      "current_status": "임시 이미지",
+      "art_direction": [
+        { "media": "(min-width: 901px)", "ratio": "21:9", "widths": [1280, 1920, 2560], "focus": "center 30%", "note": "데스크톱: 좌측 ~50%에 어두운 그라데이션 + 텍스트. 우측에 메인 비주얼." },
+        { "media": "(max-width: 900px)", "ratio": "16:9", "widths": [768, 1080], "note": "모바일: 하단부터 짙어지는 그라데이션. 상단 ~40%만 보임." }
+      ]
+    },
+    {
+      "id": "preview-night",
+      "page": "/",
+      "section": ".preview__bg--night — 홈 Green Night 프리뷰 풀블리드 배경 (좌우 반전 레이아웃)",
+      "render": "background-cover",
+      "priority": "P1",
+      "lcp": false,
+      "alt": "한여름 밤 콘서트의 네온/라이브 분위기",
+      "current_file": "img/sections/night.webp",
+      "current_status": "임시 이미지",
+      "art_direction": [
+        { "media": "(min-width: 901px)", "ratio": "21:9", "widths": [1280, 1920, 2560], "focus": "center 40%", "note": "데스크톱: 우측 ~50%에 어두운 그라데이션 + 텍스트. 좌측에 메인 비주얼." },
+        { "media": "(max-width: 900px)", "ratio": "16:9", "widths": [768, 1080] }
+      ]
+    },
+    {
+      "id": "preview-garden",
+      "page": "/",
+      "section": ".preview__bg--garden — 홈 Green Garden 프리뷰 풀블리드 배경",
+      "render": "background-cover",
+      "priority": "P1",
+      "lcp": false,
+      "alt": "남산 한국숲정원의 식생과 도슨트 투어 분위기",
+      "current_file": "img/sections/garden.webp",
+      "current_status": "임시 이미지",
+      "art_direction": [
+        { "media": "(min-width: 901px)", "ratio": "21:9", "widths": [1280, 1920, 2560], "focus": "center 50%", "note": "데스크톱: 좌측 ~50%에 어두운 그라데이션 + 텍스트. 우측에 메인 비주얼." },
+        { "media": "(max-width: 900px)", "ratio": "16:9", "widths": [768, 1080] }
+      ]
+    },
+    {
+      "id": "course-map-walk",
+      "page": "/pages/fun-and-walk.html",
+      "section": ".course-map (Course 섹션) — Fun&Walk 5km 코스 지도",
+      "render": "background-cover",
+      "priority": "P2",
+      "lcp": false,
+      "alt": "Fun&Walk 5km 코스: 백범광장 → 남산도서관 → 북측순환로 → 백범광장",
+      "current_file": null,
+      "current_status": "그라데이션 플레이스홀더 (실 지도 미작업)",
+      "art_direction": [
+        { "ratio": "16:9", "widths": [768, 1280], "note": "지도 일러스트 또는 위성 캡처 + 코스 라인 + CP 1~4 / FIN 마커 오버레이. 다크 테마 톤." }
+      ]
+    },
+    {
+      "id": "course-map-event",
+      "page": "/pages/event.html#location",
+      "section": ".course-map (Location 섹션) — 행사장 약도",
+      "render": "background-cover",
+      "priority": "P2",
+      "lcp": false,
+      "alt": "남산공원 일대 행사장 약도 (백범광장 · 북측순환로 · 남산도서관)",
+      "current_file": null,
+      "current_status": "그라데이션 플레이스홀더",
+      "art_direction": [
+        { "ratio": "16:9", "widths": [768, 1280], "note": "행사 구역 + 접근 경로(지하철 4호선 명동/회현역, 셔틀, 순환버스). 다크 테마 톤." }
+      ]
+    },
+    {
+      "id": "card-media-funwalk",
+      "page": "/pages/event.html",
+      "section": ".card__media--funwalk — 행사 페이지 프로그램 카드 (Program 01)",
+      "render": "background-cover",
+      "priority": "P3",
+      "lcp": false,
+      "alt": "Fun&Walk 키비주얼 썸네일",
+      "current_file": null,
+      "current_status": "그라데이션 (이미지 교체 vs 그라데이션 유지: 디자이너 결정)",
+      "art_direction": [
+        { "ratio": "4:3", "widths": [480, 768] }
+      ]
+    },
+    {
+      "id": "card-media-night",
+      "page": "/pages/event.html, /pages/green-night.html",
+      "section": ".card__media--night — Green Night 키비주얼 (2개 페이지 공유)",
+      "render": "background-cover",
+      "priority": "P3",
+      "lcp": false,
+      "alt": "Green Night 키비주얼 썸네일",
+      "current_file": null,
+      "current_status": "그라데이션 (event.html 1곳 + green-night.html 1곳 동일 자산 공유)",
+      "art_direction": [
+        { "ratio": "4:3", "widths": [480, 768] }
+      ]
+    },
+    {
+      "id": "card-media-garden",
+      "page": "/pages/event.html, /pages/green-night.html, /pages/green-garden.html",
+      "section": ".card__media--garden — Green Garden 키비주얼 (3개 페이지 공유)",
+      "render": "background-cover",
+      "priority": "P3",
+      "lcp": false,
+      "alt": "Green Garden 키비주얼 썸네일",
+      "current_file": null,
+      "current_status": "그라데이션 (3개 페이지 동일 자산 공유)",
+      "art_direction": [
+        { "ratio": "4:3", "widths": [480, 768] }
+      ]
+    },
+    {
+      "id": "card-media-garden-deep",
+      "page": "/pages/green-garden.html",
+      "section": ".card__media--garden-deep — Green Garden Workshop 02 (허브 향기 체험)",
+      "render": "background-cover",
+      "priority": "P3",
+      "lcp": false,
+      "alt": "허브 향기 체험 워크숍 비주얼",
+      "current_file": null,
+      "current_status": "그라데이션",
+      "art_direction": [{ "ratio": "4:3", "widths": [480, 768] }]
+    },
+    {
+      "id": "card-media-garden-fresh",
+      "page": "/pages/green-garden.html",
+      "section": ".card__media--garden-fresh — Green Garden Workshop 03 (식물 일기 워크숍)",
+      "render": "background-cover",
+      "priority": "P3",
+      "lcp": false,
+      "alt": "식물 일기 워크숍 비주얼",
+      "current_file": null,
+      "current_status": "그라데이션",
+      "art_direction": [{ "ratio": "4:3", "widths": [480, 768] }]
+    },
+    {
+      "id": "card-media-neutral",
+      "page": "/pages/green-night.html",
+      "section": ".card__media--neutral — Green Night Zone 03 (Food Truck)",
+      "render": "background-cover",
+      "priority": "P3",
+      "lcp": false,
+      "alt": "푸드트럭 존 비주얼",
+      "current_file": null,
+      "current_status": "그라데이션",
+      "art_direction": [{ "ratio": "4:3", "widths": [480, 768] }]
+    },
+    {
+      "id": "og-share-default",
+      "page": "all (meta property)",
+      "section": "<meta property=\"og:image\"> — SNS 공유 카드 (Facebook/Twitter/Kakao/LinkedIn)",
+      "render": "meta",
+      "priority": "P1",
+      "lcp": false,
+      "alt": "2026 남산 그린 서머 페스티벌",
+      "current_file": "img/sections/hero.webp",
+      "current_status": "현재 hero.webp 재사용 (540×380). SNS 표준 1200×630에 미달.",
+      "art_direction": [
+        { "ratio": "1.91:1", "widths": [1200], "note": "Facebook/Twitter/LinkedIn/Kakao 공통 표준. 텍스트 오버레이 포함한 별도 디자인 권장. 권장 경로: img/share/og-default.png" }
+      ]
+    }
+  ]
+}
