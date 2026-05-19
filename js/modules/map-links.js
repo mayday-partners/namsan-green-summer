@@ -38,6 +38,8 @@ export function buildGoogleLink(venue) {
     utm_source: 'namsan-green-summer',
     utm_campaign: 'directions_request',
   });
+  const placeId = venue?.primary?.place_ids?.google;
+  if (placeId) params.set('destination_place_id', placeId);
   return `https://www.google.com/maps/dir/?${params.toString()}`;
 }
 

@@ -28,7 +28,9 @@
       "kakao": "8381397",
       "kakao_source": "https://place.map.kakao.com/8381397",
       "kakao_verified": "2026-05-19 — Kakao search '남산 백범광장' result A: 문화유적, 별점 4.6, 67 리뷰, 회현동1가 100-115",
-      "google": null,
+      "google": "ChIJDXyPRF-ifDURo-L1LXIXqj8",
+      "google_source": "https://developers.google.com/maps/documentation/places/web-service/place-id",
+      "google_verified": "2026-05-19 — Google Place ID Finder marker on 남산공원 백범광장, 서울 중구 회현동 삼일대로 231",
       "naver": "1982441579",
       "naver_source": "https://map.naver.com/p/entry/place/1982441579",
       "naver_verified": "2026-05-19 — Naver place entry: 백범광장공원, 자연공원, 회현역 4번 출구 255m, 남산공원길 649"
