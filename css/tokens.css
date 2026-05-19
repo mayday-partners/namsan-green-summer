@@ -25,6 +25,7 @@
   --fs-xl: 2rem;
   --fs-2xl: 3rem;
   --fs-3xl: 4.5rem;
+  --fs-display-hero: clamp(2.5rem, 7vw, 6rem);
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
