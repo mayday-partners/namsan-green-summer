@@ -63,6 +63,7 @@ export async function renderFaqList() {
           return;
         }
 
+        if (!item.id) return; // skip items missing id — anchor would collide on #faq-undefined
         const node = tpl.content.cloneNode(true);
         const details = node.querySelector('details');
         if (details) details.id = `faq-${item.id}`;

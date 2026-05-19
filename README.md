@@ -40,39 +40,44 @@ python3 -m http.server 8000
 ```
 /
 ├─ index.html
+├─ _headers                    ← Cloudflare Pages 헤더 (CSP, cache, security)
+├─ robots.txt                  ← 검색엔진 정책
+├─ sitemap.xml                 ← 6 URL
 ├─ pages/
 │  ├─ event.html
 │  ├─ fun-and-walk.html
 │  ├─ green-night.html
 │  ├─ green-garden.html
 │  └─ community.html
-├─ partials/                  ← 공통 마크업 (헤더/푸터 fetch 대상)
+├─ partials/                   ← 공통 마크업 (header/footer fetch 대상)
 │  ├─ header.html
 │  └─ footer.html
-├─ data/                      ← 콘텐츠 데이터 (게시판 SSOT)
+├─ data/                       ← 콘텐츠 데이터 (게시판 SSOT)
 │  ├─ notices.json
 │  └─ faqs.json
 ├─ css/
-│  ├─ tokens.css              ← Settings (변수)
-│  ├─ reset.css               ← Generic
-│  ├─ base.css                ← Elements
-│  ├─ components/             ← Components (BEM 블록 단위)
-│  │  ├─ header.css
-│  │  ├─ footer.css
-│  │  ├─ button.css
-│  │  ├─ card.css
-│  │  └─ ...
-│  ├─ pages/
-│  └─ main.css                ← @layer + @import 진입점
+│  ├─ main.css                 ← @layer + @import 단일 진입점
+│  ├─ tokens.css               ← Settings (변수)
+│  ├─ reset.css                ← Generic
+│  ├─ base.css                 ← Elements (기본 태그 + skip-link)
+│  ├─ home.css                 ← 홈 페이지 컴포넌트
+│  ├─ page.css                 ← 서브 페이지 컴포넌트
+│  ├─ animations.css           ← fade-in / glow / float
+│  ├─ utilities.css            ← .text-neon, .mt-7, .fallback-error
+│  └─ components/              ← BEM 블록 단위
+│     ├─ header.css            ← + <site-header> 호스트 규칙
+│     ├─ footer.css            ← + <site-footer> 호스트 규칙
+│     ├─ button.css
+│     └─ card.css
 ├─ js/
-│  ├─ main.js                 ← ES Module 진입점
+│  ├─ main.js                  ← ES Module 진입점
 │  ├─ components/
-│  │  ├─ site-header.js       ← <site-header> 커스텀 엘리먼트
-│  │  └─ site-footer.js       ← <site-footer> 커스텀 엘리먼트
+│  │  ├─ site-header.js        ← <site-header> 커스텀 엘리먼트
+│  │  └─ site-footer.js        ← <site-footer> 커스텀 엘리먼트
 │  └─ modules/
-│     ├─ observer.js          ← fade-in IntersectionObserver
-│     ├─ notice-list.js       ← 공지사항 렌더
-│     └─ faq-list.js          ← FAQ 렌더
+│     ├─ observer.js           ← fade-in IntersectionObserver
+│     ├─ notice-list.js        ← 공지사항 렌더
+│     └─ faq-list.js           ← FAQ 렌더
 ├─ img/
 ├─ fonts/
 ├─ README.md
@@ -120,16 +125,15 @@ ITCSS + BEM + CSS Cascade Layers 조합:
 @import url('base.css')                     layer(base);
 
 @import url('components/header.css')        layer(components);
-@import url('components/footer.css')        layer(components);
 @import url('components/button.css')        layer(components);
 @import url('components/card.css')          layer(components);
-@import url('components/faq.css')           layer(components);
-@import url('components/notice-list.css')   layer(components);
-@import url('components/timetable.css')     layer(components);
-/* ...더 추가될 컴포넌트... */
+@import url('components/footer.css')        layer(components);
 
-@import url('pages/home.css')               layer(pages);
-@import url('pages/page.css')               layer(pages);
+@import url('home.css')                     layer(pages);
+@import url('page.css')                     layer(pages);
+
+@import url('animations.css')               layer(utilities);
+@import url('utilities.css')                layer(utilities);
 ```
 
 원칙:
