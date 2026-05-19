@@ -25,8 +25,11 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/home.css">
+
+  <link rel="preload" as="image" href="img/sections/hero.webp" fetchpriority="high">
 </head>
 <body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
   <site-header>
     <header class="site-header">
       <div class="container site-header__inner">
@@ -47,7 +50,7 @@
     </header>
   </site-header>
 
-  <main>
+  <main id="main">
 
     <!-- SECTION 01 HERO -->
     <section class="hero" id="hero" aria-labelledby="hero-title">
@@ -59,7 +62,7 @@
             <span class="accent">그린 서머 페스티벌</span>
           </h1>
           <p class="hero__card-tagline">
-            여름의 푸르름과 청량감을 주는 <strong style="color:var(--color-neon)">Green</strong> 컨셉으로<br>
+            여름의 푸르름과 청량감을 주는 <strong class="text-neon">Green</strong> 컨셉으로<br>
             도심 속에서 즐기는 도심형 여름 축제.
           </p>
           <dl class="hero__card-meta">
