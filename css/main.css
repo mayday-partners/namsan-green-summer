@@ -12,9 +12,11 @@
 @import url('components/button.css')      layer(components);
 @import url('components/card.css')        layer(components);
 @import url('components/footer.css')      layer(components);
-@import url('animations.css')             layer(components);
 
 @import url('home.css')                   layer(pages);
 @import url('page.css')                   layer(pages);
 
+/* Animations and utility classes share the strongest layer so they
+   reliably win over component/page rules (e.g., .fade-in opacity:0). */
+@import url('animations.css')             layer(utilities);
 @import url('utilities.css')              layer(utilities);

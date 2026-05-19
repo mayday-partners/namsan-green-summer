@@ -381,6 +381,6 @@
   color: var(--color-text-muted);
 }
 
-/* spacing tightening for home page sections */
-.section { padding-block: var(--space-8); }
-@media (max-width: 768px) { .section { padding-block: var(--space-7); } }
+/* spacing tightening — scoped to home page only (sub-pages keep base.css value) */
+.page-home .section { padding-block: var(--space-8); }
+@media (max-width: 768px) { .page-home .section { padding-block: var(--space-7); } }
