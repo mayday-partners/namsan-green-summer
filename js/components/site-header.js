@@ -8,8 +8,21 @@ function rewriteAbsolutePaths(html) {
   return html.replace(/((?:href|src)\s*=\s*["'])\/(?!\/)/g, `$1${SITE_BASE}`);
 }
 
+function normalizeFallbackLinks(root) {
+  if (SITE_BASE === '/') return;
+  root.querySelectorAll('a[href^="/"]').forEach(a => {
+    const href = a.getAttribute('href');
+    if (href && !href.startsWith('//')) {
+      a.setAttribute('href', SITE_BASE + href.slice(1));
+    }
+  });
+}
+
 class SiteHeader extends HTMLElement {
   async connectedCallback() {
+    // Normalize fallback nav hrefs immediately so subpath deploys
+    // don't show broken /pages/... links during the brief fetch window.
+    normalizeFallbackLinks(this);
     try {
       const res = await fetch(PARTIAL_URL, { cache: 'force-cache' });
       if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);

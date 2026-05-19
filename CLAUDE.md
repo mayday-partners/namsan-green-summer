@@ -111,3 +111,19 @@
 - `@layer` 미적용
 
 작업 시 수정 범위가 위 항목을 건드리면, **현 상태 유지가 아닌 가이드 방향으로 마이그레이션**한다(사용자가 명시적으로 "현 구조 유지"를 요청한 경우 제외).
+
+---
+
+## 배포 환경 (subpath 호환 필수)
+
+본 사이트는 두 환경에서 동작:
+- **테스트**: GitHub Pages `https://mayday-partners.github.io/namsan-green-summer/` (subpath `/namsan-green-summer/`)
+- **프로덕션**: Cloudflare Pages `https://namsangreensummer.com/` (도메인 루트, Gabia 등록 + Cloudflare 네임서버)
+
+코드 작성 시 **반드시**:
+- HTML에서 `/`로 시작하는 절대 경로 금지 — 페이지-상대 경로 사용
+- JS에서 `'/data/...'` 같은 문자열 fetch 금지 — 반드시 `new URL('../../data/...', import.meta.url)`
+- partial 내부에서는 root-absolute(`/pages/...`) 허용 — 커스텀 엘리먼트가 mount 시 자동으로 `SITE_BASE` prefix 적용
+- 새 fallback content nav 추가 시 `normalizeFallbackLinks()` 호출 패턴 적용 또는 페이지-상대 작성
+
+상세: [`README.md §14`](./README.md#14-배포-환경) 참조.

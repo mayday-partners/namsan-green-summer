@@ -459,3 +459,71 @@ npx serve .
 6. **(선택) SSG 도입** — 게시판 SEO가 중요해지는 시점에 Eleventy로 정적 빌드 전환.
 
 각 단계는 다른 단계 없이 단독 실행 가능하며, 단계 사이에 사이트는 계속 동작 가능해야 한다.
+
+---
+
+## 14. 배포 환경
+
+본 사이트는 **두 환경 모두에서 동작**해야 한다. 코드는 두 환경의 차이를 자동 흡수한다.
+
+### 14-1. 환경 매트릭스
+
+| 항목 | 테스트 (GitHub Pages) | 프로덕션 (Cloudflare) |
+|---|---|---|
+| URL | `https://mayday-partners.github.io/namsan-green-summer/` | `https://namsangreensummer.com/` |
+| 호스팅 | GitHub Pages (`main` branch, repo root) | Cloudflare Pages |
+| 도메인 | github.io 서브경로(subpath) | 루트(apex) 도메인 |
+| 도메인 등록 | — | Gabia (네임서버는 Cloudflare로 위임) |
+| SSL | GitHub 자동 (Let's Encrypt) | Cloudflare 자동 |
+| 사이트 base | `/namsan-green-summer/` | `/` |
+| 자동 배포 트리거 | `main` push 시 GH Pages action | `main` push 시 Cloudflare Pages build |
+
+### 14-2. subpath 호환 메커니즘
+
+GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로, **모든 경로가 페이지-상대 또는 base-aware**여야 한다. 다음 메커니즘이 이를 보장한다:
+
+1. **HTML 정적 경로는 페이지-상대** — `<script src="js/main.js">` (index) / `<script src="../js/main.js">` (pages/), `<link rel="stylesheet" href="css/...">` 등. 페이지 위치에 따라 다름.
+2. **JS 모듈의 fetch URL은 `import.meta.url` 기반** — `notice-list.js`, `faq-list.js`, `site-header.js`, `site-footer.js` 모두 `new URL('../../partials/header.html', import.meta.url)` 형태. 모듈이 어떤 base에서 import되든 자동으로 올바른 절대 URL로 resolve됨.
+3. **`SITE_BASE` 자동 감지** — `site-header.js` / `site-footer.js`가 `new URL('../../', import.meta.url).pathname`으로 base 계산. GH Pages면 `/namsan-green-summer/`, Cloudflare면 `/`.
+4. **partial 내 root-absolute 링크 자동 rewrite** — `partials/header.html`, `partials/footer.html`은 `/pages/event.html` 같은 root-absolute href를 작성하고, 커스텀 엘리먼트가 fetch한 HTML을 innerHTML로 주입하기 직전에 `rewriteAbsolutePaths()`로 base prefix를 적용한다.
+5. **fallback nav href도 mount 시 정규화** — `<site-header>` 내 fallback content의 `/pages/...` 링크는 `connectedCallback` 시작 시 즉시 base prefix 적용 (fetch 결과를 기다리지 않음).
+
+### 14-3. 환경별 동작 검증
+
+#### GitHub Pages
+1. `main` 브랜치 push
+2. `https://mayday-partners.github.io/namsan-green-summer/` 접속
+3. DevTools Console 에러 0, Network 탭에서 다음이 200:
+   - `/namsan-green-summer/partials/header.html`
+   - `/namsan-green-summer/partials/footer.html`
+   - `/namsan-green-summer/data/notices.json`
+   - `/namsan-green-summer/data/faqs.json`
+4. nav 클릭 시 `/namsan-green-summer/pages/...`로 라우팅
+
+#### Cloudflare (프로덕션)
+1. Cloudflare Pages에 GitHub repo 연결 (Build command 비움, output dir `/`)
+2. Cloudflare DNS 영역에 `namsangreensummer.com` A/AAAA 또는 CNAME 설정
+3. Gabia DNS 관리에서 네임서버를 Cloudflare가 안내한 2개로 변경
+4. `https://namsangreensummer.com/` 접속
+5. 동일하게 fetch 4종이 200 (이번엔 `/partials/...` 형태)
+
+### 14-4. 환경별 차이 없는 코드 작성 원칙
+
+새 파일·기능 추가 시:
+- **HTML에서 절대 경로(`/...`) 사용 금지** (페이지-상대 또는 partial 안에 두고 rewrite에 맡김)
+- **JS에서 절대 경로 문자열로 fetch 금지** — 반드시 `new URL(..., import.meta.url)` 사용
+- **CSS의 `url()` 참조는 CSS 파일 위치 기준 상대** (브라우저가 자동 처리, 변경 불요)
+- **외부 폼/링크는 도메인 포함 절대 URL** (`https://forms.example.com/...`) — 영향 없음
+
+### 14-5. 도메인 전환 시 체크리스트
+
+테스트(GH Pages) → 프로덕션(Cloudflare/namsangreensummer.com) 전환 시:
+
+- [ ] Cloudflare Pages 프로젝트 생성 + GitHub repo 연결
+- [ ] Cloudflare에 `namsangreensummer.com` 추가 → 네임서버 2개 안내 받음
+- [ ] Gabia에 네임서버 변경 (DNS 전파 ~수 시간)
+- [ ] Cloudflare Pages 프로젝트에 `namsangreensummer.com` Custom Domain 연결
+- [ ] SSL/TLS 모드 "Full (Strict)" 권장
+- [ ] OG/SNS 메타 태그 점검 (현재 `og:image`는 페이지마다 `/img/sections/hero.webp`, 절대 URL 아님 — 카카오/페이스북 일부에서 인식 안 될 수 있음 → 향후 페이지별 절대 URL OG 이미지 권장)
+- [ ] `robots.txt`, `sitemap.xml` 추가 (현재 없음 — 프로덕션 SEO 필요 시)
+- [ ] Lighthouse 측정: LCP < 2.5s, CLS < 0.1, INP < 200ms
