@@ -111,5 +111,43 @@
       "_verified": false,
       "_source": "latitude.to (단일 출처)"
     }
+  },
+  "courses": {
+    "baekbeom_square": {
+      "name": "Fun&Walk 5km 코스 (체크포인트 마커 + 외부 앱 길찾기)",
+      "_source": "CP coordinates only — polyline rendering disabled. The course outline belongs to a designer illustration (docs/IMAGE_SPEC.md P2 course-map-walk) or operator-supplied GPX trace.",
+      "_verified": false,
+      "cp_count": 5,
+      "checkpoints": [
+        {
+          "id": "cp1",
+          "name": "CP1 백범광장 출발 게이트",
+          "lat": 37.5548599,
+          "lng": 126.9792405,
+          "km": 0
+        },
+        {
+          "id": "cp2",
+          "name": "CP2 남산도서관 앞 미스트 존",
+          "lat": 37.5530394,
+          "lng": 126.9814272,
+          "km": 1.4
+        },
+        {
+          "id": "cp3",
+          "name": "CP3 북측순환로 인증샷 부스 (추정)",
+          "lat": 37.557,
+          "lng": 126.987,
+          "km": 2.8
+        },
+        {
+          "id": "cp4",
+          "name": "CP4 전망쉼터 (추정)",
+          "lat": 37.554,
+          "lng": 126.988,
+          "km": 3.8
+        }
+      ]
+    }
   }
 }

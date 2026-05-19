@@ -68,15 +68,45 @@ export async function mountMapEmbeds(root = document) {
     const map = new kakao.maps.Map(slot, { center, level: 4, draggable: true });
     new kakao.maps.Marker({ position: center, map, title: venue.name });
 
+    // Checkpoint markers + InfoWindow (click to open/close).
+    // Polyline rendering intentionally omitted: course geometry should come
+    // from an operator GPX trace or designer illustration, not estimated coords.
+    //
+    // Mount pattern (Kakao SDK aspect-ratio quirk):
+    //   1) relayout() after the next paint to recompute pixel/coord mapping
+    //   2) create overlays AFTER relayout
+    //   3) setBounds() (single-arg form) auto-fits the new viewport
     const course = data.courses?.[key];
-    if (course?.polyline?.length >= 2) {
-      new kakao.maps.Polyline({
-        map,
-        path: course.polyline.map(([la, ln]) => new kakao.maps.LatLng(la, ln)),
-        strokeWeight: 4,
-        strokeColor: '#A8FF00',
-        strokeOpacity: 0.9,
-        strokeStyle: 'solid',
+    if (course?.checkpoints?.length) {
+      requestAnimationFrame(() => {
+        map.relayout();
+
+        const bounds = new kakao.maps.LatLngBounds();
+        bounds.extend(center);
+
+        course.checkpoints.forEach((cp) => {
+          if (cp.lat == null || cp.lng == null) return;
+          const pos = new kakao.maps.LatLng(cp.lat, cp.lng);
+          const marker = new kakao.maps.Marker({ map, position: pos, title: cp.name });
+
+          // Build InfoWindow content as a DOM element (textContent — XSS-safe per CLAUDE.md).
+          const iwContent = document.createElement('div');
+          iwContent.style.padding = '6px 10px';
+          iwContent.style.fontSize = '0.875rem';
+          iwContent.style.fontWeight = '600';
+          iwContent.textContent = cp.name + (cp.km != null ? ` · ${cp.km}km` : '');
+
+          const iw = new kakao.maps.InfoWindow({
+            content: iwContent,
+            removable: true,
+          });
+
+          kakao.maps.event.addListener(marker, 'click', () => iw.open(map, marker));
+
+          bounds.extend(pos);
+        });
+
+        map.setBounds(bounds);
       });
     }
   });
