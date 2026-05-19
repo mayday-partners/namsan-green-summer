@@ -42,16 +42,29 @@ export function buildGoogleLink(venue) {
 }
 
 export function buildNaverLink(venue) {
+  const name = venue?.primary?.name;
+  if (!name) return null;
+  const appname = location.origin || 'https://namsangreensummer.com';
   const c = venue?.primary?.coordinates;
-  if (!c || c.lat == null || c.lng == null) return null;
-  if (!isMobile()) return null; // PC web fallback not finalized
-  const params = new URLSearchParams({
-    dlat: String(c.lat),
-    dlng: String(c.lng),
-    dname: venue.primary.name ?? '',
-    appname: location.origin || 'https://namsangreensummer.com',
-  });
-  return `nmap://route/public?${params.toString()}`;
+  const hasCoords = c && c.lat != null && c.lng != null;
+
+  // Priority 1: coords-based public-transit directions (mobile app only)
+  if (hasCoords && isMobile()) {
+    const params = new URLSearchParams({
+      dlat: String(c.lat),
+      dlng: String(c.lng),
+      dname: name,
+      appname,
+    });
+    return `nmap://route/public?${params.toString()}`;
+  }
+
+  // Priority 2: search fallback (no coords needed)
+  if (isMobile()) {
+    const params = new URLSearchParams({ query: name, appname });
+    return `nmap://search?${params.toString()}`;
+  }
+  return `https://map.naver.com/p/search/${encodeURIComponent(name)}`;
 }
 
 export async function mountMapLinks(root = document) {
@@ -77,7 +90,7 @@ export async function mountMapLinks(root = document) {
   const links = [
     { label: '카카오맵으로 열기',     modifier: 'map-kakao',  href: buildKakaoLink(venue) },
     { label: '구글맵으로 길찾기',     modifier: 'map-google', href: buildGoogleLink(venue) },
-    { label: '네이버지도로 길찾기',   modifier: 'map-naver',  href: buildNaverLink(venue) },
+    { label: '네이버지도로 열기',     modifier: 'map-naver',  href: buildNaverLink(venue) },
   ].filter((l) => l.href);
 
   if (!links.length) {

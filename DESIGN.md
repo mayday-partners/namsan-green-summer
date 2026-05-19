@@ -21,6 +21,7 @@ colors:
   # External deep-link brand colors — scoped to button-map-* only, never reused elsewhere
   brand-kakao:        "#FAE100"   # Kakao official yellow — pair with neutral text (15:1, AAA)
   brand-google-blue:  "#1A73E8"   # Google Material blue — pair with on-surface white (4.5:1, AA)
+  brand-naver:        "#03C75A"   # Naver Bright Green — pair with neutral text (9.4:1, AAA)
 typography:
   display-hero:
     fontFamily: Anton
@@ -154,6 +155,12 @@ components:
     rounded: "{rounded.full}"
     padding: 12px
     typography: "{typography.body-sm}"
+  button-map-naver:
+    backgroundColor: "{colors.brand-naver}"
+    textColor: "{colors.neutral}"
+    rounded: "{rounded.full}"
+    padding: 12px
+    typography: "{typography.body-sm}"
 ---
 
 # 2026 Namsan Green Summer Festival — Visual Identity
@@ -252,7 +259,7 @@ Two in-system variants (`button-primary`, `button-ghost`) plus an external deep-
 - **`button-ghost`** — transparent background, 1 px `border (alpha 0.08)`, `on-surface` text. Hover: border and text both shift to `primary`. Used as the secondary CTA next to `button-primary` (e.g., "사전예약" beside "개요 보기").
 - Inner arrow span (`.btn__arrow`) shifts `translateX(4px)` on hover for both variants — small motion cue, applied automatically.
 
-**External deep-link buttons (`button-map-*`)** — a separate category that intentionally breaks the dark-canvas color rule because each button must remain instantly recognizable as the target app. They appear only inside `.map-links` slots beneath `.course-map` placeholders and never substitute for the in-system CTA. `button-map-kakao` uses Kakao's brand yellow (`brand-kakao`) with `neutral` text; `button-map-google` uses Google Material blue (`brand-google-blue`) with `on-surface` white. Both brand colors are scoped to this category — they must not be reused for any other surface. A reserved `button-map-naver` (Naver green) will activate once destination coordinates are captured (currently disabled at the JS layer).
+**External deep-link buttons (`button-map-*`)** — a separate category that intentionally breaks the dark-canvas color rule because each button must remain instantly recognizable as the target app. They appear only inside `.map-links` slots beneath `.course-map` placeholders and never substitute for the in-system CTA. `button-map-kakao` uses Kakao's brand yellow (`brand-kakao`) with `neutral` text; `button-map-google` uses Google Material blue (`brand-google-blue`) with `on-surface` white; `button-map-naver` uses Naver Bright Green (`brand-naver`) with `neutral` text. All three brand colors are scoped to this category — they must not be reused for any other surface. Kakao opens the venue's Place page by ID; Google opens transit directions to the road address; Naver opens its search-result page (Naver requires coordinates for direct route deep-linking, which are not yet captured — the JS module auto-upgrades to `nmap://route/public` once `data/venue.json` `coordinates` are filled in).
 
 ### Program cards
 

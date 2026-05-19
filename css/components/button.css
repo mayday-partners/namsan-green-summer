@@ -58,6 +58,14 @@
   transform: translateY(-2px);
 }
 
+.btn--map-naver {
+  background: var(--color-brand-naver);
+  color: var(--color-bg);
+}
+.btn--map-naver:hover {
+  transform: translateY(-2px);
+}
+
 /* Layout slot for map-link button row */
 .map-links {
   display: flex;

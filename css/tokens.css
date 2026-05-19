@@ -16,6 +16,7 @@
   /* External deep-link brand colors — scoped to .btn--map-* only */
   --color-brand-kakao: #FAE100;
   --color-brand-google-blue: #1A73E8;
+  --color-brand-naver: #03C75A;
 
   --font-kr: 'Pretendard', system-ui, -apple-system, sans-serif;
   --font-en: 'Montserrat', sans-serif;
