@@ -36,7 +36,36 @@
 .btn:hover .btn__arrow { transform: translateX(4px); }
 
 .btn--compact {
-  padding: 10px 16px;
+  padding: var(--space-3) var(--space-4);
   font-size: var(--fs-sm);
   line-height: 1;
+}
+
+/* ===== External deep-link buttons (map apps) ===== */
+.btn--map-kakao {
+  background: var(--color-brand-kakao);
+  color: var(--color-bg);
+}
+.btn--map-kakao:hover {
+  transform: translateY(-2px);
+}
+
+.btn--map-google {
+  background: var(--color-brand-google-blue);
+  color: var(--color-white);
+}
+.btn--map-google:hover {
+  transform: translateY(-2px);
+}
+
+/* Layout slot for map-link button row */
+.map-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+.map-links .btn {
+  flex: 1 1 auto;
+  justify-content: center;
 }
