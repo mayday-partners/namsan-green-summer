@@ -26,7 +26,25 @@
 <body>
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
 
-  <div data-include="../partials/header.html"></div>
+  <site-header>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="/index.html" class="site-logo">
+          <span class="site-logo__dot"></span>
+          <span>NAMSAN GREEN SUMMER</span>
+        </a>
+        <nav class="site-nav" data-open="false">
+          <ul class="site-nav__list">
+            <li><a class="site-nav__link" href="/pages/event.html">행사안내</a></li>
+            <li><a class="site-nav__link" href="/pages/fun-and-walk.html">Fun&amp;Walk</a></li>
+            <li><a class="site-nav__link" href="/pages/green-night.html">Green Night</a></li>
+            <li><a class="site-nav__link" href="/pages/green-garden.html">Green Garden</a></li>
+            <li><a class="site-nav__link" href="/pages/community.html">커뮤니티</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  </site-header>
 
   <main id="main">
     <section class="page-hero page-hero--event">
@@ -157,7 +175,7 @@
     </section>
   </main>
 
-  <div data-include="../partials/footer.html"></div>
+  <site-footer></site-footer>
 
   <script type="module" src="../js/main.js"></script>
 </body>

@@ -298,3 +298,13 @@ html.nav-open { overflow: hidden; }
     gap: var(--space-5);
   }
 }
+
+/* ===== Custom Element Host Rules ===== */
+site-header {
+  display: block;
+  min-height: var(--header-h);
+}
+site-footer {
+  display: block;
+  min-height: 200px;
+}

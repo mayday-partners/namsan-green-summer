@@ -15,7 +15,7 @@
 
 ## 절대 룰 (위반 시 즉시 중단)
 
-1. **헤더/푸터 마크업을 페이지마다 복붙 금지** — `partials/header.html`, `partials/footer.html` 단일 편집. 새 페이지에는 `<div data-include="/partials/header.html"></div>` 슬롯만 둔다.
+1. **헤더/푸터 마크업을 페이지마다 복붙 금지** — `partials/header.html`, `partials/footer.html` 단일 편집. 새 페이지에는 `<site-header>...fallback...</site-header>` / `<site-footer></site-footer>` 커스텀 엘리먼트 사용. fallback nav는 최소 마크업 (로고 + 메뉴 5개)으로 유지 — 메뉴 항목 변경 시 fallback 6곳 + partial 1곳 모두 갱신.
 2. **게시판 항목(공지/FAQ 등)을 HTML에 직접 작성 금지** — `data/*.json`에만 추가. 마크업은 `<template>` 또는 모듈 렌더 함수로만 생성.
 3. **같은 데이터를 두 페이지에 복사 금지** — `index.html` 미리보기와 `community.html` 전체 목록이 같은 JSON을 다른 `data-limit`으로 호출해야 한다.
 4. **인라인 `style` 속성 금지** — 색상/그라데이션은 컴포넌트 modifier 또는 CSS 변수로. (현재 `event.html` 카드들에 위반 있음, 작업 시 정리)
@@ -82,10 +82,10 @@
 
 | 안티패턴 | 올바른 방식 |
 |---|---|
-| `<header>...</header>`를 새 페이지에 복붙 | `<div data-include="/partials/header.html"></div>` |
+| `<header>...</header>`를 새 페이지에 복붙 | `<site-header>...fallback...</site-header>` (자체 hydrate) |
 | `<li>공지제목</li>` 직접 작성 | `data/notices.json`에 추가 + 렌더 모듈이 자동 표시 |
 | `style="background: linear-gradient(...)"` | 컴포넌트 modifier class + `tokens.css` 색상 |
-| `<script src="js/header.js">` 추가 | `js/modules/`에 두고 `main.js`에서 import |
+| `<script src="js/header.js">` 추가 | `js/components/<X>.js`에 customElements.define 후 `main.js`에서 import |
 | 새 색상 헥스값 컴포넌트에 직접 작성 | `tokens.css`에 의미 토큰 먼저 추가 |
 | 같은 공지를 `index.html`/`community.html` 둘에 입력 | 한 JSON에 1번, `data-limit` 속성으로 다르게 호출 |
 | `el.innerHTML = jsonData.title` | `el.textContent = jsonData.title` |
