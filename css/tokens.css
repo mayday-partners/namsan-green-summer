@@ -45,6 +45,11 @@
   --color-border-on-dark:   rgba(230, 232, 240, 0.10);   /* hairline divider inside .dark-section */
   --color-surface-overlay:  rgba(244, 248, 238, 0.72);   /* scrolled header backdrop (blur on this) */
   --color-primary-soft:     rgba(168, 255, 0, 0.18);     /* focus ring fills, neon halos */
+  --color-scrim-on-dark:        rgba(5, 8, 22, 0.55);     /* hero card backdrop (with blur) */
+  --color-scrim-on-dark-heavy:  rgba(5, 8, 22, 0.88);     /* image-slot dev badge (?spec=1) */
+  --color-program-border-funwalk: rgba(0, 163, 255, 0.30); /* .program-card resting border */
+  --color-program-border-night:   rgba(255, 15, 123, 0.30);
+  --color-program-border-garden:  rgba(168, 255, 0, 0.30);
 
   /* ============================================================
      Typography
@@ -119,6 +124,18 @@
   --z-header: 100;
   --z-header-fg: 110;    /* logo + hamburger sit above the mobile nav drawer */
   --z-skip-link: 200;
+
+  /* ============================================================
+     Sizes — 1:1 with DESIGN.md `sizes:` block (spec extension).
+     Component CSS must reference these instead of inlining raw px.
+     ============================================================ */
+  --size-mask-icon:        16px;   /* bullet markers, notice/FAQ list icons */
+  --size-logo-dot:         10px;   /* .site-logo__dot */
+  --size-faq-sign:         24px;   /* .faq__sign toggle indicator */
+  --size-hamburger-toggle: 32px;   /* .site-nav__toggle (a11y deviation — see DESIGN.md) */
+  --size-sns-icon:         36px;   /* footer .sns-list a (a11y deviation — see DESIGN.md) */
+  --size-tap-target:       44px;   /* WCAG 2.2 SC 2.5.8 minimum — reserved */
+  --size-program-icon:     48px;   /* .program-card__icon */
 
   /* Card media placeholder gradients — dark tones, used inside .program-card
      dark containers (Hybrid pattern). See DESIGN.md "Card media placeholder

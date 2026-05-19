@@ -98,6 +98,18 @@ rounded:
   md:   12px    # standard cards (.program-card)
   lg:   24px    # hero card, large panels (.card, .hero__card, .caution)
   full: 9999px  # pill CTAs (.btn)
+sizes:
+  # Dimension primitives — referenced by components below and exported as
+  # `--size-*` in tokens.css. Use these instead of inlining raw px in
+  # component definitions. Closed list — add a new key only when a value
+  # repeats in ≥ 2 components or has semantic identity worth naming.
+  mask-icon:        16px  # bullet markers, notice/FAQ list icons (1:1 SVG mask)
+  logo-dot:         10px  # site-logo signature dot
+  faq-sign:         24px  # FAQ details/summary toggle indicator
+  hamburger-toggle: 32px  # mobile nav toggle — a11y deviation, see prose
+  sns-icon:         36px  # footer SNS round icons — a11y deviation, see prose
+  tap-target:       44px  # WCAG 2.2 SC 2.5.8 minimum recommended hit area
+  program-icon:     48px  # .program-card circular icon
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
@@ -149,17 +161,17 @@ components:
     backgroundColor: "{colors.tertiary}"
     textColor: "{colors.dark-surface}"
     rounded: "{rounded.full}"
-    size: 48px
+    size: 48px   # matches sizes.program-icon (spec extension — lint can't resolve cross-category)
   program-icon-night:
     backgroundColor: "{colors.secondary}"
     textColor: "{colors.dark-surface}"
     rounded: "{rounded.full}"
-    size: 48px
+    size: 48px   # matches sizes.program-icon
   program-icon-garden:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.dark-surface}"
     rounded: "{rounded.full}"
-    size: 48px
+    size: 48px   # matches sizes.program-icon
   program-eyebrow-funwalk:
     textColor: "{colors.tertiary-text}"
     typography: "{typography.label-en-md}"
@@ -240,7 +252,10 @@ These derive from base colors and are applied via `rgba()` or layer opacity rath
 - **Border** — `rgba(15, 20, 25, 0.10)` — hairline divider between sections, cards, list items on light surfaces.
 - **Border (dark sections)** — `rgba(230, 232, 240, 0.10)` — same role inside dark containers.
 - **Scrim/Overlay** — `rgba(244, 248, 238, 0.72)` — behind the scrolled header on light pages (with 16 px blur).
+- **Scrim (on dark)** — `rgba(5, 8, 22, 0.55)` — hero card backdrop inside dark containers (with `backdrop-filter: blur(18px)`).
+- **Scrim (on dark, dev tooling)** — `rgba(5, 8, 22, 0.88)` — image-slot dev badge background under `?spec=1`.
 - **Primary soft** — `rgba(168, 255, 0, 0.18)` — focus ring fills, neon glow halos, hero accent blur.
+- **Program border-soft (resting)** — `rgba(168, 255, 0, 0.30)` / `rgba(255, 15, 123, 0.30)` / `rgba(0, 163, 255, 0.30)` — program-card border at rest inside dark containers; hovers to full accent.
 - **Hero gradient bands** — see Elevation & Depth.
 
 ### Card media placeholder gradients (CSS only, not tokens)
@@ -311,6 +326,20 @@ Depth is conveyed through **tonal layers + soft shadows + selective dark contain
 - **Small radius** (`rounded.sm`, 6px) — skip-link, image-slot dev badge, ad-hoc small labels.
 - **Circle** — the `.site-logo__dot`, footer SNS icons (36 × 36 px circles), and the `.program-card__icon` (48 × 48 px). Always solid neon or accent fill with dark-surface text inside.
 - The `.course-map` element (designer-placeholder) uses `aspect-ratio: 16/9` with `rounded.lg` and currently fills with a neon + blue radial-gradient as a stand-in until real maps arrive — see `IMAGE_SPEC.md`.
+
+## Sizes
+
+Dimension primitives for component fixtures (icon hit areas, decorative dots, masked SVG icons). Defined in the YAML `sizes:` block (spec extension — alpha lint recognises only `colors/typography/spacing/rounded` as primitive categories, so `sizes` keys are not cross-referenced from `components.*.size` and remain as raw px in those rules; the canonical mapping is enforced in `tokens.css` via `--size-*` and in `CLAUDE.md` rule #6).
+
+- **`mask-icon` (16 px)** — Square hit box for SVG-masked decoration: list bullets, notice/FAQ row icons. Always 1:1 with no border.
+- **`logo-dot` (10 px)** — The single brand signature dot in `.site-logo__dot`. Solid neon fill + neon glow. Decorative, never interactive on its own.
+- **`faq-sign` (24 px)** — `.faq__sign` `+` / `×` toggle indicator inside the FAQ summary row. Hit area is the whole summary row, not this glyph alone.
+- **`hamburger-toggle` (32 px)** — `.site-nav__toggle` mobile menu trigger. **A11y deviation**: WCAG 2.2 SC 2.5.8 recommends ≥ 44 × 44 hit area; current 32 passes the absolute minimum (24) but should be revisited. Tracked for future revision.
+- **`sns-icon` (36 px)** — Footer SNS round icons (`.sns-list a`). Same a11y deviation as `hamburger-toggle`; the surrounding gap (`space-3`) extends the practical hit area but does not satisfy SC 2.5.8.
+- **`tap-target` (44 px)** — WCAG 2.2 SC 2.5.8 recommended minimum. Not used yet; reserved as the target value when `hamburger-toggle` / `sns-icon` are revised.
+- **`program-icon` (48 px)** — `.program-card__icon` solid circle in the program accent color. Pairs with `program-icon-{program}` components.
+
+Rule: when adding a new fixture, prefer reusing one of the above before inventing a new key. New keys require ≥ 2 callsites or a clear semantic name.
 
 ## Components
 

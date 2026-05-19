@@ -20,7 +20,7 @@
 3. **같은 데이터를 두 페이지에 복사 금지** — `index.html` 미리보기와 `community.html` 전체 목록이 같은 JSON을 다른 `data-limit`으로 호출해야 한다.
 4. **인라인 `style` 속성 금지** — 색상/그라데이션은 컴포넌트 modifier 또는 CSS 변수로.
 5. **`<script type="module">` 사용. 전역 `<script src>` 금지**, 전역 변수 금지.
-6. **`DESIGN.md`/`tokens.css`에 없는 색상·spacing·radius·typography 직접 사용 금지** — `DESIGN.md` 먼저 등록 → `tokens.css`에 동일 이름으로 매핑 → 컴포넌트 적용.
+6. **`DESIGN.md`/`tokens.css`에 없는 값 직접 사용 금지** — 대상: 색상·spacing·radius·typography·**size**(고정 dimension, 예: 48px icon)·**alpha 변형**(dark-context 또는 program color soft variant 등 rgba 패턴). `DESIGN.md` 먼저 등록 → `tokens.css`에 동일 이름으로 매핑 → 컴포넌트 적용. 단 다음은 예외: (a) `?spec=1` dev tooling 내부 매직값, (b) 컴포넌트 내부 좌표(hamburger lines 등 1회 사용 절대좌표).
 7. **`!important` 금지** (접근성 fallback 제외).
 8. **빌드 도구·npm 의존성 추가 금지** — 사용자가 명시 승인하기 전까지 No-build 원칙 유지.
 9. **외부 URL이 필요한 메타 (`og:image`, `og:url`, `canonical`) 절대 URL 사용** — 프로덕션 도메인 `https://namsangreensummer.com` 기준. 페이지-상대 또는 root-absolute 금지 (SNS 봇이 못 찾음).
