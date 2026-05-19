@@ -15,7 +15,7 @@ export async function renderFaqList() {
 
   let items;
   try {
-    const res = await fetch(DATA_URL);
+    const res = await fetch(DATA_URL, { cache: 'no-cache' });
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     items = await res.json();
     if (!Array.isArray(items)) throw new TypeError('expected array');
@@ -29,7 +29,8 @@ export async function renderFaqList() {
 
   slots.forEach(slot => {
     const raw = slot.dataset.limit ?? 'all';
-    const list = raw === 'all' ? items : items.slice(0, Number(raw) || 4);
+    const limit = parseLimit(raw);
+    const list = limit === Infinity ? items : items.slice(0, limit);
     const isPreview = slot.dataset.render === 'preview';
 
     const frag = document.createDocumentFragment();
@@ -62,4 +63,14 @@ export async function renderFaqList() {
     });
     slot.replaceChildren(frag);
   });
+}
+
+function parseLimit(raw) {
+  if (raw === 'all') return Infinity;
+  const n = Number.parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.warn('[faq-list] invalid data-limit "%s"; defaulting to 4', raw);
+    return 4;
+  }
+  return n;
 }

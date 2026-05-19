@@ -1,9 +1,12 @@
 // js/modules/header.js
 export function initHeader() {
   const header = document.querySelector('.site-header');
+  if (!header) {
+    console.error('[header] .site-header not found — partial injection may have failed');
+    return;
+  }
   const nav = document.querySelector('.site-nav');
   const toggle = document.querySelector('.site-nav__toggle');
-  if (!header) return;
 
   const onScroll = () => {
     header.classList.toggle('is-scrolled', window.scrollY > 8);
@@ -34,13 +37,13 @@ export function initHeader() {
     });
   }
 
-  // 현재 페이지 nav 링크에 aria-current 자동 부여
-  const here = location.pathname.endsWith('/')
-    ? '/index.html'
-    : location.pathname;
+  // URL-normalized aria-current. Tolerant of subpath, query strings, hashes, trailing slash.
+  const here = new URL(location.href);
+  const herePath = here.pathname.replace(/\/$/, '/index.html');
   document.querySelectorAll('.site-nav__link').forEach(a => {
-    if (a.getAttribute('href') === here) {
-      a.setAttribute('aria-current', 'page');
-    }
+    try {
+      const linkPath = new URL(a.href, here).pathname;
+      if (linkPath === herePath) a.setAttribute('aria-current', 'page');
+    } catch {}
   });
 }

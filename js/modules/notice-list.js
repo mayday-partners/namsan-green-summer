@@ -14,7 +14,7 @@ export async function renderNoticeList() {
 
   let sorted;
   try {
-    const res = await fetch(DATA_URL);
+    const res = await fetch(DATA_URL, { cache: 'no-cache' });
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const items = await res.json();
     if (!Array.isArray(items)) throw new TypeError('expected array');
@@ -33,14 +33,15 @@ export async function renderNoticeList() {
 
   slots.forEach(slot => {
     const raw = slot.dataset.limit ?? 'all';
-    const list = raw === 'all' ? sorted : sorted.slice(0, Number(raw) || 4);
+    const limit = parseLimit(raw);
+    const list = limit === Infinity ? sorted : sorted.slice(0, limit);
 
     const frag = document.createDocumentFragment();
     for (const item of list) {
       const node = tpl.content.cloneNode(true);
       const a = node.querySelector('a');
       if (!a) continue;
-      a.href = item.link ?? `pages/community.html#${item.id}`;
+      a.href = safeLink(item.link) ?? `pages/community.html#${item.id}`;
       const dateEl = node.querySelector('.notice__date');
       const titleEl = node.querySelector('.notice__title');
       if (dateEl) dateEl.textContent = formatDate(item.date);
@@ -53,4 +54,24 @@ export async function renderNoticeList() {
 
 function formatDate(iso) {
   return String(iso ?? '').replaceAll('-', '.');
+}
+
+function parseLimit(raw) {
+  if (raw === 'all') return Infinity;
+  const n = Number.parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.warn('[notice-list] invalid data-limit "%s"; defaulting to 4', raw);
+    return 4;
+  }
+  return n;
+}
+
+function safeLink(raw) {
+  if (!raw) return null;
+  try {
+    const u = new URL(raw, location.origin);
+    if (u.protocol === 'http:' || u.protocol === 'https:') return raw;
+  } catch {}
+  console.warn('[notice-list] unsafe link rejected:', raw);
+  return null;
 }
