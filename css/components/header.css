@@ -122,3 +122,23 @@ site-header {
   display: block;
   min-height: var(--header-h);
 }
+
+/* Fallback header: visible only briefly before partial replaces it, and
+   permanently when JS is disabled. Mobile nav is wrapped horizontal (no
+   hamburger required) so users without JS still have navigation. */
+@media (max-width: 768px) {
+  .site-header--fallback .site-nav__list {
+    position: static;
+    inset: auto;
+    background: transparent;
+    flex-direction: row;
+    flex-wrap: wrap;
+    transform: none;
+    height: auto;
+    justify-content: flex-end;
+    gap: var(--space-3);
+  }
+  .site-header--fallback .site-nav__link {
+    font-size: var(--fs-sm);
+  }
+}

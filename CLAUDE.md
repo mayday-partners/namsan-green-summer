@@ -23,6 +23,7 @@
 6. **`tokens.css`에 없는 색상 직접 사용 금지** — 토큰 먼저 추가 → 컴포넌트 적용.
 7. **`!important` 금지** (접근성 fallback 제외).
 8. **빌드 도구·npm 의존성 추가 금지** — 사용자가 명시 승인하기 전까지 No-build 원칙 유지.
+9. **외부 URL이 필요한 메타 (`og:image`, `og:url`, `canonical`) 절대 URL 사용** — 프로덕션 도메인 `https://namsangreensummer.com` 기준. 페이지-상대 또는 root-absolute 금지 (SNS 봇이 못 찾음).
 
 ---
 

@@ -524,6 +524,6 @@ GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로
 - [ ] Gabia에 네임서버 변경 (DNS 전파 ~수 시간)
 - [ ] Cloudflare Pages 프로젝트에 `namsangreensummer.com` Custom Domain 연결
 - [ ] SSL/TLS 모드 "Full (Strict)" 권장
-- [ ] OG/SNS 메타 태그 점검 (현재 `og:image`는 페이지마다 `/img/sections/hero.webp`, 절대 URL 아님 — 카카오/페이스북 일부에서 인식 안 될 수 있음 → 향후 페이지별 절대 URL OG 이미지 권장)
-- [ ] `robots.txt`, `sitemap.xml` 추가 (현재 없음 — 프로덕션 SEO 필요 시)
+- ~~[ ] OG/SNS 메타 태그 점검 (현재 `og:image`는 페이지마다 `/img/sections/hero.webp`, 절대 URL 아님 — 카카오/페이스북 일부에서 인식 안 될 수 있음 → 향후 페이지별 절대 URL OG 이미지 권장)~~ ✅
+- ~~[ ] `robots.txt`, `sitemap.xml` 추가 (현재 없음 — 프로덕션 SEO 필요 시)~~ ✅
 - [ ] Lighthouse 측정: LCP < 2.5s, CLS < 0.1, INP < 200ms
