@@ -1,0 +1,20 @@
+/* css/main.css
+ * Single entry point for all stylesheets.
+ * Layer order (weak → strong): reset, tokens, base, components, pages, utilities.
+ */
+@layer reset, tokens, base, components, pages, utilities;
+
+@import url('reset.css')                  layer(reset);
+@import url('tokens.css')                 layer(tokens);
+@import url('base.css')                   layer(base);
+
+@import url('components/header.css')      layer(components);
+@import url('components/button.css')      layer(components);
+@import url('components/card.css')        layer(components);
+@import url('components/footer.css')      layer(components);
+@import url('animations.css')             layer(components);
+
+@import url('home.css')                   layer(pages);
+@import url('page.css')                   layer(pages);
+
+@import url('utilities.css')              layer(utilities);

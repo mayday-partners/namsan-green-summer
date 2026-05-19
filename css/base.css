@@ -117,13 +117,3 @@ body {
   outline: 2px solid var(--color-white);
   outline-offset: 2px;
 }
-
-.fallback-error {
-  padding: var(--space-4);
-  color: var(--color-pink);
-  font-size: var(--fs-sm);
-}
-
-/* ===== Utilities (BEM 예외 — 의미 단일 utility) ===== */
-.text-neon { color: var(--color-neon); }
-.mt-7 { margin-block-start: var(--space-7); }
