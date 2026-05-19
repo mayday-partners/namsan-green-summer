@@ -10,9 +10,13 @@ export function initFadeIn() {
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        io.unobserve(entry.target);
+      try {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      } catch (err) {
+        console.error('[observer] entry handler failed:', err);
       }
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });

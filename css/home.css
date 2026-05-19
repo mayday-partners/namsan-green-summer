@@ -374,7 +374,7 @@
   transition: color var(--dur-fast) var(--ease-out);
 }
 .bottom-list a:hover { color: var(--color-neon); }
-.bottom-list__date {
+.bottom-list__meta {
   font-family: var(--font-en);
   font-size: var(--fs-xs);
   letter-spacing: 0.1em;

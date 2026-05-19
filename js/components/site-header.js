@@ -20,6 +20,8 @@ function normalizeFallbackLinks(root) {
 
 class SiteHeader extends HTMLElement {
   async connectedCallback() {
+    // Reset any nav-open lock that may have survived bfcache restore.
+    document.documentElement.classList.remove('nav-open');
     // Normalize fallback nav hrefs immediately so subpath deploys
     // don't show broken /pages/... links during the brief fetch window.
     normalizeFallbackLinks(this);
@@ -81,3 +83,8 @@ class SiteHeader extends HTMLElement {
 }
 
 customElements.define('site-header', SiteHeader);
+
+// bfcache restore safeguard — clear nav-open lock that may have persisted.
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) document.documentElement.classList.remove('nav-open');
+});

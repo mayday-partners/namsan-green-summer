@@ -42,7 +42,7 @@ export async function renderFaqList() {
         const title = document.createElement('span');
         title.textContent = item.question;
         const tag = document.createElement('span');
-        tag.className = 'bottom-list__date';
+        tag.className = 'bottom-list__meta';
         tag.textContent = `FAQ ${String(i + 1).padStart(2, '0')}`;
         a.append(title, tag);
         li.append(a);

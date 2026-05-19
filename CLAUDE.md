@@ -86,6 +86,7 @@
 | `<li>공지제목</li>` 직접 작성 | `data/notices.json`에 추가 + 렌더 모듈이 자동 표시 |
 | `style="background: linear-gradient(...)"` | 컴포넌트 modifier class + `tokens.css` 색상 |
 | `<script src="js/header.js">` 추가 | `js/components/<X>.js`에 customElements.define 후 `main.js`에서 import |
+| analytics/GA를 `partials/*.html`에 `<script>` 직접 삽입 | `innerHTML`/`outerHTML` 주입 시 `<script>`는 미실행 — `js/main.js`에 import하거나 페이지 HTML inline 추가 |
 | 새 색상 헥스값 컴포넌트에 직접 작성 | `tokens.css`에 의미 토큰 먼저 추가 |
 | 같은 공지를 `index.html`/`community.html` 둘에 입력 | 한 JSON에 1번, `data-limit` 속성으로 다르게 호출 |
 | `el.innerHTML = jsonData.title` | `el.textContent = jsonData.title` |
