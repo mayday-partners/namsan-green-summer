@@ -148,15 +148,15 @@ site-header {
   margin-inline-start: var(--space-3);
 }
 
-.site-header__cta--mobile {
+.btn.site-header__cta--mobile {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .site-header__cta {
+  .btn.site-header__cta {
     display: none;
   }
-  .site-nav[data-open="true"] .site-header__cta--mobile {
+  .site-nav[data-open="true"] .btn.site-header__cta--mobile {
     display: inline-flex;
     width: 100%;
     justify-content: center;
