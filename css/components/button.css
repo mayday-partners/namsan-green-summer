@@ -71,7 +71,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
-  margin-top: var(--space-5);
+  margin-block-start: var(--space-5);
 }
 .map-links .btn {
   flex: 1 1 auto;

@@ -12,7 +12,7 @@
 .hero__bg {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: var(--z-deep);
   background-image: url('../img/sections/hero.webp');
   background-size: cover;
   background-position: left center;
@@ -29,7 +29,7 @@
 
 .hero__inner {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr var(--track-hero-card);
   gap: var(--space-6);
   align-items: end;
   width: 100%;
@@ -74,7 +74,7 @@
 }
 
 .hero__card {
-  width: 280px;
+  width: var(--track-hero-card);
   background: rgba(5, 8, 22, 0.55);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -115,7 +115,7 @@
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  z-index: 2;
+  z-index: var(--z-overlay-fg);
 }
 
 @media (max-width: 900px) {
@@ -229,7 +229,7 @@
 .preview__bg {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: var(--z-deep);
   background-size: cover;
   background-position: center;
 }
@@ -240,7 +240,7 @@
 .preview__overlay {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: var(--z-below);
 }
 .preview__overlay--ltr {
   background:
@@ -448,6 +448,8 @@
   color: var(--color-text-muted);
 }
 
-/* spacing tightening — scoped to home page only (sub-pages keep base.css value) */
+/* Homepage-only overrides. `.page-home` is a deliberate parent-context
+   selector (not a BEM modifier) — applies to *every* .section/.bottom-list
+   on the homepage without modifying markup. Sub-pages keep base.css values. */
 .page-home .section { padding-block: var(--space-8); }
 @media (max-width: 768px) { .page-home .section { padding-block: var(--space-7); } }

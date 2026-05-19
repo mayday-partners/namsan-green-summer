@@ -39,11 +39,11 @@
 ### CSS
 - 명명: **BEM** (`block__element--modifier`).
 - 컴포넌트 1개 = 파일 1개 (`css/components/<block>.css`).
-- 페이지 전용은 `css/pages/<name>.css`.
+- 페이지 전용 스타일은 `css/<area>.css` 한 파일에 담는다. 현재는 `css/home.css` (홈 전용) + `css/page.css` (5개 서브페이지 공통) 둘만 존재. 새 페이지가 기존 패턴 안에 들어가면 `page.css`에 추가, 완전히 다른 레이아웃이면 새 `css/<area>.css` 생성 후 `main.css`에 `@import`.
 - 진입점: `css/main.css` 하나만 HTML이 link. `@layer reset, tokens, base, components, pages, utilities;` 순서.
 - 간격은 `var(--space-*)`, 색상은 `var(--color-*)` 토큰만 사용. 모든 CSS 토큰은 `DESIGN.md` YAML과 **1:1 매핑** 유지 (이름·값 모두).
 - 셀렉터 중첩 3단계 이하.
-- 반응형 break: `768px`(모바일), `900px`(태블릿 메인 그리드), `1440px`(데스크톱 와이드).
+- 반응형 break: `768px`(모바일/태블릿 경계, 광범위 사용), `900px`(메인 그리드 pivot, `home.css` 전용). `1440px`는 DESIGN.md에 정의되어 있으나 현재 미사용 — wide-desktop variant 도입 전까지는 신규 break 만들지 말고 둘 중 하나 선택.
 
 ### JavaScript
 - ES Module. `js/main.js`가 진입점. 새 기능은 `js/modules/<name>.js`로 분리, `main.js`에서 import.

@@ -61,6 +61,27 @@
   --dur-slow: 800ms;
 
   --header-h: 72px;
+
+  /* Grid track widths (referenced from multiple layout rules — keep in sync) */
+  --track-hero-card: 280px;
+
+  /* Z-index scale — keep stacking deterministic. Higher = closer to user. */
+  --z-below: -1;
+  --z-deep:  -2;
+  --z-overlay-fg: 2;     /* badges, scroll hints sitting just above section content */
+  --z-header: 100;
+  --z-header-fg: 110;    /* logo + hamburger sit above the mobile nav drawer */
+  --z-skip-link: 200;
+
+  /* Card media placeholder gradients — shown before real images arrive.
+     Each pair is a darkened mix of the program accent. Referenced only by
+     .card__media--<program>. See DESIGN.md "Alpha-tinted utilities". */
+  --card-media-funwalk:      linear-gradient(135deg, #001a2e, #003a66);
+  --card-media-night:        linear-gradient(135deg, #2a0418, #66052f);
+  --card-media-garden:       linear-gradient(135deg, #082a02, #1a5505);
+  --card-media-garden-deep:  linear-gradient(135deg, #103620, #1f5a3a);
+  --card-media-garden-fresh: linear-gradient(135deg, #0a3d2c, #1a6849);
+  --card-media-neutral:      linear-gradient(135deg, #1a1a2e, #2c2c4a);
 }
 
 @media (max-width: 768px) {

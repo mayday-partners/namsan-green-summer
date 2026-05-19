@@ -28,12 +28,12 @@
 .eyebrow--neon { color: var(--color-neon); }
 .eyebrow--white { color: var(--color-white); }
 
-.card__media--funwalk { background: linear-gradient(135deg, #001a2e, #003a66); }
-.card__media--night   { background: linear-gradient(135deg, #2a0418, #66052f); }
-.card__media--garden  { background: linear-gradient(135deg, #082a02, #1a5505); }
-.card__media--garden-deep { background: linear-gradient(135deg, #103620, #1f5a3a); }
-.card__media--garden-fresh { background: linear-gradient(135deg, #0a3d2c, #1a6849); }
-.card__media--neutral { background: linear-gradient(135deg, #1a1a2e, #2c2c4a); }
+.card__media--funwalk      { background: var(--card-media-funwalk); }
+.card__media--night        { background: var(--card-media-night); }
+.card__media--garden       { background: var(--card-media-garden); }
+.card__media--garden-deep  { background: var(--card-media-garden-deep); }
+.card__media--garden-fresh { background: var(--card-media-garden-fresh); }
+.card__media--neutral      { background: var(--card-media-neutral); }
 .card__title {
   font-family: var(--font-display);
   font-size: var(--fs-xl);

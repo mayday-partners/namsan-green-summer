@@ -106,7 +106,7 @@ body {
   background: var(--color-neon);
   color: var(--color-bg);
   padding: var(--space-3) var(--space-5);
-  z-index: 200;
+  z-index: var(--z-skip-link);
   font-weight: 700;
   font-size: var(--fs-sm);
   border-radius: var(--radius-sm);

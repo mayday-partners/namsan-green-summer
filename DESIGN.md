@@ -198,6 +198,22 @@ These derive from base colors and are applied via `rgba()` or layer opacity rath
 - **Primary soft** — `rgba(168, 255, 0, 0.18)` — focus ring fills, subtle hover halos.
 - **Hero gradient bands** — see Elevation & Depth.
 
+### Card media placeholder gradients (CSS only, not tokens)
+
+`.card__media--<program>` slots show a darkened two-stop gradient before real
+images arrive. Like the `.course-map` placeholder, these are temporary
+stand-ins removed when `data/image-slots.json` is filled in, so they live as
+CSS variables (`--card-media-*` in `tokens.css`) rather than as Color tokens.
+Two stops only, no third hue, derived as a `135deg` mix of the program accent
+on `neutral`:
+
+- `funwalk`      — `#001a2e → #003a66` (Sky Blue darkened)
+- `night`        — `#2a0418 → #66052f` (Hot Pink darkened)
+- `garden`       — `#082a02 → #1a5505` (Neon Lime darkened, base)
+- `garden-deep`  — `#103620 → #1f5a3a` (Neon, lower chroma)
+- `garden-fresh` — `#0a3d2c → #1a6849` (Neon, higher saturation)
+- `neutral`      — `#1a1a2e → #2c2c4a` (page-default for unassigned cards)
+
 ## Typography
 
 Three families, each with a strict role. Never substitute one family into another's role.
