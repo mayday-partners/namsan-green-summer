@@ -34,3 +34,9 @@
 
 .btn__arrow { transition: transform var(--dur-fast) var(--ease-out); }
 .btn:hover .btn__arrow { transform: translateX(4px); }
+
+.btn--compact {
+  padding: 10px 16px;
+  font-size: var(--fs-sm);
+  line-height: 1;
+}
