@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx @google/design.md lint:*)",
+      "Bash(npx --yes @google/design.md lint:*)"
+    ]
+  }
+}
