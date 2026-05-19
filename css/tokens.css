@@ -23,7 +23,6 @@
   --fs-xl: 2rem;
   --fs-2xl: 3rem;
   --fs-3xl: 4.5rem;
-  --fs-hero: clamp(2.5rem, 8vw, 6rem);
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -54,10 +53,6 @@
   --dur-slow: 800ms;
 
   --header-h: 72px;
-
-  --bp-mobile: 390px;
-  --bp-tablet: 768px;
-  --bp-desktop: 1440px;
 }
 
 @media (max-width: 768px) {

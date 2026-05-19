@@ -14,37 +14,3 @@
 .fade-in[data-delay='3'] { transition-delay: 240ms; }
 .fade-in[data-delay='4'] { transition-delay: 320ms; }
 
-@keyframes glow-pulse {
-  0%, 100% {
-    text-shadow: 0 0 12px rgba(168, 255, 0, 0.4),
-                 0 0 32px rgba(168, 255, 0, 0.15);
-  }
-  50% {
-    text-shadow: 0 0 24px rgba(168, 255, 0, 0.7),
-                 0 0 64px rgba(168, 255, 0, 0.3);
-  }
-}
-
-.glow-text {
-  color: var(--color-neon);
-  animation: glow-pulse 3.6s var(--ease-in-out) infinite;
-}
-
-@keyframes slow-zoom {
-  from { transform: scale(1.0); }
-  to   { transform: scale(1.12); }
-}
-
-.slow-zoom {
-  animation: slow-zoom 16s ease-out forwards;
-  will-change: transform;
-}
-
-@keyframes float-y {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
-}
-.float-y {
-  animation: float-y 3.2s var(--ease-in-out) infinite;
-}
-
