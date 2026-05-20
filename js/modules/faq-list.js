@@ -51,7 +51,7 @@ export async function renderFaqList() {
           if (!item.id) return;
           const li = document.createElement('li');
           const a = document.createElement('a');
-          a.href = `community/#faq-${item.id}`;
+          a.href = `/community/faq.html#faq-${item.id}`;
           const icon = document.createElement('span');
           icon.className = 'notice__icon notice__icon--faq';
           icon.setAttribute('aria-hidden', 'true');

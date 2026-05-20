@@ -55,7 +55,13 @@ export async function renderNoticeList() {
         const node = tpl.content.cloneNode(true);
         const a = node.querySelector('a');
         if (!a) continue;
-        a.href = safeLink(item.link) ?? `community/#${item.id}`;
+        a.href = safeLink(item.link) ?? `/community/#${item.id}`;
+        // Full mode renders on community/index.html — give the <li> a stable id so
+        // /community/#<id> from the preview link can scroll to this item.
+        if (mode === 'full') {
+          const li = node.querySelector('li');
+          if (li) li.id = item.id;
+        }
         const dateEl = node.querySelector('.notice__date');
         const titleEl = node.querySelector('.notice__title');
         if (dateEl) dateEl.textContent = formatDate(item.date);

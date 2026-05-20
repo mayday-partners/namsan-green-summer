@@ -73,6 +73,7 @@
 - `index.html` HTML 주석 V1 잔재 (`<!-- SECTION 04 GREEN NIGHT PREVIEW -->`, `<!-- SECTION 05 GREEN GARDEN PREVIEW -->`) → V2
 - `index.html` watermark V1 잔재 (`Green<br>Night` / `Green<br>Garden`) → V2 (`Summer<br>Night` / `Summer<br>Garden`)
 - `fun-and-walk/course.html` 코스맵 종점 라벨 "FIN" → "종점", "Read Before You Go" → "출발 전 확인 사항"
+- **메인 → community 링크 broken anchor 수정**: `faq-list.js`의 preview href를 `community/#faq-${id}`(잘못된 공지 페이지) → `/community/faq.html#faq-${id}`(FAQ 페이지의 `<details id="faq-...">`)로 변경. `notice-list.js` fallback href를 root-absolute(`/community/#${id}`)로 통일하고 full 모드에서 `<li id="${item.id}">` 부여(앵커 target 생성). `main.js`의 `resolveHashAfterRender`를 `querySelector`(숫자로 시작하는 id에서 invalid selector로 silent fail) → `getElementById`로 변경하여 `2026-05-20-launch` 같은 notice id도 정상 resolve
 
 ### Notes
 - 전 페이지 콘솔 에러 0건, HTML lint 14 files 0 errors, JS lint 0 errors

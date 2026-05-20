@@ -19,13 +19,10 @@ window.addEventListener('hashchange', resolveHashAfterRender);
 
 function resolveHashAfterRender() {
   if (!location.hash) return;
-  let target;
-  try {
-    target = document.querySelector(location.hash);
-  } catch (err) {
-    console.warn('[main] invalid hash selector:', location.hash, err);
-    return;
-  }
+  // Use getElementById (not querySelector) so ids that start with digits
+  // — e.g., notice ids like "2026-05-20-launch" — resolve correctly.
+  const id = decodeURIComponent(location.hash.slice(1));
+  const target = document.getElementById(id);
   if (!target) return;
   if (target instanceof HTMLDetailsElement) target.open = true;
   target.scrollIntoView({ behavior: 'auto', block: 'start' });
