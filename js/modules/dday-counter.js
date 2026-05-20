@@ -1,6 +1,3 @@
-// js/modules/dday-counter.js
-// Renders D-XXX badges for [data-dday] slots based on event date.
-// Slot reads target from data-dday="YYYY-MM-DD" or falls back to "2026-06-27".
 const FALLBACK_DATE = '2026-06-27';
 
 export function renderDdayBadges() {

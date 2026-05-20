@@ -1,6 +1,3 @@
-// js/modules/sponsor-list.js
-// Renders sponsor tiles into [data-sponsor-list] slots.
-// Each item may include logo URL (img) or fall back to name text (placeholder).
 const DATA_URL = '/data/sponsors.json';
 
 export async function renderSponsorList() {

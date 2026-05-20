@@ -210,6 +210,15 @@ components:
     textColor: "{colors.on-surface}"
     rounded: "{rounded.md}"
     padding: 24px
+  notice-table:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.md}"
+    padding: 24px
+  notice-table-head:
+    backgroundColor: "{colors.surface-alt}"
+    textColor: "{colors.on-surface-muted}"
+    typography: "{typography.body-sm}"
   dark-section:
     backgroundColor: "{colors.dark-surface}"
     textColor: "{colors.on-dark-body}"

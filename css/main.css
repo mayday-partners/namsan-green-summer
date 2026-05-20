@@ -19,6 +19,7 @@
 @import url('components/cta-group.css')   layer(components);
 @import url('components/sponsor.css')     layer(components);
 @import url('components/kit-grid.css')    layer(components);
+@import url('components/notice-table.css') layer(components);
 
 @import url('home.css')                   layer(pages);
 @import url('page.css')                   layer(pages);

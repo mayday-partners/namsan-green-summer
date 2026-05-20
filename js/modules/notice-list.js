@@ -3,7 +3,9 @@ const DATA_URL = '/data/notices.json';
 const TEMPLATES = {
   preview: 'tpl-notice-preview',
   full:    'tpl-notice-full',
+  table:   'tpl-notice-table',
 };
+const VALID_MODES = new Set(Object.keys(TEMPLATES));
 
 export async function renderNoticeList() {
   const slots = document.querySelectorAll('[data-notice-list]');
@@ -37,41 +39,45 @@ export async function renderNoticeList() {
 
   slots.forEach(slot => {
     try {
-      const mode = slot.dataset.render === 'preview' ? 'preview' : 'full';
+      const rawMode = slot.dataset.render || 'full';
+      const mode = VALID_MODES.has(rawMode) ? rawMode : 'full';
       const tpl = document.getElementById(TEMPLATES[mode]);
+      const fallbackTag = mode === 'table' ? 'tr' : 'li';
       if (!tpl) {
         console.error('[notice-list] template missing for mode "%s": #%s', mode, TEMPLATES[mode]);
-        renderFallbackError(slot, 'li', '공지사항을 표시할 수 없습니다 (template missing).');
+        renderFallbackError(slot, fallbackTag, '공지사항을 표시할 수 없습니다 (template missing).');
         return;
       }
 
       const raw = slot.dataset.limit ?? 'all';
       const limit = parseLimit(raw);
       const list = limit === Infinity ? sorted : sorted.slice(0, limit);
+      const total = list.length;
 
       const frag = document.createDocumentFragment();
-      for (const item of list) {
-        if (!item.id) continue;
+      list.forEach((item, i) => {
+        if (!item.id) return;
         const node = tpl.content.cloneNode(true);
         const a = node.querySelector('a');
-        if (!a) continue;
+        if (!a) return;
         a.href = safeLink(item.link) ?? `/community/#${item.id}`;
-        // Full mode renders on community/index.html — give the <li> a stable id so
-        // /community/#<id> from the preview link can scroll to this item.
-        if (mode === 'full') {
-          const li = node.querySelector('li');
-          if (li) li.id = item.id;
-        }
-        const dateEl = node.querySelector('.notice__date');
-        const titleEl = node.querySelector('.notice__title');
+        const row = node.querySelector('li, tr');
+        if (row && mode !== 'preview') row.id = item.id;
+
+        const numEl = node.querySelector('.notice-table__num');
+        if (numEl) numEl.textContent = String(total - i).padStart(2, '0');
+
+        const dateEl = node.querySelector('.notice__date, .notice-table__date');
+        const titleEl = node.querySelector('.notice__title, .notice-table__title');
         if (dateEl) dateEl.textContent = formatDate(item.date);
         if (titleEl) titleEl.textContent = item.title ?? '(제목 없음)';
         frag.appendChild(node);
-      }
+      });
       slot.replaceChildren(frag);
     } catch (err) {
       console.error('[notice-list] render failed for slot:', slot, err);
-      renderFallbackError(slot, 'li', '공지사항 표시 중 오류가 발생했습니다.');
+      const fallbackTag = slot.dataset.render === 'table' ? 'tr' : 'li';
+      renderFallbackError(slot, fallbackTag, '공지사항 표시 중 오류가 발생했습니다.');
     }
   });
 }

@@ -86,26 +86,39 @@
     <section class="section">
       <div class="container">
         <div class="sub-head fade-in">
-          <p class="sub-head__eyebrow">유의사항</p>
+          <p class="sub-head__eyebrow">공지</p>
           <h2 class="sub-head__title">공지사항</h2>
         </div>
 
-        <ul class="notice__list fade-in" data-notice-list data-limit="all"></ul>
+        <table class="notice-table fade-in">
+          <colgroup>
+            <col class="notice-table__col-num">
+            <col>
+            <col class="notice-table__col-date">
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">번호</th>
+              <th scope="col">제목</th>
+              <th scope="col">등록일</th>
+            </tr>
+          </thead>
+          <tbody data-notice-list data-limit="all" data-render="table"></tbody>
+        </table>
       </div>
     </section>
   </main>
 
   <site-footer></site-footer>
 
-  <!-- Full-list shape (date, title, arrow). index.html uses tpl-notice-preview for the preview shape. -->
-  <template id="tpl-notice-full">
-    <li>
-      <a class="notice__item">
-        <span class="notice__date"></span>
-        <span class="notice__title"></span>
-        <span class="notice__arrow" aria-hidden="true">→</span>
-      </a>
-    </li>
+  <template id="tpl-notice-table">
+    <tr>
+      <td class="notice-table__num"></td>
+      <td>
+        <a class="notice-table__title"></a>
+      </td>
+      <td class="notice-table__date"></td>
+    </tr>
   </template>
 
   <script type="module" src="/js/main.js"></script>

@@ -1,5 +1,3 @@
-/* CTA Group — 메인 정보 박스 다음에 위치하는 프로그램별 참가신청 진입점 3개.
-   seoulrun.kr 메인의 [개인참가신청 / 단체참가신청 / 참가신청조회] 3버튼 패턴 참고. */
 .cta-group {
   background: var(--color-surface-alt);
   border-radius: var(--radius-lg);

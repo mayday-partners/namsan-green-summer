@@ -1,0 +1,101 @@
+.notice-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.notice-table thead {
+  background: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.notice-table th {
+  font-family: var(--font-kr);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-on-surface-muted);
+  text-align: left;
+  padding: var(--space-4) var(--space-5);
+  text-transform: none;
+}
+
+.notice-table__col-num   { width: 80px; }
+.notice-table__col-date  { width: 140px; }
+
+.notice-table tbody tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 120ms ease;
+}
+
+.notice-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.notice-table tbody tr:hover,
+.notice-table tbody tr:focus-within {
+  background: var(--color-surface-alt);
+}
+
+.notice-table td {
+  padding: var(--space-4) var(--space-5);
+  vertical-align: middle;
+  font-family: var(--font-kr);
+  font-size: 0.9375rem;
+  color: var(--color-on-surface-body);
+}
+
+.notice-table__num {
+  font-family: var(--font-en);
+  font-weight: 600;
+  color: var(--color-on-surface-muted);
+}
+
+.notice-table__title {
+  font-weight: 600;
+  color: var(--color-on-surface);
+  text-decoration: none;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notice-table__title:hover,
+.notice-table__title:focus-visible {
+  color: var(--color-primary-text);
+  outline: none;
+}
+
+.notice-table__date {
+  font-family: var(--font-en);
+  color: var(--color-on-surface-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .notice-table__col-num,
+  .notice-table th:first-child,
+  .notice-table td:first-child {
+    display: none;
+  }
+
+  .notice-table__col-date {
+    width: 110px;
+  }
+
+  .notice-table th,
+  .notice-table td {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .notice-table__title {
+    font-size: 0.9375rem;
+  }
+
+  .notice-table__date {
+    font-size: 0.8125rem;
+  }
+}
