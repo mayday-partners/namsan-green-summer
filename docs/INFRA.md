@@ -1,8 +1,13 @@
 # Infrastructure — CSP / 캐시 / 외부 도메인
 
-> **이 문서는 Reference + How-to입니다** (Diátaxis 4-mode).
-> `_headers` 파일의 모든 지시문과 외부 의존성 추가 절차를 다룹니다.
-> Cloudflare 운영 비상 대응(롤백/캐시 퍼지 등)은 [`../README.md`](../README.md) §14-8을 참조하세요.
+> [!NOTE]
+> **Diátaxis: Reference + How-to.** `_headers` 파일의 모든 지시문과 외부 의존성 추가 절차.
+> Cloudflare 운영 비상 대응(롤백/캐시 퍼지 등)은 [README][rm] §14-8.
+
+[rm]: ../README.md
+[arch]: ../ARCHITECTURE.md
+[claude]: ../CLAUDE.md
+[schemas]: ./SCHEMAS.md
 
 ---
 
@@ -23,9 +28,13 @@
 
 [Cloudflare Pages `_headers` 형식](https://developers.cloudflare.com/pages/configuration/headers/). 저장소 루트의 `_headers` 파일이 Cloudflare Pages 배포에 자동 인식되어 HTTP 응답 헤더로 부여됨.
 
-**중요**: GitHub Pages는 `_headers` 파일을 인식하지 않음. 즉:
-- 프로덕션(Cloudflare): `_headers` 정책 적용됨
-- 테스트(GitHub Pages): `_headers` 정책 적용 안 됨 → 보안/캐시 검증은 Cloudflare 환경에서
+> [!IMPORTANT]
+> **GitHub Pages는 `_headers` 파일을 인식하지 않음.** 보안/캐시 검증은 항상 Cloudflare 환경에서 해야 한다.
+>
+> | 환경 | `_headers` 적용 |
+> |---|---|
+> | 프로덕션 (Cloudflare) | ✓ |
+> | 테스트 (GitHub Pages) | ✗ |
 
 ### 1-2. 파일 문법
 
@@ -68,10 +77,25 @@
 
 ### 2-2. Content-Security-Policy 분해
 
-현재 단일 라인:
+<details>
+<summary>현재 CSP 전체 원문 (`_headers` `/*` 그룹)</summary>
+
 ```
-default-src 'self'; script-src 'self' https://dapi.kakao.com https://*.daumcdn.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https://*.daumcdn.net https://*.kakao.com; connect-src 'self' https://dapi.kakao.com https://cloudflareinsights.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://forms.example.com; object-src 'none'
+default-src 'self';
+script-src 'self' https://dapi.kakao.com https://*.daumcdn.net https://static.cloudflareinsights.com;
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
+font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net;
+img-src 'self' data: https://*.daumcdn.net https://*.kakao.com;
+connect-src 'self' https://dapi.kakao.com https://cloudflareinsights.com;
+frame-ancestors 'self';
+base-uri 'self';
+form-action 'self' https://forms.example.com;
+object-src 'none'
 ```
+
+(실제 파일은 한 줄로 정리됨 — 위는 가독성을 위한 줄 나눔)
+
+</details>
 
 지시문별 의도 + 화이트리스트 출처:
 
@@ -173,30 +197,38 @@ default-src 'self'; script-src 'self' https://dapi.kakao.com https://*.daumcdn.n
 
 ### 4-4. 일반적 함정
 
-- **`'unsafe-inline'` 남발 금지** — CSP의 보호 효과 무력화. 이미 `style-src`에 들어있지만 그건 InfoWindow 등 외부 SDK 호환 때문 — 다른 도메인엔 적용 말 것.
-- **`*` 와일드카드 금지** — `https://*` 같은 지정은 CSP의 의미를 잃음. 서브도메인 와일드카드(`*.daumcdn.net`)는 OK.
-- **테스트 환경(GH Pages)에서는 CSP 미적용** — 실 검증은 Cloudflare 환경에서. 사전에 DevTools의 Response Headers 확인.
+> [!CAUTION]
+> **`'unsafe-inline'` 남발 금지** — CSP 보호 효과 무력화. 현재 `style-src`에 한 번 사용 중 (Kakao InfoWindow 동적 스타일 호환). **다른 지시문엔 절대 추가 금지**.
+
+> [!CAUTION]
+> **`*` 전체 와일드카드 금지** — `script-src https://*` 같은 지정은 CSP를 사실상 무력화. 서브도메인 와일드카드(`*.daumcdn.net`)는 명시적 도메인 제한이므로 OK.
+
+> [!IMPORTANT]
+> **테스트 환경(GH Pages)에서 CSP 미적용** — 실 검증은 Cloudflare 환경에서. 사전에 DevTools Network → Response Headers에서 `content-security-policy` 행 확인.
 
 ---
 
 ## 5. How-to: `forms.example.com` placeholder 교체
 
-본 사이트의 6 페이지 CTA가 모두 `https://forms.example.com/<program>` placeholder를 가리킴. 실 폼 시스템(예: Google Forms / Typeform / Tally / 자체 빌드) 도입 시 따라야 하는 절차.
+> [!WARNING]
+> **`forms.example.com`은 실제로 존재하지 않는 placeholder 도메인**이다. 현재 6 페이지의 모든 "참가신청/예약" CTA가 이 도메인을 가리킴. 출시 전 반드시 실제 폼 시스템(Google Forms / Typeform / Tally / 자체 빌드)으로 교체할 것.
 
 ### 5-1. 영향 범위
 
-- HTML 6곳: `index.html`, `pages/event.html`, `pages/fun-and-walk.html`, `pages/green-night.html`, `pages/green-garden.html`, `pages/community.html`
-- 폼 종류별 URL: `/apply` (전체 참가), `/funwalk`, `/greennight`, `/greengarden`
-- `partials/header.html` (참가신청 CTA)
-- `_headers`의 `form-action` 지시문
+| 자산 | 위치 / 개수 |
+|---|---|
+| HTML 페이지 | `index.html`, `pages/{event,fun-and-walk,green-night,green-garden,community}.html` — 6곳 |
+| Partial | `partials/header.html` (참가신청 CTA) |
+| URL 종류 | `/apply` (전체 참가), `/funwalk`, `/greennight`, `/greengarden` |
+| CSP 지시문 | `_headers`의 `form-action` |
 
-### 5-2. 교체 절차
+### 5-2. 교체 체크리스트
 
-1. 실 폼 시스템에서 각 프로그램별 폼 URL 발급 (예: `https://forms.gle/<id1>`, `<id2>`, ...)
-2. 6개 페이지 + `partials/header.html`의 `forms.example.com` URL 일괄 교체 (`grep -rl "forms.example.com" .` 후 sed)
-3. `_headers`의 `form-action` 화이트리스트를 새 도메인으로 교체 (placeholder 제거)
-4. 본 문서 §2-3 인덱스에서 `forms.example.com` 행 제거 + 새 도메인 행 추가
-5. Cloudflare 환경에 배포 후 폼 submit 동작 확인
+- [ ] 실 폼 시스템에서 각 프로그램별 폼 URL 발급 (예: `https://forms.gle/<id1>`, `<id2>`, …)
+- [ ] 6개 페이지 + `partials/header.html`의 `forms.example.com` URL 일괄 교체 (`grep -rl "forms.example.com" .` 후 sed)
+- [ ] `_headers`의 `form-action` 화이트리스트를 새 도메인으로 교체 (placeholder 제거)
+- [ ] 본 문서 §2-3 인덱스에서 `forms.example.com` 행 제거 + 새 도메인 행 추가
+- [ ] Cloudflare 환경에 배포 후 폼 submit 동작 확인 (DevTools Network → 차단 메시지 없는지)
 
 ---
 

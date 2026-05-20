@@ -1,9 +1,9 @@
 # Changelog
 
-> **이 문서는 Reference입니다** (Diátaxis 4-mode).
-> 본 프로젝트는 단일 주말 페스티벌 사이트로 semver 릴리스가 없습니다 — **날짜별 작업 단위**로 변경을 기록합니다.
-> [Keep a Changelog](https://keepachangelog.com/) 형식을 단순화 적용 (Added/Changed/Fixed/Removed/Security).
-> 코드 단위 정확한 이력은 `git log`를 참조하세요. 본 파일은 **"사용자/기여자 관점에서 무엇이 바뀌었나"**에 집중합니다.
+> [!NOTE]
+> **Diátaxis: Reference.** 단일 주말 페스티벌 사이트로 semver 릴리스가 없음 — **날짜별 작업 단위**로 기록.
+> [Keep a Changelog](https://keepachangelog.com/) 형식을 단순화 적용 (Added/Changed/Fixed/Removed).
+> 코드 단위 이력은 `git log`. 본 파일은 **"사용자/기여자 관점에서 무엇이 바뀌었나"**에 집중.
 
 ---
 

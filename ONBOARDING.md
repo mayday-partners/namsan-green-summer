@@ -1,8 +1,18 @@
 # Onboarding — 처음 30분 가이드
 
-> **이 문서는 Tutorial입니다** (Diátaxis 4-mode).
-> 본 프로젝트를 처음 만지는 모든 사람(개발자/디자이너/콘텐츠 운영자)이 30분 안에 첫 변경을 만들 수 있도록 안내합니다.
-> 깊은 설명은 [`ARCHITECTURE.md`](./ARCHITECTURE.md), 절차는 [`README.md`](./README.md), 데이터/인프라 스펙은 [`docs/`](./docs/)를 참조하세요.
+> [!NOTE]
+> **Diátaxis: Tutorial.** 본 프로젝트를 처음 만지는 모든 사람(개발자/디자이너/콘텐츠 운영자)이 30분 안에 첫 변경을 만들 수 있도록 안내합니다.
+> 깊은 설명은 [ARCHITECTURE][arch], 절차는 [README][rm], 데이터·인프라 스펙은 [docs/][docs]를 참조.
+
+[arch]: ./ARCHITECTURE.md
+[rm]: ./README.md
+[docs]: ./docs/
+[design]: ./DESIGN.md
+[claude]: ./CLAUDE.md
+[changelog]: ./CHANGELOG.md
+[schemas]: ./docs/SCHEMAS.md
+[infra]: ./docs/INFRA.md
+[image]: ./docs/IMAGE_SPEC.md
 
 ---
 
@@ -26,7 +36,8 @@ npx serve -l 3000
 # → http://localhost:3000/
 ```
 
-**왜 포트 3000인가**: 카카오 디벨로퍼스 콘솔에 `localhost:3000`만 화이트리스트 — 다른 포트는 지도 SDK 거부됨.
+> [!IMPORTANT]
+> **포트 3000 고정** — Kakao Developers Console JavaScript SDK 도메인 화이트리스트가 `localhost:3000`만 허용. 다른 포트로 띄우면 지도 SDK가 거부된다.
 
 ### 1-2. 페이지 6개 클릭 (5분)
 
@@ -100,9 +111,10 @@ http://localhost:3000/docs/design-system/
 
 각 도구는 npx로 일회성 실행 (의존성 0). 첫 실행만 ~1-2분 다운로드, 이후 캐시.
 
-Lint가 무엇을 잡는지: [`README.md`](./README.md) §3 "형식 규약" 표. Lint가 못 잡는 의미적 규약(시맨틱 태그, 컴포넌트 분리 의도 등)은 같은 §의 "Lint가 못 잡는 의미적 규약" 항목.
+Lint가 무엇을 잡는지: [README][rm] §3 "형식 규약" 표. Lint가 못 잡는 의미적 규약(시맨틱 태그, 컴포넌트 분리 의도 등)은 같은 §의 "Lint가 못 잡는 의미적 규약" 항목.
 
-**중요**: Lint 통과 못 한 상태로 사용자에게 "완료"라고 보고하지 말 것 — CLAUDE.md 절대 룰 #11.
+> [!CAUTION]
+> Lint 통과 못 한 상태로 사용자에게 "완료"라고 보고하지 말 것 — [CLAUDE][claude] 절대 룰 #11. AI 에이전트가 직접 self-gating 하는 강제력이다.
 
 작동했으면 30분 끝. 다음은 §2 작업 유형별 진입점 매트릭스에서 자신의 작업 찾아 진행.
 

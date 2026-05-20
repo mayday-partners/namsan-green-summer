@@ -1,8 +1,13 @@
 # Data Schemas — `data/*.json` Reference
 
-> **이 문서는 Reference입니다** (Diátaxis 4-mode 중 Reference).
-> 5개 JSON 파일의 필드 정의와 추가 시 주의사항을 정리합니다.
-> 작업 절차(How-to)는 [`README.md`](../README.md) §7 (콘텐츠 관리)를, 디자이너 핸드오프 워크플로우는 [`IMAGE_SPEC.md`](./IMAGE_SPEC.md)를 참조하세요.
+> [!NOTE]
+> **Diátaxis: Reference.** 5개 JSON 파일의 필드 정의와 추가 시 주의사항.
+> 작업 절차(How-to)는 [README][rm] §7, 디자이너 핸드오프는 [IMAGE_SPEC][image].
+
+[rm]: ../README.md
+[arch]: ../ARCHITECTURE.md
+[image]: ./IMAGE_SPEC.md
+[infra]: ./INFRA.md
 
 ---
 
@@ -51,9 +56,12 @@
 - **커뮤니티** (`pages/community.html`): `<ul data-notice-list data-limit="all">` → `tpl-notice-full` 템플릿 사용 (date + title + arrow)
 
 ### 추가 시 체크리스트
-1. `id`는 `YYYY-MM-DD-slug` 형식 권장 (중복 방지 + 정렬 안정)
-2. `date` 형식은 반드시 `YYYY-MM-DD` (ISO 8601)
-3. 추가만 하면 홈/커뮤니티 양쪽 자동 반영 — HTML 수정 불필요
+
+- [ ] `id`는 `YYYY-MM-DD-slug` 형식 (중복 방지 + 정렬 안정)
+- [ ] `date` 형식 반드시 `YYYY-MM-DD` (ISO 8601)[^iso]
+- [ ] 추가만 하면 홈/커뮤니티 양쪽 자동 반영 — HTML 수정 불필요
+
+[^iso]: 표시용 포맷(`YYYY.MM.DD`)으로 저장하면 정렬이 깨지고 `formatDate()`가 중복 변환을 시도해 깨진다. 데이터는 항상 ISO, 표시는 렌더 시점 변환.
 
 ---
 
@@ -84,8 +92,9 @@
 - **커뮤니티**: details/summary `tpl-faq-item` 사용. `Q · NN` qmark 표시
 
 ### 추가 시 체크리스트
-1. `id`는 URL anchor가 되므로 외부에 노출됨 — 안정적 슬러그로
-2. `answer`는 평문만. 강조/링크 필요하면 향후 mini-md 파서 도입 검토
+
+- [ ] `id`는 URL anchor가 되므로 외부에 노출됨 — 안정적 슬러그로
+- [ ] `answer`는 평문만. 강조/링크 필요하면 향후 mini-md 파서 도입 검토
 
 ---
 
@@ -116,6 +125,9 @@
 | `courses` | object | ⬜ | 워킹 코스 체크포인트. key는 venue key와 매칭 |
 
 ### `Venue` 스키마
+
+<details>
+<summary>전체 예시 (백범광장 — 33줄)</summary>
 
 ```json
 {
@@ -148,6 +160,8 @@
   }
 }
 ```
+
+</details>
 
 | 필드 그룹 | 필수 | 설명 |
 |---|---|---|
@@ -191,11 +205,12 @@
   3. 추정값이면 `_verified: false` + `_note`에 추정 근거 기록 (예: 현재 `courses.baekbeom_square.checkpoints[2,3]`이 그러함)
 
 ### 추가 시 체크리스트
-1. 신규 venue → `venues.<key>` 추가 + 슬롯에서 `[data-map-links="<key>"]` / `[data-map-embed="<key>"]`로 선택
-2. Kakao Place ID는 `https://place.map.kakao.com/<id>`에서 추출
-3. Google Place ID는 [Place ID Finder](https://developers.google.com/maps/documentation/places/web-service/place-id)에서 marker 클릭
-4. Naver Place ID는 `https://map.naver.com/p/entry/place/<id>`에서 추출
-5. 좌표 정확성은 [`reference_points`](#)의 검증된 좌표와 거리 비교로 sanity check
+
+- [ ] 신규 venue → `venues.<key>` 추가 + 슬롯에서 `[data-map-links="<key>"]` / `[data-map-embed="<key>"]`로 선택
+- [ ] Kakao Place ID는 `https://place.map.kakao.com/<id>`에서 추출
+- [ ] Google Place ID는 [Place ID Finder](https://developers.google.com/maps/documentation/places/web-service/place-id)에서 marker 클릭
+- [ ] Naver Place ID는 `https://map.naver.com/p/entry/place/<id>`에서 추출
+- [ ] 좌표 정확성은 `reference_points`의 검증된 좌표와 거리 비교로 sanity check
 
 ---
 
@@ -236,13 +251,14 @@
 `data/image-slots.json`이 1차 SSOT이고, [`IMAGE_SPEC.md`](./IMAGE_SPEC.md)는 디자이너 친화적 사본. **수정은 항상 JSON 먼저** → IMAGE_SPEC.md 갱신.
 
 ### 추가 시 체크리스트
-1. 페이지에 `<div data-image-slot="<new-id>">` 슬롯 추가
-2. `data/image-slots.json`의 `slots[]`에 새 정의 push
-3. `IMAGE_SPEC.md`에도 동일 정보 반영 (디자이너 인지)
-4. `?spec=1` 모드로 페이지 열어 라벨 표시 확인
-5. 실 이미지 파일을 `img/` 하위에 배치 후 `current_file` 갱신
 
-상세 활용법은 [`IMAGE_SPEC.md`](./IMAGE_SPEC.md) 참조.
+- [ ] 페이지에 `<div data-image-slot="<new-id>">` 슬롯 추가
+- [ ] `data/image-slots.json`의 `slots[]`에 새 정의 push
+- [ ] `IMAGE_SPEC.md`에도 동일 정보 반영 (디자이너 인지)
+- [ ] `?spec=1` 모드로 페이지 열어 라벨 표시 확인
+- [ ] 실 이미지 파일을 `img/` 하위에 배치 후 `current_file` 갱신
+
+상세 활용법은 [IMAGE_SPEC][image] 참조.
 
 ---
 
@@ -264,14 +280,21 @@
 
 ### 왜 git에 커밋하는가
 
-Kakao JavaScript SDK 키는 **의도적으로 공개**되도록 설계됨. 보호는 **Kakao Developers Console의 Web 도메인 화이트리스트**에서 처리:
+> [!IMPORTANT]
+> Kakao JavaScript SDK 키는 **의도적으로 공개**되도록 설계됨. 보호는 **Kakao Developers Console의 Web 도메인 화이트리스트**에서 처리[^kakao-key].
+
+화이트리스트:
+
 - `http://localhost:3000` (로컬 dev)
 - `https://namsangreensummer.com` (프로덕션)
 - `https://mayday-partners.github.io` (테스트)
 
-위 화이트리스트 외 도메인에서 SDK 호출 시 Kakao 서버가 거부. 따라서 키를 외부에 노출해도 악용 불가. (대조: 서버 API 키는 절대 커밋 금지 — 본 프로젝트는 서버가 없음)
+위 외 도메인에서 SDK 호출 시 Kakao 서버가 거부 → 키 노출되어도 악용 불가.
 
-상세 의도는 `data/config.example.json`의 `_note` 필드 참조.
+> [!CAUTION]
+> 서버 API 키(secret)는 절대 커밋 금지. 본 프로젝트는 서버가 없으므로 해당 없음 — 향후 서버 도입 시 [§5 추가 외부 API 키가 필요해질 때](#추가-외부-api-키가-필요해질-때) 절차 따를 것.
+
+[^kakao-key]: 상세 의도는 `data/config.example.json`의 `_note` 필드에 명시. 일반 서버 API 키와 다른 보안 모델임을 운영자에게 환기.
 
 ### 신규 클론 후 셋업
 없음. `data/config.json`이 이미 트래킹되어 있어 clone 즉시 동작. `config.example.json`은 키 로테이션 시 템플릿.

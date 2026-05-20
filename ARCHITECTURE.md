@@ -1,8 +1,17 @@
 # Architecture
 
-> **이 문서는 Explanation입니다** (Diátaxis 4-mode 중 Explanation).
-> "왜 이렇게 설계됐는가"와 "각 부분이 어떻게 맞물려 있는가"를 설명합니다.
-> 작업 절차(How-to)는 [`README.md`](./README.md)와 [`ONBOARDING.md`](./ONBOARDING.md)를, 데이터 스펙(Reference)은 [`docs/SCHEMAS.md`](./docs/SCHEMAS.md)와 [`DESIGN.md`](./DESIGN.md)를 참조하세요.
+> [!NOTE]
+> **Diátaxis: Explanation.** "왜 이렇게 설계됐는가"와 "각 부분이 어떻게 맞물려 있는가"를 다룹니다.
+> 작업 절차(How-to)는 [README][rm]과 [ONBOARDING][ob], 데이터 스펙(Reference)은 [SCHEMAS][sc]와 [DESIGN][ds]을 참조하세요.
+
+[rm]: ./README.md
+[ob]: ./ONBOARDING.md
+[sc]: ./docs/SCHEMAS.md
+[ds]: ./DESIGN.md
+[infra]: ./docs/INFRA.md
+[changelog]: ./CHANGELOG.md
+[image]: ./docs/IMAGE_SPEC.md
+[claude]: ./CLAUDE.md
 
 ---
 
@@ -26,18 +35,19 @@
 
 ### 1-2. 4계층 멘탈 모델
 
-```
-┌─ Layer 4: 페이지 (index.html + pages/*.html × 5 + 404.html)
-│  └─ slot 마크업 (<site-header>, [data-notice-list], [data-image-slot], ...)
-├─ Layer 3: 모듈 (js/components/*, js/modules/*)
-│  └─ JSON fetch → template clone → slot 마운트
-├─ Layer 2: 데이터/스타일 SSOT (data/*.json, css/tokens.css, partials/*)
-│  └─ DESIGN.md ↔ tokens.css 1:1 동기화, image-slots.json ↔ IMAGE_SPEC.md 사본 관계
-└─ Layer 1: 인프라 (_headers, sitemap.xml, robots.txt, 404.html)
-   └─ CSP, 캐시 정책, SEO 정책
+```mermaid
+flowchart TB
+  L4["<b>Layer 4: 페이지</b><br/>index.html + pages/*.html × 5 + 404.html<br/><i>slot 마크업: site-header, data-notice-list, data-image-slot, …</i>"]
+  L3["<b>Layer 3: 모듈</b><br/>js/components/* + js/modules/*<br/><i>JSON fetch → template clone → slot 마운트</i>"]
+  L2["<b>Layer 2: 데이터/스타일 SSOT</b><br/>data/*.json + css/tokens.css + partials/*<br/><i>DESIGN.md ↔ tokens.css 1:1, image-slots.json ↔ IMAGE_SPEC.md</i>"]
+  L1["<b>Layer 1: 인프라</b><br/>_headers + sitemap.xml + robots.txt + 404.html<br/><i>CSP, 캐시 정책, SEO 정책</i>"]
+  L4 -- "slot attribute로만 의존" --> L3
+  L3 -- "fetch" --> L2
+  L2 -- "served by" --> L1
 ```
 
-각 레이어는 **상위 레이어가 하위 레이어를 모르도록** 설계됐다. 페이지는 모듈을 모르고(슬롯 attribute만 안다), 모듈은 페이지를 모르고(슬롯 querySelectorAll만 한다), 데이터는 양쪽 모두를 모른다.
+> [!TIP]
+> 각 레이어는 **상위 레이어가 하위 레이어를 모르도록** 설계됐다. 페이지는 모듈을 모르고(슬롯 attribute만 안다), 모듈은 페이지를 모르고(슬롯 querySelectorAll만 한다), 데이터는 양쪽 모두를 모른다.
 
 ---
 
@@ -63,42 +73,74 @@
 
 ## 3. 데이터 흐름
 
-```
-              [SSOT 파일]                  [모듈]                          [페이지 슬롯]
-                                                                          
-data/notices.json ────────────→ js/modules/notice-list.js ───────────→ [data-notice-list]
-                                  └─ <template id="tpl-notice-preview"> 또는 tpl-notice-full
-                                                                          
-data/faqs.json    ────────────→ js/modules/faq-list.js    ───────────→ [data-faq-list]
-                                                                          
-data/venue.json   ─┬───────────→ js/modules/map-links.js  ───────────→ [data-map-links]
-                   │              └─ buildKakaoLink/buildGoogleLink/buildNaverLink
-                   │                                                      
-                   └───────────→ js/modules/map-embed.js  ───────────→ [data-map-embed]
-                                  └─ Kakao SDK lazy load + Marker + InfoWindow
-                                                                          
-data/config.json  ────────────→ js/modules/map-embed.js              (Kakao JS key only)
-                                                                          
-data/image-slots.json ────────→ js/modules/image-slot.js ───────────→ [data-image-slot]
-                                  └─ ?spec=1 모드에서만 활성
-                                                                          
-partials/header.html ─────────→ js/components/site-header.js ────────→ <site-header>
-partials/footer.html ─────────→ js/components/site-footer.js ────────→ <site-footer>
+### 3-1. SSOT → 모듈 → 페이지 슬롯 매핑
+
+```mermaid
+flowchart LR
+  subgraph SSOT["SSOT 파일"]
+    direction TB
+    NOT[("notices.json")]
+    FAQ[("faqs.json")]
+    VEN[("venue.json")]
+    CFG[("config.json")]
+    SLT[("image-slots.json")]
+    PH[/"partials/header.html"/]
+    PF[/"partials/footer.html"/]
+  end
+
+  subgraph MODS["js/ 모듈"]
+    direction TB
+    M_NLIST["notice-list.js"]
+    M_FLIST["faq-list.js"]
+    M_MLINK["map-links.js"]
+    M_MEMBED["map-embed.js"]
+    M_ISLOT["image-slot.js<br/><i>?spec=1만</i>"]
+    M_SH["site-header.js"]
+    M_SF["site-footer.js"]
+  end
+
+  subgraph SLOTS["페이지 슬롯"]
+    direction TB
+    S_NOT["data-notice-list"]
+    S_FAQ["data-faq-list"]
+    S_MLINK["data-map-links"]
+    S_MEMBED["data-map-embed"]
+    S_ISLOT["data-image-slot"]
+    S_SH["site-header"]
+    S_SF["site-footer"]
+  end
+
+  NOT --> M_NLIST --> S_NOT
+  FAQ --> M_FLIST --> S_FAQ
+  VEN --> M_MLINK --> S_MLINK
+  VEN --> M_MEMBED --> S_MEMBED
+  CFG -- "Kakao JS key" --> M_MEMBED
+  SLT --> M_ISLOT --> S_ISLOT
+  PH --> M_SH --> S_SH
+  PF --> M_SF --> S_SF
 ```
 
-### 마운트 순서 (`js/main.js`)
-```
-1. import 시점: customElements.define('site-header', ...) / ('site-footer', ...)
-2. DOM 파싱 시점: <site-header>/<site-footer>가 connectedCallback 자동 트리거 (병렬 partial fetch)
-3. main.js IIFE: Promise.allSettled([
-     renderNoticeList(), renderFaqList(),
-     initImageSlots(), mountMapLinks(), mountMapEmbeds()
-   ])  ← 5개 모듈 병렬 fetch
-4. initFadeIn()    ← IntersectionObserver 등록
-5. resolveHashAfterRender()   ← URL hash가 있으면 대상 scroll + details open
+### 3-2. 마운트 순서 (`js/main.js`)
+
+```mermaid
+sequenceDiagram
+  participant Browser
+  participant CE as Custom Elements<br/>(site-header/footer)
+  participant Main as main.js IIFE
+  participant Mods as 5 모듈<br/>(notice/faq/image-slot/map-links/map-embed)
+
+  Browser->>CE: define() at import time
+  Browser->>CE: DOM 파싱 → connectedCallback 자동 트리거
+  CE->>CE: partials fetch + innerHTML (병렬)
+  Browser->>Main: IIFE 실행
+  Main->>Mods: Promise.allSettled([5개 render/mount])
+  Mods-->>Main: 각자 fetch + slot 마운트 (병렬)
+  Main->>Browser: initFadeIn() → IntersectionObserver
+  Main->>Browser: resolveHashAfterRender() → scroll + details open
 ```
 
-`allSettled`를 쓰는 이유: 한 모듈의 JSON fetch 실패가 다른 모듈을 차단하면 안 됨. 각 모듈은 자체 `try/catch`로 `role="alert"` fallback 에러 메시지 노출.
+> [!IMPORTANT]
+> `allSettled`를 쓰는 이유: 한 모듈의 JSON fetch 실패가 다른 모듈을 차단하면 안 됨. 각 모듈은 자체 `try/catch`로 `role="alert"` fallback 에러 메시지를 노출한다(`renderFallbackError` 헬퍼).
 
 ---
 
@@ -122,24 +164,22 @@ partials/footer.html ─────────→ js/components/site-footer.js
 
 ### 4-2. 라이프사이클
 
-```
-[DOM 파싱]
-   ↓
-<site-header> 발견
-   ↓
-connectedCallback() 진입
-   ├─ this.#hydrated 체크 → 재마운트(bfcache 복원)면 #attachHandlers + #markCurrent로 점프
-   ├─ document.documentElement.classList.remove('nav-open')   ← bfcache 복원 시 lock 해제
-   ├─ normalizeFallbackLinks(this)   ← fetch 전 즉시 fallback 링크 SITE_BASE prefix
-   ├─ fetch(PARTIAL_URL, { cache: 'force-cache' })
-   ├─ this.innerHTML = rewriteAbsolutePaths(await res.text())
-   ├─ this.#hydrated = true
-   ├─ #attachHandlers()   ← scroll listener, hamburger toggle, esc, mql
-   └─ #markCurrent()       ← aria-current="page" 부여
-   ↓
-[페이지 활성]
-   ↓
-disconnectedCallback() → this.#ac.abort()   ← 모든 핸들러 cleanup
+```mermaid
+flowchart TD
+  PARSE([DOM 파싱]) --> FIND["site-header 발견"]
+  FIND --> CC["connectedCallback 진입"]
+  CC --> HYD{"this.#hydrated?"}
+  HYD -- "true (bfcache 복원)" --> ATT["#attachHandlers + #markCurrent"]
+  HYD -- "false (최초)" --> RESET["nav-open lock 해제"]
+  RESET --> NORM["normalizeFallbackLinks(this)<br/><i>fetch 전 즉시 SITE_BASE prefix</i>"]
+  NORM --> FETCH["fetch(PARTIAL_URL, cache: force-cache)"]
+  FETCH --> WRITE["innerHTML = rewriteAbsolutePaths(text)"]
+  WRITE --> MARK["#hydrated = true"]
+  MARK --> ATT
+  ATT --> CURR["#markCurrent → aria-current"]
+  CURR --> ACTIVE([페이지 활성])
+  ACTIVE --> DISC["disconnectedCallback"]
+  DISC --> ABORT["this.#ac.abort()<br/><i>모든 핸들러 cleanup</i>"]
 ```
 
 ### 4-3. AbortController로 핸들러 cleanup
@@ -232,7 +272,8 @@ function normalizeFallbackLinks(root) {
 
 전체 페이지 베이스는 **라이트 paper(`#F4F8EE`)** — 편집 잡지 느낌. 그런데 페스티벌의 정체성에는 네온 + 야간 무드도 필수. 이 둘을 한 페이지에 공존시키는 패턴이 "Hybrid 다크 컨테이너":
 
-> 페이지는 라이트, 일부 섹션만 다크 surface로 띄워서 그 안에서만 neon-on-dark 대비를 유지.
+> [!TIP]
+> 페이지는 라이트, **일부 섹션만 다크 surface로 띄워서** 그 안에서만 neon-on-dark 대비를 유지.
 
 ### 6-2. 현재 4가지 구현 (의도는 같으나 코드는 별개)
 
@@ -271,11 +312,13 @@ function normalizeFallbackLinks(root) {
 
 ## 관련 문서
 
-- [`README.md`](./README.md) — 빠른 시작, 디렉토리, 작업 절차 (How-to)
-- [`ONBOARDING.md`](./ONBOARDING.md) — 처음 30분 가이드 (Tutorial)
-- [`DESIGN.md`](./DESIGN.md) — 디자인 시스템 SSOT (Reference + Explanation)
-- [`docs/SCHEMAS.md`](./docs/SCHEMAS.md) — `data/*.json` 스키마 (Reference)
-- [`docs/INFRA.md`](./docs/INFRA.md) — CSP/캐시/외부 도메인 (Reference + How-to)
-- [`docs/IMAGE_SPEC.md`](./docs/IMAGE_SPEC.md) — 디자이너 핸드오프 (How-to + Reference)
-- [`CLAUDE.md`](./CLAUDE.md) — AI 에이전트 룰 (Reference)
-- [`CHANGELOG.md`](./CHANGELOG.md) — 변경 이력 (Reference)
+| 문서 | 모드 | 다루는 것 |
+|---|---|---|
+| [README][rm] | Tutorial + How-to + Reference | 빠른 시작, 디렉토리, 작업 절차 |
+| [ONBOARDING][ob] | Tutorial | 처음 30분 가이드 |
+| [DESIGN][ds] | Reference + Explanation | 디자인 시스템 SSOT |
+| [SCHEMAS][sc] | Reference | `data/*.json` 스키마 |
+| [INFRA][infra] | Reference + How-to | CSP, 캐시, 외부 도메인 |
+| [IMAGE_SPEC][image] | How-to + Reference | 디자이너 핸드오프 |
+| [CLAUDE][claude] | Reference | AI 에이전트 룰 |
+| [CHANGELOG][changelog] | Reference | 변경 이력 |

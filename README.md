@@ -330,7 +330,8 @@ this.querySelectorAll('.site-nav__link').forEach(a => {
 4-8. `pages/{event,fun-and-walk,green-night,green-garden,community}.html` fallback
 9. `404.html` fallback
 
-> **더 깊은 설명** (왜 Web Components를 골랐는지, lifecycle 상세, normalize 타이밍 등): [`ARCHITECTURE.md`](./ARCHITECTURE.md) §4 Custom Element 패턴 참조.
+> [!TIP]
+> 더 깊은 설명(왜 Web Components를 골랐는지, lifecycle 상세, `normalize` 타이밍 등)은 [`ARCHITECTURE.md`](./ARCHITECTURE.md) §4 Custom Element 패턴 참조.
 
 ---
 
@@ -503,7 +504,8 @@ python3 -m http.server 3000
 
 브라우저: `http://localhost:3000/`.
 
-> **포트 고정 이유**: 카카오 디벨로퍼스 콘솔의 JavaScript SDK 도메인 화이트리스트에 `http://localhost:3000`만 등록되어 있어, 다른 포트로 띄우면 카카오 맵 SDK가 거부된다.
+> [!IMPORTANT]
+> **포트 3000 고정** — Kakao Developers Console JavaScript SDK 도메인 화이트리스트에 `http://localhost:3000`만 등록. 다른 포트로 띄우면 카카오 맵 SDK가 거부된다.
 
 ---
 
@@ -619,7 +621,8 @@ GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로
 
 ### 14-6. Cloudflare Pages 프로젝트 정보
 
-> 계정 / 권한 등 민감 정보는 repo에 두지 않는다. 별도 인수인계 문서(Notion/Wiki/패스워드 매니저) 참조.
+> [!CAUTION]
+> 계정 / 권한 등 민감 정보는 repo에 두지 말 것. 별도 인수인계 문서(Notion / Wiki / 패스워드 매니저)에서 관리.
 
 | 항목 | 값 |
 |---|---|
