@@ -181,6 +181,25 @@ components:
   program-eyebrow-garden:
     textColor: "{colors.primary-text}"
     typography: "{typography.label-en-md}"
+  info-box:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 32px
+  info-box-label:
+    textColor: "{colors.on-surface-muted}"
+    typography: "{typography.label-en-md}"
+  info-box-dday:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.dark-surface}"
+    rounded: "{rounded.full}"
+    padding: 12px
+    typography: "{typography.label-en-caps}"
+  cta-group:
+    backgroundColor: "{colors.surface-alt}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 32px
   dark-section:
     backgroundColor: "{colors.dark-surface}"
     textColor: "{colors.on-dark-body}"

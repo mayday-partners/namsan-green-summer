@@ -7,9 +7,11 @@ import { renderFaqList } from './modules/faq-list.js';
 import { initImageSlots } from './modules/image-slot.js';
 import { mountMapLinks } from './modules/map-links.js';
 import { mountMapEmbeds } from './modules/map-embed.js';
+import { renderDdayBadges } from './modules/dday-counter.js';
 
 (async () => {
   // Custom elements self-hydrate; no orchestration needed for partials.
+  renderDdayBadges();
   await Promise.allSettled([renderNoticeList(), renderFaqList(), initImageSlots(), mountMapLinks(), mountMapEmbeds()]);
   try { initFadeIn(); } catch (e) { console.error('[main] initFadeIn:', e); }
   resolveHashAfterRender();
