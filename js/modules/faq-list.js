@@ -12,7 +12,7 @@ export async function renderFaqList() {
     console.error('[faq-list] template missing:', TEMPLATE_ID);
     slots.forEach(slot => {
       if (slot.dataset.render !== 'preview') {
-        slot.innerHTML = '<p role="alert" class="fallback-error">자주 묻는 질문을 표시할 수 없습니다 (template missing).</p>';
+        renderFallbackError(slot, 'p', '자주 묻는 질문을 표시할 수 없습니다 (template missing).');
       }
     });
     return;
@@ -33,7 +33,7 @@ export async function renderFaqList() {
   } catch (err) {
     console.error('[faq-list] load failed:', err);
     slots.forEach(slot => {
-      slot.innerHTML = '<p role="alert" class="fallback-error">자주 묻는 질문을 불러오지 못했습니다.</p>';
+      renderFallbackError(slot, 'p', '자주 묻는 질문을 불러오지 못했습니다.');
     });
     return;
   }
@@ -81,9 +81,17 @@ export async function renderFaqList() {
       slot.replaceChildren(frag);
     } catch (err) {
       console.error('[faq-list] render failed for slot:', slot, err);
-      slot.innerHTML = '<p role="alert" class="fallback-error">자주 묻는 질문 표시 중 오류가 발생했습니다.</p>';
+      renderFallbackError(slot, 'p', '자주 묻는 질문 표시 중 오류가 발생했습니다.');
     }
   });
+}
+
+function renderFallbackError(slot, tag, message) {
+  const el = document.createElement(tag);
+  el.setAttribute('role', 'alert');
+  el.className = 'fallback-error';
+  el.textContent = message;
+  slot.replaceChildren(el);
 }
 
 function parseLimit(raw) {

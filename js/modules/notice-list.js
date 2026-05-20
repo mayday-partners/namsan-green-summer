@@ -30,7 +30,7 @@ export async function renderNoticeList() {
   } catch (err) {
     console.error('[notice-list] load failed:', err);
     slots.forEach(slot => {
-      slot.innerHTML = '<li role="alert" class="fallback-error">공지사항을 불러오지 못했습니다.</li>';
+      renderFallbackError(slot, 'li', '공지사항을 불러오지 못했습니다.');
     });
     return;
   }
@@ -41,7 +41,7 @@ export async function renderNoticeList() {
       const tpl = document.getElementById(TEMPLATES[mode]);
       if (!tpl) {
         console.error('[notice-list] template missing for mode "%s": #%s', mode, TEMPLATES[mode]);
-        slot.innerHTML = '<li role="alert" class="fallback-error">공지사항을 표시할 수 없습니다 (template missing).</li>';
+        renderFallbackError(slot, 'li', '공지사항을 표시할 수 없습니다 (template missing).');
         return;
       }
 
@@ -65,13 +65,21 @@ export async function renderNoticeList() {
       slot.replaceChildren(frag);
     } catch (err) {
       console.error('[notice-list] render failed for slot:', slot, err);
-      slot.innerHTML = '<li role="alert" class="fallback-error">공지사항 표시 중 오류가 발생했습니다.</li>';
+      renderFallbackError(slot, 'li', '공지사항 표시 중 오류가 발생했습니다.');
     }
   });
 }
 
 function formatDate(iso) {
   return String(iso ?? '').replaceAll('-', '.');
+}
+
+function renderFallbackError(slot, tag, message) {
+  const el = document.createElement(tag);
+  el.setAttribute('role', 'alert');
+  el.className = 'fallback-error';
+  el.textContent = message;
+  slot.replaceChildren(el);
 }
 
 function parseLimit(raw) {
