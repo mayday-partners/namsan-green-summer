@@ -160,7 +160,6 @@ sequenceDiagram
 | JS 없는 환경에서 헤더 사라짐 | fallback `<header>`가 그대로 렌더 — partial fetch 실패해도 메뉴 보임 |
 | partial fetch 전 short window의 빈 헤더 | fallback이 그 시간 동안 표시 → CLS 0 |
 | main.js의 마운트 책임 비대화 | 엘리먼트가 `connectedCallback`에서 셀프 하이드레이트 — main.js는 import만 |
-| subpath 환경의 `/<area>/...` 경로 깨짐 | `rewriteAbsolutePaths` + `normalizeFallbackLinks`로 fetch 결과/fallback 둘 다 SITE_BASE prefix |
 
 ### 4-2. 라이프사이클
 
@@ -171,9 +170,8 @@ flowchart TD
   CC --> HYD{"this.#hydrated?"}
   HYD -- "true (bfcache 복원)" --> ATT["#attachHandlers + #markCurrent"]
   HYD -- "false (최초)" --> RESET["nav-open lock 해제"]
-  RESET --> NORM["normalizeFallbackLinks(this)<br/><i>fetch 전 즉시 SITE_BASE prefix</i>"]
-  NORM --> FETCH["fetch(PARTIAL_URL, cache: force-cache)"]
-  FETCH --> WRITE["innerHTML = rewriteAbsolutePaths(text)"]
+  RESET --> FETCH["fetch(PARTIAL_URL, cache: force-cache)"]
+  FETCH --> WRITE["innerHTML = text"]
   WRITE --> MARK["#hydrated = true"]
   MARK --> ATT
   ATT --> CURR["#markCurrent → aria-current"]
@@ -202,67 +200,32 @@ window.addEventListener('pageshow', (e) => {
 
 ---
 
-## 5. Subpath 호환 메커니즘
+## 5. 정적 자원 경로 패턴
 
-### 5-1. 두 배포 환경
+### 5-1. 배포 환경
 
-| 환경 | URL | SITE_BASE |
+| 환경 | URL | 사이트 base |
 |---|---|---|
-| GitHub Pages (테스트) | `https://mayday-partners.github.io/namsan-green-summer/` | `/namsan-green-summer/` |
 | Cloudflare Pages (프로덕션) | `https://namsangreensummer.com/` | `/` |
 
-**동일 코드 + 동일 git 브랜치로 두 환경 모두 동작**해야 한다. 환경별 빌드 분기 없음.
+> 2026-05-20 결정으로 GitHub Pages 미사용. subpath 환경 제약이 사라져 정적 자원·메뉴 href는 모두 root-absolute (`/css/`, `/<area>/`)로 통일. 미래 subpath 환경 도입 시에는 `import.meta.url` 패턴(5-2)으로 fetch URL은 자동 호환, 메뉴 href는 별도 prefix 로직 재도입 필요.
 
 ### 5-2. `import.meta.url`이 핵심
 
-`new URL('../../data/notices.json', import.meta.url)`은 모듈이 어떤 base에서 import됐든 자동으로 절대 URL로 resolve한다. 즉:
-- GH Pages: `https://mayday-partners.github.io/namsan-green-summer/data/notices.json`
-- Cloudflare: `https://namsangreensummer.com/data/notices.json`
+`new URL('../../data/notices.json', import.meta.url)`은 모듈이 어떤 페이지에서 import됐든 자동으로 절대 URL로 resolve한다. 모듈 위치 독립성이 보장되므로 향후 디렉토리 구조가 바뀌거나 subpath 환경이 도입되어도 fetch URL은 깨지지 않는다.
 
-`'/data/notices.json'` 같은 문자열 literal은 절대 쓰지 않는다(GH Pages에서 깨짐).
+`'/data/notices.json'` 같은 문자열 literal은 fetch에 직접 쓰지 않는다 — 미래 subpath 도입 시 한 곳을 깰 가능성을 차단하는 단일 안전 패턴.
 
-### 5-3. SITE_BASE 자동 감지
+### 5-3. 코드 작성 규약 (현재 Cloudflare root 단일 환경)
 
-`site-header.js` / `site-footer.js`에서:
-```js
-const SITE_BASE = new URL('../../', import.meta.url).pathname;
-// GH Pages → '/namsan-green-summer/'
-// Cloudflare → '/'
-```
+| ✗ 금지 | ✓ 권장 | 이유 |
+|---|---|---|
+| JS에 `fetch('/data/notices.json')` | `fetch(new URL('../../data/notices.json', import.meta.url))` | 미래 subpath 환경 도입 시 안전. 모듈이 어디서 import되든 자동 resolve |
+| HTML에 `href="../<area>/"` 페이지-상대 | `href="/<area>/"` root-absolute | 모든 페이지가 1 depth라 일관 + 사용자 노출 URL과 동일 |
+| 정적 자원 페이지-상대 (`href="../css/"`) | `href="/css/main.css"` | 절대 경로 통일 — 페이지 위치에 의존 X |
+| partial 내부 페이지-상대 | `/<area>/...` root-absolute | partial은 어느 페이지에서든 inject되므로 절대 경로만 안전 |
 
-이 값을 두 곳에서 사용:
-
-**a) `rewriteAbsolutePaths(html)`** — partial fetch 결과 처리
-```js
-function rewriteAbsolutePaths(html) {
-  if (SITE_BASE === '/') return html;   // Cloudflare는 no-op
-  return html.replace(/((?:href|src)\s*=\s*["'])\/(?!\/)/g, `$1${SITE_BASE}`);
-}
-```
-정규식 해설: `href="/...` 또는 `src="/...`에서 시작 슬래시 직후에 슬래시가 없는 경우(즉 protocol-relative `//cdn.example.com`이 아닌 경우)만 prefix 적용.
-
-**b) `normalizeFallbackLinks(root)`** — fallback content 처리
-```js
-function normalizeFallbackLinks(root) {
-  if (SITE_BASE === '/') return;
-  root.querySelectorAll('a[href^="/"]').forEach(a => {
-    const href = a.getAttribute('href');
-    if (href && !href.startsWith('//')) {
-      a.setAttribute('href', SITE_BASE + href.slice(1));
-    }
-  });
-}
-```
-`connectedCallback` 진입 즉시 호출 — fetch 결과를 기다리지 않고 fallback 링크를 먼저 정규화. 결과: subpath 환경에서 fetch 완료 전에 fallback이 보여도 링크가 깨지지 않음.
-
-### 5-4. 코드 작성 규약 (subpath 환경 호환을 깨지 않으려면)
-
-| ✗ 금지 | ✓ 권장 |
-|---|---|
-| HTML에 `<a href="/event/">` | `<a href="event/">` (페이지-상대) |
-| JS에 `fetch('/data/notices.json')` | `fetch(new URL('../../data/notices.json', import.meta.url))` |
-| HTML에 `<link rel="stylesheet" href="/css/main.css">` | `<link rel="stylesheet" href="css/main.css">` (index) / `"../css/main.css"` (pages) |
-| partial 내부 `/<area>/...` | `/<area>/...` 그대로 OK (custom element가 `rewriteAbsolutePaths`로 자동 처리) |
+> **이전 SITE_BASE / rewriteAbsolutePaths / normalizeFallbackLinks 로직**: GitHub Pages subpath 호환을 위한 우회 로직이었으나, GH Pages 미사용 결정(2026-05-20) 이후 제거됨. 미래 subpath 환경 도입 시 `import.meta.url` 패턴(5-2)이 fetch URL을 자동으로 안전하게 만들어 주므로 별도 prefix 로직 없이도 작동.
 
 ---
 

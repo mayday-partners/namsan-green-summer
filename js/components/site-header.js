@@ -1,22 +1,6 @@
 // js/components/site-header.js
 // Self-hydrating header. Fallback markup inside the element is the SEO/noscript baseline.
 const PARTIAL_URL = new URL('../../partials/header.html', import.meta.url);
-const SITE_BASE = new URL('../../', import.meta.url).pathname;
-
-function rewriteAbsolutePaths(html) {
-  if (SITE_BASE === '/') return html;
-  return html.replace(/((?:href|src)\s*=\s*["'])\/(?!\/)/g, `$1${SITE_BASE}`);
-}
-
-function normalizeFallbackLinks(root) {
-  if (SITE_BASE === '/') return;
-  root.querySelectorAll('a[href^="/"]').forEach(a => {
-    const href = a.getAttribute('href');
-    if (href && !href.startsWith('//')) {
-      a.setAttribute('href', SITE_BASE + href.slice(1));
-    }
-  });
-}
 
 class SiteHeader extends HTMLElement {
   #ac = null;
@@ -31,16 +15,12 @@ class SiteHeader extends HTMLElement {
     }
     // Reset any nav-open lock that may have survived bfcache restore.
     document.documentElement.classList.remove('nav-open');
-    // Normalize fallback nav hrefs immediately so subpath deploys
-    // don't show broken /<area>/... links during the brief fetch window.
-    // (Cloudflare root deploy 단일 환경이므로 현재는 no-op에 가깝지만,
-    // 미래 subpath 환경 대비로 hook은 유지한다.)
-    normalizeFallbackLinks(this);
     try {
       const res = await fetch(PARTIAL_URL, { cache: 'force-cache' });
       if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-      const html = await res.text();
-      this.innerHTML = rewriteAbsolutePaths(html);
+      // partial은 same-origin own repo trusted source — innerHTML 대입 안전.
+      // eslint-disable-next-line no-restricted-syntax
+      this.innerHTML = await res.text();
       this.#hydrated = true;
       this.#attachHandlers();
       this.#markCurrent();

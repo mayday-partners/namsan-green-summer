@@ -296,19 +296,11 @@ import { mountMapEmbeds } from './modules/map-embed.js';
 ```js
 // js/components/site-header.js — 핵심 발췌
 const PARTIAL_URL = new URL('../../partials/header.html', import.meta.url);
-const SITE_BASE = new URL('../../', import.meta.url).pathname;
-// GH Pages subpath = '/namsan-green-summer/', Cloudflare root = '/'
-
-function rewriteAbsolutePaths(html) {
-  if (SITE_BASE === '/') return html;
-  return html.replace(/((?:href|src)\s*=\s*["'])\/(?!\/)/g, `$1${SITE_BASE}`);
-}
 
 class SiteHeader extends HTMLElement {
   async connectedCallback() {
-    normalizeFallbackLinks(this);   // fetch 전 fallback /<area>/... 즉시 prefix
     const res = await fetch(PARTIAL_URL, { cache: 'force-cache' });
-    this.innerHTML = rewriteAbsolutePaths(await res.text());
+    this.innerHTML = await res.text();
     this.#attachHandlers();   // nav 토글, scroll-state, esc-close, mql-change
     this.#markCurrent();       // 현재 URL과 매칭되는 링크에 aria-current="page"
   }
@@ -317,10 +309,10 @@ customElements.define('site-header', SiteHeader);
 ```
 
 이 패턴이 해결하는 것:
-- **subpath 호환** — `import.meta.url` 기반으로 SITE_BASE 자동 감지. GH Pages든 Cloudflare든 동일 코드.
 - **JS 없는 환경** — fallback `<header>`가 그대로 보임 (SEO + a11y baseline).
 - **bfcache 복원** — `pageshow` 핸들러로 nav-open 상태 reset.
 - **메모리 누수 방지** — `AbortController`로 모든 핸들러 cleanup.
+- **fetch URL의 위치 독립성** — `import.meta.url` 기반으로 모듈이 어떤 페이지에서 import되든 동일하게 동작.
 
 ### 현재 페이지 표시
 `#markCurrent()`가 partial 마운트 직후 자동 부여:
@@ -569,15 +561,12 @@ python3 -m http.server 3000
 | 프로젝트 URL | — | `https://namsan-green-summer.pages.dev/` (Pages 기본 도메인, 백업 URL) |
 | PR 프리뷰 | 없음 | PR마다 `https://<hash>.namsan-green-summer.pages.dev/` 자동 발급 |
 
-### 14-2. subpath 호환 메커니즘
+### 14-2. 정적 자원 경로 패턴
 
-GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로, **모든 경로가 페이지-상대 또는 base-aware**여야 한다. 다음 메커니즘이 이를 보장한다:
+Cloudflare Pages root deploy 단일 환경(2026-05-20 결정)에서 subpath 제약이 없으므로 단순한 두 패턴으로 충분하다:
 
-1. **HTML 정적 경로는 절대 경로 통일** — `<script src="/js/main.js">`, `<link rel="stylesheet" href="/css/main.css">` 등. 모든 페이지가 영역 디렉토리 1 depth라 일관됨. (Cloudflare Pages root deploy 단일 환경 — GitHub Pages subpath 호환 제약 없음.)
-2. **JS 모듈의 fetch URL은 `import.meta.url` 기반** — `notice-list.js`, `faq-list.js`, `site-header.js`, `site-footer.js` 모두 `new URL('../../partials/header.html', import.meta.url)` 형태. 모듈이 어떤 base에서 import되든 자동으로 올바른 절대 URL로 resolve됨.
-3. **`SITE_BASE` 자동 감지** — `site-header.js` / `site-footer.js`가 `new URL('../../', import.meta.url).pathname`으로 base 계산. GH Pages면 `/namsan-green-summer/`, Cloudflare면 `/`.
-4. **partial 내 root-absolute 링크 자동 rewrite** — `partials/header.html`, `partials/footer.html`은 `/event/` 같은 root-absolute href를 작성하고, 커스텀 엘리먼트가 fetch한 HTML을 innerHTML로 주입하기 직전에 `rewriteAbsolutePaths()`로 base prefix를 적용한다.
-5. **fallback nav href도 mount 시 정규화** — `<site-header>` 내 fallback content의 `/<area>/...` 링크는 `connectedCallback` 시작 시 즉시 base prefix 적용 (fetch 결과를 기다리지 않음).
+1. **HTML 정적 경로는 절대 경로 통일** — `<script src="/js/main.js">`, `<link rel="stylesheet" href="/css/main.css">` 등. 모든 페이지가 영역 디렉토리 1 depth라 일관됨. partial 내 메뉴 href(`/event/` 등)도 동일하게 root-absolute.
+2. **JS 모듈의 fetch URL은 `import.meta.url` 기반** — `notice-list.js`, `faq-list.js`, `site-header.js`, `site-footer.js` 모두 `new URL('../../partials/header.html', import.meta.url)` 형태. 모듈이 어떤 페이지에서 import되든 자동으로 올바른 절대 URL로 resolve됨. (`/partials/...` 같은 root-absolute 문자열을 fetch에 직접 쓰지 않는 이유는 미래 subpath 환경 도입 가능성에 대비한 단일 안전 패턴.)
 
 ### 14-3. 환경별 동작 검증
 

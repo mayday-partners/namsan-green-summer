@@ -153,9 +153,9 @@ partials/data/modules/CSS 마이그레이션 완료. 현 코드베이스는 본 
 - **프로덕션**: Cloudflare Pages `https://namsangreensummer.com/` (도메인 루트, Gabia 등록 + Cloudflare 네임서버)
 
 코드 작성 시 **반드시**:
-- HTML에서 `/`로 시작하는 절대 경로 금지 — 페이지-상대 경로 사용
-- JS에서 `'/data/...'` 같은 문자열 fetch 금지 — 반드시 `new URL('../../data/...', import.meta.url)`
-- partial 내부에서는 root-absolute(`/<area>/...`) 허용 — 커스텀 엘리먼트가 mount 시 자동으로 `SITE_BASE` prefix 적용
-- 새 fallback content nav 추가 시 `normalizeFallbackLinks()` 호출 패턴 적용 또는 페이지-상대 작성
+- HTML 정적 자원·메뉴 href는 root-absolute (`/css/`, `/js/`, `/<area>/`) 통일 — 모든 페이지가 영역 디렉토리 1 depth라 일관됨.
+- JS에서 `'/data/...'` 같은 문자열 fetch 금지 — 반드시 `new URL('../../data/...', import.meta.url)` (모듈 위치 독립성)
+- partial 내부 href도 root-absolute(`/<area>/...`)로 작성 — Cloudflare root deploy 단일 환경이라 별도 prefix 처리 불요.
+- fallback content nav도 root-absolute href 직접 작성 (정규화 로직 없음 — 2026-05-20 SITE_BASE 코드 정리 이후)
 
 상세: [`README.md §14`](./README.md#14-배포-환경) 참조.
