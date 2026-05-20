@@ -16,6 +16,9 @@ colors:
   neutral:        "#F4F8EE"   # Pale Garden — page background, green-tinted paper
   surface:        "#FFFFFF"   # Pure paper — cards, panels, scrolled header backdrop
   surface-alt:    "#FAFBF6"   # Soft off-white — section zone separation
+  surface-pink:        "#FFE6F0"   # Pastel Pink — info box / CTA group zone background
+  surface-lime-soft:   "#E8F8D4"   # Pastel Lime — kit grid zone background
+  surface-orange:      "#FFE3CC"   # Pastel Orange — sponsor / banner zone background
   # Foreground tiers (on light surfaces)
   on-surface:        "#0F1419"   # Charcoal Ink — display titles, primary headings
   on-surface-body:   "#2D3340"   # Body Slate — body copy
@@ -219,6 +222,18 @@ components:
     backgroundColor: "{colors.surface-alt}"
     textColor: "{colors.on-surface-muted}"
     typography: "{typography.body-sm}"
+  section-zone-pink:
+    backgroundColor: "{colors.surface-pink}"
+    textColor: "{colors.on-surface-body}"
+    padding: 64px
+  section-zone-lime:
+    backgroundColor: "{colors.surface-lime-soft}"
+    textColor: "{colors.on-surface-body}"
+    padding: 64px
+  section-zone-orange:
+    backgroundColor: "{colors.surface-orange}"
+    textColor: "{colors.on-surface-body}"
+    padding: 64px
   dark-section:
     backgroundColor: "{colors.dark-surface}"
     textColor: "{colors.on-dark-body}"

@@ -20,6 +20,7 @@
 @import url('components/sponsor.css')     layer(components);
 @import url('components/kit-grid.css')    layer(components);
 @import url('components/notice-table.css') layer(components);
+@import url('components/section-zone.css') layer(components);
 
 @import url('home.css')                   layer(pages);
 @import url('page.css')                   layer(pages);

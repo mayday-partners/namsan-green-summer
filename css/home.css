@@ -76,6 +76,17 @@
   margin-block-start: var(--space-3);
 }
 
+.hero__dday {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 11vw, 8rem);
+  font-weight: 800;
+  line-height: 0.9;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+  margin: var(--space-5) 0 0;
+  text-shadow: 0 4px 24px rgba(5, 8, 22, 0.45);
+}
+
 .hero__card {
   width: var(--track-hero-card);
   background: rgba(5, 8, 22, 0.55);
@@ -130,6 +141,7 @@
   }
   .hero__inner { grid-template-columns: 1fr; padding-block: var(--space-6); gap: var(--space-5); }
   .hero__display { gap: var(--space-1); }
+  .hero__dday { font-size: clamp(2.5rem, 14vw, 5rem); margin-block-start: var(--space-3); }
   .hero__card { width: 100%; }
   .hero__scroll-hint { display: none; }
 }

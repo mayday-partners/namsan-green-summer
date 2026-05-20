@@ -1,0 +1,11 @@
+.section--zone-pink {
+  background: var(--color-surface-pink);
+}
+
+.section--zone-lime {
+  background: var(--color-surface-lime-soft);
+}
+
+.section--zone-orange {
+  background: var(--color-surface-orange);
+}
