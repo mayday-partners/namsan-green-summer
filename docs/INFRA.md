@@ -55,7 +55,8 @@
 |---|---|---|
 | `/*` | 모든 응답 | 보안 헤더 + CSP |
 | `/*.html` | HTML 파일 | 짧은 캐시 (콘텐츠 변경 즉시 반영) |
-| `/css/*`, `/js/*`, `/partials/*` | 정적 자산 | 중간 캐시 (1시간) |
+| `/css/*`, `/js/*` | 정적 자산 | 중간 캐시 (1시간, must-revalidate) |
+| `/partials/*` | partial 마크업 | 짧은 캐시 (5분, must-revalidate) — 배포 직후 헤더/푸터 변경 빠른 반영 |
 | `/data/*.json` | 데이터 파일 | 매우 짧은 캐시 (공지/FAQ 즉시 반영) |
 | `/img/*` | 이미지 | 긴 캐시 (1일) |
 | `/fonts/*` | 폰트 | 영구 캐시 (immutable) |
@@ -86,7 +87,7 @@ script-src 'self' https://dapi.kakao.com https://*.daumcdn.net https://static.cl
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
 font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net;
 img-src 'self' data: https://*.daumcdn.net https://*.kakao.com;
-connect-src 'self' https://dapi.kakao.com https://cloudflareinsights.com;
+connect-src 'self' https://dapi.kakao.com https://cloudflareinsights.com https://cdn.jsdelivr.net;
 frame-ancestors 'self';
 base-uri 'self';
 form-action 'self' https://forms.example.com;
@@ -106,7 +107,7 @@ object-src 'none'
 | `style-src` | `'self' 'unsafe-inline' + fonts.googleapis.com + cdn.jsdelivr.net` | `'unsafe-inline'` = `<noscript><style>` + 카카오 InfoWindow 동적 스타일 필요. `googleapis` = Anton/Montserrat. `jsdelivr` = Pretendard variable CSS |
 | `font-src` | `'self' + fonts.gstatic.com + cdn.jsdelivr.net` | `gstatic` = Google Fonts 폰트 파일 호스트. `jsdelivr` = Pretendard woff2 |
 | `img-src` | `'self' data: + *.daumcdn.net + *.kakao.com` | `data:` = SVG favicon + image-slot placeholder. Kakao 도메인 2종 = 지도 타일 + Place 미리보기 |
-| `connect-src` | `'self' + dapi.kakao.com + cloudflareinsights.com` | `'self'` = `fetch('./data/*.json')`. Kakao = SDK가 추가 데이터 fetch. CF = Web Analytics beacon |
+| `connect-src` | `'self' + dapi.kakao.com + cloudflareinsights.com + cdn.jsdelivr.net` | `'self'` = `fetch('./data/*.json')`. Kakao = SDK가 추가 데이터 fetch. CF = Web Analytics beacon. jsdelivr = Pretendard variable subset (의도 미명, _headers 정의에 따름) |
 | `frame-ancestors` | `'self'` | 본 사이트가 외부 iframe에 임베드되는 것 차단 (clickjacking) |
 | `base-uri` | `'self'` | 동적 `<base>` 태그 주입 차단 |
 | `form-action` | `'self' https://forms.example.com` | 폼 submit 가능 origin. **`forms.example.com`은 placeholder** — 실 폼 시스템 도입 시 교체 |
@@ -121,7 +122,7 @@ object-src 'none'
 | `*.kakao.com` | img-src | Kakao Place 썸네일 (InfoWindow 등) |
 | `fonts.googleapis.com` | style-src | Anton + Montserrat CSS (`<link>` in HTML head) |
 | `fonts.gstatic.com` | font-src | Google Fonts woff2 파일 |
-| `cdn.jsdelivr.net` | style-src, font-src | Pretendard variable CDN (orioncactus/pretendard v1.3.9) |
+| `cdn.jsdelivr.net` | style-src, font-src, connect-src | Pretendard variable CDN (orioncactus/pretendard v1.3.9) |
 | `static.cloudflareinsights.com` | script-src | Cloudflare Web Analytics (자동 주입) |
 | `cloudflareinsights.com` | connect-src | CF Analytics beacon |
 | `forms.example.com` | form-action | **placeholder** — 실 폼 시스템 도입 시 교체 |
@@ -135,9 +136,9 @@ object-src 'none'
 | 그룹 | max-age | 추가 옵션 | 의도 |
 |---|---|---|---|
 | `/*.html` | 300s (5분) | `must-revalidate` | 페이지 콘텐츠 변경 빠른 반영 |
-| `/css/*` | 3600s (1시간) | — | 디자인 변경 1시간 내 반영 (드물게 변경) |
-| `/js/*` | 3600s (1시간) | — | 모듈 변경 1시간 내 반영 |
-| `/partials/*` | 3600s (1시간) | — | 헤더/푸터 변경 1시간 내 반영 |
+| `/css/*` | 3600s (1시간) | `must-revalidate` | 디자인 변경 1시간 내 반영 (드물게 변경). max-age 만료 후 강제 ETag 검증 |
+| `/js/*` | 3600s (1시간) | `must-revalidate` | 모듈 변경 1시간 내 반영. max-age 만료 후 강제 ETag 검증 (배포 시 stale main.js 차단 — 2026-05-19 `3aad39d` 커밋) |
+| `/partials/*` | 300s (5분) | `must-revalidate` | 배포 직후 헤더/푸터 변경 빠른 반영 (이전 3600s에서 단축, 2026-05-19 `3aad39d` 커밋) |
 | `/data/*.json` | 120s (2분) | `must-revalidate` | 공지/FAQ 추가 시 거의 즉시 반영 (must-revalidate로 stale 차단) |
 | `/img/*` | 86400s (1일) | — | 이미지 교체 빈도 낮음 |
 | `/fonts/*` | 31536000s (1년) | `immutable` | 폰트 파일 hash 불변 (서브셋 파일명 고정) |
