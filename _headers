@@ -9,16 +9,16 @@
   Cache-Control: public, max-age=300, must-revalidate
 
 /css/*
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=3600, must-revalidate
 
 /js/*
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=3600, must-revalidate
 
 /data/*.json
   Cache-Control: public, max-age=120, must-revalidate
 
 /partials/*
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=300, must-revalidate
 
 /img/*
   Cache-Control: public, max-age=86400
