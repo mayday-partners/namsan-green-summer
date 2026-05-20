@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>좌표 픽업 (dev 도구) · 남산 서머 페스티벌</title>
+    <meta name="description" content="venue.json용 WGS84 좌표 추출 dev 도구. 카카오맵 클릭 → 위도·경도 표시 + 클립보드 복사. 사이트맵에 노출되지 않습니다.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/tools/coord-picker.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <main id="main">
+      <section class="coord-picker" aria-labelledby="coord-picker-title">
+        <header class="coord-picker__head">
+          <h1 id="coord-picker-title" class="coord-picker__title">좌표 픽업 (venue.json dev 도구)</h1>
+          <p class="coord-picker__hint">
+            카카오맵을 클릭하면 그 지점의 WGS84 위도·경도를 표시합니다. 운영 사이트맵에 노출되지 않으며, 검색엔진 인덱싱도 차단됩니다.
+            data/venue.json 갱신 워크플로우 전용.
+          </p>
+        </header>
+
+        <div id="coord-picker-map" class="coord-picker__map" role="application" aria-label="카카오맵 좌표 픽업 영역"></div>
+
+        <div class="coord-picker__readout" id="coord-picker-readout" aria-live="polite">
+          지도를 클릭하세요.
+        </div>
+
+        <div class="coord-picker__buttons">
+          <button type="button" class="coord-picker__btn" data-action="copy-json" disabled>
+            "lat": …, "lng": … 형식 복사
+          </button>
+          <button type="button" class="coord-picker__btn" data-action="copy-pair" disabled>
+            lat, lng 형식 복사
+          </button>
+          <button type="button" class="coord-picker__btn" data-action="copy-gmaps" disabled>
+            Google Maps !3d!4d 형식 복사
+          </button>
+        </div>
+
+        <details class="coord-picker__guide">
+          <summary>이 도구가 어떻게 동작하나요?</summary>
+          <ol>
+            <li>지도를 원하는 지점에서 클릭하면 마커가 이동하고 좌표가 표시됩니다.</li>
+            <li>"복사" 버튼은 형식별로 클립보드에 넣습니다.</li>
+            <li>운영 페이지의 카카오맵 임베드와 같은 SDK·키를 공유합니다 (data/config.json).</li>
+            <li>tools/ 경로는 robots.txt에서 Disallow + meta robots noindex로 검색엔진 노출이 차단됩니다.</li>
+          </ol>
+        </details>
+      </section>
+    </main>
+    <script type="module" src="/js/tools/coord-picker.js"></script>
+  </body>
+</html>
