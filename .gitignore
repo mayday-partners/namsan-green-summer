@@ -21,6 +21,3 @@ img/sections/*.png
 # Editor / OS
 *.log
 *~
-
-# API keys / runtime config — only data/config.example.json is committed
-data/config.json
