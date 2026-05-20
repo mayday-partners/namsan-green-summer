@@ -15,11 +15,6 @@
   --color-surface:     #FFFFFF;   /* Pure paper — cards, panels */
   --color-surface-alt: #FAFBF6;   /* Soft off-white — zone separation */
 
-  /* Section color zones — info(pink) / kit(lime soft) / sponsor·banner(orange) */
-  --color-surface-pink:      #FFE6F0;
-  --color-surface-lime-soft: #E8F8D4;
-  --color-surface-orange:    #FFE3CC;
-
   /* On-light text tiers */
   --color-on-surface:        #0F1419;   /* Charcoal Ink — headings */
   --color-on-surface-body:   #2D3340;   /* Body Slate — body copy */
