@@ -6,7 +6,8 @@ const SPEC_URL = '/data/image-slots.json';
 const STYLE_ID = 'image-slot-injected-styles';
 
 export async function initImageSlots() {
-  if (new URLSearchParams(location.search).get('spec') !== '1') return;
+  // 운영팀이 실 이미지 자산을 확정할 때까지 모든 슬롯은 placeholder로 노출.
+  // ?spec=1 토글 없이 항상 활성.
   document.documentElement.dataset.specMode = '1';
 
   const elements = document.querySelectorAll('[data-image-slot]');
