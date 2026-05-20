@@ -29,51 +29,6 @@
       ]
     },
     {
-      "id": "preview-funwalk",
-      "page": "/",
-      "section": ".preview__bg--funwalk — 홈 Fun&Walk 프리뷰 풀블리드 배경",
-      "render": "background-cover",
-      "priority": "P1",
-      "lcp": false,
-      "alt": "남산 둘레길을 걷는 사람들의 활동적인 모습",
-      "current_file": "img/sections/funwalk.webp",
-      "current_status": "임시 이미지",
-      "art_direction": [
-        { "media": "(min-width: 901px)", "ratio": "21:9", "widths": [1280, 1920, 2560], "focus": "center 30%", "note": "데스크톱: 좌측 ~50%에 어두운 그라데이션 + 텍스트. 우측에 메인 비주얼." },
-        { "media": "(max-width: 900px)", "ratio": "16:9", "widths": [768, 1080], "note": "모바일: 하단부터 짙어지는 그라데이션. 상단 ~40%만 보임." }
-      ]
-    },
-    {
-      "id": "preview-night",
-      "page": "/",
-      "section": ".preview__bg--night — 홈 Summer Night 프리뷰 풀블리드 배경 (좌우 반전 레이아웃)",
-      "render": "background-cover",
-      "priority": "P1",
-      "lcp": false,
-      "alt": "한여름 밤 콘서트의 네온/라이브 분위기",
-      "current_file": "img/sections/night.webp",
-      "current_status": "임시 이미지",
-      "art_direction": [
-        { "media": "(min-width: 901px)", "ratio": "21:9", "widths": [1280, 1920, 2560], "focus": "center 40%", "note": "데스크톱: 우측 ~50%에 어두운 그라데이션 + 텍스트. 좌측에 메인 비주얼." },
-        { "media": "(max-width: 900px)", "ratio": "16:9", "widths": [768, 1080] }
-      ]
-    },
-    {
-      "id": "preview-garden",
-      "page": "/",
-      "section": ".preview__bg--garden — 홈 Summer Garden 프리뷰 풀블리드 배경",
-      "render": "background-cover",
-      "priority": "P1",
-      "lcp": false,
-      "alt": "남산 한국숲정원의 식생과 도슨트 투어 분위기",
-      "current_file": "img/sections/garden.webp",
-      "current_status": "임시 이미지",
-      "art_direction": [
-        { "media": "(min-width: 901px)", "ratio": "21:9", "widths": [1280, 1920, 2560], "focus": "center 50%", "note": "데스크톱: 좌측 ~50%에 어두운 그라데이션 + 텍스트. 우측에 메인 비주얼." },
-        { "media": "(max-width: 900px)", "ratio": "16:9", "widths": [768, 1080] }
-      ]
-    },
-    {
       "id": "course-map-walk",
       "page": "/fun-and-walk/",
       "section": ".course-map (Course 섹션) — Fun&Walk 5km 코스 지도",

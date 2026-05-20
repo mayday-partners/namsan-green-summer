@@ -262,7 +262,7 @@ components:
 
 The brand mood is **"editorial calm with luminous festival accents on a green-tinted paper canvas."** A pale garden paper plays foil to a single signature **Neon Lime** accent used as a *motif* (CTA background, brand mark, glow), while two secondary brand colors — **Hot Pink** and **Sky Blue** — partition the three festival programs. Nocturnal moments (Summer Night hero, program imagery cards) live inside dedicated **dark section containers** rather than across full pages.
 
-- **Density**: spacious. Hero, programs, and previews each occupy a full viewport-height band. Typography breathes; CTAs sit alone in their visual zone.
+- **Density**: spacious. Hero occupies a full viewport-height band; programs sit in a 3-column grid below. Typography breathes; CTAs sit alone in their visual zone.
 - **Voice**: editorial broadsheet meets after-hours flyer. Korean headlines stay tight (Pretendard SemiBold), English eyebrows wear wide letter-spacing (Montserrat caps), and display numerals/English use Anton for festival-poster gravitas.
 - **Motion**: subtle. `cubic-bezier(0.22, 1, 0.36, 1)` ease-out across 200–400 ms. Hover lifts (`translateY(-2px) ~ -4px`) plus a neon glow on the primary CTA; the program watermarks scale-fade on scroll-in only.
 - **Non-goals**: no full-page dark theme (dark mood is section-scoped), no glassmorphism gradients on content, no playful illustrations, no rounded sans-serif headings.
@@ -340,9 +340,9 @@ The grid is a **fixed-max-width Container** centered on the viewport. No bespoke
 - **Spacing scale** — based on a `0.25rem` (4 px) unit. Use only `xs / sm / md / lg / xl / 2xl / 3xl / 4xl / 5xl`. Do not invent in-between values.
 - **Breakpoints** —
   - `768px` — mobile / tablet boundary (header hamburger appears, info-grid collapses to one column, section padding drops).
-  - `900px` — main grid pivot (`programs__grid` 3→1 col, `preview__inner` 2→1 col, hero card layout shifts).
+  - `900px` — main grid pivot (`programs__grid` 3→1 col, hero card layout shifts).
   - `1440px` — desktop wide (container caps at 1280, content stays comfortable).
-- **Hero & Preview sections** use `min-height: 100svh` / `560px` and a full-bleed `position: absolute` background layer (z-index -2) plus a directional gradient overlay (z-index -1). Hero photo containers are themselves dark — the light paper page wraps them.
+- **Hero sections** use `min-height: 100svh` and a full-bleed `position: absolute` background layer (`hero__bg`) plus a directional gradient overlay (`hero__bg::after`). Hero photo containers are themselves dark — the light paper page wraps them.
 
 ## Elevation & Depth
 
@@ -354,8 +354,7 @@ Depth is conveyed through **tonal layers + soft shadows + selective dark contain
 - **Card shadow (light surfaces)** `--shadow-card: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04)`. Used as the resting state on light cards to lift from the pale paper.
 - **Glow (the brand's signature)** `--shadow-glow: 0 0 24px rgba(168, 255, 0, 0.45), 0 0 64px rgba(168, 255, 0, 0.18)`. Applied to the primary button on hover, the section-bottom Garden card hover, the favicon dot, and as a halo behind the hero number on light pages.
 - **Dark-section lift shadow** `--shadow-dark: 0 24px 64px rgba(0, 0, 0, 0.45)` — used on `.program-card:hover` and inside dark sections to amplify the `translateY(-4px)` lift. Never used as a resting state on light surfaces.
-- **Hero gradients (Hybrid pattern)** Hero photos live inside dark container panels that sit on the light page. Inside the dark container: a `linear-gradient(180deg, transparent 50%, var(--color-dark-surface) 100%)` fade plus a right-side scrim `linear-gradient(90deg, ... 80% rgba(5,8,22,0.85))` under the text card. The preview sections likewise wrap photos in dark containers and use directional `--ltr` / `--rtl` overlays (88% → 0% on `dark-surface`) to push the photo behind text.
-
+- **Hero gradients (Hybrid pattern)** Hero photos live inside dark container panels that sit on the light page. Inside the dark container: a `linear-gradient(180deg, transparent 50%, var(--color-dark-surface) 100%)` fade plus a right-side scrim `linear-gradient(90deg, ... 80% rgba(5,8,22,0.85))` under the text card.
 ## Shapes
 
 - **Pill** (`rounded.full`, 9999px) — all CTAs (`.btn`). Reads as "interactive," differentiates from cards.
@@ -385,7 +384,7 @@ Rule: when adding a new fixture, prefer reusing one of the above before inventin
 
 Two in-system variants (`button-primary`, `button-ghost`) plus an external deep-link category (`button-map-*`). All are pill-shaped (`rounded.full`).
 
-- **`button-primary`** — solid `primary` (neon) background, `dark-surface` text (the neon-on-dark pairing remains the brand's signature pairing, contrast 14.6 : 1 AAA). Hover: add `shadow-glow`, lift `translateY(-2px)`. Used at most once per visual zone; never two primaries side by side in the same hero/preview band.
+- **`button-primary`** — solid `primary` (neon) background, `dark-surface` text (the neon-on-dark pairing remains the brand's signature pairing, contrast 14.6 : 1 AAA). Hover: add `shadow-glow`, lift `translateY(-2px)`. Used at most once per visual zone; never two primaries side by side in the same hero band.
 - **`button-ghost`** — transparent background, 1 px `border (alpha 0.10)`, `on-surface` text (dark on light). Hover: border and text both shift to `primary-text` (the darker lime variant — the raw neon hex is invisible against light backgrounds). Used as the secondary CTA next to `button-primary`.
 - Inner arrow span (`.btn__arrow`) shifts `translateX(4px)` on hover for both variants — small motion cue, applied automatically.
 
