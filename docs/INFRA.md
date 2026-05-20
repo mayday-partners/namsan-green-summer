@@ -217,7 +217,7 @@ object-src 'none'
 
 | 자산 | 위치 / 개수 |
 |---|---|
-| HTML 페이지 | `index.html`, `pages/{event,fun-and-walk,summer-night,summer-garden,community}.html` — 6곳 |
+| HTML 페이지 | `index.html`, `{event,fun-and-walk,summer-night,summer-garden,community}/index.html` — 6곳 |
 | Partial | `partials/header.html` (참가신청 CTA) |
 | URL 종류 | `/apply` (전체 참가), `/funwalk`, `/greennight`, `/greengarden` |
 | CSP 지시문 | `_headers`의 `form-action` |
@@ -250,11 +250,11 @@ Sitemap: https://namsangreensummer.com/sitemap.xml
 
 ```xml
 <url><loc>https://namsangreensummer.com/</loc>                           <priority>1.0</priority></url>
-<url><loc>https://namsangreensummer.com/pages/event.html</loc>           <priority>0.9</priority></url>
-<url><loc>https://namsangreensummer.com/pages/fun-and-walk.html</loc>    <priority>0.8</priority></url>
-<url><loc>https://namsangreensummer.com/pages/summer-night.html</loc>     <priority>0.8</priority></url>
-<url><loc>https://namsangreensummer.com/pages/summer-garden.html</loc>    <priority>0.8</priority></url>
-<url><loc>https://namsangreensummer.com/pages/community.html</loc>       <priority>0.7</priority></url>
+<url><loc>https://namsangreensummer.com/event/</loc>           <priority>0.9</priority></url>
+<url><loc>https://namsangreensummer.com/fun-and-walk/</loc>    <priority>0.8</priority></url>
+<url><loc>https://namsangreensummer.com/summer-night/</loc>     <priority>0.8</priority></url>
+<url><loc>https://namsangreensummer.com/summer-garden/</loc>    <priority>0.8</priority></url>
+<url><loc>https://namsangreensummer.com/community/</loc>       <priority>0.7</priority></url>
 ```
 
 - 6개 페이지만 포함. `404.html`은 `noindex` 메타로 제외 (자동 + 명시 둘 다)

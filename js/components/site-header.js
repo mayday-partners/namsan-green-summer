@@ -32,7 +32,9 @@ class SiteHeader extends HTMLElement {
     // Reset any nav-open lock that may have survived bfcache restore.
     document.documentElement.classList.remove('nav-open');
     // Normalize fallback nav hrefs immediately so subpath deploys
-    // don't show broken /pages/... links during the brief fetch window.
+    // don't show broken /<area>/... links during the brief fetch window.
+    // (Cloudflare root deploy 단일 환경이므로 현재는 no-op에 가깝지만,
+    // 미래 subpath 환경 대비로 hook은 유지한다.)
     normalizeFallbackLinks(this);
     try {
       const res = await fetch(PARTIAL_URL, { cache: 'force-cache' });

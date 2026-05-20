@@ -37,7 +37,7 @@
 
 ```mermaid
 flowchart TB
-  L4["<b>Layer 4: 페이지</b><br/>index.html + pages/*.html × 5 + 404.html<br/><i>slot 마크업: site-header, data-notice-list, data-image-slot, …</i>"]
+  L4["<b>Layer 4: 페이지</b><br/>index.html + <area>/{index,page}.html × 5 + 404.html<br/><i>slot 마크업: site-header, data-notice-list, data-image-slot, …</i>"]
   L3["<b>Layer 3: 모듈</b><br/>js/components/* + js/modules/*<br/><i>JSON fetch → template clone → slot 마운트</i>"]
   L2["<b>Layer 2: 데이터/스타일 SSOT</b><br/>data/*.json + css/tokens.css + partials/*<br/><i>DESIGN.md ↔ tokens.css 1:1, image-slots.json ↔ IMAGE_SPEC.md</i>"]
   L1["<b>Layer 1: 인프라</b><br/>_headers + sitemap.xml + robots.txt + 404.html<br/><i>CSP, 캐시 정책, SEO 정책</i>"]
@@ -160,7 +160,7 @@ sequenceDiagram
 | JS 없는 환경에서 헤더 사라짐 | fallback `<header>`가 그대로 렌더 — partial fetch 실패해도 메뉴 보임 |
 | partial fetch 전 short window의 빈 헤더 | fallback이 그 시간 동안 표시 → CLS 0 |
 | main.js의 마운트 책임 비대화 | 엘리먼트가 `connectedCallback`에서 셀프 하이드레이트 — main.js는 import만 |
-| subpath 환경의 `/pages/...` 경로 깨짐 | `rewriteAbsolutePaths` + `normalizeFallbackLinks`로 fetch 결과/fallback 둘 다 SITE_BASE prefix |
+| subpath 환경의 `/<area>/...` 경로 깨짐 | `rewriteAbsolutePaths` + `normalizeFallbackLinks`로 fetch 결과/fallback 둘 다 SITE_BASE prefix |
 
 ### 4-2. 라이프사이클
 
@@ -259,10 +259,10 @@ function normalizeFallbackLinks(root) {
 
 | ✗ 금지 | ✓ 권장 |
 |---|---|
-| HTML에 `<a href="/pages/event.html">` | `<a href="pages/event.html">` (페이지-상대) |
+| HTML에 `<a href="/event/">` | `<a href="event/">` (페이지-상대) |
 | JS에 `fetch('/data/notices.json')` | `fetch(new URL('../../data/notices.json', import.meta.url))` |
 | HTML에 `<link rel="stylesheet" href="/css/main.css">` | `<link rel="stylesheet" href="css/main.css">` (index) / `"../css/main.css"` (pages) |
-| partial 내부 `/pages/...` | `/pages/...` 그대로 OK (custom element가 `rewriteAbsolutePaths`로 자동 처리) |
+| partial 내부 `/<area>/...` | `/<area>/...` 그대로 OK (custom element가 `rewriteAbsolutePaths`로 자동 처리) |
 
 ---
 
@@ -300,7 +300,7 @@ function normalizeFallbackLinks(root) {
 
 | 자산 | 상태 | 확인 위치 |
 |---|---|---|
-| `css/components/dark-section.css` + DESIGN.md "Dark section" prose | 정의 완료, HTML 6페이지 사용처 0 | `grep -r "dark-section" pages/ index.html 404.html` |
+| `css/components/dark-section.css` + DESIGN.md "Dark section" prose | 정의 완료, HTML 6페이지 사용처 0 | `grep -r "dark-section" event/ fun-and-walk/ summer-night/ summer-garden/ community/ index.html 404.html` |
 | `--size-tap-target: 44px` (WCAG 2.2 SC 2.5.8) | tokens.css 정의, 컴포넌트 미참조 | DESIGN.md prose에 "reserved" 명시 |
 | `forms.example.com` (외부 폼 시스템 placeholder) | `_headers`의 `form-action` CSP에 등록, 6페이지 CTA href에 사용 | 실 폼 시스템 도입 시 일괄 교체 + CSP 갱신 |
 | `docs/superpowers/plans/*.md` (i18n 등 11개) | git untracked (CLAUDE.md 룰), 로컬 작업 산출물 | 진행 중 계획이면 별도 인터뷰로 파악 |

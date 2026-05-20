@@ -117,7 +117,7 @@
       "name": "Fun&Walk 6.0km 편도 코스 (V2: 백범광장→호현당→북측순환로→남측순환로→팔각광장)",
       "_source": "CP coordinates only — polyline rendering disabled. The course outline belongs to a designer illustration (docs/IMAGE_SPEC.md P2 course-map-walk) or operator-supplied GPX trace.",
       "_verified": false,
-      "_v2_pending": "V2 코스로 변경됨 (V1 5km 왕복 → V2 6.0km 편도). 호현당·팔각광장 좌표 검증 작업 별도 (PPTX V2 출처). pages/fun-and-walk.html은 정적 텍스트로 V2 코스 표시 중. checkpoints 배열은 V1 데이터 — 좌표 검증 후 V2로 마이그레이션 예정.",
+      "_v2_pending": "V2 코스로 변경됨 (V1 5km 왕복 → V2 6.0km 편도). 호현당·팔각광장 좌표 검증 작업 별도 (PPTX V2 출처). fun-and-walk/은 정적 텍스트로 V2 코스 표시 중. checkpoints 배열은 V1 데이터 — 좌표 검증 후 V2로 마이그레이션 예정.",
       "cp_count": 5,
       "checkpoints": [
         {

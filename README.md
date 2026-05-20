@@ -23,7 +23,7 @@ npx serve -l 3000
 | 종류 | 멀티페이지(MPA) 정적 사이트 |
 | 빌드 도구 | 없음 (브라우저가 직접 실행) |
 | 언어 | HTML5, CSS3, Vanilla JavaScript (ES2020+) |
-| 페이지 수 | 6 (`index.html` + `pages/*.html` × 5) |
+| 페이지 수 | 6 (`index.html` + `<area>/{index,page}.html` × 5) |
 | 호스팅 가정 | 정적 파일 서버 / CDN |
 | 기본 언어 | 한국어 (`<html lang="ko">`) |
 
@@ -43,13 +43,24 @@ npx serve -l 3000
 ├─ 404.html                    ← Not Found (Cloudflare 자동 서빙, noindex)
 ├─ _headers                    ← Cloudflare Pages 보안 헤더 + CSP + 캐시 정책 — docs/INFRA.md
 ├─ robots.txt                  ← 검색엔진 정책
-├─ sitemap.xml                 ← 6 URL (404 제외)
-├─ pages/                      ← 5개 서브 페이지
-│  ├─ event.html
-│  ├─ fun-and-walk.html
-│  ├─ summer-night.html
-│  ├─ summer-garden.html
-│  └─ community.html
+├─ sitemap.xml                 ← 13 URL (404 제외)
+├─ event/                      ← 행사안내 (행사 개요 + 주요 프로그램)
+│  ├─ index.html
+│  └─ programs.html
+├─ fun-and-walk/               ← Fun&Walk (안내 + 코스 + 유의사항)
+│  ├─ index.html
+│  ├─ course.html
+│  └─ notice.html
+├─ summer-night/               ← Summer Night (안내 + 공연 예약 유의사항)
+│  ├─ index.html
+│  └─ notice.html
+├─ summer-garden/              ← Summer Garden (안내 + 도슨트 투어 유의사항)
+│  ├─ index.html
+│  └─ notice.html
+├─ community/                  ← 커뮤니티 (공지 + FAQ + 환불 신청)
+│  ├─ index.html
+│  ├─ faq.html
+│  └─ refund.html
 ├─ partials/                   ← <site-header> / <site-footer> 가 fetch (SSOT)
 │  ├─ header.html
 │  └─ footer.html
@@ -269,7 +280,7 @@ import { mountMapEmbeds } from './modules/map-embed.js';
       <a href="/index.html" class="site-logo">...</a>
       <nav class="site-nav" data-open="false">
         <ul class="site-nav__list">
-          <li><a class="site-nav__link" href="/pages/event.html">행사안내</a></li>
+          <li><a class="site-nav__link" href="/event/">행사안내</a></li>
           ...
         </ul>
       </nav>
@@ -295,7 +306,7 @@ function rewriteAbsolutePaths(html) {
 
 class SiteHeader extends HTMLElement {
   async connectedCallback() {
-    normalizeFallbackLinks(this);   // fetch 전 fallback /pages/... 즉시 prefix
+    normalizeFallbackLinks(this);   // fetch 전 fallback /<area>/... 즉시 prefix
     const res = await fetch(PARTIAL_URL, { cache: 'force-cache' });
     this.innerHTML = rewriteAbsolutePaths(await res.text());
     this.#attachHandlers();   // nav 토글, scroll-state, esc-close, mql-change
@@ -327,7 +338,7 @@ this.querySelectorAll('.site-nav__link').forEach(a => {
 1. `partials/header.html` (정상 fetch 결과)
 2. `partials/footer.html` (sitemap 영역)
 3. `index.html` fallback
-4-8. `pages/{event,fun-and-walk,summer-night,summer-garden,community}.html` fallback
+4-8. `{event,fun-and-walk,summer-night,summer-garden,community}/index.html` fallback
 9. `404.html` fallback
 
 > [!TIP]
@@ -338,7 +349,7 @@ this.querySelectorAll('.site-nav__link').forEach(a => {
 ## 7. 콘텐츠 / 게시판 관리 (핵심)
 
 ### 7-1. 문제 정의
-공지사항·FAQ·일정 같은 "자주 바뀌는 목록형 콘텐츠"가 현재 HTML 마크업에 직접 박혀 있고, 동일 항목이 `index.html`(미리보기)과 `pages/community.html`(전체) **양쪽에 중복**된다. 항목을 1건 추가하려면 두 페이지의 HTML을 모두 수정해야 한다.
+공지사항·FAQ·일정 같은 "자주 바뀌는 목록형 콘텐츠"가 현재 HTML 마크업에 직접 박혀 있고, 동일 항목이 `index.html`(미리보기)과 `community/`(전체) **양쪽에 중복**된다. 항목을 1건 추가하려면 두 페이지의 HTML을 모두 수정해야 한다.
 
 ### 7-2. 관리 원칙
 1. **데이터는 JSON 1개 파일**(SSOT) — `data/notices.json` 등.
@@ -372,7 +383,7 @@ this.querySelectorAll('.site-nav__link').forEach(a => {
 <!-- 홈 (index.html) — 4건 미리보기 -->
 <ul class="bottom-list" data-notice-list data-limit="4" data-render="preview"></ul>
 
-<!-- 커뮤니티 (pages/community.html) — 전체 목록 -->
+<!-- 커뮤니티 (community/) — 전체 목록 -->
 <ul class="notice__list" data-notice-list data-limit="all"></ul>
 ```
 
@@ -382,7 +393,7 @@ this.querySelectorAll('.site-nav__link').forEach(a => {
 
 **템플릿** (페이지별 정의):
 - `index.html`: `<template id="tpl-notice-preview">` (icon + title + meta 형태)
-- `pages/community.html`: `<template id="tpl-notice-full">` (date + title + arrow 형태) + `<template id="tpl-faq-item">` (details/summary)
+- `community/`: `<template id="tpl-notice-full">` (date + title + arrow 형태) + `<template id="tpl-faq-item">` (details/summary)
 
 **렌더 모듈 흐름** (`js/modules/notice-list.js` 발췌):
 ```js
@@ -399,7 +410,7 @@ const DATA_URL = new URL('../../data/notices.json', import.meta.url).href;
 정적 사이트에서 게시글 N건의 상세 페이지를 각각 만들지 않는 두 가지 패턴:
 
 **A. 쿼리스트링 단일 페이지 (No-build 유지)**
-- 라우트: `pages/notice.html?id=2026-05-20-launch`
+- 라우트: `community/notice.html?id=2026-05-20-launch`
 - `notice.html`이 URL의 `id`를 읽어 해당 항목의 `body`를 렌더.
 - 장점: 추가 빌드 없이 N건 처리 가능 / 단점: SEO·SNS 공유는 단일 URL.
 
@@ -431,13 +442,13 @@ const DATA_URL = new URL('../../data/notices.json', import.meta.url).href;
 
 ## 8. 신규 페이지 추가 절차 (체크리스트)
 
-- [ ] `pages/<name>.html` 생성. 다른 페이지를 복제하지 말고 **헤더/푸터는 partials 슬롯** 사용.
+- [ ] `<area>/<name>.html` 생성. 다른 페이지를 복제하지 말고 **헤더/푸터는 partials 슬롯** 사용.
 - [ ] `<title>`, `<meta name="description">`, OG 메타 4종(`og:title`, `og:description`, `og:type`, `og:image`) 작성.
 - [ ] `<main id="main">` + skip-link 포함.
 - [ ] 헤더 nav에 항목 추가 → `partials/header.html` 한 곳에서 수정.
 - [ ] 푸터 sitemap에 링크 추가 → `partials/footer.html` 한 곳에서 수정.
 - [ ] 새 컴포넌트가 필요하면 `css/components/<block>.css` + `css/main.css`에 `@import` 추가.
-- [ ] 페이지 전용 스타일이 필요하면 `css/pages/<name>.css` 작성 후 `main.css`의 `pages` 레이어에 추가.
+- [ ] 페이지 전용 스타일이 필요하면 `css/<area>.css` 작성 후 `main.css`의 `pages` 레이어에 추가.
 - [ ] 모바일(390/768) · 데스크톱(1280/1440) 시각 확인.
 - [ ] Lighthouse Performance ≥ 90, Accessibility = 100 확인.
 
@@ -459,7 +470,7 @@ const DATA_URL = new URL('../../data/notices.json', import.meta.url).href;
 
 ## 10. 접근성 체크리스트
 
-- [ ] 모든 페이지 skip-link 존재 (`pages/community.html`엔 있고, 일부 페이지엔 누락 상태 → 점검).
+- [ ] 모든 페이지 skip-link 존재 (`community/`엔 있고, 일부 페이지엔 누락 상태 → 점검).
 - [ ] `<main id="main">` 존재.
 - [ ] 헤더 nav에 현재 페이지 `aria-current="page"` (`site-header.js`의 `#markCurrent()` 자동 처리).
 - [ ] 이미지에 `alt` 또는 `aria-hidden="true"`.
@@ -562,11 +573,11 @@ python3 -m http.server 3000
 
 GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로, **모든 경로가 페이지-상대 또는 base-aware**여야 한다. 다음 메커니즘이 이를 보장한다:
 
-1. **HTML 정적 경로는 페이지-상대** — `<script src="js/main.js">` (index) / `<script src="../js/main.js">` (pages/), `<link rel="stylesheet" href="css/...">` 등. 페이지 위치에 따라 다름.
+1. **HTML 정적 경로는 절대 경로 통일** — `<script src="/js/main.js">`, `<link rel="stylesheet" href="/css/main.css">` 등. 모든 페이지가 영역 디렉토리 1 depth라 일관됨. (Cloudflare Pages root deploy 단일 환경 — GitHub Pages subpath 호환 제약 없음.)
 2. **JS 모듈의 fetch URL은 `import.meta.url` 기반** — `notice-list.js`, `faq-list.js`, `site-header.js`, `site-footer.js` 모두 `new URL('../../partials/header.html', import.meta.url)` 형태. 모듈이 어떤 base에서 import되든 자동으로 올바른 절대 URL로 resolve됨.
 3. **`SITE_BASE` 자동 감지** — `site-header.js` / `site-footer.js`가 `new URL('../../', import.meta.url).pathname`으로 base 계산. GH Pages면 `/namsan-green-summer/`, Cloudflare면 `/`.
-4. **partial 내 root-absolute 링크 자동 rewrite** — `partials/header.html`, `partials/footer.html`은 `/pages/event.html` 같은 root-absolute href를 작성하고, 커스텀 엘리먼트가 fetch한 HTML을 innerHTML로 주입하기 직전에 `rewriteAbsolutePaths()`로 base prefix를 적용한다.
-5. **fallback nav href도 mount 시 정규화** — `<site-header>` 내 fallback content의 `/pages/...` 링크는 `connectedCallback` 시작 시 즉시 base prefix 적용 (fetch 결과를 기다리지 않음).
+4. **partial 내 root-absolute 링크 자동 rewrite** — `partials/header.html`, `partials/footer.html`은 `/event/` 같은 root-absolute href를 작성하고, 커스텀 엘리먼트가 fetch한 HTML을 innerHTML로 주입하기 직전에 `rewriteAbsolutePaths()`로 base prefix를 적용한다.
+5. **fallback nav href도 mount 시 정규화** — `<site-header>` 내 fallback content의 `/<area>/...` 링크는 `connectedCallback` 시작 시 즉시 base prefix 적용 (fetch 결과를 기다리지 않음).
 
 ### 14-3. 환경별 동작 검증
 
@@ -578,7 +589,7 @@ GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로
    - `/namsan-green-summer/partials/footer.html`
    - `/namsan-green-summer/data/notices.json`
    - `/namsan-green-summer/data/faqs.json`
-4. nav 클릭 시 `/namsan-green-summer/pages/...`로 라우팅
+4. nav 클릭 시 `/namsan-green-summer/<area>/...`로 라우팅
 
 #### Cloudflare (프로덕션)
 1. Cloudflare에 도메인 zone 추가 → 네임서버 2개 발급
@@ -645,10 +656,10 @@ GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로
 
 배포 환경에서만 발생하는 동작. 디버깅 시 자주 막히는 지점.
 
-1. **`.html` 자동 drop (308 redirect)**
-   - `/pages/event.html` 요청 시 자동으로 `/pages/event`로 308 리다이렉트. 페이지 동작에 문제 없음(브라우저/fetch 자동 follow).
-   - GH Pages 호환을 위해 코드의 `.html` 확장자는 **유지**한다. 제거 시 GH Pages 깨짐.
-   - 클린 URL(`/community` 형태) 미도입 결정 — 위 호환성 + SEO 손실(308 1회)은 무시 가능 수준.
+1. **디렉토리 URL + `.html` 자동 drop (308 redirect)**
+   - `/event/` 요청 시 자동으로 `/event/index.html` 서빙 (no redirect).
+   - 서브 페이지 `/fun-and-walk/course.html` 등은 `/fun-and-walk/course`로도 접근 가능 (CF가 `.html` drop + 308 redirect). 단, 코드/문서 표기는 명시성 위해 `.html` 유지.
+   - GH Pages 미사용 결정 (2026-05-20) 이후 subpath 호환 제약 없음. 모든 정적 자원/메뉴 href는 절대 경로(`/css/`, `/<area>/`) 통일.
 
 2. **404 처리**
    - 매칭되는 정적 자산이 없으면 루트 `404.html`을 404 상태로 서빙.

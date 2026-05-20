@@ -41,8 +41,8 @@
 
 | ID | 페이지 | 비율 | 권장 widths | 비고 |
 |---|---|---|---|---|
-| `course-map-walk` | `/pages/fun-and-walk.html` | 16:9 | 768·1280 | 5km 코스 라인 + CP1~CP4 / FIN 마커. 다크 테마. |
-| `course-map-event` | `/pages/event.html#location` | 16:9 | 768·1280 | 행사 구역(백범광장/북측순환로/남산도서관) + 교통 접근. 다크 테마. |
+| `course-map-walk` | `/fun-and-walk/` | 16:9 | 768·1280 | 5km 코스 라인 + CP1~CP4 / FIN 마커. 다크 테마. |
+| `course-map-event` | `/event/#location` | 16:9 | 768·1280 | 행사 구역(백범광장/북측순환로/남산도서관) + 교통 접근. 다크 테마. |
 
 ### P3 — 프로그램 카드 미디어 (의사결정 필요)
 

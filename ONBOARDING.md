@@ -43,11 +43,11 @@ npx serve -l 3000
 
 브라우저에서 다음 순서로 모두 열어보세요:
 - `/` (홈)
-- `/pages/event.html` (행사안내 — 허브 페이지)
-- `/pages/fun-and-walk.html` (Program 01)
-- `/pages/summer-night.html` (Program 02)
-- `/pages/summer-garden.html` (Program 03)
-- `/pages/community.html` (공지 + FAQ + 환불)
+- `/event/` (행사안내 — 허브 페이지)
+- `/fun-and-walk/` (Program 01)
+- `/summer-night/` (Program 02)
+- `/summer-garden/` (Program 03)
+- `/community/` (공지 + FAQ + 환불)
 
 **관찰 포인트**:
 - 모바일 viewport (DevTools 375px)에서 햄버거 메뉴 → 메뉴 항목 클릭 → 닫힘 자동
@@ -97,7 +97,7 @@ http://localhost:3000/docs/design-system/
    }
    ```
 3. 저장 → 브라우저 reload
-4. 홈 페이지 "공지사항" 섹션과 `/pages/community.html` 둘 다에 자동 반영되는지 확인
+4. 홈 페이지 "공지사항" 섹션과 `/community/` 둘 다에 자동 반영되는지 확인
 5. 확인 후 추가한 항목 삭제
 
 ### 1-7. Lint (커밋 전 필수)

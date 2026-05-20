@@ -53,7 +53,7 @@
 
 ### 렌더 동작
 - **홈** (`index.html`): `<ul data-notice-list data-limit="4" data-render="preview">` → `tpl-notice-preview` 템플릿 사용 (icon + title + meta)
-- **커뮤니티** (`pages/community.html`): `<ul data-notice-list data-limit="all">` → `tpl-notice-full` 템플릿 사용 (date + title + arrow)
+- **커뮤니티** (`community/`): `<ul data-notice-list data-limit="all">` → `tpl-notice-full` 템플릿 사용 (date + title + arrow)
 
 ### 추가 시 체크리스트
 

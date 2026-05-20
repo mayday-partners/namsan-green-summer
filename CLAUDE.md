@@ -8,7 +8,7 @@
 
 - 2026 남산 서머 페스티벌 정적 사이트
 - **멀티페이지(MPA) · 빌드 도구 없음 · Vanilla JS · 한국어**
-- 페이지: `index.html` + `pages/*.html` × 5
+- 페이지: `index.html` + `<area>/{index,page}.html` × 5
 - 단일 진실원(SSOT): 공통 마크업은 `partials/`, 게시판 콘텐츠는 `data/*.json`
 
 ---
@@ -71,12 +71,12 @@
 
 ## 신규 페이지 추가 시 절차
 
-1. `pages/<name>.html` 생성 — 다른 페이지 복제하지 말 것.
+1. `<area>/<name>.html` 생성 — 다른 페이지 복제하지 말 것.
 2. 헤더/푸터는 `<div data-include="/partials/...">` 슬롯만.
 3. 메타·skip-link·`<main id="main">` 포함.
 4. 메뉴 추가 필요 시 `partials/header.html` + `partials/footer.html` 단일 편집.
 5. 새 컴포넌트면 `css/components/<X>.css` + `css/main.css`에 `@import` 추가.
-6. 페이지 전용 스타일은 `css/pages/<name>.css`.
+6. 페이지 전용 스타일은 `css/<area>.css`.
 7. 모바일(390/768) · 데스크톱(1280/1440) 확인 후 보고.
 
 ---
@@ -155,7 +155,7 @@ partials/data/modules/CSS 마이그레이션 완료. 현 코드베이스는 본 
 코드 작성 시 **반드시**:
 - HTML에서 `/`로 시작하는 절대 경로 금지 — 페이지-상대 경로 사용
 - JS에서 `'/data/...'` 같은 문자열 fetch 금지 — 반드시 `new URL('../../data/...', import.meta.url)`
-- partial 내부에서는 root-absolute(`/pages/...`) 허용 — 커스텀 엘리먼트가 mount 시 자동으로 `SITE_BASE` prefix 적용
+- partial 내부에서는 root-absolute(`/<area>/...`) 허용 — 커스텀 엘리먼트가 mount 시 자동으로 `SITE_BASE` prefix 적용
 - 새 fallback content nav 추가 시 `normalizeFallbackLinks()` 호출 패턴 적용 또는 페이지-상대 작성
 
 상세: [`README.md §14`](./README.md#14-배포-환경) 참조.

@@ -10,7 +10,7 @@
   <meta property="og:title" content="커뮤니티">
   <meta property="og:description" content="2026 남산 서머 페스티벌의 공지사항, 자주 묻는 질문, 환불 및 취소 신청 안내.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://namsangreensummer.com/pages/community.html">
+  <meta property="og:url" content="https://namsangreensummer.com/community/">
   <meta property="og:image" content="https://namsangreensummer.com/img/sections/hero.webp">
   <meta property="og:image:width" content="540">
   <meta property="og:image:height" content="380">
@@ -19,7 +19,7 @@
   <meta property="og:locale" content="ko_KR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="color-scheme" content="light">
-  <link rel="canonical" href="https://namsangreensummer.com/pages/community.html">
+  <link rel="canonical" href="https://namsangreensummer.com/community/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23F4F8EE'/><circle cx='16' cy='16' r='8' fill='%23A8FF00'/></svg>">
   <noscript><style>.fade-in{opacity:1;transform:none}</style></noscript>
 
@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -44,11 +44,11 @@
         </a>
         <nav class="site-nav" data-open="false">
           <ul class="site-nav__list">
-            <li><a class="site-nav__link" href="/pages/event.html">행사안내</a></li>
-            <li><a class="site-nav__link" href="/pages/fun-and-walk.html">Fun&amp;Walk</a></li>
-            <li><a class="site-nav__link" href="/pages/summer-night.html">Summer Night</a></li>
-            <li><a class="site-nav__link" href="/pages/summer-garden.html">Summer Garden</a></li>
-            <li><a class="site-nav__link" href="/pages/community.html">커뮤니티</a></li>
+            <li><a class="site-nav__link" href="/event/">행사안내</a></li>
+            <li><a class="site-nav__link" href="/fun-and-walk/">Fun&amp;Walk</a></li>
+            <li><a class="site-nav__link" href="/summer-night/">Summer Night</a></li>
+            <li><a class="site-nav__link" href="/summer-garden/">Summer Garden</a></li>
+            <li><a class="site-nav__link" href="/community/">커뮤니티</a></li>
             <li class="site-nav__cta-li"><a class="btn btn--primary btn--compact site-header__cta--mobile" href="https://forms.example.com/apply">참가신청 <span class="btn__arrow">→</span></a></li>
           </ul>
         </nav>
@@ -62,17 +62,26 @@
       <div class="page-hero__bg"></div>
       <div class="container">
         <nav class="crumb">
-          <a href="../index.html">Home</a><span>/</span><span>커뮤니티</span>
+          <a href="/">Home</a><span>/</span><span>커뮤니티</span>
         </nav>
         <div class="page-hero__inner">
           <p class="page-hero__eyebrow">Community</p>
           <h1 class="page-hero__title">공지 &amp; <span class="accent">자주 묻는 질문</span></h1>
           <p class="page-hero__sub">
-            행사 진행 관련 공지사항과 자주 묻는 질문, 환불 안내를 한 곳에서 확인하세요.
+            행사 진행 관련 공지사항을 확인하세요. 자주 묻는 질문과 환불·취소 신청은
+            상단 탭에서 이동하실 수 있습니다.
           </p>
         </div>
       </div>
     </section>
+
+    <div class="container">
+      <nav class="page-tabs" aria-label="커뮤니티 페이지 내비">
+        <a class="page-tabs__link" href="/community/" aria-current="page">공지사항</a>
+        <a class="page-tabs__link" href="/community/faq.html">자주 묻는 질문</a>
+        <a class="page-tabs__link" href="/community/refund.html">환불 및 취소</a>
+      </nav>
+    </div>
 
     <section class="section">
       <div class="container">
@@ -82,45 +91,6 @@
         </div>
 
         <ul class="notice__list fade-in" data-notice-list data-limit="all"></ul>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="sub-head fade-in">
-          <p class="sub-head__eyebrow">FAQ</p>
-          <h2 class="sub-head__title">자주 묻는 질문</h2>
-        </div>
-
-        <div class="faq fade-in" data-faq-list data-limit="all"></div>
-      </div>
-    </section>
-
-    <section class="section" id="refund">
-      <div class="container">
-        <div class="sub-head fade-in">
-          <p class="sub-head__eyebrow">Refund</p>
-          <h2 class="sub-head__title">환불 및 취소</h2>
-        </div>
-
-        <div class="caution fade-in">
-          <p class="caution__title">Cancellation Policy</p>
-          <ul>
-            <li>유료 결제 프로그램에 한해 환불이 가능합니다. (무료 프로그램은 신청 취소만 진행)</li>
-            <li>행사일 14일 전까지: 100% 환불</li>
-            <li>행사일 7일 전까지: 50% 환불</li>
-            <li>행사일 7일 이내: 환불 불가</li>
-            <li>천재지변 / 주최 측 사정으로 취소된 경우 전액 환불됩니다.</li>
-          </ul>
-        </div>
-
-        <a class="ext-cta fade-in" href="mailto:namsan-festival@example.kr?subject=환불%20신청">
-          <div>
-            <p class="ext-cta__label">Refund Request</p>
-            <p class="ext-cta__title">환불 / 취소 신청하기</p>
-          </div>
-          <span class="btn btn--primary">메일로 접수 <span class="btn__arrow">↗</span></span>
-        </a>
       </div>
     </section>
   </main>
@@ -138,19 +108,6 @@
     </li>
   </template>
 
-  <template id="tpl-faq-item">
-    <details class="faq__item">
-      <summary class="faq__q">
-        <span class="faq__qmark"></span>
-        <span class="faq__q-text"></span>
-        <span class="faq__sign" aria-hidden="true">+</span>
-      </summary>
-      <div class="faq__a">
-        <p class="faq__a-text"></p>
-      </div>
-    </details>
-  </template>
-
-  <script type="module" src="../js/main.js"></script>
+  <script type="module" src="/js/main.js"></script>
 </body>
 </html>

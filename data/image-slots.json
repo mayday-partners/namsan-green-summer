@@ -75,7 +75,7 @@
     },
     {
       "id": "course-map-walk",
-      "page": "/pages/fun-and-walk.html",
+      "page": "/fun-and-walk/",
       "section": ".course-map (Course 섹션) — Fun&Walk 5km 코스 지도",
       "render": "background-cover",
       "priority": "P2",
@@ -89,7 +89,7 @@
     },
     {
       "id": "course-map-event",
-      "page": "/pages/event.html#location",
+      "page": "/event/#location",
       "section": ".course-map (Location 섹션) — 행사장 약도",
       "render": "background-cover",
       "priority": "P2",
@@ -103,7 +103,7 @@
     },
     {
       "id": "card-media-funwalk",
-      "page": "/pages/event.html",
+      "page": "/event/",
       "section": ".card__media--funwalk — 행사 페이지 프로그램 카드 (Program 01)",
       "render": "background-cover",
       "priority": "P3",
@@ -117,7 +117,7 @@
     },
     {
       "id": "card-media-night",
-      "page": "/pages/event.html, /pages/summer-night.html",
+      "page": "/event/, /summer-night/",
       "section": ".card__media--night — Summer Night 키비주얼 (2개 페이지 공유)",
       "render": "background-cover",
       "priority": "P3",
@@ -131,7 +131,7 @@
     },
     {
       "id": "card-media-garden",
-      "page": "/pages/event.html, /pages/summer-night.html, /pages/summer-garden.html",
+      "page": "/event/, /summer-night/, /summer-garden/",
       "section": ".card__media--garden — Summer Garden 키비주얼 (3개 페이지 공유)",
       "render": "background-cover",
       "priority": "P3",
@@ -145,7 +145,7 @@
     },
     {
       "id": "card-media-garden-deep",
-      "page": "/pages/summer-garden.html",
+      "page": "/summer-garden/",
       "section": ".card__media--garden-deep — Summer Garden Workshop 02 (허브 향기 체험)",
       "render": "background-cover",
       "priority": "P3",
@@ -157,7 +157,7 @@
     },
     {
       "id": "card-media-garden-fresh",
-      "page": "/pages/summer-garden.html",
+      "page": "/summer-garden/",
       "section": ".card__media--garden-fresh — Summer Garden Workshop 03 (식물 일기 워크숍)",
       "render": "background-cover",
       "priority": "P3",
@@ -169,7 +169,7 @@
     },
     {
       "id": "card-media-neutral",
-      "page": "/pages/summer-night.html",
+      "page": "/summer-night/",
       "section": ".card__media--neutral — Summer Night Zone 03 (Food Truck)",
       "render": "background-cover",
       "priority": "P3",

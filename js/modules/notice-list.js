@@ -55,7 +55,7 @@ export async function renderNoticeList() {
         const node = tpl.content.cloneNode(true);
         const a = node.querySelector('a');
         if (!a) continue;
-        a.href = safeLink(item.link) ?? `pages/community.html#${item.id}`;
+        a.href = safeLink(item.link) ?? `community/#${item.id}`;
         const dateEl = node.querySelector('.notice__date');
         const titleEl = node.querySelector('.notice__title');
         if (dateEl) dateEl.textContent = formatDate(item.date);
