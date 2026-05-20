@@ -8,7 +8,7 @@
 ## 1. 빠른 시작 (Designer)
 
 1. **사이트를 spec 모드로 연다**
-   - 로컬: `http://localhost:8000/?spec=1`
+   - 로컬: `http://localhost:3000/?spec=1`
    - 배포: `https://namsangreensummer.com/?spec=1`
 2. 페이지를 다음 폭으로 확인:
    - 모바일 **390 / 768**

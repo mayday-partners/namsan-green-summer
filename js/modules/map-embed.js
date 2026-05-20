@@ -1,7 +1,8 @@
 // js/modules/map-embed.js
 // Loads the Kakao Maps SDK on demand and renders maps into [data-map-embed] slots.
 // Slot selects venue: <div data-map-embed="<key>"> picks venues[<key>]; bare attribute uses default_venue.
-// Course polyline auto-renders when data.courses[<key>] exists (not required for marker-only mode).
+// When data.courses[<key>].checkpoints exists, each CP renders as a marker + click-to-open InfoWindow
+// and the viewport auto-fits via setBounds. Polyline rendering intentionally omitted — see inline note.
 
 const VENUE_URL  = new URL('../../data/venue.json',  import.meta.url).href;
 const CONFIG_URL = new URL('../../data/config.json', import.meta.url).href;

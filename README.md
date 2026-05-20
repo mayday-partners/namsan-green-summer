@@ -8,11 +8,11 @@
 
 ```bash
 # 정적 서버 실행 (fetch가 file:// 에서 동작 안 하므로 필수)
-python3 -m http.server 8000
-# 또는: npx serve .
+npx serve -l 3000
+# 또는: python3 -m http.server 3000
 ```
 
-브라우저: <http://localhost:8000/>
+브라우저: <http://localhost:3000/>
 
 ---
 
@@ -431,16 +431,18 @@ function formatDate(iso) {
 `fetch('/partials/...')`는 `file://` 프로토콜에서 동작하지 않으므로 반드시 정적 서버를 사용한다.
 
 ```bash
-# 택 1: Python
-python3 -m http.server 8000
+# 택 1: Node (권장 — 프론트엔드 표준 도구, npm 의존성 추가 없이 npx로 일회성 실행)
+npx serve -l 3000
 
-# 택 2: Node
-npx serve .
+# 택 2: Python (macOS/Linux 기본 설치, Windows는 별도)
+python3 -m http.server 3000
 
-# 택 3: VS Code Live Server 확장
+# 택 3: VS Code Live Server 확장 (settings.json에서 liveServer.settings.port를 3000으로 변경)
 ```
 
-브라우저: `http://localhost:8000/`.
+브라우저: `http://localhost:3000/`.
+
+> **포트 고정 이유**: 카카오 디벨로퍼스 콘솔의 JavaScript SDK 도메인 화이트리스트에 `http://localhost:3000`만 등록되어 있어, 다른 포트로 띄우면 카카오 맵 SDK가 거부된다.
 
 ---
 

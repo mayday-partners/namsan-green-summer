@@ -103,7 +103,7 @@
 - 한국어. 간결. 이모지 금지.
 - 모호한 "개선/정리/최적화" 요청은 구체화 후 진행.
 - 멀티파일 변경 전 영향 범위 매트릭스(`README.md §11`) 확인.
-- 변경 후 정적 서버(`python3 -m http.server`)로 동작 검증 권장 사항을 사용자에게 안내.
+- 변경 후 정적 서버(`npx serve -l 3000`)로 동작 검증 권장 사항을 사용자에게 안내. 포트 3000은 카카오 콘솔 도메인 화이트리스트와 일치하도록 고정.
 - 빌드 도구 도입·외부 의존성 추가·SSG 전환은 **반드시 사용자 승인** 후 진행.
 
 ---
@@ -117,8 +117,8 @@ partials/data/modules/CSS 마이그레이션 완료. 현 코드베이스는 본 
 ## 디자인 시스템 (DESIGN.md)
 
 - **SSOT**: 루트 [`DESIGN.md`](./DESIGN.md) — [Google Stitch DESIGN.md alpha spec](https://github.com/google-labs-code/design.md) 준수.
-- 현재 정의: 8 colors / 8 typography / 4 rounding / 9 spacing / 13 components.
-- 섹션 순서 강제: Overview → Colors → Typography → Layout → Elevation & Depth → Shapes → Components → Do's and Don'ts.
+- 정의 카테고리: colors / typography / spacing / rounded / **sizes** / components. **정확한 수치는 본 파일이 아니라 항상 `DESIGN.md` 원본을 grep/awk로 확인** — 본 파일에 수치를 박지 말 것(stale 누적 원인).
+- 섹션 순서 강제: Overview → Colors → Typography → Layout → Elevation & Depth → Shapes → Sizes → Components → Do's and Don'ts.
 
 ### 변경 워크플로우
 
