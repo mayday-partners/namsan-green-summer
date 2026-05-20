@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(npx @google/design.md lint:*)",
-      "Bash(npx --yes @google/design.md lint:*)"
+      "Bash(npx --yes @google/design.md lint:*)",
+      "Bash(npx --yes stylelint:*)",
+      "Bash(npx --yes eslint:*)",
+      "Bash(npx --yes htmlhint:*)",
+      "Bash(./scripts/lint.sh:*)",
+      "Bash(scripts/lint.sh:*)"
     ]
   }
 }

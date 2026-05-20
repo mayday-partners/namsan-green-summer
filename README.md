@@ -39,85 +39,137 @@ npx serve -l 3000
 
 ```
 /
-├─ index.html
-├─ _headers                    ← Cloudflare Pages 헤더 (CSP, cache, security)
+├─ index.html                  ← 홈 페이지
+├─ 404.html                    ← Not Found (Cloudflare 자동 서빙, noindex)
+├─ _headers                    ← Cloudflare Pages 보안 헤더 + CSP + 캐시 정책 — docs/INFRA.md
 ├─ robots.txt                  ← 검색엔진 정책
-├─ sitemap.xml                 ← 6 URL
-├─ pages/
+├─ sitemap.xml                 ← 6 URL (404 제외)
+├─ pages/                      ← 5개 서브 페이지
 │  ├─ event.html
 │  ├─ fun-and-walk.html
 │  ├─ green-night.html
 │  ├─ green-garden.html
 │  └─ community.html
-├─ partials/                   ← 공통 마크업 (header/footer fetch 대상)
+├─ partials/                   ← <site-header> / <site-footer> 가 fetch (SSOT)
 │  ├─ header.html
 │  └─ footer.html
-├─ data/                       ← 콘텐츠 데이터 (게시판 SSOT)
-│  ├─ notices.json
-│  └─ faqs.json
+├─ data/                       ← JSON SSOT — docs/SCHEMAS.md
+│  ├─ notices.json             ← 공지사항
+│  ├─ faqs.json                ← FAQ
+│  ├─ venue.json               ← 장소 + 코스 (지도 deep-link / SDK 임베드)
+│  ├─ image-slots.json         ← 이미지 슬롯 인벤토리 (디자이너 핸드오프 SSOT)
+│  ├─ config.json              ← Kakao JS key (의도적 공개)
+│  └─ config.example.json      ← 키 로테이션용 템플릿
 ├─ css/
 │  ├─ main.css                 ← @layer + @import 단일 진입점
-│  ├─ tokens.css               ← Settings (변수)
-│  ├─ reset.css                ← Generic
-│  ├─ base.css                 ← Elements (기본 태그 + skip-link)
-│  ├─ home.css                 ← 홈 페이지 컴포넌트
-│  ├─ page.css                 ← 서브 페이지 컴포넌트
-│  ├─ animations.css           ← fade-in / glow / float
-│  ├─ utilities.css            ← .text-neon, .mt-7, .fallback-error
+│  ├─ tokens.css               ← DESIGN.md ↔ 1:1 매핑 (colors/typography/spacing/rounded/sizes)
+│  ├─ reset.css                ← Generic + prefers-reduced-motion
+│  ├─ base.css                 ← Elements (@font-face Pretendard + skip-link + body)
+│  ├─ home.css                 ← 홈 페이지 컴포넌트 (.hero / .preview / .program-card / .bottom-grid)
+│  ├─ page.css                 ← 5개 서브 페이지 공통 (.page-hero / .info-grid / .timetable / .faq / .ext-cta ...)
+│  ├─ animations.css           ← .fade-in + data-delay 1-4
+│  ├─ utilities.css            ← .fallback-error / .mt-7
 │  └─ components/              ← BEM 블록 단위
-│     ├─ header.css            ← + <site-header> 호스트 규칙
-│     ├─ footer.css            ← + <site-footer> 호스트 규칙
-│     ├─ button.css
-│     └─ card.css
+│     ├─ header.css            ← .site-header + <site-header> host
+│     ├─ footer.css            ← .site-footer + <site-footer> host
+│     ├─ button.css            ← .btn / .btn--primary/ghost / .btn--map-{kakao,google,naver} / .map-links
+│     ├─ card.css              ← .card / .card__media--{funwalk,night,garden,...}
+│     ├─ image-slot.css        ← ?spec=1 dev tooling 슬롯 라벨 badge
+│     └─ dark-section.css      ← (정의됨, 현재 HTML 미사용 — ARCHITECTURE.md §7)
 ├─ js/
-│  ├─ main.js                  ← ES Module 진입점
+│  ├─ main.js                  ← ES Module 진입점 (모든 페이지 공통)
 │  ├─ components/
-│  │  ├─ site-header.js        ← <site-header> 커스텀 엘리먼트
-│  │  └─ site-footer.js        ← <site-footer> 커스텀 엘리먼트
+│  │  ├─ site-header.js        ← <site-header> custom element (셀프 하이드레이트 + nav 토글 + aria-current)
+│  │  └─ site-footer.js        ← <site-footer> custom element
 │  └─ modules/
-│     ├─ observer.js           ← fade-in IntersectionObserver
-│     ├─ notice-list.js        ← 공지사항 렌더
-│     └─ faq-list.js           ← FAQ 렌더
+│     ├─ observer.js           ← .fade-in IntersectionObserver
+│     ├─ notice-list.js        ← notices.json → [data-notice-list] (preview/full 2-mode)
+│     ├─ faq-list.js           ← faqs.json → [data-faq-list]
+│     ├─ image-slot.js         ← ?spec=1 디자이너 모드 (image-slots.json 기반 라벨 오버레이)
+│     ├─ map-links.js          ← venue.json → [data-map-links] (카카오/구글/네이버 deep-link)
+│     └─ map-embed.js          ← Kakao SDK lazy load → [data-map-embed] (지도 + CP 마커 + InfoWindow)
 ├─ img/
-├─ fonts/
-├─ README.md
-└─ CLAUDE.md
+│  ├─ sections/                ← hero / funwalk / night / garden (webp + png)
+│  ├─ hero/ programs/ ui/      ← (예약 폴더)
+├─ fonts/pretendard/           ← woff2 subset (300/400/500/600/700) — 로컬 호스트
+├─ docs/                       ← 보조 문서
+│  ├─ IMAGE_SPEC.md            ← 디자이너 핸드오프 가이드 + ?spec=1 모드 사용법
+│  ├─ INFRA.md                 ← _headers / CSP / 캐시 / 외부 도메인 추가 절차
+│  ├─ SCHEMAS.md               ← data/*.json 스키마 전체 reference
+│  ├─ design-system/           ← 컴포넌트 카탈로그 (Storybook 대체, ds-canvas/catalog/tokens)
+│  └─ design-explorations/     ← 디자인 탐색 기록
+├─ README.md                   ← 본 파일 (storefront + 빠른 시작)
+├─ ONBOARDING.md               ← 처음 30분 둘러보기 + 작업 유형별 진입점 (Tutorial)
+├─ ARCHITECTURE.md             ← 시스템 이해 — 왜 이렇게 설계됐는가 (Explanation)
+├─ DESIGN.md                   ← 디자인 시스템 SSOT (Google Stitch alpha)
+├─ CHANGELOG.md                ← 날짜별 변경 이력
+└─ CLAUDE.md                   ← AI 에이전트 룰
 ```
+
+각 문서의 역할은 [ONBOARDING.md](./ONBOARDING.md)의 "문서 지도" 참조.
 
 ---
 
 ## 3. 코드 스타일
 
-### HTML
-- 들여쓰기 2칸, 속성 순서는 `class → id → data-* → aria-* → role`.
-- 시맨틱 우선: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`.
-- `<section>`에는 `aria-labelledby` 또는 `aria-label` 부여.
-- 모든 페이지는 `<a class="skip-link" href="#main">본문으로 건너뛰기</a>`와 `<main id="main">`를 포함.
-- 인라인 `style` 금지 — 색상/그라데이션은 컴포넌트 modifier 또는 CSS 변수로 처리.
+대부분 룰은 **lint로 자동 강제** — `./scripts/lint.sh` 실행. 본 § 는 lint가 못 잡는 의미적 규약 + 의도만 다룬다. 절대 룰과 anti-pattern 표는 [`CLAUDE.md`](./CLAUDE.md) 참조.
 
-### CSS
-- 명명: **BEM** (`block__element--modifier`).
-- 단위: 폰트는 `rem`, 간격은 토큰(`var(--space-*)`), 미디어 쿼리 breakpoint는 `768px` / `900px` / `1440px` 기준.
-- 셀렉터 중첩 깊이 3단계 이하.
-- `!important` 금지(접근성 fallback 외).
-- 컴포넌트 1개 = CSS 파일 1개 (`css/components/<block>.css`).
-- 색상은 토큰만 사용 (`tokens.css`에 없는 색상이 필요하면 먼저 토큰 추가).
+### Lint (커밋 전 필수 실행)
 
-### JavaScript
-- ES Module 기본 (`<script type="module">`), 전역 변수 금지.
-- 한 모듈 = 한 책임(SRP), 외부에 공개할 것만 `export`.
-- DOM 쿼리는 모듈 초기화 함수 내부에서만 실행, 모듈 최상단에서 `document.querySelector` 호출 금지(import 시점에 DOM 미준비 위험).
-- 이벤트 리스너에는 가능한 한 `{ passive: true }` 옵션 사용(scroll/touch).
-- async 함수의 await에는 `try/catch`로 fetch 실패 처리.
+```bash
+./scripts/lint.sh           # 전체 (stylelint + eslint + htmlhint + design.md + tokens grep)
+./scripts/lint.sh css       # stylelint만
+./scripts/lint.sh js        # eslint만
+./scripts/lint.sh html      # htmlhint만
+./scripts/lint.sh design    # DESIGN.md lint만
+./scripts/lint.sh tokens    # 색상 토큰 SSOT grep만
+```
+
+config 파일:
+- [`.stylelintrc.json`](./.stylelintrc.json) — BEM 패턴, `!important` 금지, 중첩 3단계, breakpoint 화이트리스트 (768/900)
+- [`eslint.config.mjs`](./eslint.config.mjs) — ES Module, `innerHTML`/`outerHTML`/`eval` 금지, `no-undef`
+- [`.htmlhintrc`](./.htmlhintrc) — `inline-style-disabled`, `alt-require`, `attr-no-duplication`, `id-unique`
+
+CI는 **도입하지 않음** — 개발자/AI 에이전트의 양심에 맡김. CLAUDE.md "코드 수정 후 lint 실행" 룰이 사실상 강제력 (모든 코드가 Claude를 거치는 워크플로우).
+
+### Lint가 못 잡는 의미적 규약 (인간 가이드 필수)
+
+- **시맨틱 태그 우선** — `<div>` 남발 대신 `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>` 선택
+- **`<section>`에 `aria-labelledby` 또는 `aria-label`** — a11y 의미 부여
+- **모든 페이지에 skip-link + `<main id="main">`** — htmlhint custom rule 없으므로 review로 보장
+- **컴포넌트 1개 = CSS 파일 1개** — `css/components/<block>.css` 구조 의도
+- **모듈은 타깃 슬롯이 없으면 조용히 `return`** — 다른 페이지에서 import해도 안전
+- **신규 색상/spacing이 필요하면 토큰 먼저** — `DESIGN.md` 등록 → `tokens.css` 매핑 → 컴포넌트 적용 순서 (워크플로우는 [`DESIGN.md`](./DESIGN.md))
+- **경로는 페이지-상대** — root-absolute `/...` 금지 (subpath 호환 — [`ARCHITECTURE.md`](./ARCHITECTURE.md) §5)
+- **fetch URL은 `new URL(..., import.meta.url)`** — 문자열 literal 금지 (subpath 호환)
+- **이벤트 리스너 scroll/touch는 `{ passive: true }`** — 스크롤 jank 방지
+- **`window.<name> = ...` 전역 부여 금지** — eslint `no-implicit-globals`가 일부 잡지만 의도적 전역도 금지
+
+### 형식 규약 (lint가 자동 검증)
+
+| 규약 | 도구 | 룰 |
+|---|---|---|
+| HTML 인라인 `style` 금지 | htmlhint | `inline-style-disabled` |
+| HTML `alt`/`title` 누락 | htmlhint | `alt-require`, `title-require` |
+| HTML `id` 중복 | htmlhint | `id-unique` |
+| CSS BEM 명명 패턴 | stylelint | `selector-class-pattern` |
+| CSS `!important` 금지 | stylelint | `declaration-no-important` |
+| CSS 중첩 3단계 이하 | stylelint | `max-nesting-depth` |
+| CSS breakpoint 화이트리스트 | stylelint | `media-feature-name-value-allowed-list` |
+| 색상 토큰 SSOT (tokens.css 외 hex 금지) | shell grep | `scripts/lint.sh tokens` |
+| JS `innerHTML`/`outerHTML` 금지 | eslint | `no-restricted-syntax` |
+| JS `eval`/`document.write`/`new Function()` 금지 | eslint | `no-eval`, `no-restricted-syntax` |
+| JS 전역 변수 금지 | eslint | `no-implicit-globals`, `no-undef` |
+| JS `var` 금지 | eslint | `no-var` |
+| DESIGN.md ↔ tokens.css 정합성 | design.md lint | spec validation |
 
 ---
 
 ## 4. CSS 아키텍처
 
-ITCSS + BEM + CSS Cascade Layers 조합:
+ITCSS + BEM + CSS Cascade Layers 조합. 단일 진입점 `css/main.css`:
 
 ```css
-/* css/main.css — 모든 페이지가 이 파일 하나만 link */
 @layer reset, tokens, base, components, pages, utilities;
 
 @import url('reset.css')                    layer(reset);
@@ -128,6 +180,8 @@ ITCSS + BEM + CSS Cascade Layers 조합:
 @import url('components/button.css')        layer(components);
 @import url('components/card.css')          layer(components);
 @import url('components/footer.css')        layer(components);
+@import url('components/image-slot.css')    layer(components);
+@import url('components/dark-section.css')  layer(components);
 
 @import url('home.css')                     layer(pages);
 @import url('page.css')                     layer(pages);
@@ -137,84 +191,146 @@ ITCSS + BEM + CSS Cascade Layers 조합:
 ```
 
 원칙:
-- 페이지별 CSS는 `pages` 레이어에 두어 컴포넌트 기본형을 자연스럽게 오버라이드.
-- 토큰 변경은 **반드시 `tokens.css`만** 수정.
-- 신규 색상/간격이 필요하면 토큰 먼저 추가 → 컴포넌트 적용 순서 준수.
+- **페이지별 CSS는 `pages` 레이어**에 두어 컴포넌트 기본형을 자연스럽게 오버라이드. 현재 `home.css` (홈 전용) + `page.css` (5개 서브 페이지 공통) 2개. 신규 페이지가 기존 패턴 내면 `page.css` 추가, 완전히 다르면 새 `css/<area>.css` + main.css `@import`
+- **토큰 변경은 반드시 `tokens.css`만** 수정 — DESIGN.md ↔ tokens.css 1:1 매핑 유지. 토큰 워크플로우는 [`DESIGN.md`](./DESIGN.md) "변경 워크플로우"
+- **`dark-section.css`는 정의됐으나 HTML 미사용** — 향후 Green Night 전용 섹션 도입 후보 ([`ARCHITECTURE.md`](./ARCHITECTURE.md) §7)
+- **utility layer가 components 위** — `.fade-in opacity:0`이 컴포넌트 기본형보다 우선 적용되어야 IntersectionObserver 진입 전 숨김 보장
 
 ---
 
 ## 5. JavaScript 모듈 패턴
 
+진입점은 모든 페이지에 동일하게 link되는 단일 `js/main.js` 모듈이다. 페이지별 조건 분기 없이, 각 모듈이 타깃 슬롯이 없으면 조용히 return하는 방식으로 안전성을 보장한다.
+
 ```html
-<!-- 모든 HTML의 </body> 직전 -->
-<script type="module" src="/js/main.js"></script>
+<!-- 홈: <script type="module" src="js/main.js"></script>
+     서브 페이지: <script type="module" src="../js/main.js"></script>
+     (페이지-상대 경로 — GH Pages subpath 호환을 위해 root-absolute `/...` 금지) -->
 ```
 
 ```js
-// js/main.js
-import { mountIncludes } from './modules/include.js';
-import { initHeader } from './modules/header.js';
+// js/main.js — 실제 코드
+import './components/site-header.js';   // <site-header> custom element 정의 (self-hydrate)
+import './components/site-footer.js';   // <site-footer> custom element 정의 (self-hydrate)
 import { initFadeIn } from './modules/observer.js';
 import { renderNoticeList } from './modules/notice-list.js';
 import { renderFaqList } from './modules/faq-list.js';
+import { initImageSlots } from './modules/image-slot.js';
+import { mountMapLinks } from './modules/map-links.js';
+import { mountMapEmbeds } from './modules/map-embed.js';
 
 (async () => {
-  await mountIncludes();          // 헤더/푸터 주입 먼저
-  initHeader();                   // 그 후 헤더 상호작용
-  await Promise.all([
-    renderNoticeList(),           // 데이터 의존 렌더
-    renderFaqList(),
+  // Custom elements가 connectedCallback에서 스스로 partial fetch + 마운트.
+  // main.js는 orchestration 책임 없음.
+  await Promise.allSettled([
+    renderNoticeList(), renderFaqList(),
+    initImageSlots(), mountMapLinks(), mountMapEmbeds(),
   ]);
-  initFadeIn();                   // 마지막에 IntersectionObserver 등록
+  try { initFadeIn(); } catch (e) { console.error('[main] initFadeIn:', e); }
+  resolveHashAfterRender();    // URL hash 대상이 details면 open + scrollIntoView
 })();
 ```
 
+전체 모듈 인벤토리 (`js/`):
+
+| 경로 | 책임 |
+|---|---|
+| `js/main.js` | 모든 페이지 공통 진입점. 모듈 import + Promise.allSettled로 병렬 마운트 |
+| `js/components/site-header.js` | `<site-header>` custom element — partial fetch + nav 토글 + `aria-current` 자동 부여 + bfcache 복원 핸들링 |
+| `js/components/site-footer.js` | `<site-footer>` custom element — partial fetch만 |
+| `js/modules/observer.js` | `.fade-in` IntersectionObserver (threshold 0.15, rootMargin -10%) |
+| `js/modules/notice-list.js` | `data/notices.json` → `[data-notice-list]` 슬롯 렌더 (`data-render="preview"` / `data-limit` 분기) |
+| `js/modules/faq-list.js` | `data/faqs.json` → `[data-faq-list]` 슬롯 렌더 (preview/full 2-mode) |
+| `js/modules/image-slot.js` | `?spec=1` 모드에서만 활성. `data/image-slots.json` 기반 디자이너 슬롯 라벨 오버레이 |
+| `js/modules/map-links.js` | `data/venue.json` → `[data-map-links]` 슬롯에 카카오/구글/네이버 deep link 버튼 |
+| `js/modules/map-embed.js` | Kakao Maps SDK lazy load + `[data-map-embed]` 슬롯에 지도 + CP 마커 + InfoWindow |
+
 모듈 작성 규약:
-- 한 모듈은 `init...()`, `render...()`, `mount...()` 등 동사로 시작하는 함수를 export.
-- 모듈 외부에 상태(state)를 노출하지 않는다.
-- DOM이 없는 경우(타깃 요소 부재) 조용히 `return` — 다른 페이지에서 import해도 안전해야 한다.
+- 한 모듈은 `init...()`, `render...()`, `mount...()` 등 동사로 시작하는 함수만 export.
+- 모듈 외부에 상태(state)를 노출하지 않는다 (모듈 내부 클로저로 캐시).
+- DOM이 없는 경우(타깃 슬롯 부재) **조용히 `return`** — 다른 페이지에서 import해도 안전해야 한다.
+- 동적 마크업은 `<template>` + `cloneNode` + `textContent` 사용. **`innerHTML`로 JSON/사용자 데이터 삽입 금지** (XSS).
+- fetch URL은 `new URL('../../path', import.meta.url)`로 작성 (subpath 호환).
 
 ---
 
 ## 6. 공통 컴포넌트(헤더/푸터) 관리
 
-### 마크업 단일화
-모든 페이지의 `<header>`와 `<footer>`는 `partials/`에서 단 한 번 정의하고, 각 페이지에서는 자리 표시자만 둔다.
+### Web Components 셀프-하이드레이션 패턴
+모든 페이지의 헤더/푸터는 **custom element**로 마운트된다. 페이지 HTML에는 `<site-header>` / `<site-footer>` 태그만 두고, 엘리먼트가 `connectedCallback`에서 자체 partial을 fetch하여 자기 `innerHTML`을 교체한다.
 
 ```html
 <!-- 모든 페이지 공통 -->
-<div data-include="/partials/header.html"></div>
+<site-header>
+  <!-- fallback content: JS 미동작 환경에서 노출 + partial fetch 전 short window의 SEO baseline.
+       메뉴 항목 변경 시 이 fallback도 6개 페이지 + 1개 partial 모두 동기화 필요. -->
+  <header class="site-header site-header--fallback">
+    <div class="container site-header__inner">
+      <a href="/index.html" class="site-logo">...</a>
+      <nav class="site-nav" data-open="false">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/pages/event.html">행사안내</a></li>
+          ...
+        </ul>
+      </nav>
+    </div>
+  </header>
+</site-header>
+
 <main id="main"> ... </main>
-<div data-include="/partials/footer.html"></div>
+
+<site-footer></site-footer>   <!-- 푸터는 fallback content 없음 (SEO 가중치 낮음) -->
 ```
 
 ```js
-// js/modules/include.js
-export async function mountIncludes(root = document) {
-  const slots = root.querySelectorAll('[data-include]');
-  await Promise.all([...slots].map(async (el) => {
-    try {
-      const res = await fetch(el.dataset.include);
-      if (!res.ok) throw new Error(res.statusText);
-      el.outerHTML = await res.text();
-    } catch (err) {
-      console.error('[include]', el.dataset.include, err);
-    }
-  }));
+// js/components/site-header.js — 핵심 발췌
+const PARTIAL_URL = new URL('../../partials/header.html', import.meta.url);
+const SITE_BASE = new URL('../../', import.meta.url).pathname;
+// GH Pages subpath = '/namsan-green-summer/', Cloudflare root = '/'
+
+function rewriteAbsolutePaths(html) {
+  if (SITE_BASE === '/') return html;
+  return html.replace(/((?:href|src)\s*=\s*["'])\/(?!\/)/g, `$1${SITE_BASE}`);
 }
+
+class SiteHeader extends HTMLElement {
+  async connectedCallback() {
+    normalizeFallbackLinks(this);   // fetch 전 fallback /pages/... 즉시 prefix
+    const res = await fetch(PARTIAL_URL, { cache: 'force-cache' });
+    this.innerHTML = rewriteAbsolutePaths(await res.text());
+    this.#attachHandlers();   // nav 토글, scroll-state, esc-close, mql-change
+    this.#markCurrent();       // 현재 URL과 매칭되는 링크에 aria-current="page"
+  }
+}
+customElements.define('site-header', SiteHeader);
 ```
 
-`<noscript>` fallback: JS 미사용 환경에서는 헤더가 비게 되므로, partials에 들어갈 메뉴를 `<noscript>` 블록으로 한 번 더 정적 출력하거나, 향후 SSG(11ty 등) 도입 시 자동 인라이닝한다.
+이 패턴이 해결하는 것:
+- **subpath 호환** — `import.meta.url` 기반으로 SITE_BASE 자동 감지. GH Pages든 Cloudflare든 동일 코드.
+- **JS 없는 환경** — fallback `<header>`가 그대로 보임 (SEO + a11y baseline).
+- **bfcache 복원** — `pageshow` 핸들러로 nav-open 상태 reset.
+- **메모리 누수 방지** — `AbortController`로 모든 핸들러 cleanup.
 
 ### 현재 페이지 표시
-헤더 partial 로딩 직후, 현재 페이지 URL과 일치하는 nav 링크에 `aria-current="page"`를 자동 부여한다.
+`#markCurrent()`가 partial 마운트 직후 자동 부여:
 ```js
-// js/modules/header.js 내 initHeader 끝
-const here = location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.site-nav__link').forEach(a => {
-  if (a.getAttribute('href').endsWith(here)) a.setAttribute('aria-current', 'page');
+const here = new URL(location.href);
+const herePath = here.pathname.replace(/\/$/, '/index.html');
+this.querySelectorAll('.site-nav__link').forEach(a => {
+  if (new URL(a.href, here).pathname === herePath) {
+    a.setAttribute('aria-current', 'page');
+  }
 });
 ```
+
+### 메뉴 항목 변경 시 동기화 위치 (반드시 7곳 모두 수정)
+1. `partials/header.html` (정상 fetch 결과)
+2. `partials/footer.html` (sitemap 영역)
+3. `index.html` fallback
+4-8. `pages/{event,fun-and-walk,green-night,green-garden,community}.html` fallback
+9. `404.html` fallback
+
+> **더 깊은 설명** (왜 Web Components를 골랐는지, lifecycle 상세, normalize 타이밍 등): [`ARCHITECTURE.md`](./ARCHITECTURE.md) §4 Custom Element 패턴 참조.
 
 ---
 
@@ -230,113 +346,53 @@ document.querySelectorAll('.site-nav__link').forEach(a => {
 4. **표시 위치는 N개** — 같은 데이터를 다른 변형(요약/전체)으로 호출.
 5. **스키마는 명시** — 필드명·타입·필수 여부를 본 문서에 기재.
 
-### 7-3. 데이터 스키마
+### 7-3. 데이터 SSOT 인벤토리
 
-#### `data/notices.json`
-```json
-[
-  {
-    "id": "2026-05-20-launch",
-    "date": "2026-05-20",
-    "title": "2026 남산 그린 서머 페스티벌 공식 홈페이지 오픈!",
-    "category": "공지",
-    "pinned": true,
-    "body": "본문 마크다운 또는 HTML 문자열(상세 페이지 사용 시)",
-    "link": null
-  }
-]
-```
+5개 JSON 파일이 서로 다른 책임을 분담한다.
 
-| 필드 | 타입 | 필수 | 설명 |
-|---|---|---|---|
-| `id` | string | ✅ | 영문 kebab-case 유일 식별자. URL slug 겸용 |
-| `date` | string(YYYY-MM-DD) | ✅ | 게시일. 내림차순 정렬 기준 |
-| `title` | string | ✅ | 목록·상세 공통 제목 |
-| `category` | string | ⬜ | "공지" / "이벤트" / "긴급" 등 |
-| `pinned` | boolean | ⬜ | 상단 고정 여부 |
-| `body` | string | ⬜ | 상세 본문. 없으면 목록만 표시 |
-| `link` | string\|null | ⬜ | 외부 링크면 상세 페이지 대신 이 URL로 |
+| 파일 | 책임 | 사용 모듈 |
+|---|---|---|
+| `data/notices.json` | 공지사항 | `js/modules/notice-list.js` |
+| `data/faqs.json` | FAQ | `js/modules/faq-list.js` |
+| `data/venue.json` | 장소 + 코스 | `js/modules/map-{links,embed}.js` |
+| `data/image-slots.json` | 이미지 슬롯 인벤토리 | `js/modules/image-slot.js` |
+| `data/config.json` | 외부 API 키 (Kakao) | `js/modules/map-embed.js` |
 
-#### `data/faqs.json`
-```json
-[
-  {
-    "id": "fee",
-    "question": "참가비가 있나요?",
-    "answer": "모든 입장은 무료입니다. 다만 Fun&Walk, Green Garden 도슨트 등 일부 프로그램은 사전 예약이 필요합니다.",
-    "tags": ["참가", "예약"]
-  }
-]
-```
+**전체 필드 스펙 + 추가 시 체크리스트는 [`docs/SCHEMAS.md`](./docs/SCHEMAS.md) 참조** (Reference). 본 §에서는 작업 흐름만 다룬다.
 
-| 필드 | 타입 | 필수 | 설명 |
-|---|---|---|---|
-| `id` | string | ✅ | 앵커 링크 ID(`#faq-fee`)로 사용 |
-| `question` | string | ✅ | summary에 표시 |
-| `answer` | string | ✅ | details 본문 (HTML 허용) |
-| `tags` | string[] | ⬜ | 향후 필터링 확장용 |
+공통 룰:
+- 날짜는 항상 `YYYY-MM-DD` (ISO 8601)로 저장 — 표시 변환은 렌더 시점
+- 좌표는 WGS84 + 소수점 6자리 이상 — `_verified` / `_source` 흔적 기록
+- 외부 API 키가 server secret이면 `config.json` 커밋 중단 (Kakao JS key는 공개 의도)
 
-### 7-4. 템플릿과 렌더링
+### 7-4. 템플릿과 렌더링 패턴
 
 ```html
-<!-- pages/community.html 일부 -->
+<!-- 홈 (index.html) — 4건 미리보기 -->
+<ul class="bottom-list" data-notice-list data-limit="4" data-render="preview"></ul>
+
+<!-- 커뮤니티 (pages/community.html) — 전체 목록 -->
 <ul class="notice__list" data-notice-list data-limit="all"></ul>
-
-<!-- index.html 일부 -->
-<ul class="notice__list" data-notice-list data-limit="4"></ul>
 ```
 
-```html
-<!-- partials/templates.html (또는 community.html 내부에 둠) -->
-<template id="tpl-notice-item">
-  <li>
-    <a class="notice__item" href="">
-      <span class="notice__date"></span>
-      <span class="notice__title"></span>
-      <span class="notice__arrow" aria-hidden="true">→</span>
-    </a>
-  </li>
-</template>
-```
+**slot attribute**:
+- `data-limit` — 숫자 또는 `"all"`. 정렬 후 상위 N개 슬라이스
+- `data-render` — `"preview"`면 미리보기 템플릿, 미지정이면 full 템플릿
 
+**템플릿** (페이지별 정의):
+- `index.html`: `<template id="tpl-notice-preview">` (icon + title + meta 형태)
+- `pages/community.html`: `<template id="tpl-notice-full">` (date + title + arrow 형태) + `<template id="tpl-faq-item">` (details/summary)
+
+**렌더 모듈 흐름** (`js/modules/notice-list.js` 발췌):
 ```js
-// js/modules/notice-list.js
-const PATH = '/data/notices.json';
-
-export async function renderNoticeList() {
-  const slots = document.querySelectorAll('[data-notice-list]');
-  if (!slots.length) return;
-
-  const res = await fetch(PATH);
-  if (!res.ok) return console.error('[notice] load failed');
-  const items = await res.json();
-
-  const sorted = [...items].sort((a, b) => {
-    if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
-    return b.date.localeCompare(a.date);
-  });
-
-  const tpl = document.getElementById('tpl-notice-item');
-
-  slots.forEach(slot => {
-    const limit = slot.dataset.limit;
-    const list = limit === 'all' ? sorted : sorted.slice(0, Number(limit) || 4);
-
-    slot.replaceChildren(...list.map(item => {
-      const node = tpl.content.cloneNode(true);
-      const a = node.querySelector('a');
-      a.href = item.link ?? `notice.html?id=${item.id}`;
-      a.querySelector('.notice__date').textContent = formatDate(item.date);
-      a.querySelector('.notice__title').textContent = item.title;
-      return node;
-    }));
-  });
-}
-
-function formatDate(iso) {
-  return iso.replaceAll('-', '.');
-}
+const DATA_URL = new URL('../../data/notices.json', import.meta.url).href;
+// 1. fetch + parse + 정렬 (pinned 우선 → date 내림차순)
+// 2. 각 슬롯의 data-render 모드별 템플릿 선택
+// 3. data-limit 적용 후 cloneNode + textContent 채움 (XSS-safe)
+// 4. slot.replaceChildren(frag)
 ```
+
+상세 동작은 모듈 코드와 [`ARCHITECTURE.md`](./ARCHITECTURE.md) §3 데이터 흐름 참조.
 
 ### 7-5. 상세 페이지 처리
 정적 사이트에서 게시글 N건의 상세 페이지를 각각 만들지 않는 두 가지 패턴:
@@ -404,7 +460,7 @@ function formatDate(iso) {
 
 - [ ] 모든 페이지 skip-link 존재 (`pages/community.html`엔 있고, 일부 페이지엔 누락 상태 → 점검).
 - [ ] `<main id="main">` 존재.
-- [ ] 헤더 nav에 현재 페이지 `aria-current="page"` (`include.js` 자동 처리).
+- [ ] 헤더 nav에 현재 페이지 `aria-current="page"` (`site-header.js`의 `#markCurrent()` 자동 처리).
 - [ ] 이미지에 `alt` 또는 `aria-hidden="true"`.
 - [ ] 버튼/링크 텍스트가 없으면 `aria-label`.
 - [ ] 색 대비 4.5:1 이상 — 본문 텍스트 기준. `var(--color-text-muted)`는 약한 본문에만 사용, 핵심 정보 금지.
@@ -415,14 +471,19 @@ function formatDate(iso) {
 
 ## 11. 변경 시 영향 범위 매트릭스
 
-| 변경 종류 | 수정 파일 | 영향 페이지 |
-|---|---|---|
-| 색상 토큰 | `css/tokens.css` | 전체 |
-| 메뉴 항목 | `partials/header.html` | 전체 |
-| 푸터 sitemap | `partials/footer.html` | 전체 |
-| 공지/FAQ 1건 추가 | `data/notices.json` / `data/faqs.json` | community + index 자동 반영 |
-| 새 컴포넌트 | `css/components/<X>.css` + `css/main.css` | 사용처만 |
-| JS 동작 변경 | `js/modules/<X>.js` | 해당 모듈 사용 페이지 |
+| 변경 종류 | 수정 파일 | 영향 페이지 | 참고 |
+|---|---|---|---|
+| 색상/spacing 토큰 | `DESIGN.md` + `css/tokens.css` (1:1) | 전체 | DESIGN.md "변경 워크플로우" |
+| 메뉴 항목 | `partials/header.html` + 6개 페이지 + `404.html` fallback (총 8곳) | 전체 | §6 마지막 표 |
+| 푸터 sitemap | `partials/footer.html` | 전체 | |
+| 공지/FAQ 1건 추가 | `data/notices.json` / `data/faqs.json` | community + index 자동 반영 | [`docs/SCHEMAS.md`](./docs/SCHEMAS.md) §1, §2 |
+| 새 venue (지도 장소) | `data/venue.json` `venues.<key>` + 페이지에 `[data-map-links="<key>"]` | 해당 슬롯만 | SCHEMAS.md §3 |
+| 새 이미지 슬롯 | `data/image-slots.json` `slots[]` + 페이지에 `[data-image-slot="<id>"]` | 해당 페이지 | [`docs/IMAGE_SPEC.md`](./docs/IMAGE_SPEC.md) |
+| 새 컴포넌트 | `DESIGN.md` `components:` + `css/components/<X>.css` + `css/main.css` @import | 사용처만 | |
+| JS 동작 변경 | `js/modules/<X>.js` | 해당 모듈 사용 페이지 | |
+| 외부 도메인 / CDN / 폼 시스템 추가 | `_headers` CSP 갱신 + HTML preconnect | 전체 (보안 정책) | [`docs/INFRA.md`](./docs/INFRA.md) §4 |
+| Kakao JS key 로테이션 | `data/config.json` + Kakao Console 도메인 화이트리스트 | 지도 기능 | SCHEMAS.md §5 |
+| 새 페이지 추가 | §8 체크리스트 + `sitemap.xml` URL 추가 + fallback nav 8곳 | 신규 | |
 
 ---
 
@@ -448,16 +509,32 @@ python3 -m http.server 3000
 
 ## 13. 마이그레이션 우선순위
 
-현재 코드베이스에서 본 가이드를 적용해 나갈 순서:
+본 § 는 **현재 진행 중 / 계획**만 다룹니다. 완료된 마이그레이션 이력은 [`CHANGELOG.md`](./CHANGELOG.md) 참조.
 
-1. ~~**partials 분리** (`header.html`, `footer.html`) + `include.js` 도입 → 6개 HTML의 중복 제거.~~ ✅ 완료
-2. ~~**데이터 분리** (`notices.json`, `faqs.json`) + 렌더 모듈 도입 → `community.html`·`index.html` 동기화 문제 해결.~~ ✅ 완료
-3. ~~**ES Module 전환** — `<script src>` → `type="module"`, 모듈 폴더 정리.~~ ✅ 완료
-4. ~~**CSS 컴포넌트 분리** — 현재 단일 `components.css`를 `components/*.css`로 쪼개고 `@layer` 적용.~~ ✅ 완료
-5. **성능 보강** — preload, fetchpriority 추가.
-6. **(선택) SSG 도입** — 게시판 SEO가 중요해지는 시점에 Eleventy로 정적 빌드 전환.
+### 완료 (요약)
 
-각 단계는 다른 단계 없이 단독 실행 가능하며, 단계 사이에 사이트는 계속 동작 가능해야 한다.
+| 단계 | 완료 시점 | 상세 |
+|---|---|---|
+| partials/data/modules 분리 (Phase 1) | 2026-05-18 | CHANGELOG 2026-05-18 |
+| Custom Elements 마이그레이션 (`<site-header>`/`<site-footer>`) | 2026-05-19 | CHANGELOG 2026-05-19 |
+| CSS `@layer` + 컴포넌트 분리 | 2026-05-19 | CHANGELOG 2026-05-19 |
+| 디자인 시스템 SSOT (`DESIGN.md`) + light baseline 전환 | 2026-05-19 | CHANGELOG 2026-05-19 |
+| 이미지 슬롯 시스템 + `?spec=1` dev tooling | 2026-05-19 | CHANGELOG 2026-05-19 |
+| 지도 통합 (Kakao SDK + 3-앱 deep links + multi-venue) | 2026-05-19 | CHANGELOG 2026-05-19 |
+| a11y/perf 번들 (skip-link, hero preload, fetchpriority) | 2026-05-19 | CHANGELOG 2026-05-19 |
+| `_headers` CSP + 캐시 정책 | 2026-05-20 | CHANGELOG 2026-05-20, [`docs/INFRA.md`](./docs/INFRA.md) |
+| 문서 체계 정비 (ARCHITECTURE/SCHEMAS/INFRA/ONBOARDING/CHANGELOG) | 2026-05-20 | CHANGELOG [Unreleased] |
+
+### 진행 중 / 계획
+
+1. **`forms.example.com` placeholder → 실 폼 시스템 교체** — CTA 6곳 + `partials/header.html` + `_headers` CSP 동시 갱신. 절차는 [`docs/INFRA.md`](./docs/INFRA.md) §5
+2. **`www.namsangreensummer.com` Custom Domain + apex 301** — Cloudflare 설정 ([`§14-5`](#14-5-도메인-전환-체크리스트))
+3. **`pages.dev` 서브도메인 `X-Robots-Tag: noindex`** — CF Transform Rules
+4. **Lighthouse 측정 + 회귀 가드** — LCP < 2.5s, CLS < 0.1, INP < 200ms
+5. **`.dark-section` 활성화 또는 deprecation 결정** — 현재 미사용 ([`ARCHITECTURE.md`](./ARCHITECTURE.md) §7)
+6. **(조건부) SSG 도입** — `data/notices.json` 항목 30+ 도달 + SNS 공유/SEO가 비즈니스 요구가 될 때 Eleventy 전환 검토. 현 단계는 No-build 유지
+
+각 항목은 다른 항목 없이 단독 실행 가능. 단계 사이에 사이트는 계속 동작해야 함.
 
 ---
 
@@ -522,7 +599,7 @@ GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로
 - **CSS의 `url()` 참조는 CSS 파일 위치 기준 상대** (브라우저가 자동 처리, 변경 불요)
 - **외부 폼/링크는 도메인 포함 절대 URL** (`https://forms.example.com/...`) — 영향 없음
 
-### 14-5. 도메인 전환 체크리스트 (현황: 2026-05-19 시점)
+### 14-5. 도메인 전환 체크리스트 (현황: 2026-05-20 시점)
 
 테스트(GH Pages) → 프로덕션(Cloudflare/namsangreensummer.com) 전환 진행 상태:
 
@@ -533,11 +610,12 @@ GH Pages는 사이트가 `/namsan-green-summer/` 서브경로에 위치하므로
 - [x] SSL/TLS 모드 설정 (현재 **Full** — "Full (Strict)" 갱신 권장)
 - [x] OG/SNS 메타 태그 (모든 페이지 `og:image` 절대 URL 적용 완료)
 - [x] 루트 `404.html` 추가 (`.html` 매칭 실패 시 index.html catchall 방지)
+- [x] `robots.txt` + `sitemap.xml` 추가 (6 URL)
+- [x] `_headers` 파일 — 보안 헤더 + CSP + 캐시 정책 (Kakao SDK / Pretendard CDN / CF Insights 화이트리스트 포함). 상세 [`docs/INFRA.md`](./docs/INFRA.md)
 - [ ] `www.namsangreensummer.com` Custom Domain 추가 + apex로 301
 - [ ] `pages.dev` 서브도메인 `X-Robots-Tag: noindex` (CF Transform Rules)
-- [ ] `robots.txt`, `sitemap.xml` 추가 (현재 없음)
-- [ ] `_headers` 파일로 캐시 정책 / CSP 추가
-- [ ] Lighthouse 측정: LCP < 2.5s, CLS < 0.1, INP < 200ms
+- [ ] `forms.example.com` placeholder → 실 폼 시스템 교체 ([`docs/INFRA.md`](./docs/INFRA.md) §5)
+- [ ] Lighthouse 측정 + 회귀 가드: LCP < 2.5s, CLS < 0.1, INP < 200ms
 
 ### 14-6. Cloudflare Pages 프로젝트 정보
 

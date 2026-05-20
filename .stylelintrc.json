@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json.schemastore.org/stylelintrc.json",
+  "_comment": "본 프로젝트는 npm 의존성 0 원칙을 위해 stylelint plugin을 사용하지 않음. 색상 토큰 SSOT 강제는 scripts/lint.sh의 grep 단계가 보강한다.",
+  "rules": {
+    "declaration-no-important": true,
+    "max-nesting-depth": 3,
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+      {
+        "message": "BEM 또는 utility 명명 위반 — block / block__element / block--modifier / block-name 형태만 허용"
+      }
+    ],
+    "media-feature-name-value-allowed-list": {
+      "max-width": ["768px", "900px"],
+      "min-width": ["769px", "901px"]
+    },
+    "color-no-invalid-hex": true,
+    "no-duplicate-selectors": true,
+    "no-empty-source": true,
+    "block-no-empty": true,
+    "property-no-unknown": true,
+    "unit-no-unknown": true
+  },
+  "overrides": [
+    {
+      "files": ["css/reset.css"],
+      "rules": {
+        "declaration-no-important": null,
+        "selector-class-pattern": null
+      }
+    },
+    {
+      "files": ["css/home.css"],
+      "rules": {
+        "max-nesting-depth": null
+      }
+    },
+    {
+      "files": ["css/tokens.css"],
+      "rules": {
+        "selector-class-pattern": null
+      }
+    }
+  ]
+}

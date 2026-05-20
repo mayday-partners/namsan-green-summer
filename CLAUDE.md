@@ -25,6 +25,7 @@
 8. **빌드 도구·npm 의존성 추가 금지** — 사용자가 명시 승인하기 전까지 No-build 원칙 유지.
 9. **외부 URL이 필요한 메타 (`og:image`, `og:url`, `canonical`) 절대 URL 사용** — 프로덕션 도메인 `https://namsangreensummer.com` 기준. 페이지-상대 또는 root-absolute 금지 (SNS 봇이 못 찾음).
 10. **디자인 시스템은 `DESIGN.md` SSOT** — 색상/타이포/spacing/radius/컴포넌트는 `DESIGN.md` (Google Stitch alpha spec)를 먼저 갱신한 뒤 CSS 반영. lint(`npx @google/design.md lint DESIGN.md`)가 **0 errors / 0 warnings** 통과해야 머지.
+11. **코드 수정 후 `./scripts/lint.sh` 실행 필수** — CI 미도입 결정(2026-05-20)에 따라 lint 통과는 AI 에이전트(본인)와 개발자가 양심적으로 보장한다. 실패 시 fix 후 재실행, 통과 못 한 상태로 사용자에게 완료 보고 금지. 부분 실행: `./scripts/lint.sh {css|js|html|design|tokens}`. 만진 파일 종류만 검증해도 됨 (전체는 PR 직전).
 
 ---
 
@@ -82,19 +83,24 @@
 
 ## 자주 깨지는 패턴 (방지 목록)
 
-| 안티패턴 | 올바른 방식 |
-|---|---|
-| `<header>...</header>`를 새 페이지에 복붙 | `<site-header>...fallback...</site-header>` (자체 hydrate) |
-| `<li>공지제목</li>` 직접 작성 | `data/notices.json`에 추가 + 렌더 모듈이 자동 표시 |
-| `style="background: linear-gradient(...)"` | 컴포넌트 modifier class + `tokens.css` 색상 |
-| `<script src="js/header.js">` 추가 | `js/components/<X>.js`에 customElements.define 후 `main.js`에서 import |
-| analytics/GA를 `partials/*.html`에 `<script>` 직접 삽입 | `innerHTML`/`outerHTML` 주입 시 `<script>`는 미실행 — `js/main.js`에 import하거나 페이지 HTML inline 추가 |
-| 새 색상 헥스값 컴포넌트에 직접 작성 | `DESIGN.md` `colors:` 등록 → `tokens.css` 의미 토큰 추가 → 컴포넌트 적용 |
-| `DESIGN.md`/`tokens.css`가 어긋남 (이름/값 불일치) | 둘을 같은 PR에서 동시 갱신, lint 통과 확인 |
-| 새 컴포넌트를 CSS만 작성 | `DESIGN.md` `components:` 등록 + Components prose 1단락 동시 작성 |
-| 같은 공지를 `index.html`/`community.html` 둘에 입력 | 한 JSON에 1번, `data-limit` 속성으로 다르게 호출 |
-| `el.innerHTML = jsonData.title` | `el.textContent = jsonData.title` |
-| 날짜를 `"2026.05.20"` 형태로 JSON 저장 | `"2026-05-20"` 저장, 표시 시 `formatDate()` |
+| 안티패턴 | 올바른 방식 | lint 자동 검출 |
+|---|---|---|
+| `<header>...</header>`를 새 페이지에 복붙 | `<site-header>...fallback...</site-header>` (자체 hydrate) | ✗ (review 필수) |
+| `<li>공지제목</li>` 직접 작성 | `data/notices.json`에 추가 + 렌더 모듈이 자동 표시 | ✗ |
+| `style="background: linear-gradient(...)"` | 컴포넌트 modifier class + `tokens.css` 색상 | ✓ htmlhint `inline-style-disabled` |
+| `<script src="js/header.js">` 추가 | `js/components/<X>.js`에 customElements.define 후 `main.js`에서 import | ✗ |
+| analytics/GA를 `partials/*.html`에 `<script>` 직접 삽입 | `innerHTML`/`outerHTML` 주입 시 `<script>`는 미실행 — `js/main.js`에 import하거나 페이지 HTML inline 추가 | ✗ |
+| 새 색상 헥스값 컴포넌트에 직접 작성 | `DESIGN.md` `colors:` 등록 → `tokens.css` 의미 토큰 추가 → 컴포넌트 적용 | ✓ `lint.sh tokens` (hex 검출) |
+| `DESIGN.md`/`tokens.css`가 어긋남 (이름/값 불일치) | 둘을 같은 PR에서 동시 갱신, lint 통과 확인 | ✓ `@google/design.md lint` |
+| 새 컴포넌트를 CSS만 작성 | `DESIGN.md` `components:` 등록 + Components prose 1단락 동시 작성 | ⚠ design.md lint 일부 검출 |
+| 같은 공지를 `index.html`/`community.html` 둘에 입력 | 한 JSON에 1번, `data-limit` 속성으로 다르게 호출 | ✗ |
+| `el.innerHTML = jsonData.title` | `el.textContent = jsonData.title` | ✓ eslint `no-restricted-syntax` |
+| 날짜를 `"2026.05.20"` 형태로 JSON 저장 | `"2026-05-20"` 저장, 표시 시 `formatDate()` | ✗ |
+| `!important` 추가 | layer 순서 조정 또는 specificity 재설계 | ✓ stylelint `declaration-no-important` |
+| 새 CSS 셀렉터 4단계 중첩 | 컴포넌트 분리 또는 modifier class | ✓ stylelint `max-nesting-depth` |
+| 새 breakpoint (예: `@media (max-width: 1024px)`) | 768/900 화이트리스트 내 선택 또는 DESIGN.md 갱신 후 추가 | ✓ stylelint `media-feature-name-value-allowed-list` |
+| 새 전역 변수 `window.foo = ...` | 모듈 내부 클로저 또는 export | ✓ eslint `no-implicit-globals` |
+| `eval()` / `new Function()` / `document.write()` | DOM API 사용 | ✓ eslint `no-eval`, `no-restricted-syntax` |
 
 ---
 
