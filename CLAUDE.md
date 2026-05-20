@@ -26,6 +26,13 @@
 9. **외부 URL이 필요한 메타 (`og:image`, `og:url`, `canonical`) 절대 URL 사용** — 프로덕션 도메인 `https://namsangreensummer.com` 기준. 페이지-상대 또는 root-absolute 금지 (SNS 봇이 못 찾음).
 10. **디자인 시스템은 `DESIGN.md` SSOT** — 색상/타이포/spacing/radius/컴포넌트는 `DESIGN.md` (Google Stitch alpha spec)를 먼저 갱신한 뒤 CSS 반영. lint(`npx @google/design.md lint DESIGN.md`)가 **0 errors / 0 warnings** 통과해야 머지.
 11. **코드 수정 후 `./scripts/lint.sh` 실행 필수** — CI 미도입 결정(2026-05-20)에 따라 lint 통과는 AI 에이전트(본인)와 개발자가 양심적으로 보장한다. 실패 시 fix 후 재실행, 통과 못 한 상태로 사용자에게 완료 보고 금지. 부분 실행: `./scripts/lint.sh {css|js|html|design|tokens}`. 만진 파일 종류만 검증해도 됨 (전체는 PR 직전).
+12. **mirror 문서(같은 정보를 두 출처에 가진 파일 쌍) 한쪽 변경 시 다른 쪽도 같은 PR에서 동시 갱신** — 현 mirror pair 3개:
+    - `data/image-slots.json` ↔ `docs/IMAGE_SPEC.md` (운영팀 핸드오프) — slot id·페이지 위치·art_direction
+    - `sitemap.xml` ↔ `docs/INFRA.md §6-2` — URL 목록·priority·changefreq
+    - `data/programs.json.refund_policy` ↔ `fun-and-walk/notice.html` 환불 표 — 5 tier 조건·환불 %
+    - `_headers` ↔ `docs/INFRA.md §1-§3` — Cache-Control(max-age·must-revalidate)·CSP 지시문 분해·외부 도메인 화이트리스트
+
+    한쪽 갱신 후 반드시 다른 쪽을 grep으로 cross-reference하여 drift 없는지 확인. lint 자동 검출 없음 → review 의무. 본 룰은 2026-05-20 IMAGE_SPEC.md drift 사고에서 도입, 같은 날 sitemap.xml V1→V2 drift와 _headers ↔ INFRA.md drift(cache duration / CSP connect-src)도 함께 발견되어 pair 목록 확장. 새 mirror pair 발견 시 본 목록에 즉시 추가.
 
 ---
 
@@ -106,6 +113,8 @@
 | 새 breakpoint (예: `@media (max-width: 1024px)`) | 768/900 화이트리스트 내 선택 또는 DESIGN.md 갱신 후 추가 | ✓ stylelint `media-feature-name-value-allowed-list` |
 | 새 전역 변수 `window.foo = ...` | 모듈 내부 클로저 또는 export | ✓ eslint `no-implicit-globals` |
 | `eval()` / `new Function()` / `document.write()` | DOM API 사용 | ✓ eslint `no-eval`, `no-restricted-syntax` |
+| 비교/매칭표를 row 번호로 줄세움 (예: 3-way 비교 시 N번째 항목끼리 강제 매칭) | 각 항목에 **책임 단위**(이 zone이 답하는 사용자 질문 1개)를 1줄로 부여 후 책임 단위로 outer join. 같은 책임이면 같은 행, 한쪽만 있으면 빈칸. row 순서 매칭은 가짜 alignment를 만든다 (2026-05-20 매칭표 사고에서 도입) | ✗ (review 필수) |
+| `data/image-slots.json` 변경 후 `docs/IMAGE_SPEC.md` 미갱신 (운영팀 핸드오프 drift) | mirror 문서 동시 갱신 — 절대 룰 12 참조 | ✗ (review 필수) |
 
 ---
 
