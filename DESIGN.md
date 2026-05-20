@@ -3,7 +3,7 @@ version: alpha
 name: Namsan Green Summer 2026
 description: >-
   Festival site for the 2026 Namsan Green Summer Festival
-  (2026 남산 그린 서머 페스티벌). Light paper baseline with neon accents
+  (2026 남산 서머 페스티벌). Light paper baseline with neon accents
   preserved as motifs; dark surfaces reserved for nocturnal-mood section
   containers (Summer Night hero, program imagery). Display Anton + body
   Pretendard. Editorial calm under a high-contrast festival aesthetic.
@@ -401,7 +401,7 @@ Two-column section on the homepage (`bottom-grid`, 1:1). Each list is a vertical
 Homepage `<section class="hero">` splits into two zones: a left `hero__display` (typographic poster) and a right `hero__card` (event metadata + single CTA). The display zone stacks three element types vertically (the Korean title repeats across three lines but uses one class):
 
 1. `hero__display-num` — Anton "2026" at `display-hero` token (`--fs-display-hero`, fluid 2.5–6rem, `on-surface` charcoal with a neon glow halo behind).
-2. `hero__display-kr` — Pretendard 900 three-line Korean title ("남산 / 그린 서머 / 페스티벌"). Uses its own fluid range `clamp(2.5rem, 7vw, 5rem)` (capped 1rem below `display-hero` so the numeric reads as the lead marquee), line-height 0.95.
+2. `hero__display-kr` — Pretendard 900 three-line Korean title ("남산 / 서머 / 페스티벌"). Uses its own fluid range `clamp(2.5rem, 7vw, 5rem)` (capped 1rem below `display-hero` so the numeric reads as the lead marquee), line-height 0.95.
 3. `hero__display-en-sub` — Anton "NAMSAN GREEN SUMMER FESTIVAL" at `body-md`, `primary-text`, wide tracking.
 
 The card zone shrinks to 280 px on desktop and contains only date/place metadata + the primary CTA. On screens ≤ 900 px the two zones stack with display first.

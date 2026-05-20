@@ -18,7 +18,7 @@
 
 ## 0. 이 프로젝트가 무엇인가
 
-- **2026 남산 그린 서머 페스티벌** 공식 정적 사이트 (2026-06-27 토, 남산공원)
+- **2026 남산 서머 페스티벌** 공식 정적 사이트 (2026-06-27 토, 남산공원)
 - **6개 페이지** + 다국어 없음(한국어 전용) + **빌드 도구 없음**
 - 기술: **Vanilla HTML + CSS + ES Module JavaScript** (npm 의존성 0)
 - 호스팅: GitHub Pages (테스트) + Cloudflare Pages (프로덕션 `namsangreensummer.com`)

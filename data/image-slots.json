@@ -20,7 +20,7 @@
       "render": "background-cover",
       "priority": "P1",
       "lcp": true,
-      "alt": "남산을 배경으로 한 그린 서머 페스티벌 메인 비주얼",
+      "alt": "남산을 배경으로 한 서머 페스티벌 메인 비주얼",
       "current_file": "img/sections/hero.webp",
       "current_status": "임시 이미지 (540×380, 비표준 비율)",
       "art_direction": [
@@ -186,7 +186,7 @@
       "render": "meta",
       "priority": "P1",
       "lcp": false,
-      "alt": "2026 남산 그린 서머 페스티벌",
+      "alt": "2026 남산 서머 페스티벌",
       "current_file": "img/sections/hero.webp",
       "current_status": "현재 hero.webp 재사용 (540×380). SNS 표준 1200×630에 미달.",
       "art_direction": [

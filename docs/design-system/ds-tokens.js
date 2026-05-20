@@ -55,7 +55,7 @@ class DsTokens extends HTMLElement {
               <tr>
                 <td><code>${escapeHtml(t.name)}</code></td>
                 <td><code>${escapeHtml(t.value)}</code></td>
-                <td style="font-size: ${t.value};">남산 그린 서머 Aa 123</td>
+                <td style="font-size: ${t.value};">남산 서머 Aa 123</td>
               </tr>
             `).join('')}
           </tbody>
