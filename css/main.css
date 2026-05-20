@@ -17,6 +17,8 @@
 @import url('components/page-tabs.css')   layer(components);
 @import url('components/info-box.css')    layer(components);
 @import url('components/cta-group.css')   layer(components);
+@import url('components/sponsor.css')     layer(components);
+@import url('components/kit-grid.css')    layer(components);
 
 @import url('home.css')                   layer(pages);
 @import url('page.css')                   layer(pages);

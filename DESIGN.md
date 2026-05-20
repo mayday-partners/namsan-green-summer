@@ -200,6 +200,16 @@ components:
     textColor: "{colors.on-surface-body}"
     rounded: "{rounded.lg}"
     padding: 32px
+  sponsor-tile:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-muted}"
+    rounded: "{rounded.md}"
+    padding: 24px
+  kit-tile:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.md}"
+    padding: 24px
   dark-section:
     backgroundColor: "{colors.dark-surface}"
     textColor: "{colors.on-dark-body}"

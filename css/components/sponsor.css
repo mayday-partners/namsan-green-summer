@@ -1,0 +1,104 @@
+/* Sponsor Grid — 후원사·파트너 로고 그리드.
+   seoulrun.kr 메인의 "2026 서울런 파트너" 슬라이드 패턴 참고 (정적 그리드로 단순화).
+   현재 운영팀 확정 전이라 placeholder 타일(이름 텍스트 + TBD 뱃지) 노출. */
+.sponsor {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-4);
+  align-items: stretch;
+}
+
+.sponsor__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.sponsor__eyebrow {
+  font-family: var(--font-en);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-on-surface-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.sponsor__title {
+  font-family: var(--font-kr);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  margin: 0;
+}
+
+.sponsor__note {
+  font-family: var(--font-kr);
+  font-size: 0.875rem;
+  color: var(--color-on-surface-muted);
+}
+
+.sponsor__tile {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 96px;
+  border: 1px solid var(--color-border);
+  color: var(--color-on-surface-muted);
+  text-align: center;
+  text-decoration: none;
+}
+
+.sponsor__tile[data-pending="true"] {
+  background: var(--color-surface-alt);
+  border-style: dashed;
+}
+
+.sponsor__tile-name {
+  font-family: var(--font-kr);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-on-surface-body);
+}
+
+.sponsor__tile-badge {
+  font-family: var(--font-en);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-on-surface-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-neutral);
+  border-radius: var(--radius-full);
+}
+
+.sponsor__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-7);
+  color: var(--color-on-surface-muted);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border);
+}
+
+@media (max-width: 900px) {
+  .sponsor {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .sponsor {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
