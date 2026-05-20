@@ -1,6 +1,6 @@
 // js/components/site-header.js
 // Self-hydrating header. Fallback markup inside the element is the SEO/noscript baseline.
-const PARTIAL_URL = new URL('../../partials/header.html', import.meta.url);
+const PARTIAL_URL = '/partials/header.html';
 
 class SiteHeader extends HTMLElement {
   #ac = null;
@@ -16,7 +16,7 @@ class SiteHeader extends HTMLElement {
     // Reset any nav-open lock that may have survived bfcache restore.
     document.documentElement.classList.remove('nav-open');
     try {
-      const res = await fetch(PARTIAL_URL, { cache: 'force-cache' });
+      const res = await fetch(PARTIAL_URL, { cache: 'default' });
       if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
       // partial은 same-origin own repo trusted source — innerHTML 대입 안전.
       // eslint-disable-next-line no-restricted-syntax

@@ -4,8 +4,8 @@
 // When data.courses[<key>].checkpoints exists, each CP renders as a marker + click-to-open InfoWindow
 // and the viewport auto-fits via setBounds. Polyline rendering intentionally omitted — see inline note.
 
-const VENUE_URL  = new URL('../../data/venue.json',  import.meta.url).href;
-const CONFIG_URL = new URL('../../data/config.json', import.meta.url).href;
+const VENUE_URL  = '/data/venue.json';
+const CONFIG_URL = '/data/config.json';
 const SDK_BASE   = 'https://dapi.kakao.com/v2/maps/sdk.js';
 
 let sdkPromise = null;

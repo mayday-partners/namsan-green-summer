@@ -2,7 +2,7 @@
 // Builds map-app deep links from data/venue.json and mounts buttons into [data-map-links] slots.
 // Slot selects venue: <div data-map-links="<key>"> picks venues[<key>]; bare [data-map-links] uses default_venue.
 
-const DATA_URL = new URL('../../data/venue.json', import.meta.url).href;
+const DATA_URL = '/data/venue.json';
 
 let dataPromise = null;
 

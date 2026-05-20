@@ -21,3 +21,9 @@ img/sections/*.png
 # Editor / OS
 *.log
 *~
+
+# JetBrains IDE
+.idea/
+
+# Office temporary files (e.g. ~$*.pptx)
+~$*

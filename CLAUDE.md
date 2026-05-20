@@ -36,6 +36,11 @@
 - 모든 페이지: `<a class="skip-link" href="#main">본문으로 건너뛰기</a>` + `<main id="main">` 필수.
 - `<section>`에 `aria-labelledby` 또는 `aria-label` 부여.
 - 메타: `<title>`, `<meta name="description">`, OG 4종(`og:title`/`og:description`/`og:type`/`og:image`).
+- **기본 언어 한국어 (`<html lang="ko">`).** 사용자 노출 텍스트는 한국어 우선. 영문 사용은 다음 카테고리에만 허용:
+  - 프로그램 공식 영문명: `Fun&Walk` / `Summer Night` / `Summer Garden`
+  - SNS 플랫폼명: Instagram / YouTube / Blog (aria-label, 아이콘 표기)
+  - 도메인 / 외부 서비스 URL
+  - 기타 모든 라벨 (breadcrumb / eyebrow / `<dt>` / 섹션 헤더 / hero 디스플레이 카피)은 한국어. 이미 영문으로 작성된 경우 한국어로 의역.
 
 ### CSS
 - 명명: **BEM** (`block__element--modifier`).
@@ -146,16 +151,14 @@ partials/data/modules/CSS 마이그레이션 완료. 현 코드베이스는 본 
 
 ---
 
-## 배포 환경 (subpath 호환 필수)
+## 배포 환경
 
-본 사이트는 두 환경에서 동작:
-- **테스트**: GitHub Pages `https://mayday-partners.github.io/namsan-green-summer/` (subpath `/namsan-green-summer/`)
-- **프로덕션**: Cloudflare Pages `https://namsangreensummer.com/` (도메인 루트, Gabia 등록 + Cloudflare 네임서버)
+본 사이트는 **Cloudflare Pages 루트 도메인 단일 환경**에 배포된다 (`https://namsangreensummer.com/`, Gabia 등록 + Cloudflare 네임서버).
+GitHub Pages subpath 배포는 폐기 (2026-05-20).
 
 코드 작성 시 **반드시**:
-- HTML 정적 자원·메뉴 href는 root-absolute (`/css/`, `/js/`, `/<area>/`) 통일 — 모든 페이지가 영역 디렉토리 1 depth라 일관됨.
-- JS에서 `'/data/...'` 같은 문자열 fetch 금지 — 반드시 `new URL('../../data/...', import.meta.url)` (모듈 위치 독립성)
-- partial 내부 href도 root-absolute(`/<area>/...`)로 작성 — Cloudflare root deploy 단일 환경이라 별도 prefix 처리 불요.
-- fallback content nav도 root-absolute href 직접 작성 (정규화 로직 없음 — 2026-05-20 SITE_BASE 코드 정리 이후)
+- HTML 정적 자원·메뉴 href는 root-absolute (`/css/`, `/js/`, `/<area>/`) 통일.
+- JS fetch URL도 root-absolute 문자열 (`/data/...`, `/partials/...`) 사용. subpath 호환을 위한 `new URL(..., import.meta.url)` 우회 패턴은 폐기.
+- partial 내부 href, fallback content nav도 root-absolute (`/<area>/...`) 직접 작성.
 
 상세: [`README.md §14`](./README.md#14-배포-환경) 참조.

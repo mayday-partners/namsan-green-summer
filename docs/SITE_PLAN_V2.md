@@ -13,8 +13,7 @@
 | 행사일 | 2026.6.27. (토) |
 | 접수 시작 | 2026.6.10. (수) 선착순 마감 |
 | 운영 사무국 | 02-6412-9714 |
-| 도메인 (프로덕션) | https://namsangreensummer.com |
-| 도메인 (테스트) | https://mayday-partners.github.io/namsan-green-summer/ |
+| 도메인 | https://namsangreensummer.com (Cloudflare Pages 루트 단일 환경) |
 | 참고 사이트 | https://seoulrun.kr/ |
 | 후원사 | 미확정 (0519 기준) — 로고 추후 전달 |
 
@@ -70,7 +69,7 @@
 
 ### 3-2. 행사안내
 
-#### `pages/about.html` — 행사 개요
+#### `event/index.html` — 행사 개요
 
 - **인사말** (히어로 카피)
   > "남산의 자연, 야경, 그리고 문화가 어우러지는 도심 속 여름 특화 체험형 축제!"
@@ -87,7 +86,7 @@
 
   > ※ 주차권/비용 미지원. 대중교통 권장.
 
-#### `pages/programs.html` — 주요 프로그램
+#### `event/programs.html` — 주요 프로그램
 
 3개 프로그램 요약 카드 + 신청 버튼. 각 프로그램 상세 페이지로 진입 동선.
 
@@ -98,7 +97,7 @@
 
 ### 3-3. Fun&Walk
 
-#### `pages/funwalk.html` — 프로그램 안내
+#### `fun-and-walk/index.html` — 프로그램 안내
 
 | 항목 | 값 |
 |---|---|
@@ -110,14 +109,14 @@
 | 신청 기간 | 6월 10일 (수) ~ 선착순 마감 |
 | 신청 방법 | 사전예약 (서울시공공서비스예약) / 네이버 예약 (외국인) |
 | 지급품 | 기념티셔츠, 방수 스트링백, 완보증, 메달 키링 (완주 시 수령) |
-| 환불 마감 | 별도 안내사항 확인 (`pages/funwalk-notice.html`) |
+| 환불 마감 | 별도 안내사항 확인 (`fun-and-walk/notice.html`) |
 | 문의 | 02-6412-9714 |
 
 **CTA**:
 - 내국인 신청 바로가기 (공공서비스)
 - 외국인 신청 바로가기 (네이버 예약)
 
-#### `pages/funwalk-course.html` — 코스 안내
+#### `fun-and-walk/course.html` — 코스 안내
 
 - **6km 코스** (코스맵 이미지 디자인 필요)
 - **경유지**: ① 백범광장 → ② 호현당 → ③ 횡단보도 → ④ 남산 북측순환로 → ⑤ 남측순환로 → ⑥ 팔각광장 (종점), 약 6.0km
@@ -127,7 +126,7 @@
 - 사전 코스 확인 권장
 - 현장 운영요원·안내 표지판 지시 준수
 
-#### `pages/funwalk-notice.html` — 참가 유의사항
+#### `fun-and-walk/notice.html` — 참가 유의사항
 
 | 섹션 | 핵심 내용 |
 |---|---|
@@ -153,7 +152,7 @@
 
 ### 3-4. Summer Night
 
-#### `pages/summer-night.html` — 프로그램 안내
+#### `summer-night/index.html` — 프로그램 안내
 
 | 항목 | 값 |
 |---|---|
@@ -173,7 +172,7 @@
 **CTA**: 사전 예약 바로가기 (네이버 예약)
 **디자인 필요**: 객석 가이드, 라인업 이미지
 
-#### `pages/summer-night-notice.html` — 공연 예약 유의사항
+#### `summer-night/notice.html` — 공연 예약 유의사항
 
 | 섹션 | 핵심 내용 |
 |---|---|
@@ -186,7 +185,7 @@
 
 ### 3-5. Summer Garden
 
-#### `pages/summer-garden.html` — 도슨트 투어 안내
+#### `summer-garden/index.html` — 도슨트 투어 안내
 
 | 항목 | 값 |
 |---|---|
@@ -204,7 +203,7 @@
 **CTA**: 도슨트 투어 신청 바로가기 (네이버 예약)
 **디자인 필요**: 코스 안내 다이어그램
 
-#### `pages/summer-garden-notice.html` — 도슨트 투어 유의사항
+#### `summer-garden/notice.html` — 도슨트 투어 유의사항
 
 | 섹션 | 핵심 내용 |
 |---|---|
@@ -216,18 +215,18 @@
 
 ### 3-6. 커뮤니티
 
-#### `pages/community.html` — 공지사항
+#### `community/index.html` — 공지사항
 
 - 전체 공지 목록 (`data/notices.json` 전체 로드, `data-limit` 미지정 또는 큰 값)
 - 메인의 프리뷰와 **동일 JSON 공유** (절대 룰 #3)
-- 상세 페이지: `pages/notice.html?id=...` 쿼리스트링 패턴 (CLAUDE.md 게시판 규칙)
+- 상세 페이지: `community/notice.html?id=...` 쿼리스트링 패턴 (CLAUDE.md 게시판 규칙) — 신규 생성 시 `community/` 디렉토리 안에 둠
 
-#### `pages/faq.html` — 자주 묻는 질문
+#### `community/faq.html` — 자주 묻는 질문
 
 - FAQ 게시판 (`data/faqs.json`)
 - 콘텐츠 **추후 전달 예정** — 페이지 구조만 먼저 잡기
 
-#### `pages/refund.html` — 환불 및 취소 신청
+#### `community/refund.html` — 환불 및 취소 신청
 
 | 프로그램 | 처리 방식 |
 |---|---|
@@ -331,8 +330,8 @@
 | 메인 / Summer Night | 사전 예약 | primary | 네이버 예약 |
 | 메인 / Summer Garden | 내국인 신청 | primary | 네이버 예약 |
 | 메인 / Summer Garden | 외국인 신청 | secondary | 네이버 예약 |
-| Fun&Walk 유의사항 | 환불 신청 | 내부 | `pages/refund.html` |
-| 모든 페이지 | 공지사항 | 내부 | `pages/community.html` |
+| Fun&Walk 유의사항 | 환불 신청 | 내부 | `/community/refund.html` |
+| 모든 페이지 | 공지사항 | 내부 | `/community/` |
 
 > 모든 외부 링크는 `target="_blank" rel="noopener"` 적용 필요.
 > URL은 추후 확정 — 현재는 `data/programs.json`의 `cta[].href` placeholder.
@@ -363,77 +362,104 @@
 6. 환불 마감 정확 일자 (Fun&Walk)
 7. 객석 가이드 / 라인업 비주얼 (Summer Night)
 8. 후원사 데이터 스키마 (`data/sponsors.json` 구조)
+9. Summer Night 공연 본체 시작/종료 시각 (PPT slide 8 본문 "17:00-21:00"은 체험존 운영 시간 — 공연 본체는 미명시)
+10. 우천 시 Fun&Walk 진행 정책 (PPT slide 7 미명시. Summer Night/Garden은 명시)
+
+### 8-1. V1 → V2 명칭 매핑
+
+PPT는 V2 본문에서 "Summer Night/Summer Garden"을 사용하나 일부 슬라이드 헤더에 V1 명칭("그린나이트/그린가든 레이아웃")이 잔재한다. 외부 백링크·SEO·운영팀 핸드오프 시 혼동 방지를 위한 참조표:
+
+| V1 (PPT 슬라이드 헤더 잔재) | V2 (공식) | 코드 식별자 |
+|---|---|---|
+| 그린나이트 (Green Night) | Summer Night | `summer-night/` |
+| 그린가든 (Green Garden) | Summer Garden | `summer-garden/` |
+| 한국숲정원 (PPT slide 10 본문) | 한국 숲 정원 | `venue.json` 미등록 (`_pending_venue`) |
+
+> 도메인 `namsangreensummer.com`은 V1 명칭("Green Summer") 잔재. 도메인 등록 비가역적이므로 유지하되 표시 라벨은 V2 ("2026 남산 서머 페스티벌") 통일.
+
+### 8-2. Open Questions (검증 루프 R1 결과)
+
+다음은 PPT만으로 결정 불가 — 운영팀 확정 필요:
+
+1. **Summer Night 라인업 확정성**: PPT slide 4 "세부 프로그램 예시"에는 로이킴/존박 명시, slide 8 본문은 "아티스트 초청 (이미지/디자인 필요)"로 미명시. 라인업 단정 가능 시점 확정 필요. (`data/programs.json` lineup 항목에 `_pending_confirmation: true` 마킹됨)
+2. **셔틀 운영 데이터 출처**: `venue.json:45` "16:00–22:30, 15분 간격, 백범광장 방면"은 PPT에 없음. 운영팀 확정 또는 다른 문서 출처 명시 필요.
+3. **푸터 주최/주관/이메일**: PPT는 운영 사무국 02-6412-9714만 표기. "주최/서울특별시 · 주관/남산공원관리사무소 · namsan-festival@example.kr"은 추정값. 운영팀 확정 필요.
+4. **헤더 단일 "참가신청" CTA**: PPT는 프로그램별 "내국인/외국인" 2채널 분기 (Fun&Walk: 공공서비스/네이버, Night·Garden: 네이버). 헤더 단일 CTA 동작 정의 필요 (예: `event/programs.html`로 이동 vs Fun&Walk 직접 이동).
+5. **헤더 로고 + 푸터 © 텍스트**: 현재 "NAMSAN GREEN SUMMER" / "Namsan Green Summer Festival" — 도메인과 일치하지만 PPT 행사명("2026 남산 서머 페스티벌")과 불일치. V2 통일 여부 결정.
+6. **Fun&Walk 우천 정책**: Summer Night/Garden은 "정상 진행, 안전 따라 조정" 명시, Fun&Walk만 PPT 누락. 동일 적용 vs 별도 정책.
+7. **PPT slide 1 사이트맵 "참가 유의사항" 항목**: 사이트맵 도식 L:48-49에서 커뮤니티 하위로 표기되나 slide 12 본문에는 없음. 도식 vs 본문 SSOT 결정.
+8. **`data/notices.json` 시드 9건**: PPT slide 2 명시 항목은 "2026 남산 서머 페스티벌 개최 안내" + "프로그램 별 신청 방법" 2건뿐. 나머지 7건은 dev seed (Fun&Walk 모집, 라인업, 1차 마감, 키트 발송, 셔틀, 후원사, 홈페이지 오픈). 각 항목에 `_source` 메타로 PPT 출처/dev seed 구분 표기 완료. 운영팀 콘텐츠 확정 시 dev seed 항목들을 실제 공지로 교체 또는 제거 필요. 특히 "라인업 공개" 항목은 `programs.json` lineup `_pending_confirmation: true` 상태와 모순 — 라인업 확정 전에는 게시 보류 권장.
 
 ---
 
-## 9. 현 코드베이스 갭 분석 (2026-05-20 시점)
+## 9. 현 코드베이스 상태 (2026-05-20 갱신)
+
+V2 PPTX 기반의 IA·페이지 분리·데이터·브랜드 네이밍이 코드에 반영됨. 본 절은 잔여 작업과 미확정 항목만 추적.
 
 ### 9-1. 현재 파일 구조
 
 ```
-pages/
-├─ event.html          (행사안내 — 단일)
-├─ fun-and-walk.html   (Fun&Walk — 단일)
-├─ green-night.html    ← 기획상 "Summer Night"
-├─ green-garden.html   ← 기획상 "Summer Garden"
-└─ community.html
+event/
+├─ index.html         (행사 개요 + 오시는 길 #location)
+└─ programs.html      (주요 프로그램)
+
+fun-and-walk/
+├─ index.html         (프로그램 안내)
+├─ course.html        (6km 코스 안내)
+└─ notice.html        (참가 유의사항)
+
+summer-night/
+├─ index.html         (공연·체험존 안내)
+└─ notice.html        (공연 예약 유의사항)
+
+summer-garden/
+├─ index.html         (도슨트 투어 안내)
+└─ notice.html        (도슨트 투어 유의사항)
+
+community/
+├─ index.html         (공지사항)
+├─ faq.html           (자주 묻는 질문)
+└─ refund.html        (환불 및 취소 신청)
 
 data/
-├─ notices.json        ✓ 기획 반영됨
-├─ faqs.json           ✓ 기획 반영됨 (콘텐츠 추후)
-├─ venue.json          (3개 좌표 — programs와 분리 보관 중)
-├─ image-slots.json
-├─ config.json / config.example.json
-└─ (programs.json 없음)
-└─ (sponsors.json 없음)
+├─ programs.json      ✓ V2 메타데이터 SSOT (행사·3프로그램·환불 정책)
+├─ notices.json       ✓
+├─ faqs.json          ✓ (콘텐츠 추후)
+├─ venue.json         ✓ (5개 좌표 + Fun&Walk 5개 CP)
+├─ sponsors.json      ✓ placeholder
+├─ image-slots.json   ✓
+└─ config.json        ✓ Kakao SDK 키
 
 partials/
-├─ header.html
-└─ footer.html
+├─ header.html        ✓ V2 라벨 (Summer Night / Summer Garden)
+└─ footer.html        ✓
 ```
 
-### 9-2. ⚠️ 브랜드 네이밍 변경 (V1 → V2)
+### 9-2. 완료된 마이그레이션
 
-| V1 (현 코드) | V2 (기획) | 영향 |
+- [x] V1 → V2 브랜드 네이밍 (`green-*` → `summer-*` 디렉토리·라벨)
+- [x] 단일 페이지 → 멀티 페이지 분리 (`<area>/{index,page}.html`)
+- [x] partials + custom element (`<site-header>`, `<site-footer>`) 패턴
+- [x] `data/programs.json` 신규 — V2 PPTX의 라인업·집결지·환불 정책 반영
+- [x] 모든 페이지 메타·OG·`<title>` — "2026 남산 서머 페스티벌"
+- [x] CSS `@layer` + BEM + 컴포넌트 분리
+- [x] Cloudflare Pages 루트 도메인 단일 배포 환경 전환 (subpath 폐기)
+
+### 9-3. 잔여 작업
+
+| 영역 | 작업 | 우선순위 |
 |---|---|---|
-| Green Night / `green-night.html` | **Summer Night** | 페이지·CSS·JS 식별자, 메뉴 라벨, 도메인(`namsangreensummer.com` 유지) |
-| Green Garden / `green-garden.html` | **Summer Garden** | 동일 |
-| (행사명 미확정) | "2026 남산 서머 페스티벌" | 메타·OG·`<title>` 전반 |
-
-**판단 필요**:
-- 파일 리네임 여부 (SEO·외부 링크·캐시 영향) → 사용자 결정 요청
-- 점진적 전환: 표시 라벨만 V2로 + 파일/식별자는 그대로 유지하는 보수 옵션도 가능
-
-### 9-3. 페이지 분리 구조 차이
-
-| 기획 V2 (멀티 페이지) | 현 코드 (단일 페이지) |
-|---|---|
-| `funwalk.html` / `funwalk-course.html` / `funwalk-notice.html` | `fun-and-walk.html` 하나 |
-| `summer-night.html` / `summer-night-notice.html` | `green-night.html` 하나 |
-| `summer-garden.html` / `summer-garden-notice.html` | `green-garden.html` 하나 |
-| `about.html` / `programs.html` | `event.html` 하나 |
-| `notice.html` / `faq.html` / `refund.html` | `community.html` 하나 |
-
-**판단 필요**: 멀티 페이지 분리 vs 현재처럼 한 페이지 + 탭/아코디언 구조 유지 → 사용자 결정 요청
-
-### 9-4. 작업 우선순위 후보
-
-| 영역 | 권장 작업 | 우선순위 |
-|---|---|---|
-| 메뉴 라벨 | 5개 GNB를 V2 명칭으로 (`partials/header.html` + fallback 6곳) | High |
-| 행사명 메타 | 모든 페이지 `<title>` / OG / 인사말 — "2026 남산 서머 페스티벌" | High |
-| 프로그램 데이터 | `data/programs.json` 신규 + 기존 `data/venue.json`과 통합 또는 참조 | High |
-| 라인업 추가 | 로이킴·존박, 구석구석 라이브를 `green-night.html` 또는 신 데이터에 반영 | High |
-| 집결지 (Garden) | "남산 마루" 신규 정보 → `green-garden.html` 반영 | High |
-| 메인 카드 | `<program-card>` 컴포넌트 (modifier 3색) | Medium |
-| CTA 2버튼 그룹 | `css/components/btn.css`에 `.btn-group--dual` modifier (내국인/외국인) | Medium |
-| 환불 규정 표 | 컴포넌트 1개 + Fun&Walk·환불 페이지 양쪽 import | Medium |
-| 유의사항 아코디언 | `<details>` 기반 무JS 컴포넌트 | Medium |
-| 페이지 분리 (선택) | 멀티 페이지 구조 도입 여부 결정 후 진행 | TBD |
-| 파일명 리네임 (선택) | `green-*` → `summer-*` 진행 여부 결정 후 진행 | TBD |
-| 사이트맵 다이어그램 | SVG 인라인 (디자인 확정 후) | Low |
-| 후원사 슬롯 | `data/sponsors.json` placeholder + 그리드 | Low |
-| FAQ / 환불 신청 폼 | 페이지 구조만 + "준비 중" 안내 | Low |
+| Summer Garden 장소 | venue.json에 "한국 숲 정원" (이태원동 259-16) 등록 또는 namsan_library와 운영 결정 일원화 | High |
+| Summer Garden 집결지 | "남산 마루" 좌표 검증 후 venue.json 추가 | High |
+| CTA URL 확정 | `data/programs.json`의 `cta[].href`가 모두 `null` — 서울시공공서비스예약 / 네이버 예약 URL 확정 필요 | High |
+| Summer Night 입장 대기줄 | 운영 시간 미확정 (PPTX "00시–00시") — 운영팀 확정 후 `summer-night/notice.html` 반영 | Medium |
+| Fun&Walk 환불 마감 | 정확 일자 운영팀 확정 후 `fun-and-walk/notice.html` 반영 | Medium |
+| 후원사 로고 | 0519 기준 미확정 → `data/sponsors.json` 채우기 + 푸터/메인 슬롯 | Medium |
+| FAQ 콘텐츠 | 운영팀 전달 후 `data/faqs.json` 채우기 | Medium |
+| 환불·취소 신청 폼 | 페이지 구조만 존재 — Summer Night/Garden용 입력 폼 콘텐츠 | Medium |
+| Summer Night 객석 가이드 / 라인업 비주얼 | 디자인 필요 | Low |
+| Summer Garden 코스 다이어그램 | 디자인 필요 | Low |
+| 전체 사이트맵 SVG | `event/index.html` 다이어그램 슬롯 — 디자인 필요 | Low |
 
 ---
 
@@ -442,3 +468,4 @@ partials/
 | 일자 | 변경 | 출처 |
 |---|---|---|
 | 2026-05-20 | V2 PPTX 기반 초안 작성 | `docs/(남산) 홈페이지 기획안_V2.pptx` |
+| 2026-05-20 | 경로 갱신: `pages/*.html` → `<area>/{index,page}.html`. § 9 코드베이스 상태 갱신 (마이그레이션 완료 마킹). GH Pages subpath 폐기 반영 (도메인 표). | 사용자 지시 (subpath 배포 폐기) |

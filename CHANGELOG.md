@@ -38,6 +38,49 @@
 
 ---
 
+## 2026-05-21 — PPT 정합성 검증 + V1 잔재 정리 + 한국어 통일
+
+> 3라운드 검증 루프(critic + verifier + analyst → R2 → R3)로 PPT 원본(`docs/(남산) 홈페이지 기획안_V2.pptx`) vs 구현 정합성을 R1 65/100 → R3 93/100까지 끌어올림. R3 verifier APPROVE.
+
+### Added
+- `data/programs.json` — V2 PPT 기반 프로그램 메타데이터 SSOT (행사 · 3 프로그램 · 환불 정책 5단계). funwalk에 `checkin_open`/`checkin_close`/`depart_time`/`kit_note`/`details` 신규 키
+- `data/sponsors.json` — 0519 기준 미확정 placeholder
+- `fun-and-walk/notice.html` "우천 시 운영" 섹션 — PPT slide 7 누락 보강 (Summer Night/Garden 정책과 동일 적용)
+- `data/notices.json` 9건 시드에 `_source` 메타 — PPT slide 2 명시 2건 vs dev seed 7건 명시적 구분, 라인업 공개 항목엔 `programs.json lineup._pending_confirmation` 참조
+- `docs/SITE_PLAN_V2.md` § 8-1 — V1 → V2 명칭 매핑표 (그린나이트 → Summer Night 등)
+- `docs/SITE_PLAN_V2.md` § 8-2 — 8개 Open Questions (라인업/셔틀 출처/푸터 Host/헤더 CTA/브랜드/우천 정책/사이트맵 도식/notices 시드)
+- `data/venue.json` `courses._waypoint_note` — PPT slide 6 6단계 표기 vs 5 CP 등록 정합 설명
+- `data/programs.json` summer-night `lineup` — `_source` 메타 + 로이킴/존박 `_pending_confirmation: true` + `_lineup_note` (PPT slide 4 vs slide 8 출처 모호성)
+- `CLAUDE.md` HTML 코드 작성 규약 — 영문 사용 최소화 룰 명시 (프로그램 공식명/SNS 플랫폼명/URL만 허용)
+
+### Changed
+- **브랜드명 V1 → V2 통일** — 헤더 로고 "NAMSAN GREEN SUMMER" → "남산 서머 페스티벌", 푸터 © "Namsan Green Summer Festival" → "Namsan Summer Festival", 메인 hero 영문 sub 제거. 도메인 `namsangreensummer.com`은 마케팅 URL로 유지 (등록 비가역)
+- **헤더 CTA 동작** — `https://forms.example.com/apply` placeholder → `/event/programs.html` (프로그램 선택 후 내국인/외국인 분기 동선 보존)
+- **푸터 Host/이메일** — 추정값 → `data-pending="host"` / `data-pending="email"` placeholder + TODO 주석. 전화번호는 `02-0000-0000` → `02-6412-9714` (PPT slide 5 명시값)
+- **subpath 배포 폐기** — Cloudflare Pages 루트 도메인 단일 환경 확정 (2026-05-20). GitHub Pages 테스트 환경 매트릭스 및 mayday-partners.github.io Kakao 화이트리스트 제거
+- **JS fetch URL 단순화** — 9곳의 `new URL('../../...', import.meta.url).href` → root-absolute 문자열(`/data/...`, `/partials/...`). subpath 호환 우회 패턴 폐기
+- **partial cache 정책** — `site-header.js` / `site-footer.js`의 `cache: 'force-cache'` → `cache: 'default'`. ETag/Cache-Control 자연 활용으로 dev에서 stale partial 잡힘 방지
+- **사용자 노출 영문 → 한국어 통일** — breadcrumb (Home → 홈), `<dt>` 라벨 18종 (Date → 일시 등), eyebrow 20여 종 (About Festival → 행사 소개 등), hero 디스플레이 카피 3종 ("Walk into the Breeze" → "시원한 산들바람 속으로" 등), 푸터 섹션명 (Host/Contact/Follow → 주최/문의/팔로우). 프로그램 공식 영문명(Fun&Walk / Summer Night / Summer Garden) 및 SNS 플랫폼명(Instagram/YouTube)은 유지
+- `data/programs.json` funwalk — `time_label` "오후 16:00" 자의적 표기 정정, `eligibility` PPT 원문 가깝게, `kit_note` PPT "등" 손실 보강
+- `data/venue.json` `courses.baekbeom_square.name` — "(횡단보도 경유)" 명시 추가
+- `docs/SITE_PLAN_V2.md` — `pages/*.html` 경로 17곳 → 현 V2 디렉토리 구조(`<area>/{index,page}.html`)로 갱신, § 9 코드베이스 상태 전면 재작성 (완료 마이그레이션 vs 잔여 작업 분리)
+- `partials/header.html` + 13개 fallback nav 일관 갱신 (CLAUDE.md 절대 룰 #1: fallback 6곳 + partial 1곳 동기화)
+- `CLAUDE.md` 배포 환경 섹션 — subpath 호환 룰 폐기, root-absolute 단일 패턴 명시
+- `README.md` § 14 배포 환경 — GitHub Pages 매트릭스 제거, Cloudflare 단일 환경, fetch URL 원칙 갱신
+- `.gitignore` — `.idea/` (JetBrains) + `~$*` (Office 임시 파일) 추가
+
+### Fixed
+- `index.html` HTML 주석 V1 잔재 (`<!-- SECTION 04 GREEN NIGHT PREVIEW -->`, `<!-- SECTION 05 GREEN GARDEN PREVIEW -->`) → V2
+- `index.html` watermark V1 잔재 (`Green<br>Night` / `Green<br>Garden`) → V2 (`Summer<br>Night` / `Summer<br>Garden`)
+- `fun-and-walk/course.html` 코스맵 종점 라벨 "FIN" → "종점", "Read Before You Go" → "출발 전 확인 사항"
+
+### Notes
+- 전 페이지 콘솔 에러 0건, HTML lint 14 files 0 errors, JS lint 0 errors
+- Chrome DevTools MCP 검증: 13 페이지 데스크톱(1440×900) + 6 핵심 페이지 모바일(390×844) 캡쳐, DOM 텍스트 추출로 V1 잔재 0건 확인
+- 잔여 운영 결정 필요 항목 8개는 `docs/SITE_PLAN_V2.md` § 8-2 Open Questions로 추적
+
+---
+
 ## 2026-05-20
 
 ### Fixed

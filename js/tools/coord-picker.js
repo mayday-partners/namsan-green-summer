@@ -2,7 +2,7 @@
 // Dev tool: pick a WGS84 lat/lng by clicking the Kakao map.
 // Loads Kakao SDK with key from data/config.json (same as map-embed.js).
 
-const CONFIG_URL = new URL('../../data/config.json', import.meta.url).href;
+const CONFIG_URL = '/data/config.json';
 const SDK_BASE = 'https://dapi.kakao.com/v2/maps/sdk.js';
 const DEFAULT_CENTER = { lat: 37.5548599, lng: 126.9792405 }; // 백범광장
 

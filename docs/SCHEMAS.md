@@ -287,7 +287,6 @@
 
 - `http://localhost:3000` (로컬 dev)
 - `https://namsangreensummer.com` (프로덕션)
-- `https://mayday-partners.github.io` (테스트)
 
 위 외 도메인에서 SDK 호출 시 Kakao 서버가 거부 → 키 노출되어도 악용 불가.
 

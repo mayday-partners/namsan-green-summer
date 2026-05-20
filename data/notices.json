@@ -5,15 +5,26 @@
     "title": "2026 남산 서머 페스티벌 공식 홈페이지 오픈!",
     "category": "공지",
     "pinned": true,
-    "link": null
+    "link": null,
+    "_source": "dev seed (홈페이지 오픈 메타 공지, PPT 외)"
   },
   {
     "id": "2026-05-18-schedule",
     "date": "2026-05-18",
-    "title": "2026 남산 서머 페스티벌 일정 안내",
+    "title": "2026 남산 서머 페스티벌 개최 안내",
     "category": "공지",
     "pinned": false,
-    "link": null
+    "link": null,
+    "_source": "PPT slide 2 (공지사항 게시글 예시 1/2)"
+  },
+  {
+    "id": "2026-05-10-booking-open",
+    "date": "2026-05-10",
+    "title": "프로그램 별 신청 방법",
+    "category": "공지",
+    "pinned": false,
+    "link": null,
+    "_source": "PPT slide 2 (공지사항 게시글 예시 2/2)"
   },
   {
     "id": "2026-05-18-funwalk-recruit",
@@ -21,7 +32,8 @@
     "title": "Fun&Walk 참가자 모집 안내",
     "category": "공지",
     "pinned": false,
-    "link": null
+    "link": null,
+    "_source": "dev seed — PPT 외, 운영팀 콘텐츠 확정 필요"
   },
   {
     "id": "2026-05-15-lineup",
@@ -29,15 +41,8 @@
     "title": "Summer Night 공연 라인업 공개",
     "category": "공지",
     "pinned": false,
-    "link": null
-  },
-  {
-    "id": "2026-05-10-booking-open",
-    "date": "2026-05-10",
-    "title": "프로그램 사전 예약 오픈 안내",
-    "category": "공지",
-    "pinned": false,
-    "link": null
+    "link": null,
+    "_source": "dev seed — programs.json lineup._pending_confirmation 상태이므로 라인업 확정 전에는 미공개. 운영팀 확정 후 게시 권장"
   },
   {
     "id": "2026-05-02-traffic",
@@ -45,7 +50,8 @@
     "title": "행사 당일 교통 통제 및 셔틀 운영 안내",
     "category": "공지",
     "pinned": false,
-    "link": null
+    "link": null,
+    "_source": "dev seed — PPT 외, 셔틀 운영 정보는 venue.json:45 출처 검증 필요 (SITE_PLAN_V2.md §8-2 Q2)"
   },
   {
     "id": "2026-04-28-funwalk-deadline",
@@ -53,7 +59,8 @@
     "title": "Fun&Walk 사전 예약 1차 마감 안내",
     "category": "공지",
     "pinned": false,
-    "link": null
+    "link": null,
+    "_source": "dev seed — PPT 외, 1차 마감 일자는 운영팀 확정 필요"
   },
   {
     "id": "2026-04-20-kit",
@@ -61,7 +68,8 @@
     "title": "참가 키트 발송 일정 안내",
     "category": "공지",
     "pinned": false,
-    "link": null
+    "link": null,
+    "_source": "dev seed — PPT 외, 키트 발송 일정은 운영팀 확정 필요"
   },
   {
     "id": "2026-04-10-sponsor",
@@ -69,6 +77,7 @@
     "title": "제휴 후원사 모집 안내",
     "category": "공지",
     "pinned": false,
-    "link": null
+    "link": null,
+    "_source": "dev seed — PPT slide 2의 후원사 미확정 메타 참조. 운영팀 확정 필요"
   }
 ]

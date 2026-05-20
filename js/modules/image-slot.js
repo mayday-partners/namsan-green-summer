@@ -2,7 +2,7 @@
 // Designer hand-off helper. Activated only when the URL has ?spec=1.
 // Reads data/image-slots.json and overlays each [data-image-slot] element
 // with a labeled SVG placeholder + a badge showing slot id / live px / target ratio.
-const SPEC_URL = new URL('../../data/image-slots.json', import.meta.url).href;
+const SPEC_URL = '/data/image-slots.json';
 const STYLE_ID = 'image-slot-injected-styles';
 
 export async function initImageSlots() {

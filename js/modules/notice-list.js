@@ -1,5 +1,5 @@
 // js/modules/notice-list.js
-const DATA_URL = new URL('../../data/notices.json', import.meta.url).href;
+const DATA_URL = '/data/notices.json';
 const TEMPLATES = {
   preview: 'tpl-notice-preview',
   full:    'tpl-notice-full',

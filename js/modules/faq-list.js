@@ -1,5 +1,5 @@
 // js/modules/faq-list.js
-const DATA_URL = new URL('../../data/faqs.json', import.meta.url).href;
+const DATA_URL = '/data/faqs.json';
 const TEMPLATE_ID = 'tpl-faq-item';
 
 export async function renderFaqList() {

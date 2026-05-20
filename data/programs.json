@@ -20,7 +20,10 @@
       "tagline": "남산 산책로에서 fun하게 즐기는 미션형 걷기",
       "description": "싱그러운 남산 순환로를 함께 걸으며 무더위를 시원하게 식혀줄 이색 워터 체험까지, 기분 좋은 활력을 가득 채우는 여름 산책.",
       "date": "2026-06-27",
-      "time_label": "오후 16:00 출발 (접수 15:00–16:00)",
+      "time_label": "16:00 출발 (접수 15:00–16:00, 15:50까지 등록 완료 필수)",
+      "checkin_open": "15:00",
+      "checkin_close": "15:50",
+      "depart_time": "16:00",
       "venue_key": "baekbeom_square",
       "venue_label": "백범광장",
       "course_distance_km": 6.0,
@@ -32,7 +35,9 @@
         "methods": ["사전예약 (서울시공공서비스예약)", "네이버 예약 (외국인)"]
       },
       "kit": ["기념티셔츠", "방수 스트링백", "완보증", "메달 키링 (완주 시 수령)"],
-      "eligibility": "신체 건강한 남녀노소 누구나. 보조 장비(휠체어·인라인) 미사용. 유아 동반 가능하나 유아차 불가.",
+      "kit_note": "PPT 원문은 '등'으로 종결 — 추가 지급품 가능성 있음 (운영팀 확정 시 보강).",
+      "eligibility": "신체 건강한 남녀노소 누구나. 보조 장비(휠체어·인라인) 사용 없이 달릴 수 있는 자. 유아 동반은 가능하나 유아차를 동반하여 참가할 수 없음.",
+      "details": ["체험부스", "걷기 및 프로그램 참여 (백범광장→북측순환로→남측순환로→팔각광장)"],
       "conflict_with": ["summer-garden"],
       "cta": [
         {
@@ -57,7 +62,7 @@
       "description": "서울의 밤 풍경이 아름답게 펼쳐지는 남산 팔각정에서, 시원한 산바람과 낭만적인 음악을 들으며 한여름 밤의 다정한 추억을 만들어보세요.",
       "date": "2026-06-27",
       "time_label": "17:00–21:00",
-      "venue_key": null,
+      "venue_key": "palgakjeong_square",
       "venue_label": "팔각광장",
       "venue_address": "서울 중구 예장동 8-1",
       "fee_krw": 0,
@@ -68,10 +73,11 @@
         "methods": ["사전예약 (네이버 예약)", "현장 예약"]
       },
       "lineup": [
-        { "type": "official", "name": "2026 구석구석 라이브" },
-        { "type": "artist", "name": "로이킴" },
-        { "type": "artist", "name": "존박" }
+        { "type": "official", "name": "2026 구석구석 라이브", "_source": "PPT slide 8" },
+        { "type": "artist", "name": "로이킴", "_source": "PPT slide 4 (slide 8 본문은 '아티스트 초청 (이미지/디자인 필요)'로 미명시)", "_pending_confirmation": true },
+        { "type": "artist", "name": "존박", "_source": "PPT slide 4 (slide 8 본문은 '아티스트 초청 (이미지/디자인 필요)'로 미명시)", "_pending_confirmation": true }
       ],
+      "_lineup_note": "PPT slide 8 본문은 '구석구석 라이브 + 아티스트 초청'으로만 표기하고 라인업 비주얼은 '디자인 필요'로 미확정 표기됨. 로이킴/존박은 slide 4 '세부 프로그램' 예시에서만 언급 — 운영팀 라인업 확정 후 _pending_confirmation 제거.",
       "experience_zone": {
         "operating_label": "2026.6.27. (토) 17:00–21:00",
         "audience": "SNS 이벤트 참여자 (현장)",
@@ -98,10 +104,11 @@
       "venue_key": null,
       "venue_label": "한국 숲 정원",
       "venue_address": "서울 용산구 이태원동 259-16",
+      "_pending_venue": "venue.json에 '한국 숲 정원' 미등록 (이태원동 259-16). venue.json의 namsan_library(후암동 30-84)는 다른 장소 — 운영팀에 확인 후 venue.json 신규 엔트리로 추가하거나 namsan_library로 일원화 결정 필요.",
       "meeting_point": {
         "label": "남산 마루",
         "venue_key": null,
-        "_pending": "좌표 검증 필요 — venue.json에 추가 후 키 연결"
+        "_pending": "venue.json에 '남산 마루' 미등록. 좌표 검증 후 venue.json에 추가하고 키 연결."
       },
       "fee_krw": 0,
       "fee_label": "무료",
