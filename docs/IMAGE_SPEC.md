@@ -51,11 +51,11 @@
 | ID | 페이지 | 비율 | widths | 공유 |
 |---|---|---|---|---|
 | `card-media-funwalk` | event.html | 4:3 | 480·768 | — |
-| `card-media-night` | event.html + green-night.html | 4:3 | 480·768 | **2개 페이지** |
-| `card-media-garden` | event.html + green-night.html + green-garden.html | 4:3 | 480·768 | **3개 페이지** |
-| `card-media-garden-deep` | green-garden.html (Workshop 02) | 4:3 | 480·768 | — |
-| `card-media-garden-fresh` | green-garden.html (Workshop 03) | 4:3 | 480·768 | — |
-| `card-media-neutral` | green-night.html (Food Truck) | 4:3 | 480·768 | — |
+| `card-media-night` | event.html + summer-night.html | 4:3 | 480·768 | **2개 페이지** |
+| `card-media-garden` | event.html + summer-night.html + summer-garden.html | 4:3 | 480·768 | **3개 페이지** |
+| `card-media-garden-deep` | summer-garden.html (Workshop 02) | 4:3 | 480·768 | — |
+| `card-media-garden-fresh` | summer-garden.html (Workshop 03) | 4:3 | 480·768 | — |
+| `card-media-neutral` | summer-night.html (Food Truck) | 4:3 | 480·768 | — |
 
 ---
 

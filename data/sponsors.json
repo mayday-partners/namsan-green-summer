@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "updated": "2026-05-20",
+  "notes": "후원사 로고/링크 SSOT. 출처: docs/(남산) 홈페이지 기획안_V2.pptx (0519 기준 미확정 — placeholder). 로고 확정 시 sponsors 배열에 항목 추가. 렌더는 메인/푸터 슬롯에서 data-sponsor-list로 호출.",
+  "source": "docs/(남산) 홈페이지 기획안_V2.pptx",
+  "status": "pending",
+  "sponsors": []
+}

@@ -92,7 +92,7 @@
 - **디자인 시스템 foundations** + Pretendard woff2 subset 5종 (Light/Regular/Medium/SemiBold/Bold)
 - **공통 UI 컴포넌트** (button, card, header, footer)
 - **홈 페이지** (hero + programs + previews + notice)
-- **5개 서브 페이지** (event / fun-and-walk / green-night / green-garden / community) + 공통 sub-page 스타일
+- **5개 서브 페이지** (event / fun-and-walk / summer-night / summer-garden / community) + 공통 sub-page 스타일
 - **첫 README + CLAUDE.md** — 프로젝트 컨벤션
 - **partials / data / modules 마이그레이션** (Phase 1):
   - `partials/` 헤더/푸터 추출 + `include` 로더

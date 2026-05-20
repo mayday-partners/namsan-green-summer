@@ -47,8 +47,8 @@ npx serve -l 3000
 ├─ pages/                      ← 5개 서브 페이지
 │  ├─ event.html
 │  ├─ fun-and-walk.html
-│  ├─ green-night.html
-│  ├─ green-garden.html
+│  ├─ summer-night.html
+│  ├─ summer-garden.html
 │  └─ community.html
 ├─ partials/                   ← <site-header> / <site-footer> 가 fetch (SSOT)
 │  ├─ header.html
@@ -193,7 +193,7 @@ ITCSS + BEM + CSS Cascade Layers 조합. 단일 진입점 `css/main.css`:
 원칙:
 - **페이지별 CSS는 `pages` 레이어**에 두어 컴포넌트 기본형을 자연스럽게 오버라이드. 현재 `home.css` (홈 전용) + `page.css` (5개 서브 페이지 공통) 2개. 신규 페이지가 기존 패턴 내면 `page.css` 추가, 완전히 다르면 새 `css/<area>.css` + main.css `@import`
 - **토큰 변경은 반드시 `tokens.css`만** 수정 — DESIGN.md ↔ tokens.css 1:1 매핑 유지. 토큰 워크플로우는 [`DESIGN.md`](./DESIGN.md) "변경 워크플로우"
-- **`dark-section.css`는 정의됐으나 HTML 미사용** — 향후 Green Night 전용 섹션 도입 후보 ([`ARCHITECTURE.md`](./ARCHITECTURE.md) §7)
+- **`dark-section.css`는 정의됐으나 HTML 미사용** — 향후 Summer Night 전용 섹션 도입 후보 ([`ARCHITECTURE.md`](./ARCHITECTURE.md) §7)
 - **utility layer가 components 위** — `.fade-in opacity:0`이 컴포넌트 기본형보다 우선 적용되어야 IntersectionObserver 진입 전 숨김 보장
 
 ---
@@ -327,7 +327,7 @@ this.querySelectorAll('.site-nav__link').forEach(a => {
 1. `partials/header.html` (정상 fetch 결과)
 2. `partials/footer.html` (sitemap 영역)
 3. `index.html` fallback
-4-8. `pages/{event,fun-and-walk,green-night,green-garden,community}.html` fallback
+4-8. `pages/{event,fun-and-walk,summer-night,summer-garden,community}.html` fallback
 9. `404.html` fallback
 
 > [!TIP]

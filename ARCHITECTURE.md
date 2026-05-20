@@ -288,7 +288,7 @@ function normalizeFallbackLinks(root) {
 
 - `.hero`/`.preview`는 페이지별 background-image와 강하게 결합된 풀-블리드 섹션. 일반화하면 props가 폭증.
 - `.program-card`는 카드 grid 레이아웃의 일부. 외부 modifier로 분리하면 카드 시스템이 복잡해짐.
-- `.dark-section`은 **장래의 Green Night 전용 feature section**을 위해 미리 정의된 일반 컨테이너 — 도입 시점 미정.
+- `.dark-section`은 **장래의 Summer Night 전용 feature section**을 위해 미리 정의된 일반 컨테이너 — 도입 시점 미정.
 
 각 구현은 의도(dark-on-light 무드)를 공유하지만 책임(섹션 전용 / 카드 / 일반 컨테이너)이 달라 강제 통합이 오히려 손해. 단, 새 다크 섹션이 필요하면 먼저 `.dark-section` 컴포넌트 사용을 검토.
 

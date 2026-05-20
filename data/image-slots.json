@@ -46,7 +46,7 @@
     {
       "id": "preview-night",
       "page": "/",
-      "section": ".preview__bg--night — 홈 Green Night 프리뷰 풀블리드 배경 (좌우 반전 레이아웃)",
+      "section": ".preview__bg--night — 홈 Summer Night 프리뷰 풀블리드 배경 (좌우 반전 레이아웃)",
       "render": "background-cover",
       "priority": "P1",
       "lcp": false,
@@ -61,7 +61,7 @@
     {
       "id": "preview-garden",
       "page": "/",
-      "section": ".preview__bg--garden — 홈 Green Garden 프리뷰 풀블리드 배경",
+      "section": ".preview__bg--garden — 홈 Summer Garden 프리뷰 풀블리드 배경",
       "render": "background-cover",
       "priority": "P1",
       "lcp": false,
@@ -117,26 +117,26 @@
     },
     {
       "id": "card-media-night",
-      "page": "/pages/event.html, /pages/green-night.html",
-      "section": ".card__media--night — Green Night 키비주얼 (2개 페이지 공유)",
+      "page": "/pages/event.html, /pages/summer-night.html",
+      "section": ".card__media--night — Summer Night 키비주얼 (2개 페이지 공유)",
       "render": "background-cover",
       "priority": "P3",
       "lcp": false,
-      "alt": "Green Night 키비주얼 썸네일",
+      "alt": "Summer Night 키비주얼 썸네일",
       "current_file": null,
-      "current_status": "그라데이션 (event.html 1곳 + green-night.html 1곳 동일 자산 공유)",
+      "current_status": "그라데이션 (event.html 1곳 + summer-night.html 1곳 동일 자산 공유)",
       "art_direction": [
         { "ratio": "4:3", "widths": [480, 768] }
       ]
     },
     {
       "id": "card-media-garden",
-      "page": "/pages/event.html, /pages/green-night.html, /pages/green-garden.html",
-      "section": ".card__media--garden — Green Garden 키비주얼 (3개 페이지 공유)",
+      "page": "/pages/event.html, /pages/summer-night.html, /pages/summer-garden.html",
+      "section": ".card__media--garden — Summer Garden 키비주얼 (3개 페이지 공유)",
       "render": "background-cover",
       "priority": "P3",
       "lcp": false,
-      "alt": "Green Garden 키비주얼 썸네일",
+      "alt": "Summer Garden 키비주얼 썸네일",
       "current_file": null,
       "current_status": "그라데이션 (3개 페이지 동일 자산 공유)",
       "art_direction": [
@@ -145,8 +145,8 @@
     },
     {
       "id": "card-media-garden-deep",
-      "page": "/pages/green-garden.html",
-      "section": ".card__media--garden-deep — Green Garden Workshop 02 (허브 향기 체험)",
+      "page": "/pages/summer-garden.html",
+      "section": ".card__media--garden-deep — Summer Garden Workshop 02 (허브 향기 체험)",
       "render": "background-cover",
       "priority": "P3",
       "lcp": false,
@@ -157,8 +157,8 @@
     },
     {
       "id": "card-media-garden-fresh",
-      "page": "/pages/green-garden.html",
-      "section": ".card__media--garden-fresh — Green Garden Workshop 03 (식물 일기 워크숍)",
+      "page": "/pages/summer-garden.html",
+      "section": ".card__media--garden-fresh — Summer Garden Workshop 03 (식물 일기 워크숍)",
       "render": "background-cover",
       "priority": "P3",
       "lcp": false,
@@ -169,8 +169,8 @@
     },
     {
       "id": "card-media-neutral",
-      "page": "/pages/green-night.html",
-      "section": ".card__media--neutral — Green Night Zone 03 (Food Truck)",
+      "page": "/pages/summer-night.html",
+      "section": ".card__media--neutral — Summer Night Zone 03 (Food Truck)",
       "render": "background-cover",
       "priority": "P3",
       "lcp": false,

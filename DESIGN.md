@@ -5,12 +5,12 @@ description: >-
   Festival site for the 2026 Namsan Green Summer Festival
   (2026 남산 그린 서머 페스티벌). Light paper baseline with neon accents
   preserved as motifs; dark surfaces reserved for nocturnal-mood section
-  containers (Green Night hero, program imagery). Display Anton + body
+  containers (Summer Night hero, program imagery). Display Anton + body
   Pretendard. Editorial calm under a high-contrast festival aesthetic.
 colors:
   # Brand accents — three program identities (accent / decorative use only)
-  primary:   "#A8FF00"   # Neon Lime — Green Garden + CTA background (never as text on light surfaces)
-  secondary: "#FF0F7B"   # Hot Pink — Green Night
+  primary:   "#A8FF00"   # Neon Lime — Summer Garden + CTA background (never as text on light surfaces)
+  secondary: "#FF0F7B"   # Hot Pink — Summer Night
   tertiary:  "#00A3FF"   # Sky Blue — Fun & Walk
   # Surface system (light baseline)
   neutral:        "#F4F8EE"   # Pale Garden — page background, green-tinted paper
@@ -21,8 +21,8 @@ colors:
   on-surface-body:   "#2D3340"   # Body Slate — body copy
   on-surface-muted:  "#6B7280"   # Cool Slate — metadata, eyebrows, captions
   # Darker accent variants — text use on light surfaces (neon hues fail contrast as text)
-  primary-text:    "#3E7A00"   # Deep Lime — Green Garden eyebrow/link on light (4.62:1 AA on surface)
-  secondary-text:  "#B0094B"   # Deep Pink — Green Night eyebrow/link on light (6.74:1 AA on surface)
+  primary-text:    "#3E7A00"   # Deep Lime — Summer Garden eyebrow/link on light (4.62:1 AA on surface)
+  secondary-text:  "#B0094B"   # Deep Pink — Summer Night eyebrow/link on light (6.74:1 AA on surface)
   tertiary-text:   "#0277BD"   # Deep Blue — Fun & Walk eyebrow/link on light (4.85:1 AA on surface)
   # Dark surface system (section-level nocturnal containers)
   dark-surface:    "#050816"   # Midnight Ink — dark section background, program card imagery
@@ -222,7 +222,7 @@ components:
 
 ## Overview
 
-The brand mood is **"editorial calm with luminous festival accents on a green-tinted paper canvas."** A pale garden paper plays foil to a single signature **Neon Lime** accent used as a *motif* (CTA background, brand mark, glow), while two secondary brand colors — **Hot Pink** and **Sky Blue** — partition the three festival programs. Nocturnal moments (Green Night hero, program imagery cards) live inside dedicated **dark section containers** rather than across full pages.
+The brand mood is **"editorial calm with luminous festival accents on a green-tinted paper canvas."** A pale garden paper plays foil to a single signature **Neon Lime** accent used as a *motif* (CTA background, brand mark, glow), while two secondary brand colors — **Hot Pink** and **Sky Blue** — partition the three festival programs. Nocturnal moments (Summer Night hero, program imagery cards) live inside dedicated **dark section containers** rather than across full pages.
 
 - **Density**: spacious. Hero, programs, and previews each occupy a full viewport-height band. Typography breathes; CTAs sit alone in their visual zone.
 - **Voice**: editorial broadsheet meets after-hours flyer. Korean headlines stay tight (Pretendard SemiBold), English eyebrows wear wide letter-spacing (Montserrat caps), and display numerals/English use Anton for festival-poster gravitas.
@@ -233,15 +233,15 @@ The brand mood is **"editorial calm with luminous festival accents on a green-ti
 
 The palette is a **light paper baseline + neon motifs + dark section containers**: three brand neons (decorative), a three-step light surface stack, three darker neon variants for text use, and a two-step dark surface stack for nocturnal containers.
 
-- **Primary (#A8FF00) — "Neon Lime"** The single brand accent. Used as background fill on the primary CTA, the brand dot, the focus ring fills, and as the **Green Garden** identity. *Never set as text directly on light surfaces* (fails contrast at 1.4:1) — use `primary-text` for the eyebrow/link form.
-- **Secondary (#FF0F7B) — "Hot Pink"** Reserved for the **Green Night** program identity. Used as bg fill on the Green Night CTA banner, program icon, watermark, and section border accents. Use `secondary-text` for text on light surfaces.
+- **Primary (#A8FF00) — "Neon Lime"** The single brand accent. Used as background fill on the primary CTA, the brand dot, the focus ring fills, and as the **Summer Garden** identity. *Never set as text directly on light surfaces* (fails contrast at 1.4:1) — use `primary-text` for the eyebrow/link form.
+- **Secondary (#FF0F7B) — "Hot Pink"** Reserved for the **Summer Night** program identity. Used as bg fill on the Summer Night CTA banner, program icon, watermark, and section border accents. Use `secondary-text` for text on light surfaces.
 - **Tertiary (#00A3FF) — "Sky Blue"** Reserved for the **Fun & Walk** program identity. Same role as pink, scoped to its program. Use `tertiary-text` for text on light surfaces.
 - **Neutral (#F4F8EE) — "Pale Garden"** Page background. A green-tinted paper that anchors the "Green Summer" brief without going pure white.
 - **Surface (#FFFFFF) — "Pure paper"** Cards, panels, scrolled header backdrop, input fields. Lifts cleanly from `neutral` for elevation.
 - **Surface-alt (#FAFBF6) — "Soft off-white"** Zone-level alternate strip (footer, alternating sections) for rhythm without a heavy color shift.
 - **On-surface tiers** Charcoal Ink (#0F1419) for display titles and the highest-emphasis copy; Body Slate (#2D3340) for body text; Cool Slate (#6B7280) for muted metadata, eyebrows, and uppercase labels. All three pass WCAG AA or better on `surface`.
 - **Primary/Secondary/Tertiary text variants** Deep Lime (#3E7A00), Deep Pink (#B0094B), Deep Blue (#0277BD). Used exclusively for *text* renditions of the program identities on light surfaces. All pass WCAG AA on `surface` (white).
-- **Dark-surface (#050816) — "Midnight Ink"** Background for **section-scoped** dark containers: Green Night hero, program imagery cards, hero overlay zones. Never used as full-page background.
+- **Dark-surface (#050816) — "Midnight Ink"** Background for **section-scoped** dark containers: Summer Night hero, program imagery cards, hero overlay zones. Never used as full-page background.
 - **Dark-surface-2 (#0C0F24) — "Elevated Indigo"** Elevated cards inside dark sections. Subtle lift from `dark-surface`.
 - **On-dark tiers** White (#FFFFFF) for display titles and Paper (#E6E8F0) for body inside dark sections — preserve the original nocturnal contrast.
 
@@ -373,7 +373,7 @@ When a program identity needs **text** on a light page (e.g., notice list catego
 
 ### Dark section (nocturnal-mood container)
 
-`dark-section` is the Green Night–style mood container used **inside light pages** for hero photo zones, Green Night feature sections, and any block where the festival's after-hours identity must read clearly. It is *not* a page mode — light pages can contain multiple `.dark-section` blocks, and they always sit inside the light page rhythm with `rounded.lg` corners that announce the container boundary.
+`dark-section` is the Summer Night–style mood container used **inside light pages** for hero photo zones, Summer Night feature sections, and any block where the festival's after-hours identity must read clearly. It is *not* a page mode — light pages can contain multiple `.dark-section` blocks, and they always sit inside the light page rhythm with `rounded.lg` corners that announce the container boundary.
 
 - `dark-section` — `dark-surface` bg, `on-dark-body` body text, `rounded.lg`, 48 px padding.
 - `dark-section-title` — `on-dark` white, `headline-md` typography.
@@ -426,16 +426,16 @@ Not yet defined — awaiting designer hand-off. When introduced, inputs should f
 
 **Do**
 
-- Use `primary` (neon #A8FF00) as a **decorative motif** only: the brand dot, primary CTA background, focus ring fill, neon glow halos, program-card border accents inside dark sections, the Green Garden program identity inside dark contexts.
-- Use `primary-text` (#3E7A00) for **any text** that needs the Green Garden / brand identity on a light page (eyebrows, links, list category labels, timetable times).
-- Use the secondary/tertiary text pair (`secondary-text` #B0094B / `tertiary-text` #0277BD) for Green Night / Fun & Walk text on light pages.
+- Use `primary` (neon #A8FF00) as a **decorative motif** only: the brand dot, primary CTA background, focus ring fill, neon glow halos, program-card border accents inside dark sections, the Summer Garden program identity inside dark contexts.
+- Use `primary-text` (#3E7A00) for **any text** that needs the Summer Garden / brand identity on a light page (eyebrows, links, list category labels, timetable times).
+- Use the secondary/tertiary text pair (`secondary-text` #B0094B / `tertiary-text` #0277BD) for Summer Night / Fun & Walk text on light pages.
 - Pair every neon background with `dark-surface` text (`#A8FF00` on `#050816` → 14.6 : 1 AAA) — this remains the brand's signature pairing on CTAs and program icons.
-- Reserve each accent for its program scope: **Neon = Green Garden + brand**, **Pink = Green Night**, **Blue = Fun & Walk**.
+- Reserve each accent for its program scope: **Neon = Summer Garden + brand**, **Pink = Summer Night**, **Blue = Fun & Walk**.
 - Use Anton **only for English and numerals**. Headlines that contain Korean must use Pretendard (e.g., "주요 프로그램" stays in Pretendard, "Program 01" in Montserrat or Anton).
 - Maintain WCAG AA contrast (≥ 4.5 : 1 for normal text, ≥ 3 : 1 for large text) — all defined `on-*` × surface pairs currently pass; new combinations must be re-checked.
 - Use `shadow-glow` only on `primary` interactive states. It is the brand's signature; do not dilute it on non-CTA surfaces.
 - Keep the 9-step spacing scale closed. Adding a custom px value is a code smell — pick the nearest scale value.
-- Wrap nocturnal imagery (hero photos, program cards, Green Night feature blocks) in `.dark-section` containers so the photographic palette and neon-on-dark legibility survive the light page rhythm.
+- Wrap nocturnal imagery (hero photos, program cards, Summer Night feature blocks) in `.dark-section` containers so the photographic palette and neon-on-dark legibility survive the light page rhythm.
 
 **Don't**
 

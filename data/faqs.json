@@ -2,7 +2,7 @@
   {
     "id": "fee",
     "question": "참가비가 있나요?",
-    "answer": "모든 입장은 무료입니다. 다만 Fun&Walk, Green Garden 도슨트 등 일부 프로그램은 사전 예약이 필요하며 정원 제한이 있습니다.",
+    "answer": "모든 입장은 무료입니다. 다만 Fun&Walk, Summer Garden 도슨트 등 일부 프로그램은 사전 예약이 필요하며 정원 제한이 있습니다.",
     "tags": ["참가", "예약"]
   },
   {
@@ -20,7 +20,7 @@
   {
     "id": "walkin",
     "question": "당일 현장 워크인 참여가 가능한가요?",
-    "answer": "Green Night 메인 스테이지와 체험존은 자유 입장입니다. Fun&Walk, Green Garden 도슨트는 정원 제한으로 사전 예약자 우선이며, 잔여 자리에 한해 현장 접수가 진행됩니다.",
+    "answer": "Summer Night 메인 스테이지와 체험존은 자유 입장입니다. Fun&Walk, Summer Garden 도슨트는 정원 제한으로 사전 예약자 우선이며, 잔여 자리에 한해 현장 접수가 진행됩니다.",
     "tags": ["참가", "예약"]
   },
   {

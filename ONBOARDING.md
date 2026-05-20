@@ -45,8 +45,8 @@ npx serve -l 3000
 - `/` (홈)
 - `/pages/event.html` (행사안내 — 허브 페이지)
 - `/pages/fun-and-walk.html` (Program 01)
-- `/pages/green-night.html` (Program 02)
-- `/pages/green-garden.html` (Program 03)
+- `/pages/summer-night.html` (Program 02)
+- `/pages/summer-garden.html` (Program 03)
 - `/pages/community.html` (공지 + FAQ + 환불)
 
 **관찰 포인트**:

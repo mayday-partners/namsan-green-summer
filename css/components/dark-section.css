@@ -1,6 +1,6 @@
 /* ===== Dark Section (nocturnal-mood container) =====
  * DESIGN.md "Dark section" 컴포넌트. 라이트 페이지 위 *섹션 단위*로
- * 다크 surface를 띄워 Green Night/photo 무드를 보존하는 컨벤션.
+ * 다크 surface를 띄워 Summer Night/photo 무드를 보존하는 컨벤션.
  * 페이지 단위 다크 모드가 아니라 컨테이너 단위로만 사용.
  *
  * 사용 예:
@@ -23,7 +23,7 @@
   overflow: hidden;
 }
 
-/* Subtle pink/neon radial glow — Green Night ambient. Use the modifiers below
+/* Subtle pink/neon radial glow — Summer Night ambient. Use the modifiers below
  * to switch the glow color per section identity. */
 .dark-section::after {
   content: '';
