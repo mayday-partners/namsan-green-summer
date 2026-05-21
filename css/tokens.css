@@ -2,185 +2,185 @@
   color-scheme: light;
 
   /* ============================================================
-     DESIGN.md 1:1 매핑 — 19 colors (light baseline)
+     Colors — DESIGN.md 1:1 매핑 (15 colors)
      ============================================================ */
 
-  /* Brand accents — decorative motifs only on light surfaces */
-  --color-primary:   #39ff14;   /* Neon Green — single brand accent (DESIGN.md "Primary") */
-  --neon-deep:       #22c40f;   /* Deep neon — hover/focus deep state, paired with --color-primary */
+  /* Foundation */
+  --color-ink:        #0b0d0c;   /* Primary text */
+  --color-muted:      #6c7370;   /* Caption, metadata */
+  --color-line:       #e5e8e6;   /* Hairline divider (used as background of .divider 1px elements) */
+  --color-paper:      #ffffff;   /* Page bg, cards */
+  --color-soft:       #f5fbf7;   /* Zone alternation */
+  --color-primary:    #39ff14;   /* Neon Green — single brand accent */
+  --color-neon-deep:  #22c40f;   /* Active text variant (gnb-link-active, --shadow-text-hard) */
+  --color-black:      #080808;   /* Brand-mark surface, footer, primary-CTA base */
 
-  /* Light surface stack */
-  --color-neutral:     #F4F8EE;   /* Pale Garden — page background */
-  --color-surface:     #FFFFFF;   /* Pure paper — cards, panels */
-  --color-surface-alt: #FAFBF6;   /* Soft off-white — zone separation */
-
-  /* On-light text tiers */
-  --color-on-surface:        #0F1419;   /* Charcoal Ink — headings */
-  --color-on-surface-body:   #2D3340;   /* Body Slate — body copy */
-  --color-on-surface-muted:  #6B7280;   /* Cool Slate — metadata */
-
-  /* Darker accent text variants — for text use on light surfaces */
-  --color-primary-text:   #107010;   /* Deep Green — 6.27:1 AA on #FFFFFF, 5.83:1 AA on #F4F8EE */
-
-  /* Dark surface stack — section-scoped nocturnal containers */
-  --color-dark-surface:    #050816;   /* Midnight Ink */
-  --color-dark-surface-2:  #0C0F24;   /* Elevated Indigo */
-
-  /* On-dark text tiers (inside .dark-section) */
-  --color-on-dark:       #FFFFFF;
-  --color-on-dark-body:  #E6E8F0;
-
-  /* External deep-link brand colors — scoped to .btn--map-* only */
-  --color-brand-kakao:       #FAE100;
-  --color-brand-google-blue: #1A73E8;
-  --color-brand-naver:       #03C75A;
-
-  /* Fun&Walk 예약 버튼 브랜드 색상 — .reserve-button에만 scoped (DESIGN.md reserve-local/global) */
-  --color-reserve-local:   #ffbd00;   /* 내국인 신청 — 11.9:1 AAA on dark-surface (#050816) */
-  --color-reserve-global:  #05b957;   /* 외국인 신청 — 7.68:1 AA(normal)/AAA(large) on dark-surface (#050816) */
+  /* Program callouts — scoped per DESIGN.md */
+  --color-reserve-local:   #ffbd00;   /* Fun&Walk reserve-button-local only */
+  --color-reserve-global:  #05b957;   /* Fun&Walk reserve-button-global only */
+  --color-lineup-base:     #066d3a;   /* Summer Night lineup-card strong (normal) — AA 6.5:1 on paper */
+  --color-lineup-live:     #ffb400;   /* Summer Night lineup highlight + heading underline */
+  --color-map-garden:      #1ecb3b;   /* festival-map pin-garden only */
+  --color-map-course:      #1c7dff;   /* Fun&Walk course-map route border only */
+  --color-map-finish:      #c00404;   /* Fun&Walk course-label bg only — AA 6.4:1 on paper */
+  --color-garden-route:    #006f4a;   /* Summer Garden docent route line only */
+  --color-lineup-card-bg:  #f7f1e7;   /* Summer Night lineup card base bg (warm beige) */
+  --color-experience-deep: #273027;   /* Summer Night experience card gradient end (deeper-than-black warm) */
 
   /* ============================================================
-     Alpha-tinted utilities (CSS-only, not Color tokens per DESIGN.md
-     "Alpha-tinted utilities" — declared here for runtime reuse). */
-  --color-border:           rgba(15, 20, 25, 0.10);      /* hairline divider on light surfaces */
-  --color-border-on-dark:   rgba(230, 232, 240, 0.10);   /* hairline divider inside .dark-section */
-  --color-surface-overlay:  rgba(244, 248, 238, 0.72);   /* scrolled header backdrop (blur on this) */
-  --color-primary-soft:     rgba(57, 255, 20, 0.18);     /* focus ring fills, neon halos */
-  --color-scrim-on-dark:        rgba(5, 8, 22, 0.55);     /* hero card backdrop (with blur) */
-  --color-scrim-on-dark-heavy:  rgba(5, 8, 22, 0.88);     /* image-slot dev badge (?spec=1) */
-  --color-program-border: rgba(57, 255, 20, 0.30);  /* program-card resting border (single neon) */
-
-  /* ============================================================
-     Typography
+     Alpha-tinted utilities — CSS only, not Color tokens
+     Documented in DESIGN.md "Alpha-tinted utilities (CSS only)"
      ============================================================ */
-  --font-kr: 'Pretendard Variable', 'Pretendard', system-ui, -apple-system, sans-serif;
-  --font-en: 'Montserrat', sans-serif;
-  --font-display: 'Anton', 'Montserrat', sans-serif;
-
-  --fs-xs: 0.75rem;
-  --fs-sm: 0.875rem;
-  --fs-base: 1rem;
-  --fs-md: 1.125rem;
-  --fs-lg: 1.375rem;
-  --fs-xl: 2rem;
-  --fs-2xl: 3rem;
-  --fs-3xl: 4.5rem;
-  --fs-display-hero: clamp(2.5rem, 7vw, 6rem);
+  --color-neon-soft:           rgba(57, 255, 20, 0.18);   /* focus ring fills, neon halos */
+  --color-overlay-paper:       rgba(255, 255, 255, 0.96); /* scrolled header backdrop (blur 16px) */
+  --color-border-soft:         rgba(0, 0, 0, 0.08);       /* overview-card / program-detail border */
+  --color-pattern-white-soft:  rgba(255, 255, 255, 0.46); /* radial ring stroke on pattern-radial-light */
 
   /* ============================================================
-     Spacing scale
+     Typography — DESIGN.md 1:1 매핑 (10 scales)
+     Single family: Pretendard (Korean + English + numerals)
      ============================================================ */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: 4rem;
-  --space-9: 6rem;
-  --space-10: 8rem;
+  --font-kr: 'Pretendard Variable', 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont,
+             'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
 
-  --container-max: 1280px;
-  --container-pad: 1.25rem;
+  --fs-display-xl:   7rem;       /* wire-hero h1 — fluid clamp applied at use site */
+  --fs-display-lg:   4.5rem;     /* program-strip strong, large band copy */
+  --fs-display-md:   3rem;       /* overview-card h2, sub-page hero h1 */
+  --fs-headline-lg:  2.25rem;    /* section title inside overview-card */
+  --fs-headline-md:  1.625rem;   /* info-panel h3, program-detail h3 */
+  --fs-headline-sm:  1.25rem;    /* community-placeholder strong, lineup-heading */
+  --fs-body-md:      1rem;       /* body paragraphs */
+  --fs-body-sm:      0.875rem;   /* list items, metadata, dl values */
+  --fs-label-en:     0.8125rem;  /* section-label, block-kicker */
+  --fs-badge-en:     0.75rem;    /* notice-badge, course-label, garden-zone */
+
+  --fw-display:   950;   /* display-xl, display-lg, display-md, headline-lg */
+  --fw-headline:  900;   /* headline-md, headline-sm */
+  --fw-emphasis:  750;   /* body-sm (emphasis weight) */
+  --fw-body:      600;   /* body-md */
+
+  --lh-display-xl:   0.86;
+  --lh-display-lg:   0.9;
+  --lh-display-md:   1.0;
+  --lh-headline-lg:  1.1;
+  --lh-headline-md:  1.18;
+  --lh-headline-sm:  1.3;
+  --lh-body-md:      1.7;
+  --lh-body-sm:      1.55;
+  --lh-label-en:     1.0;
+  --lh-badge-en:     1.0;
+
+  --tracking-label:  0.06em;     /* label-en */
+  --tracking-badge:  0.08em;     /* badge-en */
+
+  /* Fluid display sizes used at hero scale */
+  --fs-display-xl-fluid: clamp(2.5rem, 8vw, 7rem);
+  --fs-display-lg-fluid: clamp(2rem, 5vw, 4.5rem);
+  --fs-display-md-fluid: clamp(1.75rem, 4vw, 3rem);
 
   /* ============================================================
-     Radii
+     Spacing scale — DESIGN.md 1:1 매핑 (10 tokens)
      ============================================================ */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 24px;
-  --radius-pill: 999px;
+  --space-xs:   0.25rem;    /* 4px  — inline micro gap */
+  --space-sm:   0.5rem;     /* 8px  — list inner, badge inset */
+  --space-md:   0.75rem;    /* 12px — small padding, button gap */
+  --space-lg:   1rem;       /* 16px — base rhythm, list gap */
+  --space-xl:   1.5rem;     /* 24px — card body, info-panel field gap */
+  --space-2xl:  2rem;       /* 32px — section header gap, notice-guide-item padding */
+  --space-3xl:  2.5rem;     /* 40px — info-panel padding */
+  --space-4xl:  3.5rem;     /* 56px — overview-card padding tablet */
+  --space-5xl:  4.5rem;     /* 72px — sub-hero padding */
+  --space-6xl:  6.5rem;     /* 104px — wire-section padding desktop */
 
   /* ============================================================
-     Shadows
-     - shadow-glow : 네온 글로우 (CTA hover, brand 시그니처) — 변경 없음
-     - shadow-card : 라이트 페이지 카드 lift (신규 라이트 톤)
-     - shadow-dark : 다크 섹션 내부 카드 lift (기존 다크 카드 그림자 보존)
+     Rounded — DESIGN.md 1:1 매핑 (7 levels)
      ============================================================ */
-  --shadow-glow: 0 0 24px rgba(57, 255, 20, 0.45), 0 0 64px rgba(57, 255, 20, 0.18);
-  --shadow-card: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04);
-  --shadow-dark: 0 24px 64px rgba(0, 0, 0, 0.45);
+  --radius-none:  0px;
+  --radius-xs:    8px;       /* course-label, skip-link */
+  --radius-sm:    12px;      /* map-pin, reserve-button */
+  --radius-md:    16px;      /* notice-guide-item, seat-guide, notice-panel */
+  --radius-lg:    20px;      /* info-panel, program-detail, community-block, *-map */
+  --radius-xl:    24px;      /* overview-card, lineup-card */
+  --radius-full:  999px;     /* pill CTAs, overview-tabs, kickers, notice-badge */
+
+  /* ============================================================
+     Sizes — DESIGN.md `sizes:` 카테고리 1:1 매핑 (spec extension)
+     ============================================================ */
+  --size-brand-mark-w:     42px;
+  --size-brand-mark-h:     28px;
+  --size-menu-icon:        72px;
+  --size-header-h:         66px;
+  --size-header-h-mobile:  60px;
+  --size-cta-min-h:        48px;
+  --size-cta-min-h-small:  40px;
+  --size-cta-min-w:        250px;
+  --size-program-number:   42px;
+  --size-reserve-btn-h:    76px;
+  --size-sub-visual-h-min: 300px;
+  --size-sub-visual-h-max: 430px;
+  --size-container-max:    980px;
+
+  /* Computed: sub-page hero height */
+  --sub-visual-height: clamp(var(--size-sub-visual-h-min), 30vw, var(--size-sub-visual-h-max));
+
+  /* ============================================================
+     Shadows — DESIGN.md "Elevation & Depth"
+     ============================================================ */
+  --shadow-base:          0 20px 60px rgba(8, 8, 8, 0.10);   /* overview-card */
+  --shadow-card-lift:     0 16px 44px rgba(0, 0, 0, 0.045);  /* program-detail */
+  --shadow-pin:           0 14px 34px rgba(0, 0, 0, 0.18);   /* map-pin */
+  --shadow-reserve:       0 16px 34px rgba(0, 0, 0, 0.12);   /* reserve-button */
+  --shadow-course-label:  0 10px 24px rgba(0, 0, 0, 0.16);   /* course-label */
+  --shadow-text-hard:     4px 4px 0 var(--color-neon-deep);  /* display-xl poster shadow */
 
   /* ============================================================
      Motion
      ============================================================ */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 200ms;
-  --dur-base: 400ms;
-  --dur-slow: 800ms;
-
-  --header-h: 72px;
-
-  /* Grid track widths (referenced from multiple layout rules — keep in sync) */
-  --track-hero-card: 280px;
-
-  /* Z-index scale — keep stacking deterministic. Higher = closer to user. */
-  --z-below: -1;
-  --z-deep:  -2;
-  --z-overlay-fg: 2;     /* badges, scroll hints sitting just above section content */
-  --z-header: 100;
-  --z-header-fg: 110;    /* logo + hamburger sit above the mobile nav drawer */
-  --z-skip-link: 200;
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast:  160ms;   /* submenu reveal */
+  --dur-base:  240ms;   /* hover lift, CTA swap */
 
   /* ============================================================
-     Sizes — 1:1 with DESIGN.md `sizes:` block (spec extension).
-     Component CSS must reference these instead of inlining raw px.
+     Transforms (DESIGN.md "Shapes" — brand mark skew)
      ============================================================ */
-  --size-mask-icon:        16px;   /* bullet markers, notice/FAQ list icons */
-  --size-logo-dot:         10px;   /* .site-logo__dot */
-  --size-faq-sign:         24px;   /* .faq__sign toggle indicator */
-  --size-hamburger-toggle: 32px;   /* .site-nav__toggle (a11y deviation — see DESIGN.md) */
-  --size-sns-icon:         36px;   /* footer .sns-list a (a11y deviation — see DESIGN.md) */
-  --size-tap-target:       44px;   /* WCAG 2.2 SC 2.5.8 minimum — reserved */
-  --size-program-icon:     48px;   /* .program-card__icon */
-
-  /* Card media placeholder — neutral dark, replaced when image-slots.json lands */
-  --card-media-placeholder: linear-gradient(135deg, #1a1a2e, #2c2c4a);
+  --skew-brand-mark: -22deg;
 
   /* ============================================================
-     Source-migration additions (시안 흡수, v2 plan §1)
+     Layout
      ============================================================ */
-  --sub-visual-height:         clamp(300px, 30vw, 430px);            /* 서브페이지 hero 이미지 */
-  --skew-brand-mark:           -22deg;                                /* NS 사선 마크 */
-  --shadow-hard-neon:          4px 4px 0 rgba(34, 196, 15, 0.55);  /* uses --neon-deep channels (#22c40f) — hard shadow tracks the deep state, matches 시안 styles.css L244 */
-  --shadow-hard-black:         4px 4px 0 rgba(8, 8, 8, 1);
-  /* Decorative pattern — base resolves to neon (--color-primary).
-     Use only on positioned/contained surfaces (e.g., section-bottom decoration with overflow:hidden),
-     never as a primary content background. */
+  --container-pad: 1.25rem;
+
+  /* ============================================================
+     Z-index scale — keep stacking deterministic
+     ============================================================ */
+  --z-below:       -1;
+  --z-overlay-fg:  2;
+  --z-header:      20;
+  --z-header-fg:   30;
+  --z-skip-link:   200;
+
+  /* ============================================================
+     Decorative patterns — DESIGN.md "Radial pattern motif"
+     ============================================================ */
   --pattern-radial-light:
-    radial-gradient(circle at 50% 22%, transparent 0 54px, rgba(255, 255, 255, .58) 55px 57px, transparent 58px),
-    radial-gradient(circle at 50% 45%, transparent 0 110px, rgba(255, 255, 255, .46) 111px 113px, transparent 114px),
-    radial-gradient(circle at 50% 76%, transparent 0 164px, rgba(255, 255, 255, .36) 165px 167px, transparent 168px),
+    radial-gradient(circle at 22% 18%, transparent 0 78px, var(--color-pattern-white-soft) 79px 81px, transparent 82px),
+    radial-gradient(circle at 78% 76%, transparent 0 150px, rgba(255, 255, 255, 0.32) 151px 153px, transparent 154px),
     var(--color-primary);
+
   --pattern-radial-dark:
-    radial-gradient(circle at 22% 18%, transparent 0 78px, rgba(57, 255, 20, .48) 79px 81px, transparent 82px),
-    radial-gradient(circle at 78% 76%, transparent 0 150px, rgba(57, 255, 20, .32) 151px 153px, transparent 154px),
-    var(--color-dark-surface);
-
-  /* Sizes — DESIGN.md sizes 신규 키 동기화 */
-  --size-button-action:        48px;
-  --size-button-action-small:  40px;
-  --size-program-number:       42px;  /* .program-number circle badge (program-detail 01/02/03) */
-  --size-reserve-button:       76px;  /* .reserve-button min-height (fun-and-walk 예약 버튼) */
-
-  /* ============================================================
-     Festival-map + program-detail 데코레이션 알파값
-     (컴포넌트 CSS에 raw rgba 금지 — tokens.css에서 SSOT 관리)
-     ============================================================ */
-  --color-map-arc-light:   rgba(30, 160, 18, 0.5);   /* .festival-map::before 데코 호 (neon-deep 계열) */
-  --color-map-arc-dark:    rgba(8, 8, 8, 0.22);      /* .festival-map::after 데코 호 (dark surface 계열) */
-  --shadow-map-pin:        0 14px 34px rgba(0, 0, 0, 0.18);     /* .map-pin 부유 효과 */
-  --shadow-program-detail: 0 16px 44px rgba(15, 20, 25, 0.045); /* .program-detail 카드 그림자 */
-  --shadow-reserve-button: 0 16px 34px rgba(15, 20, 25, 0.12);  /* .reserve-button 부유 효과 */
-  --shadow-course-label:   0 10px 24px rgba(15, 20, 25, 0.16);  /* .course-label 마커 그림자 */
-  --color-course-path:     rgba(57, 255, 20, 0.5);              /* course-map::before 경로 테두리 (neon 반투명) */
+    radial-gradient(circle at 22% 18%, transparent 0 78px, rgba(57, 255, 20, 0.48) 79px 81px, transparent 82px),
+    radial-gradient(circle at 78% 76%, transparent 0 150px, rgba(57, 255, 20, 0.32) 151px 153px, transparent 154px),
+    var(--color-black);
 }
 
-@media (max-width: 768px) {
+/* ============================================================
+   Mobile token overrides (≤ 620px)
+   ============================================================ */
+@media (max-width: 620px) {
   :root {
-    --header-h: 60px;
-    --container-pad: 1rem;
+    --size-header-h:      var(--size-header-h-mobile);
+    --size-brand-mark-w:  36px;
+    --size-brand-mark-h:  24px;
+    --container-pad:      1rem;
   }
 }

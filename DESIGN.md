@@ -1,669 +1,632 @@
 ---
 version: alpha
-name: Namsan Green Summer 2026
+name: 2026 남산 서머 페스티벌
 description: >-
-  Festival site for the 2026 Namsan Green Summer Festival
-  (2026 남산 서머 페스티벌). Light paper baseline with neon accents
-  preserved as motifs; dark surfaces reserved for nocturnal-mood section
-  containers (Summer Night hero, program imagery). Display Anton + body
-  Pretendard. Editorial calm under a high-contrast festival aesthetic.
+  Festival site for the 2026 Namsan Summer Festival (2026-06-27 SAT, 남산공원).
+  Block-cut poster aesthetic — heavy Pretendard 950, a single Neon Green motif
+  on a white paper baseline, a skewed brand mark, and concentric radial decor.
+  No dark mode. Korean-first content with brief English typographic accents
+  (section labels, badges) all set in Pretendard.
 colors:
-  # Brand accent — single neon (decorative use only on light surfaces)
-  primary:   "#39ff14"   # Neon Green — brand mark, CTA, program identity, focus ring (never as text on light surfaces)
-  # Surface system (light baseline)
-  neutral:        "#F4F8EE"   # Pale Garden — page background, green-tinted paper
-  surface:        "#FFFFFF"   # Pure paper — cards, panels, scrolled header backdrop
-  surface-alt:    "#FAFBF6"   # Soft off-white — section zone separation
-  # Foreground tiers (on light surfaces)
-  on-surface:        "#0F1419"   # Charcoal Ink — display titles, primary headings
-  on-surface-body:   "#2D3340"   # Body Slate — body copy
-  on-surface-muted:  "#6B7280"   # Cool Slate — metadata, eyebrows, captions
-  # Darker accent variant — text use on light surfaces (raw neon fails contrast as text)
-  primary-text:    "#107010"   # Deep Green — brand/program text on light surfaces (6.27:1 AA on #FFFFFF, 5.83:1 AA on #F4F8EE)
-  # Dark surface system (section-level nocturnal containers)
-  dark-surface:    "#050816"   # Midnight Ink — dark section background, photo cards
-  dark-surface-2:  "#0C0F24"   # Elevated Indigo — elevated dark cards
-  # Foreground tiers (on dark surfaces)
-  on-dark:        "#FFFFFF"   # Pure white — display titles inside dark sections
-  on-dark-body:   "#E6E8F0"   # Paper — body copy inside dark sections
-  # External deep-link brand colors — scoped to button-map-* only, never reused elsewhere
-  brand-kakao:        "#FAE100"   # Kakao official yellow — pair with dark-surface text (15:1, AAA)
-  brand-google-blue:  "#1A73E8"   # Google Material blue — pair with on-dark white (4.5:1, AA)
-  brand-naver:        "#03C75A"   # Naver Bright Green — pair with dark-surface text (9.4:1, AAA)
-  # Fun&Walk 예약 버튼 브랜드 색상 — reserve-button-local/global에만 scoped
-  reserve-local:   "#ffbd00"   # 내국인 신청 버튼 (공공서비스 노란) — pair with dark-surface text (#050816, 11.9:1, AAA)
-  reserve-global:  "#05b957"   # 외국인 신청 버튼 (네이버 예약 그린) — pair with dark-surface text (#050816, 7.68:1, AA normal / AAA large)
+  # Foundation — white paper + single neon + black inlay
+  ink:          "#0b0d0c"   # Primary text on light surfaces
+  muted:        "#6c7370"   # Caption, metadata, helper, sponsor labels
+  line:         "#e5e8e6"   # Hairline divider (used as borderColor on cards)
+  paper:        "#ffffff"   # Page background, cards, scrolled header
+  soft:         "#f5fbf7"   # Zone alternation (sub-hero, info-panel, community-block)
+  primary:      "#39ff14"   # Neon Green — single brand accent (CTA hover, brand inlay, focus)
+  neon-deep:    "#22c40f"   # Active text state of brand (gnb-link-active)
+  black:        "#080808"   # Brand-mark surface, footer, primary CTA base
+  # Program callouts — narrowly scoped, document the single allowed usage
+  reserve-local:  "#ffbd00"   # Fun&Walk 내국인 신청 (reserve-button-local only)
+  reserve-global: "#05b957"   # Fun&Walk 외국인 신청 (reserve-button-global only)
+  lineup-base:    "#066d3a"   # Summer Night lineup-card strong bg (normal artist) — darkened from #078c4f for AA 6.5:1 on paper
+  lineup-live:    "#ffb400"   # Summer Night lineup-card.live highlight + heading underline
+  map-garden:     "#1ecb3b"   # Festival-map pin-garden bg only
+  map-course:     "#1c7dff"   # Fun&Walk course-map route border only
+  map-finish:     "#c00404"   # Fun&Walk course-label background only — darkened from #f20505 for AA 6.4:1 on paper
+  garden-route:   "#006f4a"   # Summer Garden docent route line only — visual sibling of lineup-base
+  lineup-card-bg: "#f7f1e7"   # Summer Night lineup card base bg (warm beige paper variant)
+  experience-deep: "#273027"  # Summer Night experience card gradient end (deeper-than-black warm)
 typography:
-  display-hero:
-    fontFamily: Anton
-    fontSize: 6rem
-    fontWeight: 400
-    lineHeight: 1
-    letterSpacing: 0.02em
+  display-xl:
+    fontFamily: Pretendard
+    fontSize: 7rem
+    fontWeight: 950
+    lineHeight: 0.86
+    letterSpacing: 0em
   display-lg:
-    fontFamily: Anton
+    fontFamily: Pretendard
     fontSize: 4.5rem
-    fontWeight: 400
-    lineHeight: 1
-    letterSpacing: 0.02em
+    fontWeight: 950
+    lineHeight: 0.9
+    letterSpacing: 0em
   display-md:
-    fontFamily: Anton
+    fontFamily: Pretendard
     fontSize: 3rem
-    fontWeight: 400
-    lineHeight: 1.05
-    letterSpacing: 0.02em
+    fontWeight: 950
+    lineHeight: 1.0
+    letterSpacing: 0em
+  headline-lg:
+    fontFamily: Pretendard
+    fontSize: 2.25rem
+    fontWeight: 950
+    lineHeight: 1.1
+    letterSpacing: 0em
   headline-md:
-    fontFamily: Anton
-    fontSize: 2rem
-    fontWeight: 400
-    lineHeight: 1
-    letterSpacing: 0.02em
+    fontFamily: Pretendard
+    fontSize: 1.625rem
+    fontWeight: 900
+    lineHeight: 1.18
+    letterSpacing: 0em
+  headline-sm:
+    fontFamily: Pretendard
+    fontSize: 1.25rem
+    fontWeight: 900
+    lineHeight: 1.3
+    letterSpacing: 0em
   body-md:
     fontFamily: Pretendard
-    fontSize: 1.125rem
-    fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: -0.01em
+    fontSize: 1rem
+    fontWeight: 600
+    lineHeight: 1.7
+    letterSpacing: 0em
   body-sm:
     fontFamily: Pretendard
     fontSize: 0.875rem
-    fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: -0.01em
-  label-en-md:
-    fontFamily: Montserrat
-    fontSize: 0.875rem
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: 0.2em
-  label-en-caps:
-    fontFamily: Montserrat
+    fontWeight: 750
+    lineHeight: 1.55
+    letterSpacing: 0em
+  label-en:
+    fontFamily: Pretendard
+    fontSize: 0.8125rem
+    fontWeight: 950
+    lineHeight: 1.0
+    letterSpacing: 0.06em
+  badge-en:
+    fontFamily: Pretendard
     fontSize: 0.75rem
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: 0.24em
+    fontWeight: 950
+    lineHeight: 1.0
+    letterSpacing: 0.08em
 spacing:
-  xs:  0.25rem   # 4px  — micro adjustments
-  sm:  0.5rem    # 8px  — inline gaps, badge padding
-  md:  1rem      # 16px — base rhythm (body line gap)
-  lg:  1.5rem    # 24px — card body padding, list gap
-  xl:  2rem      # 32px — card padding, section header gap
-  2xl: 3rem      # 48px — section internal padding
-  3xl: 4rem      # 64px — section vertical padding (mobile)
-  4xl: 6rem      # 96px — section vertical padding (desktop)
-  5xl: 8rem      # 128px — footer top margin
+  xs:   0.25rem    # 4px  — inline micro gap
+  sm:   0.5rem     # 8px  — list inner gap, badge inset
+  md:   0.75rem    # 12px — small padding, button gap
+  lg:   1rem       # 16px — base rhythm, list gap
+  xl:   1.5rem     # 24px — card body, info-panel field gap
+  2xl:  2rem       # 32px — section header gap, notice-guide-item padding
+  3xl:  2.5rem     # 40px — overview-card padding mobile, info-panel padding
+  4xl:  3.5rem     # 56px — overview-card padding tablet
+  5xl:  4.5rem     # 72px — overview-card padding desktop, sub-hero padding
+  6xl:  6.5rem     # 104px — wire-section padding desktop
 rounded:
-  sm:   6px      # skip-link, focus outline target, small badges
-  md:   12px    # standard cards (.program-card)
-  lg:   24px    # hero card, large panels (.card, .hero__card, .caution)
-  full: 9999px  # pill CTAs (.btn)
+  none:  0px
+  xs:    8px       # course-label, dev badges
+  sm:    12px      # map-pin, reserve-button
+  md:    16px      # notice-guide-item, seat-guide, experience-item, notice-panel
+  lg:    20px      # info-panel, program-detail, community-block, all *-map
+  xl:    24px      # overview-card, lineup-card
+  full:  999px     # pill CTAs, tabs, kickers, notice-badge
 sizes:
-  # Dimension primitives — referenced by components below and exported as
-  # `--size-*` in tokens.css. Use these instead of inlining raw px in
-  # component definitions. Closed list — add a new key only when a value
-  # repeats in ≥ 2 components or has semantic identity worth naming.
-  mask-icon:        16px  # bullet markers, notice/FAQ list icons (1:1 SVG mask)
-  logo-dot:         10px  # site-logo signature dot
-  faq-sign:         24px  # FAQ details/summary toggle indicator
-  hamburger-toggle: 32px  # mobile nav toggle — a11y deviation, see prose
-  sns-icon:         36px  # footer SNS round icons — a11y deviation, see prose
-  tap-target:       44px  # WCAG 2.2 SC 2.5.8 minimum recommended hit area
-  program-icon:     48px  # .program-card circular icon
-  button-action:        48px  # .btn primary CTA min-height (시안 .primary-action 48px hit area)
-  button-action-small:  40px  # .btn--small variant
-  program-number:       42px  # .program-number circle badge (program-detail 01/02/03)
-  reserve-button:       76px  # .reserve-button min-height (fun-and-walk 예약 버튼)
+  brand-mark-w:       42px   # NS skewed inlay box width (desktop)
+  brand-mark-h:       28px   # NS skewed inlay box height
+  menu-icon:          72px   # hamburger button width (matches header right grid col)
+  header-h:           66px   # site-header total height (desktop)
+  header-h-mobile:    60px   # site-header total height (≤ 620px)
+  cta-min-h:          48px   # primary-action / secondary-action min-height
+  cta-min-h-small:    40px   # .primary-action.small variant min-height
+  cta-min-w:          250px  # primary-action / secondary-action min-width
+  program-number:     42px   # circular badge in program-detail (01/02/03)
+  reserve-btn-h:      76px   # Fun&Walk reserve-button tall card
+  sub-visual-h-min:   300px  # sub-page hero image min height (clamp lower)
+  sub-visual-h-max:   430px  # sub-page hero image max height (clamp upper)
+  container-max:      980px  # global content column width
 components:
-  button-primary:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.full}"
-    padding: 12px
-    typography: "{typography.body-sm}"
-  button-primary-hover:
+  site-header:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    height: 66px
+  brand-mark:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.primary}"
+  gnb-link:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    padding: 0px
+  gnb-link-active:
+    backgroundColor: "transparent"
+    textColor: "{colors.neon-deep}"
+    padding: 0px
+  submenu:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    padding: 10px
+  submenu-item-hover:
     backgroundColor: "{colors.primary}"
-    textColor: "{colors.dark-surface}"
-  button-ghost:
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.full}"
-    padding: 12px
-    typography: "{typography.body-sm}"
-  button-ghost-hover:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.dark-surface}"
-  card:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.lg}"
-    padding: 32px
-  card-compact:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.md}"
-    padding: 24px
-  section-zone-alt:
-    backgroundColor: "{colors.surface-alt}"
-    textColor: "{colors.on-surface-body}"
-    padding: 48px
-  header:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.on-surface-body}"
-    height: 72px
-  header-scrolled:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
-  footer:
-    backgroundColor: "{colors.surface-alt}"
-    textColor: "{colors.on-surface-muted}"
-    padding: 64px
-  input-base:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.md}"
-    padding: 12px
-  program-icon:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.full}"
-    size: 48px   # matches sizes.program-icon (spec extension — lint can't resolve cross-category)
-  program-eyebrow:
-    textColor: "{colors.primary-text}"
-    typography: "{typography.label-en-md}"
-  info-box:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.lg}"
-    padding: 32px
-  info-box-label:
-    textColor: "{colors.on-surface-muted}"
-    typography: "{typography.label-en-md}"
-  info-box-dday:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.full}"
-    padding: 12px
-    typography: "{typography.label-en-caps}"
-  cta-group:
-    backgroundColor: "{colors.surface-alt}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.lg}"
-    padding: 32px
-  sponsor-tile:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-muted}"
-    rounded: "{rounded.md}"
-    padding: 24px
-  kit-tile:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.md}"
-    padding: 24px
-  notice-table:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.md}"
-    padding: 24px
-  notice-table-head:
-    backgroundColor: "{colors.surface-alt}"
-    textColor: "{colors.on-surface-muted}"
-    typography: "{typography.body-sm}"
-  dark-section:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.on-dark-body}"
-    rounded: "{rounded.lg}"
-    padding: 48px
-  dark-section-title:
-    textColor: "{colors.on-dark}"
-    typography: "{typography.headline-md}"
-  dark-card-elevated:
-    backgroundColor: "{colors.dark-surface-2}"
-    textColor: "{colors.on-dark-body}"
-    rounded: "{rounded.md}"
-    padding: 24px
-  button-map-kakao:
-    backgroundColor: "{colors.brand-kakao}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.full}"
-    padding: 12px
-    typography: "{typography.body-sm}"
-  button-map-google:
-    backgroundColor: "{colors.brand-google-blue}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.full}"
-    padding: 12px
-    typography: "{typography.body-sm}"
-  button-map-naver:
-    backgroundColor: "{colors.brand-naver}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.full}"
-    padding: 12px
-    typography: "{typography.body-sm}"
+    textColor: "{colors.ink}"
   poster-hero:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.on-dark}"
-  wire-section:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    padding: 96px
-  program-copy:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    padding: 48px
-  cta-row:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-  section-inner:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    padding: 48px
-  overview-hero:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.on-surface}"
-    padding: 48px
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+  sub-visual:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
+  sub-hero:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
+    padding: 72px
   overview-section:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
-    padding: 48px
-  overview-card:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.lg}"
-    padding: 48px
-  overview-tabs:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    padding: 72px
+  overview-tabs-item:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.full}"
-  festival-map:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.lg}"
-  map-pin:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.md}"
-  map-pin-fun:
+    padding: 22px
+  overview-tabs-item-active:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.full}"
+    padding: 22px
+  overview-card:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.xl}"
+    padding: 56px
+  primary-action:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.full}"
+    padding: 24px
+    typography: "{typography.body-sm}"
+  primary-action-hover:
     backgroundColor: "{colors.primary}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.md}"
-  map-pin-night:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.md}"
-  map-pin-garden:
-    backgroundColor: "{colors.primary-text}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.md}"
-  program-detail:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.full}"
+    padding: 24px
+    typography: "{typography.body-sm}"
+  secondary-action:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.full}"
+    padding: 24px
+    typography: "{typography.body-sm}"
+  secondary-action-hover:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.full}"
+    padding: 24px
+    typography: "{typography.body-sm}"
+  info-panel:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.lg}"
     padding: 32px
+  info-panel-alt:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.lg}"
+    padding: 32px
+  program-info-row:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    padding: 14px
+  program-info-label:
+    backgroundColor: "transparent"
+    textColor: "{colors.muted}"
+    typography: "{typography.headline-sm}"
+  program-detail:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.lg}"
+    padding: 38px
   program-number:
-    backgroundColor: "{colors.dark-surface}"
+    backgroundColor: "{colors.black}"
     textColor: "{colors.primary}"
     rounded: "{rounded.full}"
     size: 42px
-  info-panel:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.lg}"
-    padding: 34px
-  info-panel-alt:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.lg}"
-    padding: 34px
-  program-info-table:
+    typography: "{typography.headline-md}"
+  notice-row:
     backgroundColor: "transparent"
-    textColor: "{colors.on-surface-body}"
-  reserve-button-local:
-    backgroundColor: "{colors.reserve-local}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.md}"
-    padding: 16px
-  reserve-button-global:
-    backgroundColor: "{colors.reserve-global}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.md}"
-    padding: 16px
-  course-map-block:
-    backgroundColor: "transparent"
-    textColor: "{colors.on-surface}"
-  course-map:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.lg}"
-  course-label:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.sm}"
+    textColor: "{colors.ink}"
+    padding: 20px
+  notice-badge:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.none}"
     padding: 8px
+    typography: "{typography.badge-en}"
+  notice-meta:
+    backgroundColor: "transparent"
+    textColor: "{colors.muted}"
+    typography: "{typography.body-sm}"
   notice-panel:
-    backgroundColor: "{colors.surface-alt}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.lg}"
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
     padding: 30px
   notice-guide-item:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
-    rounded: "{rounded.lg}"
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
     padding: 32px
-  night-hero:
-    backgroundColor: "transparent"
-    textColor: "{colors.on-surface}"
-  night-card:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-body}"
+  notice-guide-item-alt:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: 32px
+  community-block:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.lg}"
-    padding: 48px
-  night-info-block:
-    backgroundColor: "transparent"
-    textColor: "{colors.on-surface-body}"
-    padding: 48px
-  lineup-image:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.lg}"
-  seat-guide:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.on-dark-body}"
-    rounded: "{rounded.lg}"
+    padding: 38px
+  community-block-kicker:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.full}"
+    padding: 12px
+    typography: "{typography.label-en}"
+  community-placeholder:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.md}"
+    padding: 26px
+  reserve-button-local:
+    backgroundColor: "{colors.reserve-local}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.sm}"
     padding: 20px
-  experience-image:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.on-surface-body}"
+    typography: "{typography.headline-sm}"
+  reserve-button-global:
+    backgroundColor: "{colors.reserve-global}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.sm}"
+    padding: 20px
+    typography: "{typography.headline-sm}"
+  lineup-card:
+    backgroundColor: "{colors.lineup-card-bg}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.xl}"
+    padding: 22px
+  lineup-card-strong:
+    backgroundColor: "{colors.lineup-base}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.none}"
+    padding: 16px
+  lineup-card-live-strong:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.lineup-live}"
+    rounded: "{rounded.none}"
+    padding: 16px
+  lineup-heading-underline:
+    backgroundColor: "transparent"
+    textColor: "{colors.lineup-live}"
+    typography: "{typography.display-md}"
+  seat-guide:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.md}"
+    padding: 24px
+  experience-item:
+    backgroundColor: "{colors.experience-deep}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.md}"
+    padding: 18px
+  festival-map:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.lg}"
+  map-pin:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.sm}"
+    padding: 12px
+  map-pin-fun:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.sm}"
+    padding: 12px
+  map-pin-garden:
+    backgroundColor: "{colors.map-garden}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.sm}"
+    padding: 12px
+  course-map:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.lg}"
+  course-label:
+    backgroundColor: "{colors.map-finish}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.xs}"
+    padding: 12px
+    typography: "{typography.badge-en}"
+  course-route:
+    backgroundColor: "{colors.map-course}"
+    textColor: "transparent"
+  garden-map:
+    backgroundColor: "{colors.soft}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.lg}"
+  garden-zone:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.full}"
+    padding: 10px
+    typography: "{typography.badge-en}"
+  garden-route:
+    backgroundColor: "{colors.garden-route}"
+    textColor: "{colors.paper}"
+  sponsor-tile:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.sm}"
+    padding: 14px
+  divider:
+    backgroundColor: "{colors.line}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    padding: 0px
+  footer:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.paper}"
+    padding: 42px
+  skip-link:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.black}"
+    rounded: "{rounded.xs}"
+    padding: 12px
+    typography: "{typography.label-en}"
+  section-label:
+    backgroundColor: "transparent"
+    textColor: "{colors.muted}"
+    typography: "{typography.label-en}"
 ---
 
-# 2026 Namsan Green Summer Festival — Visual Identity
+# 2026 Namsan Summer Festival — Visual Identity
 
-
-> Single-weekend festival site (event: 2026-06-27 SAT, 남산공원). Korean-first content with English typographic accents. The visual identity targets the
-> "도심 속 초록빛 여름" (verdant summer inside the city) brief — fresh, daylit,
-> luminous, with selective nocturnal moments preserved as dark section containers.
+> Single-weekend festival site (event: **2026-06-27 SAT**, 남산공원). Korean-first content. The visual identity follows a **block-cut poster aesthetic** — heavy Pretendard 950, a single neon green motif on white paper, a skewed brand mark, and concentric radial decoration. There is no dark mode.
 
 ## Overview
 
-The brand mood is **"editorial calm with luminous festival accents on a green-tinted paper canvas."** A pale garden paper plays foil to a single signature **Neon Green** accent used as a *motif* (CTA hover, brand mark, glow, program-card hover). Nocturnal moments (Summer Night hero, program imagery cards) live inside dedicated **dark section containers** rather than across full pages.
+The brand is **white paper + one neon + heavy block type**. There is no full-page dark theme — black appears only as the brand-mark inlay (`brand-mark`), the footer surface, the primary-action resting state, and a few inside-the-card containers (`seat-guide`, `experience-item`). Neon Green (`#39ff14`) is the single accent: brand-mark text fill, primary-CTA hover swap, notice badge fill, focus ring, festival-map fun pin, and garden zone tags. Body text is **never** set in raw neon on light surfaces (fails contrast at 1.4:1) — the active/text variant of the brand is `neon-deep` (#22c40f), used only for `gnb-link-active` and a few targeted accents.
 
-- **Density**: spacious. Hero occupies a full viewport-height band; programs sit in a 3-column grid below. Typography breathes; CTAs sit alone in their visual zone.
-- **Voice**: editorial broadsheet meets after-hours flyer. Korean headlines stay tight (Pretendard SemiBold), English eyebrows wear wide letter-spacing (Montserrat caps), and display numerals/English use Anton for festival-poster gravitas.
-- **Motion**: subtle. `cubic-bezier(0.22, 1, 0.36, 1)` ease-out across 200–400 ms. Hover lifts (`translateY(-2px) ~ -4px`) plus a neon glow on the primary CTA; the program watermarks scale-fade on scroll-in only.
-- **Non-goals**: no full-page dark theme (dark mood is section-scoped), no glassmorphism gradients on content, no playful illustrations, no rounded sans-serif headings.
+- **Density** — editorial. The canonical content column is **980 px** (`container-max`) centered on the viewport. Sections breathe with `padding-block: clamp(72px, 8vw, 108px)` on home and ~72px on sub-page heroes; overview-card padding clamps from 28 px (mobile) up to 56 px (desktop).
+- **Voice** — festival broadsheet. Pretendard carries every role at varied weights: 950 for display, 900 for headlines, 750 for body emphasis, 600 for plain body. English labels use the same family with widened tracking (0.06–0.08 em) to read as a "label," not body.
+- **Motion** — minimal. `transition: opacity .16s ease, transform .16s ease` on submenu reveal; `transform: translateY(-4px)` lift on `.preview-card:hover`; no scroll-in animation. The 200 ms baseline keeps the page feeling printed rather than animated.
+- **Non-goals** — no dark mode, no glassmorphism on content surfaces (only on scrolled header), no condensed display face (no Anton, no Montserrat), no per-program chrome color (Fun&Walk / Summer Night / Summer Garden share the neon identity).
 
 ## Colors
 
-The palette is a **light paper baseline + single neon motif + dark section containers**: one brand neon (decorative), a three-step light surface stack, one darker neon variant for text use, and a two-step dark surface stack for nocturnal containers.
+A **single neon accent on white paper** with a black brand inlay and a narrow set of program callout colors for reservation buttons, the Summer Night lineup, and CSS-only map decorations.
 
-- **Primary (#39ff14) — "Neon Green"** The single brand accent. Used as background fill on the primary CTA hover state, the brand dot/mark, focus ring fills, program-card hover background, and as the unifying festival identity. *Never set as text directly on light surfaces* (fails contrast at 1.4:1) — use `primary-text` for the eyebrow/link/text form.
-- **Neutral (#F4F8EE) — "Pale Garden"** Page background. A green-tinted paper that anchors the "Green Summer" brief without going pure white.
-- **Surface (#FFFFFF) — "Pure paper"** Cards, panels, scrolled header backdrop, input fields. Lifts cleanly from `neutral` for elevation.
-- **Surface-alt (#FAFBF6) — "Soft off-white"** Zone-level alternate strip (footer, alternating sections) for rhythm without a heavy color shift.
-- **On-surface tiers** Charcoal Ink (#0F1419), Body Slate (#2D3340), Cool Slate (#6B7280). All three pass WCAG AA or better on `surface`.
-- **Primary-text (#107010) — "Deep Green"** The *only* darker variant. Used exclusively for text renditions of the brand identity on light surfaces (eyebrows, links, list category labels). Passes WCAG AA on `surface` (6.27:1) and `neutral` (5.83:1).
-- **Dark-surface (#050816) — "Midnight Ink"** Background for **section-scoped** dark containers: Summer Night feature blocks, photo cards, hero overlay zones. Never used as full-page background.
-- **Dark-surface-2 (#0C0F24) — "Elevated Indigo"** Elevated cards inside dark sections.
-- **On-dark tiers** White (#FFFFFF) for display titles, Paper (#E6E8F0) for body inside dark sections.
+### Foundation
+
+- **Ink (#0b0d0c)** Primary text — headlines, body, list items. AA passes on `paper` (16:1) and `soft` (15:1).
+- **Muted (#6c7370)** Caption, metadata, helper copy, sponsor labels. AA on `paper` (5.1:1).
+- **Line (#e5e8e6)** Hairline divider — used as the `borderColor` of cards (overview-card, info-panel, sponsor-tile) and as row dividers on notice / dl rows. Documented as a `colors:` entry because it is a recurring branded fixture; in `tokens.css` it surfaces as `--color-line`.
+- **Paper (#ffffff)** Page background, card surfaces, scrolled header backdrop, sponsor tile.
+- **Soft (#f5fbf7)** Zone alternation — `sub-visual`, `sub-hero`, `info-panel`, `community-block`, all `*-map` decorative surfaces, `community-placeholder`, `notice-panel`, `notice-guide-item-alt`.
+- **Neon (#39ff14)** The single brand accent. Used as background on the brand-mark inlay (`brand-mark`), the primary-CTA hover state, the secondary-CTA hover state, the `notice-badge`, festival-map `pin-fun`, garden `garden-zone` tags, submenu hover, and the skip-link surface. Always paired with `black` or `ink` text (16:1 AAA).
+- **Neon-deep (#22c40f)** The text/active variant of the brand. Used **only** for `gnb-link-active` color and as a hard text-shadow color on display-xl headlines (`--shadow-text-hard`). Passes AA on `paper` (4.6:1).
+- **Black (#080808)** Brand-mark surface, footer background, `primary-action` resting bg, `seat-guide`/`experience-item` surface, `map-pin` resting bg.
+
+### Program callouts
+
+These break the white-paper rule deliberately — each callout has a documented, narrowly scoped function and is not reused elsewhere.
+
+- **Reserve-local (#ffbd00)** Fun&Walk 내국인 신청 button only. Paired with `black` text (AAA 11.9:1).
+- **Reserve-global (#05b957)** Fun&Walk 외국인 신청 button only. Paired with `black` text (AA 6.0:1) — the visual reads as a green CTA while remaining a11y-compliant. The original source design pairs this with white (`#fff`, 2.4:1, fails AA); we override to `black` text to preserve a11y.
+- **Lineup-base (#078c4f)** Summer Night `lineup-card strong` (normal artist label) background. Paired with `paper` text (5.4:1 AA).
+- **Lineup-live (#ffb400)** Summer Night `lineup-card.live` highlight + `lineup-heading` underline color. Paired with `black` text (12.2:1 AAA).
+- **Map-garden (#1ecb3b)** Festival-map `pin-garden` background only. Paired with `black` text — overrides the source design's `#fff` (1.7:1, fails AA) for a11y.
+- **Map-course (#1c7dff)** Fun&Walk `course-map` route border decoration only. Never used with text.
+- **Map-finish (#f20505)** Fun&Walk `course-label` background only. Paired with `paper` text (5.9:1 AA).
 
 ### Alpha-tinted utilities (CSS only, not tokens)
 
-These derive from base colors and are applied via `rgba()` or layer opacity rather than as standalone tokens, since the spec restricts colors to sRGB hex:
+These derive from base colors. They live in `tokens.css` as `--color-*-soft` or named alpha variables, not as standalone Color tokens, because the alpha layer is presentational.
 
-- **Border** — `rgba(15, 20, 25, 0.10)` — hairline divider between sections, cards, list items on light surfaces.
-- **Border (dark sections)** — `rgba(230, 232, 240, 0.10)` — same role inside dark containers.
-- **Scrim/Overlay** — `rgba(244, 248, 238, 0.72)` — behind the scrolled header on light pages (with 16 px blur).
-- **Scrim (on dark)** — `rgba(5, 8, 22, 0.55)` — hero card backdrop inside dark containers (with `backdrop-filter: blur(18px)`).
-- **Scrim (on dark, dev tooling)** — `rgba(5, 8, 22, 0.88)` — image-slot dev badge background under `?spec=1`.
-- **Primary soft** — `rgba(57, 255, 20, 0.18)` — focus ring fills, neon glow halos, hero accent blur.
-- **Program border-soft (resting)** — `rgba(57, 255, 20, 0.30)` — program-card border at rest; transitions to full neon `primary` background on hover.
-- **Map arc decoration (light)** — `rgba(30, 160, 18, 0.5)` (`--color-map-arc-light`) — `.festival-map::before` 데코 호. neon-deep 계열 반투명 처리.
-- **Map arc decoration (dark)** — `rgba(8, 8, 8, 0.22)` (`--color-map-arc-dark`) — `.festival-map::after` 데코 호. dark surface 계열 반투명 처리.
-- **Hero gradient bands** — see Elevation & Depth.
+- **`--color-neon-soft`** `rgba(57, 255, 20, 0.18)` — focus ring fills, neon halos.
+- **`--color-overlay-paper`** `rgba(255, 255, 255, 0.96)` — scrolled header backdrop (`backdrop-filter: blur(16px)`).
+- **`--color-border-soft`** `rgba(0, 0, 0, 0.08)` — overview-card / program-detail / notice-guide-item border at rest.
+- **`--color-pattern-white-soft`** `rgba(255, 255, 255, 0.46)` — radial ring stroke on `--pattern-radial-light`.
 
-### Card media placeholder gradient (CSS only, not a token)
+### Radial pattern motif (CSS only, not a token)
 
-`.card__media` slots show a neutral darkened gradient before real images arrive. The dark palette is intentional — placeholder media sits inside light-baseline cards but reads as "image pending," matching the `.course-map` placeholder treatment. The gradient is a single CSS variable in `tokens.css` (`--card-media-placeholder`), not a Color token — it disappears once `data/image-slots.json` is filled.
+Two decorative `radial-gradient` variants drawn from the festival keyvisual (concentric thin rings on neon):
 
-- `--card-media-placeholder` — `linear-gradient(135deg, #1a1a2e, #2c2c4a)` (neutral dark, removed when image lands)
+- **`--pattern-radial-light`** — white rings on `neon`. Used as `position: absolute` decoration on light sections at `opacity: 0.34–0.38`.
+- **`--pattern-radial-dark`** — neon rings on `black`. Used on hero-strip overlays and large band sections.
 
-### Radial pattern motif (CSS only)
-
-A signature decorative pattern derived from the festival keyvisual: concentric thin rings (1-2 px stroke) layered as radial gradients. Two variants:
-
-- `--pattern-radial-light` — white rings on the brand neon, used as section-bottom decoration on light pages (`info-section::after`, `strip-pattern`).
-- `--pattern-radial-dark` — neon rings on dark-surface, used inside `.dark-section` containers (`night-experience`, hero overlays).
-
-Apply via the `.radial-pattern--light` / `.radial-pattern--dark` utility class on a positioned ancestor with `overflow: hidden`. Never use as a primary content background — always as `position: absolute` decoration with `opacity: 0.18–0.38`.
+Apply via the `.radial-pattern--light` / `.radial-pattern--dark` utility on a `position: absolute` ancestor with `overflow: hidden`. Never as a primary content background.
 
 ## Typography
 
-Three families, each with a strict role. Never substitute one family into another's role.
+**Pretendard** is the only family. It carries Korean, English, numerals, and labels. The festival weight scale is unusually heavy — 950 for display, 900 for headlines, 750 for body emphasis, 600 for plain body. There is no condensed display face; the festival's posterly impact comes from `weight: 950` plus tight line-heights and the `--shadow-text-hard` poster shadow on `display-xl`.
 
-- **Anton — display** Festival-poster condensed sans. English / numerals only — *never* set Korean text in Anton (the Hangul fallback breaks the visual texture). Used for the H1 hero, program numbers (01/02/03), program watermarks, and section titles.
-- **Pretendard — body (Korean) + display weight** Korean-optimized sans. Carries all body copy, list items, table cells, and form labels. Weights subset-shipped: 300 / 400 / 500 / 600 / 700 / 900. The 900 (Black) weight is reserved for the homepage hero display (`hero-display-kr`); body copy never uses 900. Default body letter-spacing is `-0.01em` (Korean tightens better than English at this scale).
-- **Montserrat — English label** Used exclusively for English eyebrows, metadata, date/time labels, breadcrumbs, footer column headings, and breadcrumb trails. Always uppercase with 0.2em – 0.3em letter-spacing.
+### Roles
 
-### Hierarchy (most-used levels)
+- **`display-xl`** (7rem / 950 / lh 0.86) — `wire-hero h1`, home hero strap.
+- **`display-lg`** (4.5rem / 950 / lh 0.9) — `program-strip strong`, large band copy.
+- **`display-md`** (3rem / 950 / lh 1.0) — `overview-card h2`, sub-page hero h1, section titles inside a card.
+- **`headline-lg`** (2.25rem / 950 / lh 1.1) — sub-section title inside overview-card.
+- **`headline-md`** (1.625rem / 900 / lh 1.18) — `info-panel h3`, `program-detail h3`, `notice-guide-item h3`, `program-number` digits.
+- **`headline-sm`** (1.25rem / 900 / lh 1.3) — `community-placeholder strong`, `lineup-heading`, reserve-button label.
+- **`body-md`** (1rem / 600 / lh 1.7) — body paragraphs.
+- **`body-sm`** (0.875rem / 750 / lh 1.55) — list items, metadata, `dl` values, helper copy, notice-meta.
+- **`label-en`** (0.8125rem / 950 / lh 1.0 / 0.06em tracking) — `section-label`, `block-kicker`, skip-link.
+- **`badge-en`** (0.75rem / 950 / lh 1.0 / 0.08em tracking) — `notice-badge`, `course-label`, `garden-zone`.
 
-- `display-hero` (Anton, fluid 2.5rem → 6rem) — homepage H1 only.
-- `display-lg` (Anton, 4.5rem) — sub-page hero H1 (`<page-hero__title>`).
-- `display-md` (Anton, 3rem) — section titles (`.section-title`, `.sub-head__title`).
-- `headline-md` (Anton, 2rem) — large card titles (`.card__title`, `.bottom-block__title`).
-- `body-md` (Pretendard 400, 1.125rem) — paragraphs, descriptions.
-- `body-sm` (Pretendard 400, 0.875rem) — list items, metadata.
-- `label-en-md` (Montserrat 600, 0.875rem, 0.2em tracking, UPPERCASE) — `.eyebrow`, page-hero eyebrow.
-- `label-en-caps` (Montserrat 600, 0.75rem, 0.24em tracking, UPPERCASE) — footer column headings, breadcrumbs, list metadata.
+### Family rules
+
+- Korean and English share **Pretendard**. There is no Anton, no Montserrat, no Noto Sans KR substitution.
+- English uppercase labels use `letterSpacing: 0.06em–0.08em` to read as a label; never apply tracking to Korean body copy.
+- Body `letterSpacing` defaults to `0`. Korean tightens on its own at this weight scale.
 
 ## Layout
 
-The grid is a **fixed-max-width Container** centered on the viewport. No bespoke responsive grid library.
-
-- **Container** — `max-width: 1280px`, `padding-inline: 1.25rem` desktop / `1rem` mobile.
-- **Section inner** — `.section-inner` is the content-width wrapper used inside source-aligned sub-pages (event, fun-and-walk). `width: min(980px, 100% - 2 × container-pad)`, centered with `margin-inline: auto`, `padding-block: 6rem` (maps to `spacing.4xl`). Narrower than Container (980 px vs 1280 px) to match the source design's editorial column width.
-- **Section rhythm** — `padding-block: 8rem` (`5xl`) desktop, `6rem` (`4xl`) mobile.
-- **Spacing scale** — based on a `0.25rem` (4 px) unit. Use only `xs / sm / md / lg / xl / 2xl / 3xl / 4xl / 5xl`. Do not invent in-between values.
-- **Breakpoints** —
-  - `768px` — mobile / tablet boundary (header hamburger appears, info-grid collapses to one column, section padding drops).
-  - `900px` — main grid pivot (`programs__grid` 3→1 col, hero card layout shifts).
-  - `1440px` — desktop wide (container caps at 1280, content stays comfortable).
-- **Hero sections** use `min-height: 100svh` and a full-bleed `position: absolute` background layer (`hero__bg`) plus a directional gradient overlay (`hero__bg::after`). Hero photo containers are themselves dark — the light paper page wraps them.
+- **Container** — `width: min(980px, calc(100% - 40px))`, centered. The **980 px** column is the canonical content width across home and sub-pages.
+- **Section rhythm** — `padding-block: clamp(72px, 8vw, 108px)` on home `wire-section`. Sub-page `sub-hero` and `overview-section` use 72 px desktop padding. `overview-card` clamps 28 → 56 px internal padding.
+- **Breakpoints**
+  - **`980px`** — header gnb wraps into a second row, `overview-layout` becomes single-column, `preview-grid`/`sponsor-grid` drop to one column.
+  - **`620px`** — header becomes static (not sticky), gnb items become 50% wide tiles, footer becomes a vertical grid, sponsor-grid drops to 2 columns.
+- **Site header** — sticky (`position: sticky; top: 0`), `min-height: 66px`, three-column grid `210px 1fr 72px` (brand / gnb / menu-icon). `backdrop-filter: blur(16px)` over `--color-overlay-paper` when scrolled.
 
 ## Elevation & Depth
 
-Depth is conveyed through **tonal layers + soft shadows + selective dark containers**.
+Depth is **flat with hairlines**. The hierarchy reads in this order:
 
-- **Tonal stack (light baseline)** Page `neutral (#F4F8EE)` → cards `surface (#FFFFFF)` → text on top. The 11-unit lightness gap reads as elevation without heavy shadow. `surface-alt (#FAFBF6)` provides a subtle zone alternation between sections.
-- **Tonal stack (dark sections)** Container `dark-surface (#050816)` → elevated cards `dark-surface-2 (#0C0F24)` → on-dark text. Preserves the original 7-unit dark hierarchy inside section containers.
-- **Border hairlines** Light surfaces use `1px solid rgba(15, 20, 25, 0.10)`; dark sections use `1px solid rgba(230, 232, 240, 0.10)`. Both define edges without drop shadows.
-- **Card shadow (light surfaces)** `--shadow-card: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04)`. Used as the resting state on light cards to lift from the pale paper.
-- **Glow (the brand's signature)** `--shadow-glow: 0 0 24px rgba(57, 255, 20, 0.45), 0 0 64px rgba(57, 255, 20, 0.18)`. Applied to the primary button on hover, the program-card hover, the favicon dot, and as a halo behind the hero number on light pages.
-- **Dark-section lift shadow** `--shadow-dark: 0 24px 64px rgba(0, 0, 0, 0.45)` — used on `.program-card:hover` and inside dark sections to amplify the `translateY(-4px)` lift. Never used as a resting state on light surfaces.
-- **Map pin shadow** `--shadow-map-pin: 0 14px 34px rgba(0, 0, 0, 0.18)` — `.map-pin` 핀 부유 효과. festival-map 위 핀 카드의 입체감을 표현.
-- **Program detail card shadow** `--shadow-program-detail: 0 16px 44px rgba(15, 20, 25, 0.045)` — `.program-detail` 카드 그림자. 라이트 페이지에서 `shadow-card`보다 살짝 더 강한 lift (카드 높이 차이 반영).
-- **Hero gradients** Hero photos live inside dark container panels that sit on the light page. Inside the dark container: a `linear-gradient(180deg, transparent 50%, var(--color-dark-surface) 100%)` fade plus a right-side scrim `linear-gradient(90deg, ... 80% rgba(5,8,22,0.85))` under the text card.
+1. **Hairline borders** (`--color-line` or `--color-border-soft`) on cards, info panels, overview tabs at rest. No drop shadow on resting cards in the typical case.
+2. **Soft drop shadow** (`--shadow-base: 0 20px 60px rgba(8, 8, 8, .10)`) on overview-card.
+3. **Per-component shadows** for specific lift states:
+   - `--shadow-card-lift` — `0 16px 44px rgba(0, 0, 0, .045)` on program-detail.
+   - `--shadow-pin` — `0 14px 34px rgba(0, 0, 0, .18)` on map-pin.
+   - `--shadow-reserve` — `0 16px 34px rgba(0, 0, 0, .12)` on reserve-button.
+   - `--shadow-course-label` — `0 10px 24px rgba(0, 0, 0, .16)` on course-label.
+4. **Hard text shadow** — `--shadow-text-hard: 4px 4px 0 var(--color-neon-deep)` on `display-xl` headlines only (poster impact). Reserved for `wire-hero h1`; do not apply elsewhere.
 
 ## Shapes
 
-- **Pill** (`rounded.full`, 9999px) — all CTAs (`.btn`). Reads as "interactive," differentiates from cards.
-- **Large radius** (`rounded.lg`, 24px) — hero card, caution box, `.card` thumbnails, external-CTA banner, dark section containers. Reads as a "panel."
-- **Medium radius** (`rounded.md`, 12px) — `.program-card` (sub-pages and home overview), elevated dark cards inside sections.
-- **Small radius** (`rounded.sm`, 6px) — skip-link, image-slot dev badge, ad-hoc small labels.
-- **Circle** — the `.site-logo__dot`, footer SNS icons (36 × 36 px circles), and the `.program-card__icon` (48 × 48 px). Always solid neon or accent fill with dark-surface text inside.
-- The `.course-map` element (designer-placeholder) uses `aspect-ratio: 16/9` with `rounded.lg` and currently fills with a neon + blue radial-gradient as a stand-in until real maps arrive — see `IMAGE_SPEC.md`.
+- **Pill** (`rounded.full`, 999 px) — all CTAs (`primary-action`, `secondary-action`), `overview-tabs-item`, `community-block-kicker`. Reads as "interactive."
+- **Extra-large** (`rounded.xl`, 24 px) — `overview-card`, `lineup-card`.
+- **Large** (`rounded.lg`, 20 px) — `info-panel`, `program-detail`, `community-block`, all `*-map` panels (festival-map, course-map, garden-map).
+- **Medium** (`rounded.md`, 16 px) — `notice-guide-item`, `seat-guide`, `experience-item`, `community-placeholder`, `notice-panel`.
+- **Small** (`rounded.sm`, 12 px) — `map-pin`, `reserve-button-local`/`-global`.
+- **Extra-small** (`rounded.xs`, 8 px) — `course-label`, `skip-link`.
+- **Skewed parallelogram** — the `brand-mark` uses `transform: skewX(-22deg)` (CSS only, not a shape token). The NS inlay reads as a poster block-cut.
 
 ## Sizes
 
-Dimension primitives for component fixtures (icon hit areas, decorative dots, masked SVG icons). Defined in the YAML `sizes:` block (spec extension — alpha lint recognises only `colors/typography/spacing/rounded` as primitive categories, so `sizes` keys are not cross-referenced from `components.*.size` and remain as raw px in those rules; the canonical mapping is enforced in `tokens.css` via `--size-*` and in `CLAUDE.md` rule #6).
+Dimension primitives for component fixtures. Defined in the YAML `sizes:` block (spec extension — alpha lint recognises only `colors / typography / spacing / rounded` as primitive categories, so `sizes` keys are not cross-referenced from `components.*.size` and remain as raw px in those rules; the canonical mapping is enforced in `tokens.css` via `--size-*`).
 
-- **`mask-icon` (16 px)** — Square hit box for SVG-masked decoration: list bullets, notice/FAQ row icons. Always 1:1 with no border.
-- **`logo-dot` (10 px)** — The single brand signature dot in `.site-logo__dot`. Solid neon fill + neon glow. Decorative, never interactive on its own.
-- **`faq-sign` (24 px)** — `.faq__sign` `+` / `×` toggle indicator inside the FAQ summary row. Hit area is the whole summary row, not this glyph alone.
-- **`hamburger-toggle` (32 px)** — `.site-nav__toggle` mobile menu trigger. **A11y deviation**: WCAG 2.2 SC 2.5.8 recommends ≥ 44 × 44 hit area; current 32 passes the absolute minimum (24) but should be revisited. Tracked for future revision.
-- **`sns-icon` (36 px)** — Footer SNS round icons (`.sns-list a`). Same a11y deviation as `hamburger-toggle`; the surrounding gap (`space-3`) extends the practical hit area but does not satisfy SC 2.5.8.
-- **`tap-target` (44 px)** — WCAG 2.2 SC 2.5.8 recommended minimum. Not used yet; reserved as the target value when `hamburger-toggle` / `sns-icon` are revised.
-- **`program-icon` (48 px)** — `.program-card__icon` solid circle in the program accent color. Pairs with the program-icon component.
-- **`button-action` (48 px)** — `.btn` primary CTA `min-height`. Matches WCAG 2.2 SC 2.5.8 recommended tap-target minimum (44 px) with extra headroom for festival-scale typography.
-- **`button-action-small` (40 px)** — `.btn--small` variant min-height. Below the 44 px tap-target recommendation — use only in non-primary, low-density contexts (e.g., inline secondary action in a dense reservation form).
-
-Rule: when adding a new fixture, prefer reusing one of the above before inventing a new key. New keys require ≥ 2 callsites or a clear semantic name.
+- **`brand-mark-w` / `brand-mark-h`** (42 × 28 px desktop) — NS skewed inlay box. Drops to 36 × 24 px under 620 px.
+- **`menu-icon`** (72 px) — hamburger button width (matches the site-header right grid column). The hit target is the full 72 × 66 column.
+- **`header-h` / `header-h-mobile`** (66 / 60 px) — site-header total height.
+- **`cta-min-h`** (48 px) — primary-action / secondary-action min-height. Above WCAG 2.2 SC 2.5.8 absolute minimum (24 px); near the 44 px recommendation when combined with horizontal padding.
+- **`cta-min-h-small`** (40 px) — `.primary-action.small` variant for inline CTAs inside cards (program-detail button-row).
+- **`cta-min-w`** (250 px) — primary-action / secondary-action min-width. Mobile breakpoint relaxes to `100%`.
+- **`program-number`** (42 px) — circular badge in program-detail (01/02/03). `black` fill with `neon` digit.
+- **`reserve-btn-h`** (76 px) — Fun&Walk reserve-button tall card. Large emphasis CTA.
+- **`sub-visual-h-min` / `sub-visual-h-max`** (300 / 430 px) — sub-page hero image strip height via `clamp(300px, 30vw, 430px)`.
+- **`container-max`** (980 px) — global content column width.
 
 ## Components
 
-### Summer Night area components
+### Site header
 
-**night-hero** — `.sub-hero.overview-hero.night-hero` 조합. Summer Night 서브페이지 상단 히어로 스트립. background/padding은 `.overview-hero`에서 상속. `.section-label` 색상을 `primary-text`로 강조.
+Sticky three-column grid on desktop (`210px 1fr 72px`). Left column holds the brand (NS inlay + two-line title). Center column holds the gnb (five items, hover-reveal submenus). Right column holds the hamburger trigger. Submenu drops from the gnb-item with `opacity / transform` transition (no JS — pure CSS). On screens < 980 px the gnb wraps into a second row; submenu becomes static. On screens < 620 px the header becomes non-sticky and gnb items become 50%-wide tiles.
 
-**night-card** — `.overview-card.night-card` modifier. background/padding/rounded는 부모 `.overview-card`에서 상속. 본 modifier는 `border-color: dark-surface`만 override해 야간 페스티벌 identity 부여.
+### Brand mark
 
-**night-info-block** — `.night-card` 내부 섹션 구분 블록. 공연안내 / 객석가이드 / 참가신청 / 체험존 4개 섹션에 사용. `border-block-start` 구분선 + 상단 padding.
+A skewed parallelogram (`transform: skewX(-22deg)`) inlay carrying the "NS" letters in `neon` on a `black` background. 42 × 28 px desktop / 36 × 24 px mobile. Always appears with the two-line "2026 남산 / 서머 페스티벌" label to its right.
 
-**lineup-image** — Summer Night 라인업 이미지 figure. dark-surface 배경 위 이미지 표시. 아티스트 텍스트가 이미지에 베이크인되어 있으므로 `<img alt>`에 아티스트 목록 명시.
+### Primary & secondary action
 
-**seat-guide** — Summer Night 객석 안내 다이어그램. dark-surface 배경. Stage 라벨 + 6개 seat 아이콘(빈 `<i>`) + Free Zone 라벨 수평 배치. `role="group"`으로 내부 텍스트 AT 노출.
+Both pill-shaped (`rounded.full`), `min-height: 48px`, `min-width: 250px`. Primary uses `black` bg with `paper` text; hover swaps to `neon` bg with `black` text. Secondary uses `paper` bg with `ink` text and a 1 px `black` border; hover swaps to `neon` bg with `ink` text. `.small` modifier drops min-width to 120 px and min-height to 40 px (for inline CTAs inside cards).
 
-**experience-image** — Summer Night 체험존 안내 이미지 figure. neutral 배경 위 이미지 표시. 체험종목 5종 텍스트가 이미지에 베이크인되어 있으므로 `<img alt>`에 명시.
+### Overview card
 
-### Buttons
+Sub-page primary content panel. `paper` bg, `rounded.xl` (24 px), padding `clamp(28px, 5vw, 56px)`, hairline `--color-border-soft`, `--shadow-base`. Lead paragraph (`.lead`) is `clamp(20px, 2.4vw, 28px)` at weight 950. Body paragraphs are `body-md`. Container for `info-panel`, `program-detail-list`, `notice-guide-list`, `community-block`, and per-program decorations.
 
-Two in-system variants (`button-primary`, `button-ghost`) plus an external deep-link category (`button-map-*`). All are pill-shaped (`rounded.full`).
+### Overview tabs
 
-- **`button-primary`** — solid `dark-surface` background, `on-dark` text at rest; hover swaps to `primary` (neon) background with `dark-surface` text plus `shadow-glow` and `translateY(-2px)` lift. The neon-on-dark hover pairing (14.6:1 AAA) remains the brand's signature interaction. Used at most once per visual zone; never two primaries side by side in the same hero band.
-- **`button-ghost`** — transparent background, 1 px `border (alpha 0.10)`, `on-surface` text (dark on light). Hover: background swaps to `primary` (neon), text and border invert to `dark-surface`. Used as the secondary CTA next to `button-primary`.
-- Inner arrow span (`.btn__arrow`) shifts `translateX(4px)` on hover for both variants — small motion cue, applied automatically.
+Horizontal pill row of sub-page anchors. Resting: `paper` bg, 1 px `--color-border-soft`, `ink` text. Active or hover: `black` bg, `paper` text. Min-width 150 px / min-height 44 px each. Stacks vertically under 620 px.
 
-**External deep-link buttons (`button-map-*`)** — a separate category that intentionally breaks the light-canvas color rule because each button must remain instantly recognizable as the target app. They appear only inside `.map-links` slots beneath `.course-map` placeholders and never substitute for the in-system CTA. `button-map-kakao` uses Kakao's brand yellow (`brand-kakao`) with `dark-surface` text; `button-map-google` uses Google Material blue (`brand-google-blue`) with `on-dark` white; `button-map-naver` uses Naver Bright Green (`brand-naver`) with `dark-surface` text. All three brand colors are scoped to this category — they must not be reused for any other surface. Kakao opens the venue's Place page by ID; Google opens transit directions to the road address; Naver opens its search-result page.
+### Info panel
 
-### Program cards (light-baseline with neon hover)
+Rectangular info block inside overview-card. First panel (`info-panel`) uses `soft` bg with hairline border. Subsequent panels (`info-panel + info-panel`) use `paper` bg. Both use `rounded.lg` (20 px) and `clamp(22px, 4vw, 32px)` padding. Contains an h3 (`headline-md`) and a `program-info-table` — a `<dl>` with a 150 px label column.
 
-A single base class for all three festival programs sharing the same `card-compact` shape (`rounded.md`, 24 px padding). The light-baseline page surface continues into the card — white background, hairline border, charcoal text — and the neon identity surfaces only on hover.
+### Program info table (`<dl>`)
 
-- `.program-card` — `surface` (white) bg, 1 px `border (alpha 0.10)`, `on-surface` text. The eyebrow uses `primary-text` (Deep Green); the card icon uses `primary` (Neon Green) background with `dark-surface` text inside.
-- `.program-card:hover` — `translateY(-4px)`, background swaps to `primary` (Neon Green), border swaps to `dark-surface`, eyebrow text inverts to `dark-surface`. This neon-swap is the program-card's signature interaction.
+Inside info-panel. Each row is `<div>` wrapping `<dt>` + `<dd>` with a 150 px label column and `padding-block: 14px`, hairline `--color-border-soft` divider. `dt` uses `headline-sm`/muted color; `dd` uses `body-sm` ink.
 
-Each card has a 48 × 48 circular icon (`size: program-icon`) in `primary` with `dark-surface` text. There is no per-program color variant — Fun & Walk, Summer Night, Summer Garden all share the same card visual; differentiation comes from copy, icon glyph, and photographic imagery, not from card chrome.
+### Program detail card
 
-### Program eyebrows on light surfaces
+Used on `/info/programs.html` to render 01/02/03. `paper` bg, `rounded.lg`, padding 38 px. Odd-indexed cards receive a subtle neon-tinted gradient (`linear-gradient(135deg, var(--color-neon-soft), white 44%)`). Each card has a `program-number` (42 × 42 px circle, `black` bg / `neon` digit), an h3, a strong lead, optional conflict notice, a `<dl>` info table, and a `button-row`.
 
-When the brand/program identity needs **text** on a light page (notice list category, breadcrumb, link), use `primary-text` (#107010, 6.27:1 AA on surface). Never use the raw `primary` neon for text on light surfaces.
+### Reserve button (Fun&Walk only)
 
-### Dark section (nocturnal-mood container)
+Two large reservation buttons in a 2-column grid. Each is 76 px tall, padded 16 × 20 px, `rounded.sm`. `reserve-button.local` uses `reserve-local` (#ffbd00) with `black` text; `reserve-button.global` uses `reserve-global` (#05b957) with `black` text. Both carry `--shadow-reserve`. Stack vertically under 620 px.
 
-`dark-section` is the Summer Night–style mood container used **inside light pages** for hero photo zones, Summer Night feature sections, and any block where the festival's after-hours identity must read clearly. It is *not* a page mode — light pages can contain multiple `.dark-section` blocks, and they always sit inside the light page rhythm with `rounded.lg` corners that announce the container boundary.
+### Festival map (info overview)
 
-- `dark-section` — `dark-surface` bg, `on-dark-body` body text, `rounded.lg`, 48 px padding.
-- `dark-section-title` — `on-dark` white, `headline-md` typography.
-- Inside `.dark-section`, the neon-on-dark contrast guidelines apply: eyebrows can use raw `primary`, body text uses `on-dark-body`, glow shadows are legible.
-- `dark-card-elevated` — when a card needs further elevation inside a dark section, use `dark-surface-2` bg.
+CSS-only decorative map showing three pins on a grid background. Three `.map-pin` spans absolutely positioned: `.pin-fun` (`map-pin-fun`, neon bg, black text), `.pin-night` (`map-pin`, black bg, paper text), `.pin-garden` (`map-pin-garden`, map-garden bg, black text). A decorative `.map-route` line in neon connects them. Decorative arcs (`::before`, `::after`) use rgba neon-deep / black variants.
 
-### Site Header
+### Course map (Fun&Walk)
 
-Fixed (`position: fixed`, top 0, `height: 72px` desktop / `60px` mobile). Three states:
+Larger decorative map for the 6 km route. Grid-pattern background with concentric arc borders. `.course-path` is a 5 px `map-course` (blue) border. Five `.course-label` (map-finish red bg, paper text) markers: 시작점 / 호현당 / 북측순환로 / 남측순환로 / 종점. A `.course-caption` strip at the bottom narrates the route.
 
-1. **Transparent (default, top of page)** — no background, logo + nav float over the page (or over hero containers).
-2. **Scrolled** — `surface (alpha 0.72)` background with `backdrop-filter: saturate(140%) blur(16px)` and a hairline border-bottom.
-3. **Mobile menu open** — full-viewport `neutral` background slides down (`translateY(0)`), nav links become `display-md` in `on-surface` text.
+### Garden map (Summer Garden)
 
-### Site Footer
+Five-zone decorative map for the docent tour. Soft green ellipse layers + concentric arcs. Five `.garden-zone` pills (neon bg, black text) for 남산마루 / 양지정원 / 이끼원 / 초승마당 / 무궁화원. A `.garden-route` line in `#006f4a`. Legend pill in the corner with translucent paper backdrop.
 
-`5-column grid (1.4fr 1fr 1fr ...)` of menu sections on desktop; `2-column` on mobile. Background `surface-alt` provides subtle separation from the main page rhythm without going full dark. Column headings use `label-en-caps` in `primary-text` (the darker lime that passes contrast on light). Bottom bar holds copyright and an SNS list of 36 × 36 circle borders that pick up `primary-text` on hover.
+### Lineup card (Summer Night)
 
-### Notice / FAQ lists
+Three cards in a horizontal row (stack on mobile). Each card has a soft beige bg with a circular neon disc decoration. Card label uses `body-sm` muted; card title is a flat label in `lineup-base` (green) with `paper` text. `.lineup-card.live` reverses: title pill in `black` with `lineup-live` (yellow) text. The `lineup-heading` above the row is underlined in `lineup-live` (8 px text-decoration thickness).
 
-Two-column section on the homepage (`bottom-grid`, 1:1). Each list is a vertical stack with hairline dividers (`border-block-end`). List item rows are `grid-template-columns: 1fr auto` (title left, date right). Hover swaps title text to `primary-text`.
+### Seat guide (Summer Night)
 
-### Hero Display
+Dark info card showing stage + free zone layout. `ink` (#0b0d0c) background, `paper` text. Stage label is a `neon` pill at the top spanning the card width. Six empty `<i>` elements render as faint seat markers in a 3-column grid. Free Zone label spans full width with a dashed `paper-on-ink` border.
 
-Homepage `<section class="hero">` splits into two zones: a left `hero__display` (typographic poster) and a right `hero__card` (event metadata + single CTA). The display zone stacks three element types vertically (the Korean title repeats across three lines but uses one class):
+### Experience grid (Summer Night)
 
-1. `hero__display-num` — Anton "2026" at `display-hero` token (`--fs-display-hero`, fluid 2.5–6rem, `on-surface` charcoal with a neon glow halo behind).
-2. `hero__display-kr` — Pretendard 900 three-line Korean title ("남산 / 서머 / 페스티벌"). Uses its own fluid range `clamp(2.5rem, 7vw, 5rem)` (capped 1rem below `display-hero` so the numeric reads as the lead marquee), line-height 0.95.
-3. `hero__display-en-sub` — Anton "NAMSAN GREEN SUMMER FESTIVAL" at `body-md`, `primary-text`, wide tracking.
+Two-column dark cards showing five experience booths. Each `article` has a radial neon spot in the corner and a `black → #273027` gradient background. Title text in `neon`, body in muted paper. Stacks to single column under 620 px.
 
-The card zone shrinks to 280 px on desktop and contains only date/place metadata + the primary CTA. On screens ≤ 900 px the two zones stack with display first.
+### Notice list
 
-### Info table (`info-grid`)
+Used on home + community/index.html. Each row is a 3-column grid (`52px 1fr 110px`) with a neon `notice-badge` ("공지"), the title, and the date in `notice-meta` muted gray. Hairline `--color-line` divider between rows. Date column right-aligns on desktop, left-aligns under 620 px.
 
-`220px 1fr` `<dl>` two-column on desktop; collapses to stacked dt/dd on mobile. Each name-value pair is wrapped in `<div class="info-grid__row">` (MDN-allowed inside `<dl>`) so per-row padding and the inter-row divider live on a single element — `dt` and `dd` share the same row baseline. `dt` uses `label-en-caps` in `on-surface-muted`; `dd` uses `body-md` on `on-surface` (charcoal).
+### Notice guide item
 
-### Timetable (`timetable`)
+Vertical list of guide sections (예약 안내, 입장 안내, 관람 안내, etc.) inside a notice-guide-card. Each item is a `paper` rounded card with `clamp(22px, 3vw, 32px)` padding. Odd-indexed items receive a neon-tinted gradient via the `notice-guide-item-alt` modifier (handled by `:nth-child(odd)` in CSS).
 
-`grid-template-columns: 140px 1fr auto` per row. Time column uses Montserrat 600 in `primary-text` (Deep Green — the darker variant for legibility on light surfaces).
+### Community block
 
-### Forms
+Used on `/community/refund.html`. A `soft`-backgrounded `rounded.lg` panel containing a `community-block-kicker` pill (neon bg, black text), an h3 program label, a description paragraph, and a `button-row` with primary + secondary CTAs.
 
-Not yet defined — awaiting designer hand-off. When introduced, inputs should follow the `input-base` token (12 px padding, `rounded.md`, `surface` bg, `on-surface-body` text, focus ring = `primary` 2 px with 4 px offset to mirror `:focus-visible`).
+### Skip link & focus ring
 
-### Section zones
+`.skip-link` is the first focusable element on every page. Visually hidden until focused. When focused: `neon` background with `black` text, fixed top-left, `z-index: 200`. Interactive elements receive `:focus-visible { outline: 2px solid var(--color-neon); outline-offset: 2px; }`.
 
-`section-zone-alt` is the alternating-rhythm utility for pages that need a soft separation between full-width sections. Uses `surface-alt` bg (the off-white) so the eye registers a zone change without a hard color step.
+### Footer
 
-### Poster hero
+Two-column horizontal layout (`black` bg, `paper` text). Brand mark + label on the left, contact + copyright text on the right (muted to 62% paper). Becomes a vertical grid under 620 px.
 
-`poster-hero` is a full-bleed keyvisual image section placed immediately after the site header. The image carries baked-in typography — there is no HTML text overlay. A `dark-surface` background fills the slot while the image loads. The `<img>` element is hydrated at runtime from `data/image-slots.json` via the image-slot module.
+### Sponsor tile / sponsor grid
 
-### Wire section
-
-`wire-section` is the common section container for sponsor, program-summary, and notice-area blocks. It provides a `surface` background and a hairline bottom border for rhythm. Inner content is constrained to `wire-inner` (max 980 px, horizontal padding, block padding via `clamp`).
-
-### Program copy
-
-`program-copy` lives inside `wire-section.program-summary`. It renders one program's summary: heading (h2), lead (strong), location/application paragraphs, and a `cta-row`. Alternate sections receive `program-summary--alt` (surface-alt background) for visual rhythm. The modifier class is applied by the `renderProgramSummaries` JS module based on slot index, not CSS `:nth-of-type`.
-
-### CTA row
-
-`cta-row` is a flex row of call-to-action links inside `program-copy`. Primary action uses `dark-surface` background with neon-on-dark hover; secondary action uses `surface` background with hairline border and neon hover. Both sizes follow `sizes.button-action` (48 px min-height). Pending links (URL not yet confirmed by operations team) are rendered with `aria-disabled="true"` and reduced opacity.
-
-### Overview layout (event pages)
-
-`overview-hero` is a sub-page hero strip overlaid on the `sub-visual` image. It uses a `radial-gradient` neon accent on a `neutral` background and renders the page `section-label` (Montserrat caps, `primary-text`) plus the H1 and lead paragraph. It sits directly above `overview-section`.
-
-`overview-section` wraps the tab navigation and the main content card. Background is `surface` (white). The inner `overview-layout` is a single-column grid providing consistent gap between the tabs and the card.
-
-`overview-tabs` is a flex pill-row of sub-navigation anchors. Resting state: `surface` background, hairline `color-border`, `on-surface` text. Active/hover: `dark-surface` background, `on-dark` text. Pill shape (`rounded.full`).
-
-`overview-card` is the primary content panel on event sub-pages. It uses `surface` background with a subtle neon-tinted gradient, a `rounded.lg` corner, and `shadow-card` lift. Paragraph text uses `on-surface-body` at 18 px. The `.lead` inside uses `on-surface` at a larger fluid size and heavy weight.
-
-### Festival map
-
-`festival-map` is a CSS-only decorative map placeholder showing the three festival venues as pins on a grid-patterned background. Background uses `neutral` with a neon radial accent. Three `.map-pin` spans are absolutely positioned: `.pin-fun` (`map-pin-fun`) uses `primary` (neon) background with `dark-surface` text; `.pin-night` (`map-pin-night`) uses `dark-surface` background with `on-dark` text; `.pin-garden` (`map-pin-garden`) uses `primary-text` (#107010) background with `on-dark` text. All three pins share `rounded.md` shape. The `.map-route` element is a decorative line using `primary` (neon) background. Decorative arcs use `--color-map-arc-light` (`.festival-map::before`) and `--color-map-arc-dark` (`.festival-map::after`).
-
-### Program detail list
-
-`program-detail` is a rounded card rendering one festival program's detail: a `.program-number` circle badge (Anton, `primary` neon text on `dark-surface`), an H3 heading, a lead `<strong>`, an optional conflict notice `<p>`, a `<dl>` info table (120 px label column), and a `.button-row` of CTAs. Odd-indexed cards receive a subtle neon-tinted gradient background. `program-number` uses the `program-number` size (42 × 42 px circle, `dark-surface` fill, `primary` text).
+Four-tile horizontal grid (placeholder labels — Sponsor / Partner / Supporter / Media). `paper` bg, `rounded.sm`, 1 px `--color-line`, muted text. Drops to 2 columns under 620 px.
 
 ## Do's and Don'ts
 
 **Do**
 
-- Use `primary` (neon #39ff14) as a **decorative motif** only: the brand dot, primary CTA hover background, focus ring fill, neon glow halos, program-card hover background, the unifying festival identity across all programs.
-- Use `primary-text` (#107010) for **any text** that needs the brand identity on a light page (eyebrows, links, list category labels, timetable times). All three programs share this single text variant.
-- Pair every neon background with `dark-surface` text (`#39ff14` on `#050816` → AAA) — this remains the brand's signature pairing on CTAs and program icons.
-- Neon (#39ff14) is the single festival identity — all three programs (Fun & Walk, Summer Night, Summer Garden) share it. Differentiate programs by copy, icon glyph, and photographic imagery rather than chrome color.
-- Use Anton **only for English and numerals**. Headlines that contain Korean must use Pretendard (e.g., "주요 프로그램" stays in Pretendard, "Program 01" in Montserrat or Anton).
-- Maintain WCAG AA contrast (≥ 4.5 : 1 for normal text, ≥ 3 : 1 for large text) — all defined `on-*` × surface pairs currently pass; new combinations must be re-checked.
-- Use `shadow-glow` only on `primary` interactive states. It is the brand's signature; do not dilute it on non-CTA surfaces.
-- Keep the 9-step spacing scale closed. Adding a custom px value is a code smell — pick the nearest scale value.
-- Wrap nocturnal imagery (hero photos, program cards, Summer Night feature blocks) in `.dark-section` containers so the photographic palette and neon-on-dark legibility survive the light page rhythm.
+- Use `neon` as a single signature motif: brand-mark inlay, CTA hover, notice badge, focus ring, festival-map fun pin, garden zone tags, skip-link.
+- Pair every `neon` background with `black` or `ink` text (≥ 15:1 AAA).
+- Use Pretendard 950 for display, 900 for headlines, 750 for body emphasis, 600 for plain body.
+- Maintain WCAG AA: `ink` on `paper` (16:1 ✓), `ink` on `soft` (15:1 ✓), `muted` on `paper` (5.1:1 ✓), `black` on `neon` (16:1 ✓), `paper` on `black` (16:1 ✓), `black` on `reserve-local` (11.9:1 ✓), `black` on `reserve-global` (6.0:1 ✓), `black` on `map-garden` (5.2:1 ✓).
+- Use English labels (Pretendard caps with 0.06–0.08 em tracking) only for `section-label`, `notice-badge`, `community-block-kicker`, `course-label`, `garden-zone`. All other text is Korean.
+- Keep the spacing scale closed (`xs / sm / md / lg / xl / 2xl / 3xl / 4xl / 5xl / 6xl`). Pick the nearest value before inventing a new one.
 
 **Don't**
 
-- Don't set body text in raw `primary` neon on a light surface — it fails contrast at 1.4 : 1 and reads as illegible. Use `primary-text` instead.
-- Don't introduce a second accent color, a gradient with more than two stops, or per-program color variants in a single component.
-- Don't add a full-page dark theme. Dark moods belong inside `.dark-section` containers on otherwise light pages.
-- Don't use heavy multi-layer drop shadows for hierarchy. Tonal layer + hairline border + a soft 2-layer `shadow-card` is the pattern.
-- Don't mix shape vocabularies in a single zone: square inputs next to pill buttons, or sharp cards next to rounded cards.
-- Don't use Anton for Korean text. Don't use Pretendard for English uppercase labels. Don't use Montserrat for body copy.
-- Don't replace the primary CTA neon with a custom color "to highlight a program." All three programs share the single neon identity; the CTA across the whole site stays neon.
-- Don't add `!important` to layout/component styles. The cascade is layered (`reset / tokens / base / components / pages / utilities`); break ties with layer order, not flags. (Accessibility fallbacks are the one exception, documented at the rule.)
-- Don't apply `shadow-card` (the light-page lift shadow) inside dark sections — use `shadow-dark` there.
+- Don't use `neon` as body text on a light surface — fails contrast at 1.4:1. Use `neon-deep` for the rare text occurrence (gnb-link-active) or `ink` for everything else.
+- Don't introduce a dark mode or full-page dark theme. Black is local to brand mark / footer / primary-CTA / seat-guide / experience-item only.
+- Don't substitute Noto Sans KR, Anton, or Montserrat for Pretendard.
+- Don't reuse `reserve-*` outside Fun&Walk's two reservation buttons, `lineup-*` outside Summer Night lineup cards, or `map-*` outside the documented decorative map components.
+- Don't add `!important` (accessibility fallbacks excepted). Layer order resolves cascade ties.
+- Don't mix shape vocabularies in a single zone (pill CTAs next to sharp cards).
+- Don't apply `--shadow-text-hard` (the poster shadow) outside `display-xl` headlines.
+- Don't carry the source design's failing a11y pairings (`paper` on `reserve-global`, `paper` on `map-garden`) — both are overridden to `black` text in our spec.
 
 ---
 
 ## Related documents
 
 - [`README.md`](./README.md) — repository structure, build/deploy, code conventions.
-- [`docs/IMAGE_SPEC.md`](./docs/IMAGE_SPEC.md) — image slot inventory and hand-off rules (the visual *content*; this file covers the visual *system*).
-- [`CLAUDE.md`](./CLAUDE.md) — AI coding agent rules, including "no-build" policy and SSOT principles.
-- [`docs/design-explorations/light-baseline-v1.html`](./docs/design-explorations/light-baseline-v1.html) — original light-baseline visual exploration that drove this spec.
+- [`CLAUDE.md`](./CLAUDE.md) — AI coding agent rules, including SSOT and absolute rules.
+- [`docs/namsan-summer-festival-source-20260521-103004/`](./docs/namsan-summer-festival-source-20260521-103004/) — designer source bundle (Phase 7에서 폐기 예정, 그때까지 reference).
 
-> **Format**: Google Stitch `DESIGN.md` (alpha). Validate with `npx @google/design.md lint DESIGN.md`. Export tokens with `npx @google/design.md export --format dtcg DESIGN.md`. CLI is optional — the file itself is plain markdown with YAML front matter and requires no tooling.
+> **Format**: Google Stitch `DESIGN.md` (alpha). Validate with `npx @google/design.md lint DESIGN.md`. CLI is optional — the file itself is plain markdown with YAML front matter and requires no tooling.
