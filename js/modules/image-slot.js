@@ -56,7 +56,9 @@ export async function initImageSlots() {
       if (def.src) el.src = def.src;
       if (def.alt && !el.alt) el.alt = def.alt;
     }
-    el.append(buildBadge(id, primaryRatio(def)));
+    if (!(el instanceof HTMLImageElement)) {
+      el.append(buildBadge(id, primaryRatio(def)));
+    }
   });
 
   // Disable fade-in so designers see every slot without scrolling each into view.

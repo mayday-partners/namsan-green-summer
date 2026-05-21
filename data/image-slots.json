@@ -143,8 +143,8 @@
       "priority": "P1",
       "lcp": false,
       "alt": "2026 남산 서머 페스티벌",
-      "current_file": "img/sections/hero.webp",
-      "current_status": "현재 hero.webp 재사용 (540×380). SNS 표준 1200×630에 미달.",
+      "current_file": "/img/sections/hero.webp",
+      "current_status": "현재 hero.webp 재사용 (1774×887). SNS 표준 1200×630에 미달.",
       "art_direction": [
         { "ratio": "1.91:1", "widths": [1200], "note": "Facebook/Twitter/LinkedIn/Kakao 공통 표준. 텍스트 오버레이 포함한 별도 디자인 권장. 권장 경로: img/share/og-default.png" }
       ]

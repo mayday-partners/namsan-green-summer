@@ -233,6 +233,20 @@ components:
     rounded: "{rounded.full}"
     padding: 12px
     typography: "{typography.body-sm}"
+  poster-hero:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.on-dark}"
+  wire-section:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    padding: 96px
+  program-copy:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    padding: 48px
+  cta-row:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
 ---
 
 # 2026 Namsan Green Summer Festival — Visual Identity
@@ -436,6 +450,22 @@ Not yet defined — awaiting designer hand-off. When introduced, inputs should f
 ### Section zones
 
 `section-zone-alt` is the alternating-rhythm utility for pages that need a soft separation between full-width sections. Uses `surface-alt` bg (the off-white) so the eye registers a zone change without a hard color step.
+
+### Poster hero
+
+`poster-hero` is a full-bleed keyvisual image section placed immediately after the site header. The image carries baked-in typography — there is no HTML text overlay. A `dark-surface` background fills the slot while the image loads. The `<img>` element is hydrated at runtime from `data/image-slots.json` via the image-slot module.
+
+### Wire section
+
+`wire-section` is the common section container for sponsor, program-summary, and notice-area blocks. It provides a `surface` background and a hairline bottom border for rhythm. Inner content is constrained to `wire-inner` (max 980 px, horizontal padding, block padding via `clamp`).
+
+### Program copy
+
+`program-copy` lives inside `wire-section.program-summary`. It renders one program's summary: heading (h2), lead (strong), location/application paragraphs, and a `cta-row`. Alternate sections receive `program-summary--alt` (surface-alt background) for visual rhythm. The modifier class is applied by the `renderProgramSummaries` JS module based on slot index, not CSS `:nth-of-type`.
+
+### CTA row
+
+`cta-row` is a flex row of call-to-action links inside `program-copy`. Primary action uses `dark-surface` background with neon-on-dark hover; secondary action uses `surface` background with hairline border and neon hover. Both sizes follow `sizes.button-action` (48 px min-height). Pending links (URL not yet confirmed by operations team) are rendered with `aria-disabled="true"` and reduced opacity.
 
 ## Do's and Don'ts
 

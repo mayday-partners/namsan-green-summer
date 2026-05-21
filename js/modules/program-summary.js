@@ -22,7 +22,7 @@ export async function renderProgramSummaries() {
 
   const byId = new Map(programs.map(p => [p.id, p]));
 
-  slots.forEach(slot => {
+  slots.forEach((slot, idx) => {
     const id = slot.dataset.programSummary;
     if (!id) return;
     const program = byId.get(id);
@@ -30,6 +30,7 @@ export async function renderProgramSummaries() {
       console.warn('[program-summary] no summary for id "%s"', id);
       return;
     }
+    if (idx % 2 === 1) slot.classList.add('program-summary--alt');
     renderSlot(slot, program.summary);
   });
 }
@@ -39,8 +40,9 @@ function renderSlot(section, s) {
   const inner = document.createElement('div');
   inner.className = 'wire-inner program-copy';
 
-  // h2
+  // h2 — id matches section.id + '-title' to satisfy aria-labelledby
   const h2 = document.createElement('h2');
+  h2.id = section.id + '-title';
   h2.textContent = s.heading ?? '';
   inner.appendChild(h2);
 
