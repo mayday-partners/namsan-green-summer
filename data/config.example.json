@@ -1,4 +1,0 @@
-{
-  "kakao_js_key": "REPLACE_WITH_YOUR_KAKAO_JS_KEY",
-  "_note": "Schema reference for data/config.json (which is tracked in git). The Kakao JavaScript app key is intentionally public — protection comes from the Web domain whitelist in Kakao Developers Console (앱 → 플랫폼 → Web), not from secrecy. Use this file as a template when rotating or bootstrapping the key."
-}

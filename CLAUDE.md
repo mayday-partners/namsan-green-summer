@@ -9,15 +9,16 @@
 - 2026 남산 서머 페스티벌 정적 사이트
 - **멀티페이지(MPA) · 빌드 도구 없음 · Vanilla JS · 한국어**
 - 페이지: `index.html` + `<area>/{index,page}.html` × 5
-- 단일 진실원(SSOT): 공통 마크업은 `partials/`, 게시판 콘텐츠는 `data/*.json`
+- 단일 진실원(SSOT): 공통 마크업은 `partials/`, 디자인은 `DESIGN.md` + `css/tokens.css` (1:1 매핑)
+- 콘텐츠 모드: **정적 HTML 1차 작성** — 동적 렌더 모듈(`js/modules/*`) + `data/*.json` 시스템은 2026-05-21 redesign/v2에서 폐기 (시안 단순화 방침)
 
 ---
 
 ## 절대 룰 (위반 시 즉시 중단)
 
 1. **헤더/푸터 마크업을 페이지마다 복붙 금지** — `partials/header.html`, `partials/footer.html` 단일 편집. 새 페이지에는 `<site-header>...fallback...</site-header>` / `<site-footer></site-footer>` 커스텀 엘리먼트 사용. fallback nav는 최소 마크업 (로고 + 메뉴 5개)으로 유지 — 메뉴 항목 변경 시 fallback 6곳 + partial 1곳 모두 갱신.
-2. **게시판 항목(공지/FAQ 등)을 HTML에 직접 작성 금지** — `data/*.json`에만 추가. 마크업은 `<template>` 또는 모듈 렌더 함수로만 생성.
-3. **같은 데이터를 두 페이지에 복사 금지** — `index.html` 미리보기와 `community.html` 전체 목록이 같은 JSON을 다른 `data-limit`으로 호출해야 한다.
+2. **공지/FAQ 콘텐츠는 HTML에 직접 작성** — 시안 단순화 방침에 따라 정적 마크업으로 작성. 같은 콘텐츠가 두 페이지에 들어갈 경우 review 의무 (lint 자동 검출 없음). 동적 시스템 재도입은 사용자 명시 승인 필요.
+3. **동일 콘텐츠 중복 시 review 의무** — 홈의 공지 미리보기와 `community/index.html` 전체 목록이 같은 항목이면 두 곳 모두 동시 갱신. drift 발생 시 사용자 보고.
 4. **인라인 `style` 속성 금지** — 색상/그라데이션은 컴포넌트 modifier 또는 CSS 변수로.
 5. **`<script type="module">` 사용. 전역 `<script src>` 금지**, 전역 변수 금지.
 6. **`DESIGN.md`/`tokens.css`에 없는 값 직접 사용 금지** — 대상: 색상·spacing·radius·typography·**size**(고정 dimension, 예: 48px icon)·**alpha 변형**(dark-context 또는 program color soft variant 등 rgba 패턴). `DESIGN.md` 먼저 등록 → `tokens.css`에 동일 이름으로 매핑 → 컴포넌트 적용. 단 다음은 예외: (a) `?spec=1` dev tooling 내부 매직값, (b) 컴포넌트 내부 좌표(hamburger lines 등 1회 사용 절대좌표).
@@ -26,13 +27,12 @@
 9. **외부 URL이 필요한 메타 (`og:image`, `og:url`, `canonical`) 절대 URL 사용** — 프로덕션 도메인 `https://namsangreensummer.com` 기준. 페이지-상대 또는 root-absolute 금지 (SNS 봇이 못 찾음).
 10. **디자인 시스템은 `DESIGN.md` SSOT** — 색상/타이포/spacing/radius/컴포넌트는 `DESIGN.md` (Google Stitch alpha spec)를 먼저 갱신한 뒤 CSS 반영. lint(`npx @google/design.md lint DESIGN.md`)가 **0 errors / 0 warnings** 통과해야 머지.
 11. **코드 수정 후 `./scripts/lint.sh` 실행 필수** — CI 미도입 결정(2026-05-20)에 따라 lint 통과는 AI 에이전트(본인)와 개발자가 양심적으로 보장한다. 실패 시 fix 후 재실행, 통과 못 한 상태로 사용자에게 완료 보고 금지. 부분 실행: `./scripts/lint.sh {css|js|html|design|tokens}`. 만진 파일 종류만 검증해도 됨 (전체는 PR 직전).
-12. **mirror 문서(같은 정보를 두 출처에 가진 파일 쌍) 한쪽 변경 시 다른 쪽도 같은 PR에서 동시 갱신** — 현 mirror pair 3개:
-    - `data/image-slots.json` ↔ `docs/IMAGE_SPEC.md` (운영팀 핸드오프) — slot id·페이지 위치·art_direction
+12. **mirror 문서(같은 정보를 두 출처에 가진 파일 쌍) 한쪽 변경 시 다른 쪽도 같은 PR에서 동시 갱신** — 현 mirror pair 2개:
     - `sitemap.xml` ↔ `docs/INFRA.md §6-2` — URL 목록·priority·changefreq
-    - `data/programs.json.refund_policy` ↔ `fun-and-walk/notice.html` 환불 표 — 5 tier 조건·환불 %
-    - `_headers` ↔ `docs/INFRA.md §1-§3` — Cache-Control(max-age·must-revalidate)·CSP 지시문 분해·외부 도메인 화이트리스트
+    - `_headers` ↔ `docs/INFRA.md §1-§3` — Cache-Control(max-age·must-revalidate)·CSP 지시문·외부 도메인 화이트리스트
 
-    한쪽 갱신 후 반드시 다른 쪽을 grep으로 cross-reference하여 drift 없는지 확인. lint 자동 검출 없음 → review 의무. 본 룰은 2026-05-20 IMAGE_SPEC.md drift 사고에서 도입, 같은 날 sitemap.xml V1→V2 drift와 _headers ↔ INFRA.md drift(cache duration / CSP connect-src)도 함께 발견되어 pair 목록 확장. 새 mirror pair 발견 시 본 목록에 즉시 추가.
+    한쪽 갱신 후 반드시 다른 쪽을 grep으로 cross-reference하여 drift 없는지 확인. lint 자동 검출 없음 → review 의무.
+    이전 pair 2개는 redesign/v2(2026-05-21)에서 폐기: `data/image-slots.json` ↔ `docs/IMAGE_SPEC.md`는 image-slot 시스템 폐기와 함께 제거, `data/programs.json.refund_policy` ↔ `funwalk/notice.html`은 정적 HTML 단일 출처 정책으로 mirror 해체.
 
 ---
 
@@ -56,7 +56,7 @@
 - 진입점: `css/main.css` 하나만 HTML이 link. `@layer reset, tokens, base, components, pages, utilities;` 순서.
 - 간격은 `var(--space-*)`, 색상은 `var(--color-*)` 토큰만 사용. 모든 CSS 토큰은 `DESIGN.md` YAML과 **1:1 매핑** 유지 (이름·값 모두).
 - 셀렉터 중첩 3단계 이하.
-- 반응형 break: `768px`(모바일/태블릿 경계, 광범위 사용), `900px`(메인 그리드 pivot, `home.css` 전용). `1440px`는 DESIGN.md에 정의되어 있으나 현재 미사용 — wide-desktop variant 도입 전까지는 신규 break 만들지 말고 둘 중 하나 선택.
+- 반응형 break: `980px`(헤더 gnb wrap + overview-layout 단일컬럼), `620px`(모바일 — 헤더 static + 그리드 단일컬럼). 신규 break 만들지 말고 둘 중 하나 선택. (stylelint `media-feature-name-value-allowed-list`로 강제)
 
 ### JavaScript
 - ES Module. `js/main.js`가 진입점. 새 기능은 `js/modules/<name>.js`로 분리, `main.js`에서 import.
@@ -71,13 +71,12 @@
 
 ## 게시판 콘텐츠 작업 시
 
-공지/FAQ/일정 등 목록형 콘텐츠를 다룰 때:
+공지/FAQ/일정 등 목록형 콘텐츠를 다룰 때 (정적 HTML 모드):
 
-1. 데이터: `data/*.json` 1곳에만 추가/수정.
-2. 스키마는 `README.md §7-3` 표를 따른다. 날짜는 항상 `YYYY-MM-DD`(표시 변환은 렌더 시).
-3. 렌더 슬롯: `<ul data-notice-list data-limit="4">` 같은 `data-*` 속성으로 변형 지정.
-4. 같은 데이터를 미리보기/전체 양쪽에서 쓰면 `data-limit`만 다르게.
-5. 상세 페이지는 기본적으로 쿼리스트링 단일 페이지(`notice.html?id=...`) 패턴. SEO·SNS가 중요해질 때만 SSG 도입을 사용자에게 제안.
+1. `community/index.html` 의 `.notice-list` 내부에 `<a class="notice">...</a>` 항목 직접 추가.
+2. 홈(`index.html`)의 공지 미리보기와 `community/index.html` 전체 목록은 동일 콘텐츠로 동시 갱신 (drift 방지 — review 의무).
+3. 날짜는 `<time datetime="YYYY-MM-DD">2026.05.20</time>` 형식 (시맨틱 datetime + 표시용 텍스트 분리).
+4. 상세 페이지는 사용 안 함 — 목록 항목만. 추후 SEO 필요 시 SSG 도입을 사용자에게 제안.
 
 ---
 
@@ -89,7 +88,7 @@
 4. 메뉴 추가 필요 시 `partials/header.html` + `partials/footer.html` 단일 편집.
 5. 새 컴포넌트면 `css/components/<X>.css` + `css/main.css`에 `@import` 추가.
 6. 페이지 전용 스타일은 `css/<area>.css`.
-7. 모바일(390/768) · 데스크톱(1280/1440) 확인 후 보고.
+7. 모바일(390/620) · 태블릿(980) · 데스크톱(1280) 확인 후 보고.
 
 ---
 
@@ -128,9 +127,15 @@
 
 ---
 
-## 마이그레이션 현재 상태 (2026-05-19 시점, CSS @layer + components 분리 완료)
+## 마이그레이션 현재 상태 (2026-05-21 시점, redesign/v2 완료)
 
-partials/data/modules/CSS 마이그레이션 완료. 현 코드베이스는 본 가이드와 일치한다.
+시안 단순화 방침에 따라 전면 재설계 완료:
+- **디자인 시스템**: light-baseline + dark-section 이중 시스템 → **white paper + 단일 neon 모티프**로 통일. Anton·Montserrat 폐기, **Pretendard 단일 폰트** (weight 600~950).
+- **URL slug**: `event/fun-and-walk/summer-night/summer-garden` → `info/funwalk/night/garden` (시안 영문명 1:1).
+- **콘텐츠 모드**: 동적 렌더(js/modules + data/*.json) → **정적 HTML 1차 작성**. js/modules + data/*.json + animations.css 폐기.
+- **유지 자산**: partials/header.html + footer.html, js/components/site-header.js + site-footer.js (커스텀 엘리먼트 hydration), scripts/lint.sh, _headers, sitemap.xml.
+
+현 코드베이스는 본 가이드와 일치한다.
 
 ---
 

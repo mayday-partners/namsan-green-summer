@@ -1,48 +1,16 @@
 // js/main.js
+// 시안 디자인: 정적 콘텐츠 기반. 커스텀 엘리먼트 hydration만 수행하고,
+// 동적 렌더 모듈은 없음 (data/*.json + 모듈 시스템 폐기 — Phase 7).
 import './components/site-header.js';
 import './components/site-footer.js';
-import { initFadeIn } from './modules/observer.js';
-import { renderNoticeList } from './modules/notice-list.js';
-import { initImageSlots } from './modules/image-slot.js';
-import { mountMapLinks } from './modules/map-links.js';
-import { mountMapEmbeds } from './modules/map-embed.js';
-import { renderSponsorList } from './modules/sponsor-list.js';
-import { renderProgramSummaries } from './modules/program-summary.js';
-import { renderEventOverview } from './modules/event-overview.js';
-import { renderProgramDetail } from './modules/program-detail.js';
-import { renderInfoPanelList } from './modules/info-panel-list.js';
-import { renderReservationActions } from './modules/reservation-actions.js';
-import { renderCourseMap } from './modules/course-map.js';
-import { renderNoticeGuideList } from './modules/notice-guide-list.js';
-import { renderSeatGuide } from './modules/seat-guide.js';
 
-(async () => {
-  // Custom elements self-hydrate; no orchestration needed for partials.
-  await Promise.allSettled([
-    renderNoticeList(),
-    renderSponsorList(),
-    renderProgramSummaries(),
-    initImageSlots(),
-    mountMapLinks(),
-    mountMapEmbeds(),
-    renderEventOverview(),
-    renderProgramDetail(),
-    renderInfoPanelList(),
-    renderReservationActions(),
-    renderCourseMap(),
-    renderNoticeGuideList(),
-    renderSeatGuide(),
-  ]);
-  try { initFadeIn(); } catch (e) { console.error('[main] initFadeIn:', e); }
-  resolveHashAfterRender();
-})();
+// Hash navigation — 페이지 로드 직후 / hashchange 시 anchor 스크롤 보정.
+window.addEventListener('hashchange', resolveHash);
+document.addEventListener('DOMContentLoaded', resolveHash);
 
-window.addEventListener('hashchange', resolveHashAfterRender);
-
-function resolveHashAfterRender() {
+function resolveHash() {
   if (!location.hash) return;
-  // Use getElementById (not querySelector) so ids that start with digits
-  // — e.g., notice ids like "2026-05-20-launch" — resolve correctly.
+  // getElementById (not querySelector) — digits로 시작하는 id 지원
   const id = decodeURIComponent(location.hash.slice(1));
   const target = document.getElementById(id);
   if (!target) return;
