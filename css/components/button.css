@@ -11,25 +11,37 @@
   transition: transform var(--dur-fast) var(--ease-out),
               background var(--dur-fast) var(--ease-out),
               color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
               box-shadow var(--dur-base) var(--ease-out);
 }
 
 .btn--primary {
+  background: var(--color-dark-surface);
+  color: var(--color-on-dark);
+  border: 1px solid var(--color-dark-surface);
+  min-height: var(--size-button-action);
+}
+.btn--primary:hover,
+.btn--primary:focus-visible {
   background: var(--color-primary);
   color: var(--color-dark-surface);
-}
-.btn--primary:hover {
+  border-color: var(--color-dark-surface);
   box-shadow: var(--shadow-glow);
   transform: translateY(-2px);
 }
 
 .btn--ghost {
-  border: 1px solid var(--color-border);
+  background: transparent;
   color: var(--color-on-surface);
+  border: 1px solid var(--color-border);
+  min-height: var(--size-button-action);
 }
-.btn--ghost:hover {
-  border-color: var(--color-primary-text);
-  color: var(--color-primary-text);
+/* intentionally no glow/lift — secondary actions stay subtle (matches 시안 .secondary-action) */
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  background: var(--color-primary);
+  color: var(--color-dark-surface);
+  border-color: var(--color-dark-surface);
 }
 
 .btn__arrow { transition: transform var(--dur-fast) var(--ease-out); }
@@ -39,6 +51,12 @@
   padding: var(--space-3) var(--space-4);
   font-size: var(--fs-sm);
   line-height: 1;
+}
+
+.btn--small {
+  min-height: var(--size-button-action-small);
+  padding-inline: var(--space-4);  /* block padding inherits from .btn base */
+  font-size: var(--fs-sm);
 }
 
 /* ===== External deep-link buttons (map apps) ===== */

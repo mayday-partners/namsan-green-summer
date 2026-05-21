@@ -1,9 +1,8 @@
-/* ===== Card =====
- * 본 카드는 라이트 페이지의 라이트 surface 카드. 프로그램 카드(.program-card)는
- * Hybrid 다크 컨테이너로 별도 정의 (DESIGN.md "Program cards" 단락 참조).
- * .card__media gradient/--card-media-* 토큰은 라이트 카드 안에 들어가지만
- * 이미지 fallback이라 가려지는 영역이므로 placeholder gradient는 dark 톤 유지.
- */
+/* card.css — generic card primitives + eyebrow color modifiers.
+   The .program-card component (light-baseline, D6) is defined in
+   css/home.css since it is home-page-specific.
+   .card__media uses --card-media-placeholder (dark gradient) — image fallback
+   only; hidden once real images are loaded. */
 .card {
   position: relative;
   display: block;
@@ -32,17 +31,18 @@
 /* Eyebrows on light card surface — use darker variants for AA contrast.
  * .eyebrow--default 는 program identity 없는 neutral eyebrow.
  * (이전 .eyebrow--white 클래스는 라이트 baseline에서 의미가 깨졌으므로 rename됨.) */
-.eyebrow--blue    { color: var(--color-tertiary-text); }
-.eyebrow--pink    { color: var(--color-secondary-text); }
+/* HTML compat aliases — render same as --neon, kept for class-name continuity */
+.eyebrow--blue    { color: var(--color-primary-text); }
+.eyebrow--pink    { color: var(--color-primary-text); }
 .eyebrow--neon    { color: var(--color-primary-text); }
 .eyebrow--default { color: var(--color-on-surface); }
 
-.card__media--funwalk      { background: var(--card-media-funwalk); }
-.card__media--night        { background: var(--card-media-night); }
-.card__media--garden       { background: var(--card-media-garden); }
-.card__media--garden-deep  { background: var(--card-media-garden-deep); }
-.card__media--garden-fresh { background: var(--card-media-garden-fresh); }
-.card__media--neutral      { background: var(--card-media-neutral); }
+.card__media--funwalk      { background: var(--card-media-placeholder); }
+.card__media--night        { background: var(--card-media-placeholder); }
+.card__media--garden       { background: var(--card-media-placeholder); }
+.card__media--garden-deep  { background: var(--card-media-placeholder); }
+.card__media--garden-fresh { background: var(--card-media-placeholder); }
+.card__media--neutral      { background: var(--card-media-placeholder); }
 .card__title {
   font-family: var(--font-display);
   font-size: var(--fs-xl);

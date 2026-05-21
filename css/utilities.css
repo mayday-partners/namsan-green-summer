@@ -4,7 +4,7 @@
  * inside the list slot when fetch fails or templates are missing. */
 .fallback-error {
   padding: var(--space-4);
-  color: var(--color-secondary-text);
+  color: var(--color-primary-text);
   font-size: var(--fs-sm);
 }
 

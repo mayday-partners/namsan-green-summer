@@ -1,0 +1,21 @@
+/* brand-mark.css — NS skewed badge (시안 .brand-mark)
+   Black box with neon "NS" text, sheared by --skew-brand-mark.
+   Children are counter-sheared so text reads upright. */
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 42px;
+  block-size: 28px;
+  transform: skewX(var(--skew-brand-mark));
+  background: var(--color-dark-surface);
+  color: var(--color-primary);
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  font-weight: 950;
+  line-height: 1;
+}
+
+.brand-mark > * {
+  transform: skewX(calc(var(--skew-brand-mark) * -1));
+}

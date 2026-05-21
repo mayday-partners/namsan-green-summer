@@ -53,7 +53,7 @@
 
 .coord-picker__readout--error {
   background: rgba(176, 9, 75, 0.08);
-  color: var(--color-secondary-text);
+  color: var(--color-primary-text);
 }
 
 .coord-picker__buttons {

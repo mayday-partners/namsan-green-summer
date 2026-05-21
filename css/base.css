@@ -1,3 +1,9 @@
+/* Pretendard Variable — CDN-hosted variable font.
+   Supports weight 100–900 via font-variation-settings.
+   CSP: cdn.jsdelivr.net is already whitelisted in _headers.
+   Local woff2-subset (300-700) below remains as fallback. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
 @font-face {
   font-family: 'Pretendard';
   font-weight: 300;

@@ -20,6 +20,9 @@
 @import url('components/sponsor.css')     layer(components);
 @import url('components/kit-grid.css')    layer(components);
 @import url('components/notice-table.css') layer(components);
+@import url('components/brand-mark.css')     layer(components);
+@import url('components/sub-visual.css')     layer(components);
+@import url('components/radial-pattern.css') layer(components);
 
 @import url('home.css')                   layer(pages);
 @import url('page.css')                   layer(pages);

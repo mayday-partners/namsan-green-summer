@@ -146,9 +146,12 @@
   .hero__scroll-hint { display: none; }
 }
 
-/* ===== PROGRAM CARDS (Overview) — Hybrid 다크 컨테이너 =====
- * DESIGN.md "Program cards" 참조. 라이트 페이지 위에 다크 surface 카드를
- * 띄워서 photo + neon 무드 보존. 카드 내부는 다크 컨텍스트로 작동. */
+/* ---------------------------------------------------------------
+   .program-card — light-baseline card (D6).
+   White surface, hairline border, charcoal text at rest.
+   Neon-swap on hover: background → primary, border → dark-surface,
+   eyebrow/title/desc invert to dark-surface, shadow-glow halo.
+   --------------------------------------------------------------- */
 .programs__head {
   display: flex;
   justify-content: space-between;
@@ -166,34 +169,58 @@
 @media (max-width: 900px) { .programs__grid { grid-template-columns: 1fr; } }
 
 .program-card {
-  position: relative;
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  align-items: center;
-  background: var(--color-dark-surface);
-  border: 1px solid rgba(230, 232, 240, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  overflow: hidden;
-  padding: var(--space-4) var(--space-5);
-  gap: var(--space-4);
-  transition: transform var(--dur-base) var(--ease-out),
-              border-color var(--dur-base) var(--ease-out),
-              box-shadow var(--dur-base) var(--ease-out);
+  color: var(--color-on-surface);
+  text-decoration: none;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
 }
-.program-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-dark);
+
+.program-card:hover,
+.program-card:focus-visible {
+  transform: translateY(-4px);
+  background: var(--color-primary);
+  border-color: var(--color-dark-surface);
+  box-shadow: var(--shadow-glow);
 }
 
 .program-card__icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
   display: grid;
   place-items: center;
+  inline-size: var(--size-program-icon);
+  block-size: var(--size-program-icon);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-dark-surface);
+}
+
+.program-card:hover .program-card__icon,
+.program-card:focus-visible .program-card__icon {
+  background: var(--color-dark-surface);
+  color: var(--color-primary);
+}
+
+.program-card__eyebrow {
   font-family: var(--font-en);
-  font-weight: 700;
-  font-size: var(--fs-base);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary-text);
+}
+
+.program-card:hover .program-card__eyebrow,
+.program-card:focus-visible .program-card__eyebrow {
   color: var(--color-dark-surface);
 }
 
@@ -203,33 +230,32 @@
   min-width: 0;
 }
 
-.program-card--funwalk { border-color: rgba(0, 163, 255, 0.3); }
-.program-card--funwalk .program-card__icon { background: var(--color-tertiary); }
-.program-card--funwalk:hover { border-color: var(--color-tertiary); box-shadow: 0 24px 64px rgba(0, 163, 255, 0.15); }
-
-.program-card--night { border-color: rgba(255, 15, 123, 0.3); }
-.program-card--night .program-card__icon { background: var(--color-secondary); }
-.program-card--night:hover { border-color: var(--color-secondary); box-shadow: 0 24px 64px rgba(255, 15, 123, 0.15); }
-
-.program-card--garden { border-color: rgba(168, 255, 0, 0.3); }
-.program-card--garden .program-card__icon { background: var(--color-primary); }
-.program-card--garden:hover { border-color: var(--color-primary); box-shadow: var(--shadow-glow); }
-
 .program-card__title {
   font-family: var(--font-display);
   font-size: var(--fs-md);
-  color: var(--color-on-dark);
+  color: var(--color-on-surface);
   letter-spacing: 0.02em;
   margin: 0;
 }
+
+.program-card:hover .program-card__title,
+.program-card:focus-visible .program-card__title {
+  color: var(--color-dark-surface);
+}
+
 .program-card__desc {
-  color: var(--color-on-dark-body);
+  color: var(--color-on-surface-body);
   font-size: var(--fs-sm);
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.program-card:hover .program-card__desc,
+.program-card:focus-visible .program-card__desc {
+  color: var(--color-dark-surface);
 }
 
 /* ===== NOTICE + FAQ (two column) — 라이트 페이지 영역 ===== */

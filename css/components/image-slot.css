@@ -34,8 +34,8 @@
 .image-slot__badge-target { color: var(--color-on-dark-body); }
 
 .image-slot[data-image-slot-missing] .image-slot__badge {
-  border-color: var(--color-secondary);
+  border-color: var(--color-primary);
 }
 .image-slot[data-image-slot-missing] .image-slot__badge-id {
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }

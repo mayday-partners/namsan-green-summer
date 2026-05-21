@@ -8,10 +8,8 @@ description: >-
   containers (Summer Night hero, program imagery). Display Anton + body
   Pretendard. Editorial calm under a high-contrast festival aesthetic.
 colors:
-  # Brand accents — three program identities (accent / decorative use only)
-  primary:   "#A8FF00"   # Neon Lime — Summer Garden + CTA background (never as text on light surfaces)
-  secondary: "#FF0F7B"   # Hot Pink — Summer Night
-  tertiary:  "#00A3FF"   # Sky Blue — Fun & Walk
+  # Brand accent — single neon (decorative use only on light surfaces)
+  primary:   "#39ff14"   # Neon Green — brand mark, CTA, program identity, focus ring (never as text on light surfaces)
   # Surface system (light baseline)
   neutral:        "#F4F8EE"   # Pale Garden — page background, green-tinted paper
   surface:        "#FFFFFF"   # Pure paper — cards, panels, scrolled header backdrop
@@ -20,12 +18,10 @@ colors:
   on-surface:        "#0F1419"   # Charcoal Ink — display titles, primary headings
   on-surface-body:   "#2D3340"   # Body Slate — body copy
   on-surface-muted:  "#6B7280"   # Cool Slate — metadata, eyebrows, captions
-  # Darker accent variants — text use on light surfaces (neon hues fail contrast as text)
-  primary-text:    "#3E7A00"   # Deep Lime — Summer Garden eyebrow/link on light (4.62:1 AA on surface)
-  secondary-text:  "#B0094B"   # Deep Pink — Summer Night eyebrow/link on light (6.74:1 AA on surface)
-  tertiary-text:   "#0277BD"   # Deep Blue — Fun & Walk eyebrow/link on light (4.85:1 AA on surface)
+  # Darker accent variant — text use on light surfaces (raw neon fails contrast as text)
+  primary-text:    "#107010"   # Deep Green — brand/program text on light surfaces (6.27:1 AA on #FFFFFF, 5.83:1 AA on #F4F8EE)
   # Dark surface system (section-level nocturnal containers)
-  dark-surface:    "#050816"   # Midnight Ink — dark section background, program card imagery
+  dark-surface:    "#050816"   # Midnight Ink — dark section background, photo cards
   dark-surface-2:  "#0C0F24"   # Elevated Indigo — elevated dark cards
   # Foreground tiers (on dark surfaces)
   on-dark:        "#FFFFFF"   # Pure white — display titles inside dark sections
@@ -110,10 +106,12 @@ sizes:
   sns-icon:         36px  # footer SNS round icons — a11y deviation, see prose
   tap-target:       44px  # WCAG 2.2 SC 2.5.8 minimum recommended hit area
   program-icon:     48px  # .program-card circular icon
+  button-action:        48px  # .btn primary CTA min-height (시안 .primary-action 48px hit area)
+  button-action-small:  40px  # .btn--small variant
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.dark-surface}"
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.on-dark}"
     rounded: "{rounded.full}"
     padding: 12px
     typography: "{typography.body-sm}"
@@ -126,7 +124,8 @@ components:
     padding: 12px
     typography: "{typography.body-sm}"
   button-ghost-hover:
-    textColor: "{colors.primary-text}"
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.dark-surface}"
   card:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
@@ -157,28 +156,12 @@ components:
     textColor: "{colors.on-surface-body}"
     rounded: "{rounded.md}"
     padding: 12px
-  program-icon-funwalk:
-    backgroundColor: "{colors.tertiary}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.full}"
-    size: 48px   # matches sizes.program-icon (spec extension — lint can't resolve cross-category)
-  program-icon-night:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.dark-surface}"
-    rounded: "{rounded.full}"
-    size: 48px   # matches sizes.program-icon
-  program-icon-garden:
+  program-icon:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.dark-surface}"
     rounded: "{rounded.full}"
-    size: 48px   # matches sizes.program-icon
-  program-eyebrow-funwalk:
-    textColor: "{colors.tertiary-text}"
-    typography: "{typography.label-en-md}"
-  program-eyebrow-night:
-    textColor: "{colors.secondary-text}"
-    typography: "{typography.label-en-md}"
-  program-eyebrow-garden:
+    size: 48px   # matches sizes.program-icon (spec extension — lint can't resolve cross-category)
+  program-eyebrow:
     textColor: "{colors.primary-text}"
     typography: "{typography.label-en-md}"
   info-box:
@@ -260,7 +243,7 @@ components:
 
 ## Overview
 
-The brand mood is **"editorial calm with luminous festival accents on a green-tinted paper canvas."** A pale garden paper plays foil to a single signature **Neon Lime** accent used as a *motif* (CTA background, brand mark, glow), while two secondary brand colors — **Hot Pink** and **Sky Blue** — partition the three festival programs. Nocturnal moments (Summer Night hero, program imagery cards) live inside dedicated **dark section containers** rather than across full pages.
+The brand mood is **"editorial calm with luminous festival accents on a green-tinted paper canvas."** A pale garden paper plays foil to a single signature **Neon Green** accent used as a *motif* (CTA hover, brand mark, glow, program-card hover). Nocturnal moments (Summer Night hero, program imagery cards) live inside dedicated **dark section containers** rather than across full pages.
 
 - **Density**: spacious. Hero occupies a full viewport-height band; programs sit in a 3-column grid below. Typography breathes; CTAs sit alone in their visual zone.
 - **Voice**: editorial broadsheet meets after-hours flyer. Korean headlines stay tight (Pretendard SemiBold), English eyebrows wear wide letter-spacing (Montserrat caps), and display numerals/English use Anton for festival-poster gravitas.
@@ -269,19 +252,17 @@ The brand mood is **"editorial calm with luminous festival accents on a green-ti
 
 ## Colors
 
-The palette is a **light paper baseline + neon motifs + dark section containers**: three brand neons (decorative), a three-step light surface stack, three darker neon variants for text use, and a two-step dark surface stack for nocturnal containers.
+The palette is a **light paper baseline + single neon motif + dark section containers**: one brand neon (decorative), a three-step light surface stack, one darker neon variant for text use, and a two-step dark surface stack for nocturnal containers.
 
-- **Primary (#A8FF00) — "Neon Lime"** The single brand accent. Used as background fill on the primary CTA, the brand dot, the focus ring fills, and as the **Summer Garden** identity. *Never set as text directly on light surfaces* (fails contrast at 1.4:1) — use `primary-text` for the eyebrow/link form.
-- **Secondary (#FF0F7B) — "Hot Pink"** Reserved for the **Summer Night** program identity. Used as bg fill on the Summer Night CTA banner, program icon, watermark, and section border accents. Use `secondary-text` for text on light surfaces.
-- **Tertiary (#00A3FF) — "Sky Blue"** Reserved for the **Fun & Walk** program identity. Same role as pink, scoped to its program. Use `tertiary-text` for text on light surfaces.
+- **Primary (#39ff14) — "Neon Green"** The single brand accent. Used as background fill on the primary CTA hover state, the brand dot/mark, focus ring fills, program-card hover background, and as the unifying festival identity. *Never set as text directly on light surfaces* (fails contrast at 1.4:1) — use `primary-text` for the eyebrow/link/text form.
 - **Neutral (#F4F8EE) — "Pale Garden"** Page background. A green-tinted paper that anchors the "Green Summer" brief without going pure white.
 - **Surface (#FFFFFF) — "Pure paper"** Cards, panels, scrolled header backdrop, input fields. Lifts cleanly from `neutral` for elevation.
 - **Surface-alt (#FAFBF6) — "Soft off-white"** Zone-level alternate strip (footer, alternating sections) for rhythm without a heavy color shift.
-- **On-surface tiers** Charcoal Ink (#0F1419) for display titles and the highest-emphasis copy; Body Slate (#2D3340) for body text; Cool Slate (#6B7280) for muted metadata, eyebrows, and uppercase labels. All three pass WCAG AA or better on `surface`.
-- **Primary/Secondary/Tertiary text variants** Deep Lime (#3E7A00), Deep Pink (#B0094B), Deep Blue (#0277BD). Used exclusively for *text* renditions of the program identities on light surfaces. All pass WCAG AA on `surface` (white).
-- **Dark-surface (#050816) — "Midnight Ink"** Background for **section-scoped** dark containers: Summer Night hero, program imagery cards, hero overlay zones. Never used as full-page background.
-- **Dark-surface-2 (#0C0F24) — "Elevated Indigo"** Elevated cards inside dark sections. Subtle lift from `dark-surface`.
-- **On-dark tiers** White (#FFFFFF) for display titles and Paper (#E6E8F0) for body inside dark sections — preserve the original nocturnal contrast.
+- **On-surface tiers** Charcoal Ink (#0F1419), Body Slate (#2D3340), Cool Slate (#6B7280). All three pass WCAG AA or better on `surface`.
+- **Primary-text (#107010) — "Deep Green"** The *only* darker variant. Used exclusively for text renditions of the brand identity on light surfaces (eyebrows, links, list category labels). Passes WCAG AA on `surface` (6.27:1) and `neutral` (5.83:1).
+- **Dark-surface (#050816) — "Midnight Ink"** Background for **section-scoped** dark containers: Summer Night feature blocks, photo cards, hero overlay zones. Never used as full-page background.
+- **Dark-surface-2 (#0C0F24) — "Elevated Indigo"** Elevated cards inside dark sections.
+- **On-dark tiers** White (#FFFFFF) for display titles, Paper (#E6E8F0) for body inside dark sections.
 
 ### Alpha-tinted utilities (CSS only, not tokens)
 
@@ -292,25 +273,24 @@ These derive from base colors and are applied via `rgba()` or layer opacity rath
 - **Scrim/Overlay** — `rgba(244, 248, 238, 0.72)` — behind the scrolled header on light pages (with 16 px blur).
 - **Scrim (on dark)** — `rgba(5, 8, 22, 0.55)` — hero card backdrop inside dark containers (with `backdrop-filter: blur(18px)`).
 - **Scrim (on dark, dev tooling)** — `rgba(5, 8, 22, 0.88)` — image-slot dev badge background under `?spec=1`.
-- **Primary soft** — `rgba(168, 255, 0, 0.18)` — focus ring fills, neon glow halos, hero accent blur.
-- **Program border-soft (resting)** — `rgba(168, 255, 0, 0.30)` / `rgba(255, 15, 123, 0.30)` / `rgba(0, 163, 255, 0.30)` — program-card border at rest inside dark containers; hovers to full accent.
+- **Primary soft** — `rgba(57, 255, 20, 0.18)` — focus ring fills, neon glow halos, hero accent blur.
+- **Program border-soft (resting)** — `rgba(57, 255, 20, 0.30)` — program-card border at rest; transitions to full neon `primary` background on hover.
 - **Hero gradient bands** — see Elevation & Depth.
 
-### Card media placeholder gradients (CSS only, not tokens)
+### Card media placeholder gradient (CSS only, not a token)
 
-`.card__media--<program>` slots show a darkened two-stop gradient before real
-images arrive. Like the `.course-map` placeholder, these are temporary
-stand-ins removed when `data/image-slots.json` is filled in, so they live as
-CSS variables (`--card-media-*` in `tokens.css`) rather than as Color tokens.
-The gradients themselves remain dark — they sit inside **dark card containers**
-(see "Hybrid program cards" under Components), so the nocturnal palette is preserved:
+`.card__media` slots show a neutral darkened gradient before real images arrive. The dark palette is intentional — placeholder media sits inside light-baseline cards but reads as "image pending," matching the `.course-map` placeholder treatment. The gradient is a single CSS variable in `tokens.css` (`--card-media-placeholder`), not a Color token — it disappears once `data/image-slots.json` is filled.
 
-- `funwalk`      — `#001a2e → #003a66` (Sky Blue darkened)
-- `night`        — `#2a0418 → #66052f` (Hot Pink darkened)
-- `garden`       — `#082a02 → #1a5505` (Neon Lime darkened, base)
-- `garden-deep`  — `#103620 → #1f5a3a` (Neon, lower chroma)
-- `garden-fresh` — `#0a3d2c → #1a6849` (Neon, higher saturation)
-- `neutral`      — `#1a1a2e → #2c2c4a` (dark-page-default for unassigned cards)
+- `--card-media-placeholder` — `linear-gradient(135deg, #1a1a2e, #2c2c4a)` (neutral dark, removed when image lands)
+
+### Radial pattern motif (CSS only)
+
+A signature decorative pattern derived from the festival keyvisual: concentric thin rings (1-2 px stroke) layered as radial gradients. Two variants:
+
+- `--pattern-radial-light` — white rings on the brand neon, used as section-bottom decoration on light pages (`info-section::after`, `strip-pattern`).
+- `--pattern-radial-dark` — neon rings on dark-surface, used inside `.dark-section` containers (`night-experience`, hero overlays).
+
+Apply via the `.radial-pattern--light` / `.radial-pattern--dark` utility class on a positioned ancestor with `overflow: hidden`. Never use as a primary content background — always as `position: absolute` decoration with `opacity: 0.18–0.38`.
 
 ## Typography
 
@@ -352,9 +332,10 @@ Depth is conveyed through **tonal layers + soft shadows + selective dark contain
 - **Tonal stack (dark sections)** Container `dark-surface (#050816)` → elevated cards `dark-surface-2 (#0C0F24)` → on-dark text. Preserves the original 7-unit dark hierarchy inside section containers.
 - **Border hairlines** Light surfaces use `1px solid rgba(15, 20, 25, 0.10)`; dark sections use `1px solid rgba(230, 232, 240, 0.10)`. Both define edges without drop shadows.
 - **Card shadow (light surfaces)** `--shadow-card: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04)`. Used as the resting state on light cards to lift from the pale paper.
-- **Glow (the brand's signature)** `--shadow-glow: 0 0 24px rgba(168, 255, 0, 0.45), 0 0 64px rgba(168, 255, 0, 0.18)`. Applied to the primary button on hover, the section-bottom Garden card hover, the favicon dot, and as a halo behind the hero number on light pages.
+- **Glow (the brand's signature)** `--shadow-glow: 0 0 24px rgba(57, 255, 20, 0.45), 0 0 64px rgba(57, 255, 20, 0.18)`. Applied to the primary button on hover, the program-card hover, the favicon dot, and as a halo behind the hero number on light pages.
 - **Dark-section lift shadow** `--shadow-dark: 0 24px 64px rgba(0, 0, 0, 0.45)` — used on `.program-card:hover` and inside dark sections to amplify the `translateY(-4px)` lift. Never used as a resting state on light surfaces.
-- **Hero gradients (Hybrid pattern)** Hero photos live inside dark container panels that sit on the light page. Inside the dark container: a `linear-gradient(180deg, transparent 50%, var(--color-dark-surface) 100%)` fade plus a right-side scrim `linear-gradient(90deg, ... 80% rgba(5,8,22,0.85))` under the text card.
+- **Hero gradients** Hero photos live inside dark container panels that sit on the light page. Inside the dark container: a `linear-gradient(180deg, transparent 50%, var(--color-dark-surface) 100%)` fade plus a right-side scrim `linear-gradient(90deg, ... 80% rgba(5,8,22,0.85))` under the text card.
+
 ## Shapes
 
 - **Pill** (`rounded.full`, 9999px) — all CTAs (`.btn`). Reads as "interactive," differentiates from cards.
@@ -374,7 +355,9 @@ Dimension primitives for component fixtures (icon hit areas, decorative dots, ma
 - **`hamburger-toggle` (32 px)** — `.site-nav__toggle` mobile menu trigger. **A11y deviation**: WCAG 2.2 SC 2.5.8 recommends ≥ 44 × 44 hit area; current 32 passes the absolute minimum (24) but should be revisited. Tracked for future revision.
 - **`sns-icon` (36 px)** — Footer SNS round icons (`.sns-list a`). Same a11y deviation as `hamburger-toggle`; the surrounding gap (`space-3`) extends the practical hit area but does not satisfy SC 2.5.8.
 - **`tap-target` (44 px)** — WCAG 2.2 SC 2.5.8 recommended minimum. Not used yet; reserved as the target value when `hamburger-toggle` / `sns-icon` are revised.
-- **`program-icon` (48 px)** — `.program-card__icon` solid circle in the program accent color. Pairs with `program-icon-{program}` components.
+- **`program-icon` (48 px)** — `.program-card__icon` solid circle in the program accent color. Pairs with the program-icon component.
+- **`button-action` (48 px)** — `.btn` primary CTA `min-height`. Matches WCAG 2.2 SC 2.5.8 recommended tap-target minimum (44 px) with extra headroom for festival-scale typography.
+- **`button-action-small` (40 px)** — `.btn--small` variant min-height. Below the 44 px tap-target recommendation — use only in non-primary, low-density contexts (e.g., inline secondary action in a dense reservation form).
 
 Rule: when adding a new fixture, prefer reusing one of the above before inventing a new key. New keys require ≥ 2 callsites or a clear semantic name.
 
@@ -384,29 +367,24 @@ Rule: when adding a new fixture, prefer reusing one of the above before inventin
 
 Two in-system variants (`button-primary`, `button-ghost`) plus an external deep-link category (`button-map-*`). All are pill-shaped (`rounded.full`).
 
-- **`button-primary`** — solid `primary` (neon) background, `dark-surface` text (the neon-on-dark pairing remains the brand's signature pairing, contrast 14.6 : 1 AAA). Hover: add `shadow-glow`, lift `translateY(-2px)`. Used at most once per visual zone; never two primaries side by side in the same hero band.
-- **`button-ghost`** — transparent background, 1 px `border (alpha 0.10)`, `on-surface` text (dark on light). Hover: border and text both shift to `primary-text` (the darker lime variant — the raw neon hex is invisible against light backgrounds). Used as the secondary CTA next to `button-primary`.
+- **`button-primary`** — solid `dark-surface` background, `on-dark` text at rest; hover swaps to `primary` (neon) background with `dark-surface` text plus `shadow-glow` and `translateY(-2px)` lift. The neon-on-dark hover pairing (14.6:1 AAA) remains the brand's signature interaction. Used at most once per visual zone; never two primaries side by side in the same hero band.
+- **`button-ghost`** — transparent background, 1 px `border (alpha 0.10)`, `on-surface` text (dark on light). Hover: background swaps to `primary` (neon), text and border invert to `dark-surface`. Used as the secondary CTA next to `button-primary`.
 - Inner arrow span (`.btn__arrow`) shifts `translateX(4px)` on hover for both variants — small motion cue, applied automatically.
 
 **External deep-link buttons (`button-map-*`)** — a separate category that intentionally breaks the light-canvas color rule because each button must remain instantly recognizable as the target app. They appear only inside `.map-links` slots beneath `.course-map` placeholders and never substitute for the in-system CTA. `button-map-kakao` uses Kakao's brand yellow (`brand-kakao`) with `dark-surface` text; `button-map-google` uses Google Material blue (`brand-google-blue`) with `on-dark` white; `button-map-naver` uses Naver Bright Green (`brand-naver`) with `dark-surface` text. All three brand colors are scoped to this category — they must not be reused for any other surface. Kakao opens the venue's Place page by ID; Google opens transit directions to the road address; Naver opens its search-result page.
 
-### Program cards (Hybrid — dark cards on light pages)
+### Program cards (light-baseline with neon hover)
 
-Three modifiers, one per program, sharing the same `card-compact` shape (`rounded.md`, 24 px padding) but with **dark container backgrounds** so the nocturnal palette and photographic imagery survive the light page baseline.
+A single base class for all three festival programs sharing the same `card-compact` shape (`rounded.md`, 24 px padding). The light-baseline page surface continues into the card — white background, hairline border, charcoal text — and the neon identity surfaces only on hover.
 
-- `program-card--funwalk` — `dark-surface` bg, blue border at 30 % alpha; hover: full `tertiary` border + soft blue card shadow. Eyebrow uses raw `tertiary` (light text on dark works fine).
-- `program-card--night` — `dark-surface` bg, pink at 30 % alpha; hover: `secondary` border + pink card shadow. Eyebrow `secondary`.
-- `program-card--garden` — `dark-surface` bg, neon at 30 % alpha; hover: `primary` border + the neon `shadow-glow`. Eyebrow `primary`.
+- `.program-card` — `surface` (white) bg, 1 px `border (alpha 0.10)`, `on-surface` text. The eyebrow uses `primary-text` (Deep Green); the card icon uses `primary` (Neon Green) background with `dark-surface` text inside.
+- `.program-card:hover` — `translateY(-4px)`, background swaps to `primary` (Neon Green), border swaps to `dark-surface`, eyebrow text inverts to `dark-surface`. This neon-swap is the program-card's signature interaction.
 
-Each card has a 48 × 48 circular icon in the program's accent color (with `dark-surface` text inside the icon). The icon-on-accent pairing remains identical to the original spec — only the surrounding card frame changes.
+Each card has a 48 × 48 circular icon (`size: program-icon`) in `primary` with `dark-surface` text. There is no per-program color variant — Fun & Walk, Summer Night, Summer Garden all share the same card visual; differentiation comes from copy, icon glyph, and photographic imagery, not from card chrome.
 
 ### Program eyebrows on light surfaces
 
-When a program identity needs **text** on a light page (e.g., notice list category, breadcrumb, link), use the darker text variants — never the raw neon hex:
-
-- `program-eyebrow-funwalk` — `tertiary-text` (#0277BD, 4.85:1 AA on surface)
-- `program-eyebrow-night` — `secondary-text` (#B0094B, 6.74:1 AA on surface)
-- `program-eyebrow-garden` — `primary-text` (#3E7A00, 4.62:1 AA on surface)
+When the brand/program identity needs **text** on a light page (notice list category, breadcrumb, link), use `primary-text` (#107010, 6.27:1 AA on surface). Never use the raw `primary` neon for text on light surfaces.
 
 ### Dark section (nocturnal-mood container)
 
@@ -414,7 +392,7 @@ When a program identity needs **text** on a light page (e.g., notice list catego
 
 - `dark-section` — `dark-surface` bg, `on-dark-body` body text, `rounded.lg`, 48 px padding.
 - `dark-section-title` — `on-dark` white, `headline-md` typography.
-- Inside `.dark-section`, the original neon-on-dark contrast guidelines apply: eyebrows can use raw `primary` / `secondary` / `tertiary`, body text uses `on-dark-body`, glow shadows are legible.
+- Inside `.dark-section`, the neon-on-dark contrast guidelines apply: eyebrows can use raw `primary`, body text uses `on-dark-body`, glow shadows are legible.
 - `dark-card-elevated` — when a card needs further elevation inside a dark section, use `dark-surface-2` bg.
 
 ### Site Header
@@ -449,7 +427,7 @@ The card zone shrinks to 280 px on desktop and contains only date/place metadata
 
 ### Timetable (`timetable`)
 
-`grid-template-columns: 140px 1fr auto` per row. Time column uses Montserrat 600 in `primary-text` (Deep Lime — the darker variant for legibility on light surfaces).
+`grid-template-columns: 140px 1fr auto` per row. Time column uses Montserrat 600 in `primary-text` (Deep Green — the darker variant for legibility on light surfaces).
 
 ### Forms
 
@@ -463,11 +441,10 @@ Not yet defined — awaiting designer hand-off. When introduced, inputs should f
 
 **Do**
 
-- Use `primary` (neon #A8FF00) as a **decorative motif** only: the brand dot, primary CTA background, focus ring fill, neon glow halos, program-card border accents inside dark sections, the Summer Garden program identity inside dark contexts.
-- Use `primary-text` (#3E7A00) for **any text** that needs the Summer Garden / brand identity on a light page (eyebrows, links, list category labels, timetable times).
-- Use the secondary/tertiary text pair (`secondary-text` #B0094B / `tertiary-text` #0277BD) for Summer Night / Fun & Walk text on light pages.
-- Pair every neon background with `dark-surface` text (`#A8FF00` on `#050816` → 14.6 : 1 AAA) — this remains the brand's signature pairing on CTAs and program icons.
-- Reserve each accent for its program scope: **Neon = Summer Garden + brand**, **Pink = Summer Night**, **Blue = Fun & Walk**.
+- Use `primary` (neon #39ff14) as a **decorative motif** only: the brand dot, primary CTA hover background, focus ring fill, neon glow halos, program-card hover background, the unifying festival identity across all programs.
+- Use `primary-text` (#107010) for **any text** that needs the brand identity on a light page (eyebrows, links, list category labels, timetable times). All three programs share this single text variant.
+- Pair every neon background with `dark-surface` text (`#39ff14` on `#050816` → AAA) — this remains the brand's signature pairing on CTAs and program icons.
+- Neon (#39ff14) is the single festival identity — all three programs (Fun & Walk, Summer Night, Summer Garden) share it. Differentiate programs by copy, icon glyph, and photographic imagery rather than chrome color.
 - Use Anton **only for English and numerals**. Headlines that contain Korean must use Pretendard (e.g., "주요 프로그램" stays in Pretendard, "Program 01" in Montserrat or Anton).
 - Maintain WCAG AA contrast (≥ 4.5 : 1 for normal text, ≥ 3 : 1 for large text) — all defined `on-*` × surface pairs currently pass; new combinations must be re-checked.
 - Use `shadow-glow` only on `primary` interactive states. It is the brand's signature; do not dilute it on non-CTA surfaces.
@@ -477,13 +454,12 @@ Not yet defined — awaiting designer hand-off. When introduced, inputs should f
 **Don't**
 
 - Don't set body text in raw `primary` neon on a light surface — it fails contrast at 1.4 : 1 and reads as illegible. Use `primary-text` instead.
-- Don't set body text in raw `secondary` or `tertiary` on a light surface for small copy — use `secondary-text` / `tertiary-text`.
-- Don't introduce a fourth accent color, a gradient with more than two stops, or a "rainbow" of program colors in a single component.
+- Don't introduce a second accent color, a gradient with more than two stops, or per-program color variants in a single component.
 - Don't add a full-page dark theme. Dark moods belong inside `.dark-section` containers on otherwise light pages.
 - Don't use heavy multi-layer drop shadows for hierarchy. Tonal layer + hairline border + a soft 2-layer `shadow-card` is the pattern.
 - Don't mix shape vocabularies in a single zone: square inputs next to pill buttons, or sharp cards next to rounded cards.
 - Don't use Anton for Korean text. Don't use Pretendard for English uppercase labels. Don't use Montserrat for body copy.
-- Don't replace the primary CTA color with secondary/tertiary "to highlight a program." Each program's accent is for *that program's surface*; the CTA across the whole site stays neon.
+- Don't replace the primary CTA neon with a custom color "to highlight a program." All three programs share the single neon identity; the CTA across the whole site stays neon.
 - Don't add `!important` to layout/component styles. The cascade is layered (`reset / tokens / base / components / pages / utilities`); break ties with layer order, not flags. (Accessibility fallbacks are the one exception, documented at the rule.)
 - Don't apply `shadow-card` (the light-page lift shadow) inside dark sections — use `shadow-dark` there.
 

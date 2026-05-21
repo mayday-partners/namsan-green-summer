@@ -6,9 +6,8 @@
      ============================================================ */
 
   /* Brand accents — decorative motifs only on light surfaces */
-  --color-primary:   #A8FF00;   /* Neon Lime — Summer Garden + CTA bg */
-  --color-secondary: #FF0F7B;   /* Hot Pink — Summer Night */
-  --color-tertiary:  #00A3FF;   /* Sky Blue — Fun & Walk */
+  --color-primary:   #39ff14;   /* Neon Green — single brand accent (DESIGN.md "Primary") */
+  --neon-deep:       #22c40f;   /* Deep neon — hover/focus deep state, paired with --color-primary */
 
   /* Light surface stack */
   --color-neutral:     #F4F8EE;   /* Pale Garden — page background */
@@ -21,9 +20,7 @@
   --color-on-surface-muted:  #6B7280;   /* Cool Slate — metadata */
 
   /* Darker accent text variants — for text use on light surfaces */
-  --color-primary-text:   #3E7A00;   /* Deep Lime  — 4.62:1 AA on surface */
-  --color-secondary-text: #B0094B;   /* Deep Pink  — 6.74:1 AA on surface */
-  --color-tertiary-text:  #0277BD;   /* Deep Blue  — 4.85:1 AA on surface */
+  --color-primary-text:   #107010;   /* Deep Green — 6.27:1 AA on #FFFFFF, 5.83:1 AA on #F4F8EE */
 
   /* Dark surface stack — section-scoped nocturnal containers */
   --color-dark-surface:    #050816;   /* Midnight Ink */
@@ -44,17 +41,15 @@
   --color-border:           rgba(15, 20, 25, 0.10);      /* hairline divider on light surfaces */
   --color-border-on-dark:   rgba(230, 232, 240, 0.10);   /* hairline divider inside .dark-section */
   --color-surface-overlay:  rgba(244, 248, 238, 0.72);   /* scrolled header backdrop (blur on this) */
-  --color-primary-soft:     rgba(168, 255, 0, 0.18);     /* focus ring fills, neon halos */
+  --color-primary-soft:     rgba(57, 255, 20, 0.18);     /* focus ring fills, neon halos */
   --color-scrim-on-dark:        rgba(5, 8, 22, 0.55);     /* hero card backdrop (with blur) */
   --color-scrim-on-dark-heavy:  rgba(5, 8, 22, 0.88);     /* image-slot dev badge (?spec=1) */
-  --color-program-border-funwalk: rgba(0, 163, 255, 0.30); /* .program-card resting border */
-  --color-program-border-night:   rgba(255, 15, 123, 0.30);
-  --color-program-border-garden:  rgba(168, 255, 0, 0.30);
+  --color-program-border: rgba(57, 255, 20, 0.30);  /* program-card resting border (single neon) */
 
   /* ============================================================
      Typography
      ============================================================ */
-  --font-kr: 'Pretendard', system-ui, -apple-system, sans-serif;
+  --font-kr: 'Pretendard Variable', 'Pretendard', system-ui, -apple-system, sans-serif;
   --font-en: 'Montserrat', sans-serif;
   --font-display: 'Anton', 'Montserrat', sans-serif;
 
@@ -99,7 +94,7 @@
      - shadow-card : 라이트 페이지 카드 lift (신규 라이트 톤)
      - shadow-dark : 다크 섹션 내부 카드 lift (기존 다크 카드 그림자 보존)
      ============================================================ */
-  --shadow-glow: 0 0 24px rgba(168, 255, 0, 0.45), 0 0 64px rgba(168, 255, 0, 0.18);
+  --shadow-glow: 0 0 24px rgba(57, 255, 20, 0.45), 0 0 64px rgba(57, 255, 20, 0.18);
   --shadow-card: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04);
   --shadow-dark: 0 24px 64px rgba(0, 0, 0, 0.45);
 
@@ -137,16 +132,32 @@
   --size-tap-target:       44px;   /* WCAG 2.2 SC 2.5.8 minimum — reserved */
   --size-program-icon:     48px;   /* .program-card__icon */
 
-  /* Card media placeholder gradients — dark tones, used inside .program-card
-     dark containers (Hybrid pattern). See DESIGN.md "Card media placeholder
-     gradients". The dark palette is intentional — the cards themselves are
-     dark-surface even on light pages. */
-  --card-media-funwalk:      linear-gradient(135deg, #001a2e, #003a66);
-  --card-media-night:        linear-gradient(135deg, #2a0418, #66052f);
-  --card-media-garden:       linear-gradient(135deg, #082a02, #1a5505);
-  --card-media-garden-deep:  linear-gradient(135deg, #103620, #1f5a3a);
-  --card-media-garden-fresh: linear-gradient(135deg, #0a3d2c, #1a6849);
-  --card-media-neutral:      linear-gradient(135deg, #1a1a2e, #2c2c4a);
+  /* Card media placeholder — neutral dark, replaced when image-slots.json lands */
+  --card-media-placeholder: linear-gradient(135deg, #1a1a2e, #2c2c4a);
+
+  /* ============================================================
+     Source-migration additions (시안 흡수, v2 plan §1)
+     ============================================================ */
+  --sub-visual-height:         clamp(300px, 30vw, 430px);            /* 서브페이지 hero 이미지 */
+  --skew-brand-mark:           -22deg;                                /* NS 사선 마크 */
+  --shadow-hard-neon:          4px 4px 0 rgba(34, 196, 15, 0.55);  /* uses --neon-deep channels (#22c40f) — hard shadow tracks the deep state, matches 시안 styles.css L244 */
+  --shadow-hard-black:         4px 4px 0 rgba(8, 8, 8, 1);
+  /* Decorative pattern — base resolves to neon (--color-primary).
+     Use only on positioned/contained surfaces (e.g., section-bottom decoration with overflow:hidden),
+     never as a primary content background. */
+  --pattern-radial-light:
+    radial-gradient(circle at 50% 22%, transparent 0 54px, rgba(255, 255, 255, .58) 55px 57px, transparent 58px),
+    radial-gradient(circle at 50% 45%, transparent 0 110px, rgba(255, 255, 255, .46) 111px 113px, transparent 114px),
+    radial-gradient(circle at 50% 76%, transparent 0 164px, rgba(255, 255, 255, .36) 165px 167px, transparent 168px),
+    var(--color-primary);
+  --pattern-radial-dark:
+    radial-gradient(circle at 22% 18%, transparent 0 78px, rgba(57, 255, 20, .48) 79px 81px, transparent 82px),
+    radial-gradient(circle at 78% 76%, transparent 0 150px, rgba(57, 255, 20, .32) 151px 153px, transparent 154px),
+    var(--color-dark-surface);
+
+  /* Sizes — DESIGN.md sizes 신규 키 동기화 */
+  --size-button-action:        48px;
+  --size-button-action-small:  40px;
 }
 
 @media (max-width: 768px) {

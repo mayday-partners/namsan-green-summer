@@ -52,9 +52,10 @@
   outline: none;
 }
 
-.cta-group__item--funwalk { border-color: var(--color-program-border-funwalk); }
-.cta-group__item--night   { border-color: var(--color-program-border-night); }
-.cta-group__item--garden  { border-color: var(--color-program-border-garden); }
+/* HTML compat aliases — render same as base hover border, kept for class-name continuity */
+.cta-group__item--funwalk { border-color: var(--color-program-border); }
+.cta-group__item--night   { border-color: var(--color-program-border); }
+.cta-group__item--garden  { border-color: var(--color-program-border); }
 
 .cta-group__label {
   font-family: var(--font-en);
@@ -65,8 +66,9 @@
   letter-spacing: 0.08em;
 }
 
-.cta-group__item--funwalk .cta-group__label { color: var(--color-tertiary-text); }
-.cta-group__item--night   .cta-group__label { color: var(--color-secondary-text); }
+/* HTML compat aliases — render same as --neon eyebrow, kept for class-name continuity */
+.cta-group__item--funwalk .cta-group__label { color: var(--color-primary-text); }
+.cta-group__item--night   .cta-group__label { color: var(--color-primary-text); }
 .cta-group__item--garden  .cta-group__label { color: var(--color-primary-text); }
 
 .cta-group__action {
