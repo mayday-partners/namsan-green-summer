@@ -30,6 +30,9 @@ colors:
   brand-kakao:        "#FAE100"   # Kakao official yellow — pair with dark-surface text (15:1, AAA)
   brand-google-blue:  "#1A73E8"   # Google Material blue — pair with on-dark white (4.5:1, AA)
   brand-naver:        "#03C75A"   # Naver Bright Green — pair with dark-surface text (9.4:1, AAA)
+  # Fun&Walk 예약 버튼 브랜드 색상 — reserve-button-local/global에만 scoped
+  reserve-local:   "#ffbd00"   # 내국인 신청 버튼 (공공서비스 노란) — pair with dark-surface text (#050816, 11.9:1, AAA)
+  reserve-global:  "#05b957"   # 외국인 신청 버튼 (네이버 예약 그린) — pair with dark-surface text (#050816, 7.68:1, AA normal / AAA large)
 typography:
   display-hero:
     fontFamily: Anton
@@ -109,6 +112,7 @@ sizes:
   button-action:        48px  # .btn primary CTA min-height (시안 .primary-action 48px hit area)
   button-action-small:  40px  # .btn--small variant
   program-number:       42px  # .program-number circle badge (program-detail 01/02/03)
+  reserve-button:       76px  # .reserve-button min-height (fun-and-walk 예약 버튼)
 components:
   button-primary:
     backgroundColor: "{colors.dark-surface}"
@@ -299,6 +303,51 @@ components:
     textColor: "{colors.primary}"
     rounded: "{rounded.full}"
     size: 42px
+  info-panel:
+    backgroundColor: "{colors.neutral}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 34px
+  info-panel-alt:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 34px
+  program-info-table:
+    backgroundColor: "transparent"
+    textColor: "{colors.on-surface-body}"
+  reserve-button-local:
+    backgroundColor: "{colors.reserve-local}"
+    textColor: "{colors.dark-surface}"
+    rounded: "{rounded.md}"
+    padding: 16px
+  reserve-button-global:
+    backgroundColor: "{colors.reserve-global}"
+    textColor: "{colors.dark-surface}"
+    rounded: "{rounded.md}"
+    padding: 16px
+  course-map-block:
+    backgroundColor: "transparent"
+    textColor: "{colors.on-surface}"
+  course-map:
+    backgroundColor: "{colors.neutral}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.lg}"
+  course-label:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.sm}"
+    padding: 8px
+  notice-panel:
+    backgroundColor: "{colors.surface-alt}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 30px
+  notice-guide-item:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 32px
 ---
 
 # 2026 Namsan Green Summer Festival — Visual Identity

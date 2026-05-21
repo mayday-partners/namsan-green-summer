@@ -80,6 +80,137 @@
           "href": null
         }
       ],
+      "info_panels": [
+        {
+          "heading": "기본안내",
+          "rows": [
+            { "label": "프로그램 명", "value": "Fun&Walk" },
+            { "label": "행사 일시", "value": "2026. 6. 27. 토요일" },
+            { "label": "장소", "value": "집결지 백범광장 (서울 중구 회현동1가 100-115)" },
+            { "label": "참가비", "value": "10,000원" }
+          ]
+        },
+        {
+          "heading": "참가안내",
+          "rows": [
+            { "label": "참가자 지급품", "value": "기념티셔츠, 방수 스트링백, 완보증, 메달 키링(완주 시 수령) 등" },
+            { "label": "신청 자격", "value": "신체 건강한 남녀노소 누구나" },
+            { "label": "신청 기간", "value": "6월 10일 수요일 ~ 선착순 마감" },
+            { "label": "신청 방법", "value": "사전예약(서울시공공서비스예약), 네이버 예약(외국인 대상)" },
+            { "label": "환불 마감", "value": "별도 안내사항 확인" },
+            { "label": "문의", "value": "02-6412-9714" }
+          ]
+        }
+      ],
+      "helper_copy": "신청 전 대회 일정, 환불 마감일, 참가비 및 지급품 정보를 반드시 확인해 주시기를 바랍니다.",
+      "reservation_buttons": [
+        {
+          "variant": "local",
+          "label": "내국인 신청",
+          "sub_label": "바로가기(공공서비스)",
+          "href": null,
+          "pending_link": true
+        },
+        {
+          "variant": "global",
+          "label": "외국인 신청",
+          "sub_label": "바로가기(네이버 예약)",
+          "href": null,
+          "pending_link": true
+        }
+      ],
+      "course": {
+        "heading": "6km 코스",
+        "caption": "백범광장(시작점) → 호현당 → 횡단보도 → 남산 북측순환로 → 남산 남측순환로 → 팔각광장(종점), 약 6.0km",
+        "labels": [
+          { "id": "start",   "text": "백범광장\n시작점",      "position_class": "label-start" },
+          { "id": "hohyeon", "text": "호현당",               "position_class": "label-hohyeon" },
+          { "id": "north",   "text": "남산 북측순환로",       "position_class": "label-north" },
+          { "id": "south",   "text": "남산 남측순환로",       "position_class": "label-south" },
+          { "id": "finish",  "text": "팔각광장\n종점",        "position_class": "label-finish" }
+        ],
+        "notice_panel": {
+          "heading": "안내사항",
+          "items": [
+            "야외에서 신체를 활발히 움직이는 프로그램으로, 편안한 운동복과 운동화를 반드시 착용하시길 바랍니다.",
+            "코스를 반드시 사전에 확인해 주시기 바랍니다.",
+            "현장에서는 운영요원과 안내 표지판의 지시에 따라 안전하게 이동해주시기 바랍니다."
+          ]
+        }
+      },
+      "notice_sections": [
+        {
+          "heading": "참가 자격",
+          "type": "paragraphs",
+          "items": [
+            "보조 장비(휠체어, 인라인 등) 사용 없이 달릴 수 있고 신체 건강하며 참가자 유의사항에 동의한 자",
+            "유아 동반은 가능하나 유아차를 동반하여 참가할 수 없습니다."
+          ]
+        },
+        {
+          "heading": "접수처 안내",
+          "type": "ul",
+          "items": [
+            "접수처 운영 시간 : 2026년 6월 27일(토) 15:00-16:00",
+            "출발 시간 : 2026년 6월 27일(토) 16:00",
+            "15시 50분까지 등록 완료 필수",
+            "장소 : 남산 백범광장공원 (백범광장 동상 앞)",
+            "교통이 혼잡하오니 대중교통 이용을 권장드립니다."
+          ]
+        },
+        {
+          "heading": "탈의실 운영",
+          "type": "paragraphs",
+          "items": [
+            "대회 당일 탈의실을 운영합니다. 접수처에서 배부한 기념티셔츠를 착용 바랍니다."
+          ]
+        },
+        {
+          "heading": "운영 관련 안내",
+          "type": "ul",
+          "items": [
+            "본 행사는 기록 경쟁이 아닌 참여와 완주에 의미를 두는 프로그램으로, 순위 및 기록은 별도로 집계되지 않습니다.",
+            "개인 기록 측정을 위한 장비 착용 등은 지원되지 않습니다.",
+            "출발 시간 전에 도착하시어 마련된 체험 프로그램 참여를 권장드립니다.",
+            "참가자 등록 시 제공되는 팔찌는 1인 1매 원칙이며, 분실·파손 시 재발급이 불가합니다.",
+            "행사 집결지인 백범광장 내 주차가 불가하오니 대중교통을 이용해 주시기 바랍니다.",
+            "행사 기간 중 기록을 위한 공식 사진 및 영상 촬영이 진행됩니다. 추후 홍보 자료로 사용될 수 있음을 양해 부탁드립니다."
+          ]
+        },
+        {
+          "heading": "안전 및 보험",
+          "type": "ul",
+          "items": [
+            "행사 보험이 적용되나, 개인 과실로 인한 사고의 경우 보장에 제한이 있을 수 있습니다.",
+            "참가자는 반드시 본인의 건강상태를 고려하여 대회 참가를 해야 합니다.",
+            "주최 측은 만일의 사태에 대비하여 주요 지점에 구급차 및 응급 의료 인력을 배치합니다."
+          ]
+        },
+        {
+          "heading": "환불 규정",
+          "type": "ol_from_refund_policy",
+          "_type_note": "sentinel: notice-guide-list.js가 program.refund_policy.tiers에서 ol 자동 렌더. 이 type 키를 변경하면 환불 표시가 사라짐.",
+          "intro": "서울특별시 도시공원 조례 일부 개정에 따라 이용료 환불규정이 변경되었으니 아래 내용을 확인 후 이용 신청 바랍니다."
+        },
+        {
+          "heading": "기타사항",
+          "type": "paragraphs",
+          "items": [
+            "2026 남산 서머 페스티벌 운영사는 참가 자격 박탈, 특별 인사 초대, 대회 중지 및 취소, 코스 변경 등의 권한을 가집니다. 천재지변, 감염병 확산, 정부 또는 지방자치단체의 행정조치, 교통통제, 사회적 재난, 기타 주최측이 통제할 수 없는 불가항력 사유로 인해 행사가 취소 또는 변경될 수 있습니다.",
+            "이 경우 환불 및 대회 운영 방식과 세부 조치는 주최측 방침에 따라 별도 공지합니다."
+          ]
+        }
+      ],
+      "refund_policy": {
+        "_source": "서울특별시 도시공원 조례 제19조 (시행일 2021-06-01)",
+        "tiers": [
+          { "condition": "천재지변 및 불가항력 등의 사유로 이용할 수 없는 경우", "refund_pct": 100 },
+          { "condition": "사용일 7일 전까지 취소한 경우 또는 예약당일 취소", "refund_pct": 100 },
+          { "condition": "사용일 6일~3일 전까지 취소한 경우", "refund_pct": 90 },
+          { "condition": "사용일 2일~1일 전까지 취소한 경우", "refund_pct": 70 },
+          { "condition": "사용일 이후 취소한 경우", "refund_pct": 0 }
+        ]
+      },
       "summary": {
         "heading": "Fun&Walk 개요",
         "lead": "남산 산책로에서 fun하게 즐기는 미션형 걷기",
@@ -161,6 +292,16 @@
         "_source": "시안 index.html L95-103",
         "_pending_confirmation": true
       },
+      "refund_policy": {
+        "_source": "서울특별시 도시공원 조례 제19조 (시행일 2021-06-01)",
+        "tiers": [
+          { "condition": "천재지변 및 불가항력 등의 사유로 이용할 수 없는 경우", "refund_pct": 100 },
+          { "condition": "사용일 7일 전까지 취소한 경우 또는 예약당일 취소", "refund_pct": 100 },
+          { "condition": "사용일 6일~3일 전까지 취소한 경우", "refund_pct": 90 },
+          { "condition": "사용일 2일~1일 전까지 취소한 경우", "refund_pct": 70 },
+          { "condition": "사용일 이후 취소한 경우", "refund_pct": 0 }
+        ]
+      },
       "detail": {
         "_source": "시안 info/programs.html L80-94",
         "number": "02",
@@ -228,6 +369,16 @@
         "_source": "시안 index.html L106-115",
         "_pending_confirmation": true
       },
+      "refund_policy": {
+        "_source": "서울특별시 도시공원 조례 제19조 (시행일 2021-06-01)",
+        "tiers": [
+          { "condition": "천재지변 및 불가항력 등의 사유로 이용할 수 없는 경우", "refund_pct": 100 },
+          { "condition": "사용일 7일 전까지 취소한 경우 또는 예약당일 취소", "refund_pct": 100 },
+          { "condition": "사용일 6일~3일 전까지 취소한 경우", "refund_pct": 90 },
+          { "condition": "사용일 2일~1일 전까지 취소한 경우", "refund_pct": 70 },
+          { "condition": "사용일 이후 취소한 경우", "refund_pct": 0 }
+        ]
+      },
       "detail": {
         "_source": "시안 info/programs.html L96-111",
         "number": "03",
@@ -246,16 +397,5 @@
         ]
       }
     }
-  ],
-  "refund_policy": {
-    "_source": "서울특별시 도시공원 조례 제19조 (시행일 2021-06-01)",
-    "applies_to": ["funwalk"],
-    "tiers": [
-      { "condition": "천재지변·불가항력", "refund_pct": 100 },
-      { "condition": "사용일 7일 전까지 또는 예약 당일 취소", "refund_pct": 100 },
-      { "condition": "사용일 6일~3일 전 취소", "refund_pct": 90 },
-      { "condition": "사용일 2일~1일 전 취소", "refund_pct": 70 },
-      { "condition": "사용일 이후 취소", "refund_pct": 0 }
-    ]
-  }
+  ]
 }

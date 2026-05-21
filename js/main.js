@@ -10,6 +10,10 @@ import { renderSponsorList } from './modules/sponsor-list.js';
 import { renderProgramSummaries } from './modules/program-summary.js';
 import { renderEventOverview } from './modules/event-overview.js';
 import { renderProgramDetail } from './modules/program-detail.js';
+import { renderInfoPanelList } from './modules/info-panel-list.js';
+import { renderReservationActions } from './modules/reservation-actions.js';
+import { renderCourseMap } from './modules/course-map.js';
+import { renderNoticeGuideList } from './modules/notice-guide-list.js';
 
 (async () => {
   // Custom elements self-hydrate; no orchestration needed for partials.
@@ -22,6 +26,10 @@ import { renderProgramDetail } from './modules/program-detail.js';
     mountMapEmbeds(),
     renderEventOverview(),
     renderProgramDetail(),
+    renderInfoPanelList(),
+    renderReservationActions(),
+    renderCourseMap(),
+    renderNoticeGuideList(),
   ]);
   try { initFadeIn(); } catch (e) { console.error('[main] initFadeIn:', e); }
   resolveHashAfterRender();

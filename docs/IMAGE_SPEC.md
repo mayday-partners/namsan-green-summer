@@ -39,6 +39,7 @@
 | ID | 페이지 | 비율 | 권장 widths | 비고 |
 |---|---|---|---|---|
 | `sub-visual-event` | `/event/` (index + programs) | 16:5 | 1280·1920 | `.sub-visual` 배너. 남산 일대 야경 와이드 크롭 (남산타워 포함). 텍스트 베이크인 없음 — 페이지가 오버레이. 시안 `assets/sub-visual.png` 변환 완료 → `current_file: /img/sections/sub-visual.webp` (1983×793, 121KB). `_pending_confirmation: true` (운영팀 실제 사진 미확정). |
+| `sub-visual-funwalk` | `/fun-and-walk/` | 16:5 | 1280·1920 | `.sub-visual` 배너. 현재 `sub-visual-event`와 동일 파일(`/img/sections/sub-visual.webp`) 공유. 운영팀이 영역별 다른 이미지 확정 시 별도 파일로 분리. `_pending_confirmation: true`. |
 | `course-map-walk` | `/fun-and-walk/` | 16:9 | 768·1280 | 5km 코스 라인 + CP1~CP4 / FIN 마커. 다크 테마. |
 | `course-map-event` | `/event/#location` | 16:9 | 768·1280 | 행사 구역(백범광장/북측순환로/남산도서관) + 교통 접근. 다크 테마. |
 
