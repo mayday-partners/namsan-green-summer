@@ -1104,3 +1104,137 @@
   font-weight: 950;
   color: var(--color-primary-text);
 }
+
+/* ===== Night Hero (Summer Night sub-hero 변형) =====
+ * DESIGN.md: night-hero
+ * overview-hero 위에 쌓여 보라빛 야간 분위기 accent 추가 */
+.night-hero .section-label {
+  color: var(--color-primary-text);
+}
+
+/* ===== Night Card (Summer Night overview-card 변형) =====
+ * DESIGN.md: night-card
+ * 다크 그린 강조 테두리로 야간 페스티벌 identity */
+.night-card {
+  border-color: var(--color-dark-surface);
+}
+
+/* ===== Night Info Block (Summer Night 내부 섹션) =====
+ * DESIGN.md: night-info-block
+ * 공연안내 / 객석가이드 / 참가신청 / 체험존 구분 블록 */
+.night-info-block {
+  margin-block-start: var(--space-7);
+  padding-block-start: var(--space-7);
+  border-block-start: 1px solid var(--color-border);
+}
+
+.night-info-block h3 {
+  margin: 0 0 var(--space-5);
+  font-size: 1.5rem;
+  letter-spacing: 0;
+  color: var(--color-on-surface);
+}
+
+/* ===== Lineup Image (Summer Night 라인업 이미지 figure) =====
+ * DESIGN.md: lineup-image
+ * 아티스트 라인업 이미지 블록 — 텍스트 베이크인 포함 */
+.lineup-image {
+  margin: var(--space-6) 0 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-dark-surface);
+}
+
+.lineup-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ===== Seat Guide (Summer Night 객석 가이드) =====
+ * DESIGN.md: seat-guide
+ * 다크 배경 위 Stage 라벨 + 6 seat 아이콘 + Free Zone */
+.seat-guide {
+  display: grid;
+  grid-template-columns: auto repeat(6, 1fr) auto;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--color-dark-surface);
+  border: 1px solid var(--color-border-on-dark);
+  margin-block-start: var(--space-5);
+}
+
+.seat-guide span {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-body);
+  white-space: nowrap;
+}
+
+.seat-guide strong {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.seat-guide i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--color-dark-surface-2);
+  border: 1px solid var(--color-border-on-dark);
+}
+
+@media (max-width: 768px) {
+  .seat-guide {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: var(--space-2);
+    text-align: center;
+  }
+
+  .seat-guide span,
+  .seat-guide strong {
+    justify-self: center;
+  }
+
+  .seat-guide i {
+    display: none;
+  }
+}
+
+/* ===== Experience Image (Summer Night 체험존 이미지 figure) =====
+ * DESIGN.md: experience-image
+ * 체험존 안내 이미지 블록 */
+.experience-image {
+  margin: var(--space-6) 0 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-neutral);
+}
+
+.experience-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ===== Button Row (인라인 버튼 쌍) =====
+ * Summer Night 참가신청 섹션 — 소형 버튼 2개 나란히 */
+.night-info-block .button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-block-start: var(--space-3);
+}

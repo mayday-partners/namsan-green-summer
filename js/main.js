@@ -14,6 +14,7 @@ import { renderInfoPanelList } from './modules/info-panel-list.js';
 import { renderReservationActions } from './modules/reservation-actions.js';
 import { renderCourseMap } from './modules/course-map.js';
 import { renderNoticeGuideList } from './modules/notice-guide-list.js';
+import { renderSeatGuide } from './modules/seat-guide.js';
 
 (async () => {
   // Custom elements self-hydrate; no orchestration needed for partials.
@@ -30,6 +31,7 @@ import { renderNoticeGuideList } from './modules/notice-guide-list.js';
     renderReservationActions(),
     renderCourseMap(),
     renderNoticeGuideList(),
+    renderSeatGuide(),
   ]);
   try { initFadeIn(); } catch (e) { console.error('[main] initFadeIn:', e); }
   resolveHashAfterRender();

@@ -40,6 +40,9 @@
 |---|---|---|---|---|
 | `sub-visual-event` | `/event/` (index + programs) | 16:5 | 1280·1920 | `.sub-visual` 배너. 남산 일대 야경 와이드 크롭 (남산타워 포함). 텍스트 베이크인 없음 — 페이지가 오버레이. 시안 `assets/sub-visual.png` 변환 완료 → `current_file: /img/sections/sub-visual.webp` (1983×793, 121KB). `_pending_confirmation: true` (운영팀 실제 사진 미확정). |
 | `sub-visual-funwalk` | `/fun-and-walk/` | 16:5 | 1280·1920 | `.sub-visual` 배너. 현재 `sub-visual-event`와 동일 파일(`/img/sections/sub-visual.webp`) 공유. 운영팀이 영역별 다른 이미지 확정 시 별도 파일로 분리. `_pending_confirmation: true`. |
+| `sub-visual-night` | `/summer-night/` | 16:5 | 1280·1920 | `.sub-visual` 배너. 현재 `sub-visual-event`와 동일 파일(`/img/sections/sub-visual.webp`) 공유. 운영팀이 영역별 다른 이미지 확정 시 별도 파일로 분리. `_pending_confirmation: true`. |
+| `night-lineup` | `/summer-night/` | 830:365 | 830 | `.lineup-image` — Summer Night 라인업 이미지 (구석구석라이브·로이킴·존박). 시안 자산 변환 완료 → `current_file: /img/sections/night-lineup.webp` (830×365, 46KB). 운영팀 확정 라인업 사진으로 교체 예정. `_pending_confirmation: true`. |
+| `night-experience` | `/summer-night/` | 812:397 | 812 | `.experience-image` — Summer Night 체험존 안내 이미지 (5종). 시안 자산 변환 완료 → `current_file: /img/sections/night-experience.webp` (812×397, 42KB). 운영팀 확정 체험존 사진으로 교체 예정. `_pending_confirmation: true`. |
 | `course-map-walk` | `/fun-and-walk/` | 16:9 | 768·1280 | 5km 코스 라인 + CP1~CP4 / FIN 마커. 다크 테마. |
 | `course-map-event` | `/event/#location` | 16:9 | 768·1280 | 행사 구역(백범광장/북측순환로/남산도서관) + 교통 접근. 다크 테마. |
 

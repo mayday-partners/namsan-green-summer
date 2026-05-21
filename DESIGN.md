@@ -348,9 +348,35 @@ components:
     textColor: "{colors.on-surface-body}"
     rounded: "{rounded.lg}"
     padding: 32px
+  night-hero:
+    backgroundColor: "transparent"
+    textColor: "{colors.on-surface}"
+  night-card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 48px
+  night-info-block:
+    backgroundColor: "transparent"
+    textColor: "{colors.on-surface-body}"
+    padding: 48px
+  lineup-image:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.lg}"
+  seat-guide:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.on-dark-body}"
+    rounded: "{rounded.lg}"
+    padding: 20px
+  experience-image:
+    backgroundColor: "{colors.neutral}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
 ---
 
 # 2026 Namsan Green Summer Festival — Visual Identity
+
 
 > Single-weekend festival site (event: 2026-06-27 SAT, 남산공원). Korean-first content with English typographic accents. The visual identity targets the
 > "도심 속 초록빛 여름" (verdant summer inside the city) brief — fresh, daylit,
@@ -482,6 +508,20 @@ Dimension primitives for component fixtures (icon hit areas, decorative dots, ma
 Rule: when adding a new fixture, prefer reusing one of the above before inventing a new key. New keys require ≥ 2 callsites or a clear semantic name.
 
 ## Components
+
+### Summer Night area components
+
+**night-hero** — `.sub-hero.overview-hero.night-hero` 조합. Summer Night 서브페이지 상단 히어로 스트립. background/padding은 `.overview-hero`에서 상속. `.section-label` 색상을 `primary-text`로 강조.
+
+**night-card** — `.overview-card.night-card` modifier. background/padding/rounded는 부모 `.overview-card`에서 상속. 본 modifier는 `border-color: dark-surface`만 override해 야간 페스티벌 identity 부여.
+
+**night-info-block** — `.night-card` 내부 섹션 구분 블록. 공연안내 / 객석가이드 / 참가신청 / 체험존 4개 섹션에 사용. `border-block-start` 구분선 + 상단 padding.
+
+**lineup-image** — Summer Night 라인업 이미지 figure. dark-surface 배경 위 이미지 표시. 아티스트 텍스트가 이미지에 베이크인되어 있으므로 `<img alt>`에 아티스트 목록 명시.
+
+**seat-guide** — Summer Night 객석 안내 다이어그램. dark-surface 배경. Stage 라벨 + 6개 seat 아이콘(빈 `<i>`) + Free Zone 라벨 수평 배치. `role="group"`으로 내부 텍스트 AT 노출.
+
+**experience-image** — Summer Night 체험존 안내 이미지 figure. neutral 배경 위 이미지 표시. 체험종목 5종 텍스트가 이미지에 베이크인되어 있으므로 `<img alt>`에 명시.
 
 ### Buttons
 
