@@ -24,6 +24,7 @@ export default [
         URLSearchParams: 'readonly',
         // DOM types referenced via instanceof / extends
         HTMLElement: 'readonly',
+        HTMLImageElement: 'readonly',
         HTMLDetailsElement: 'readonly',
         Element: 'readonly',
         Node: 'readonly',

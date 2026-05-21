@@ -16,17 +16,18 @@
     {
       "id": "hero-main",
       "page": "/",
-      "section": ".hero__bg — 홈 풀블리드 히어로 배경",
-      "render": "background-cover",
+      "section": ".poster-hero — 홈 풀블리드 키비주얼 포스터",
+      "render": "img",
       "priority": "P1",
       "lcp": true,
-      "alt": "남산을 배경으로 한 서머 페스티벌 메인 비주얼",
-      "current_file": "img/sections/hero.webp",
-      "current_status": "임시 이미지 (540×380, 비표준 비율)",
-      "art_direction": [
-        { "media": "(min-width: 901px)", "ratio": "16:9", "widths": [1280, 1920, 2560], "focus": "left center", "note": "데스크톱: 우상단에 360px 폭 텍스트 카드 오버레이. 좌측 60%에 메인 피사체 배치." },
-        { "media": "(max-width: 900px)", "ratio": "4:5",  "widths": [540, 768],          "focus": "35% center",   "note": "모바일: 텍스트 카드가 하단(약 55svh 위치)으로 이동. 상단 절반에 피사체." }
-      ]
+      "src": "/img/sections/hero.webp",
+      "alt": "2026 남산 서머 페스티벌 — 남산타워 야경과 불꽃놀이 키비주얼",
+      "widths": [1280, 1920, 2560],
+      "ratio": "16:9",
+      "current_file": null,
+      "current_status": "확정 (1774×887, source main-visual-wide.png 변환)",
+      "art_direction": "남산타워 야경 + 불꽃놀이 + 보라/주황 그라데이션. 좌상단 OH! 매력 특별시 서울 슬로건, 우상단 SEOUL MY SOUL 공식 BI. 중앙 한글 디스플레이 '2026 남산 / 서머 / 페스티벌'. 우측 '6.27 SAT / 단 하루의 특별한 밤!'.",
+      "_source": "docs/namsan-summer-festival-source-20260521-103004/assets/main-visual-wide.png (D4: SEOUL MY SOUL BI 허가 확보, production 채택)"
     },
     {
       "id": "course-map-walk",

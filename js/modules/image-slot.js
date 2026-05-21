@@ -52,6 +52,9 @@ export async function initImageSlots() {
           `background-size:cover;background-position:center;background-repeat:no-repeat;` +
         `}`
       );
+    } else if (def.render === 'img' && el instanceof HTMLImageElement) {
+      if (def.src) el.src = def.src;
+      if (def.alt && !el.alt) el.alt = def.alt;
     }
     el.append(buildBadge(id, primaryRatio(def)));
   });

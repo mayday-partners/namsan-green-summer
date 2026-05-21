@@ -52,7 +52,19 @@
           "channel": "네이버 예약",
           "href": null
         }
-      ]
+      ],
+      "summary": {
+        "heading": "Fun&Walk 개요",
+        "lead": "남산 산책로에서 fun하게 즐기는 미션형 걷기",
+        "location_line": "집결지 백범광장 (서울 중구 회현동1가 100-115) · 코스 : 남·북측 순환로 등",
+        "application_line": "접수기간 : 6월 10일 ~ 선착순 마감 · 참가비 : 10,000원",
+        "ctas": [
+          { "label": "내국인 참가 신청", "pending_key": "funwalk-domestic" },
+          { "label": "외국인 참가 신청", "pending_key": "funwalk-foreign" }
+        ],
+        "_source": "시안 index.html L82-93",
+        "_pending_confirmation": true
+      }
     },
     {
       "id": "summer-night",
@@ -91,7 +103,18 @@
           "channel": "네이버 예약",
           "href": null
         }
-      ]
+      ],
+      "summary": {
+        "heading": "Summer Night 개요",
+        "lead": "서울의 야경이 내려다보이는 팔각정, 한여름 밤의 낭만적인 야외 페스티벌",
+        "location_line": "팔각광장 (서울 중구 예장동 8-1) · 접수기간 : 6월 10일 ~ 선착순 마감 · 참가비 : 무료",
+        "application_line": null,
+        "ctas": [
+          { "label": "공연 사전예매 바로가기", "pending_key": "night-reserve" }
+        ],
+        "_source": "시안 index.html L95-103",
+        "_pending_confirmation": true
+      }
     },
     {
       "id": "summer-garden",
@@ -129,7 +152,19 @@
           "channel": "네이버 예약",
           "href": null
         }
-      ]
+      ],
+      "summary": {
+        "heading": "Summer Garden 개요",
+        "lead": "새로운 한국숲정원을 거닐다, 도슨트와 함께하는 고품격 정원 투어",
+        "location_line": "한국 숲 정원 (서울 용산구 이태원동 259-16) · 접수기간 : 6월 10일 ~ 선착순 마감 · 참가비 : 무료",
+        "application_line": null,
+        "ctas": [
+          { "label": "내국인 도슨트투어 신청", "pending_key": "garden-domestic" },
+          { "label": "외국인 도슨트투어 신청", "pending_key": "garden-foreign" }
+        ],
+        "_source": "시안 index.html L106-115",
+        "_pending_confirmation": true
+      }
     }
   ],
   "refund_policy": {
