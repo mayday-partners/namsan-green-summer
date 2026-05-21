@@ -29,11 +29,11 @@ run_js() {
 }
 
 run_html() {
-  echo "→ htmlhint (index.html + 404.html + {event,fun-and-walk,summer-night,summer-garden,community}/**/*.html)"
+  echo "→ htmlhint (index.html + 404.html + {info,funwalk,night,garden,community}/**/*.html)"
   npx --yes "htmlhint@${HTMLHINT_VERSION}" \
     index.html 404.html \
-    "event/**/*.html" "fun-and-walk/**/*.html" \
-    "summer-night/**/*.html" "summer-garden/**/*.html" \
+    "info/**/*.html" "funwalk/**/*.html" \
+    "night/**/*.html" "garden/**/*.html" \
     "community/**/*.html"
 }
 
