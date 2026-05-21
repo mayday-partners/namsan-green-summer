@@ -34,10 +34,11 @@
 | `hero-main` | `/` | 16:9 | 1280·1920·2560 | **LCP**. 확정 이미지 (`/img/sections/hero.webp`, 1774×887). 남산타워 야경 + 불꽃놀이 키비주얼. 텍스트 이미지 내 베이크인. D4: SEOUL MY SOUL BI 허가 확보. |
 | `og-share-default` | 전 페이지 meta | 1.91:1 | **1200×630** | **별도 파일**. 현재 hero.webp(540×380) 재사용은 SNS 표준 미달. |
 
-### P2 — 지도 (특수 자산)
+### P2 — 서브비주얼 + 지도 (특수 자산)
 
 | ID | 페이지 | 비율 | 권장 widths | 비고 |
 |---|---|---|---|---|
+| `sub-visual-event` | `/event/` (index + programs) | 16:5 | 1280·1920 | `.sub-visual` 배너. 남산 일대 야경 와이드 크롭 (남산타워 포함). 텍스트 베이크인 없음 — 페이지가 오버레이. 시안 `assets/sub-visual.png` 변환 완료 → `current_file: /img/sections/sub-visual.webp` (1983×793, 121KB). `_pending_confirmation: true` (운영팀 실제 사진 미확정). |
 | `course-map-walk` | `/fun-and-walk/` | 16:9 | 768·1280 | 5km 코스 라인 + CP1~CP4 / FIN 마커. 다크 테마. |
 | `course-map-event` | `/event/#location` | 16:9 | 768·1280 | 행사 구역(백범광장/북측순환로/남산도서관) + 교통 접근. 다크 테마. |
 

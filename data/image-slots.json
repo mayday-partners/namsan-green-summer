@@ -14,6 +14,23 @@
   },
   "slots": [
     {
+      "id": "sub-visual-event",
+      "page": "/event/",
+      "section": ".sub-visual — 행사안내·주요프로그램 서브페이지 상단 배너 이미지",
+      "render": "img",
+      "priority": "P2",
+      "lcp": false,
+      "src": "/img/sections/sub-visual.webp",
+      "alt": "2026 남산 서머 페스티벌 행사 안내 비주얼",
+      "widths": [1280, 1920],
+      "ratio": "16:5",
+      "current_file": "/img/sections/sub-visual.webp",
+      "current_status": "시안 자산 변환 완료 (1983×793, 121KB). 운영팀 실제 사진 미확정 — _pending_confirmation 유지.",
+      "art_direction": "남산 일대 야경의 와이드 크롭 (남산타워 포함). 텍스트 오버레이는 페이지가 적용 — 이미지에는 텍스트 베이크인 없음. 시안 docs/namsan-summer-festival-source-20260521-103004/assets/sub-visual.png 기반.",
+      "_source": "docs/namsan-summer-festival-source-20260521-103004/assets/sub-visual.png",
+      "_pending_confirmation": true
+    },
+    {
       "id": "hero-main",
       "page": "/",
       "section": ".poster-hero — 홈 풀블리드 키비주얼 포스터",

@@ -108,6 +108,7 @@ sizes:
   program-icon:     48px  # .program-card circular icon
   button-action:        48px  # .btn primary CTA min-height (시안 .primary-action 48px hit area)
   button-action-small:  40px  # .btn--small variant
+  program-number:       42px  # .program-number circle badge (program-detail 01/02/03)
 components:
   button-primary:
     backgroundColor: "{colors.dark-surface}"
@@ -247,6 +248,57 @@ components:
   cta-row:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
+  section-inner:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    padding: 48px
+  overview-hero:
+    backgroundColor: "{colors.neutral}"
+    textColor: "{colors.on-surface}"
+    padding: 48px
+  overview-section:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-body}"
+    padding: 48px
+  overview-card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 48px
+  overview-tabs:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.full}"
+  festival-map:
+    backgroundColor: "{colors.neutral}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.lg}"
+  map-pin:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.md}"
+  map-pin-fun:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.dark-surface}"
+    rounded: "{rounded.md}"
+  map-pin-night:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.md}"
+  map-pin-garden:
+    backgroundColor: "{colors.primary-text}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.md}"
+  program-detail:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface-body}"
+    rounded: "{rounded.lg}"
+    padding: 32px
+  program-number:
+    backgroundColor: "{colors.dark-surface}"
+    textColor: "{colors.primary}"
+    rounded: "{rounded.full}"
+    size: 42px
 ---
 
 # 2026 Namsan Green Summer Festival — Visual Identity
@@ -289,6 +341,8 @@ These derive from base colors and are applied via `rgba()` or layer opacity rath
 - **Scrim (on dark, dev tooling)** — `rgba(5, 8, 22, 0.88)` — image-slot dev badge background under `?spec=1`.
 - **Primary soft** — `rgba(57, 255, 20, 0.18)` — focus ring fills, neon glow halos, hero accent blur.
 - **Program border-soft (resting)** — `rgba(57, 255, 20, 0.30)` — program-card border at rest; transitions to full neon `primary` background on hover.
+- **Map arc decoration (light)** — `rgba(30, 160, 18, 0.5)` (`--color-map-arc-light`) — `.festival-map::before` 데코 호. neon-deep 계열 반투명 처리.
+- **Map arc decoration (dark)** — `rgba(8, 8, 8, 0.22)` (`--color-map-arc-dark`) — `.festival-map::after` 데코 호. dark surface 계열 반투명 처리.
 - **Hero gradient bands** — see Elevation & Depth.
 
 ### Card media placeholder gradient (CSS only, not a token)
@@ -330,6 +384,7 @@ Three families, each with a strict role. Never substitute one family into anothe
 The grid is a **fixed-max-width Container** centered on the viewport. No bespoke responsive grid library.
 
 - **Container** — `max-width: 1280px`, `padding-inline: 1.25rem` desktop / `1rem` mobile.
+- **Section inner** — `.section-inner` is the content-width wrapper used inside source-aligned sub-pages (event, fun-and-walk). `width: min(980px, 100% - 2 × container-pad)`, centered with `margin-inline: auto`, `padding-block: 6rem` (maps to `spacing.4xl`). Narrower than Container (980 px vs 1280 px) to match the source design's editorial column width.
 - **Section rhythm** — `padding-block: 8rem` (`5xl`) desktop, `6rem` (`4xl`) mobile.
 - **Spacing scale** — based on a `0.25rem` (4 px) unit. Use only `xs / sm / md / lg / xl / 2xl / 3xl / 4xl / 5xl`. Do not invent in-between values.
 - **Breakpoints** —
@@ -348,6 +403,8 @@ Depth is conveyed through **tonal layers + soft shadows + selective dark contain
 - **Card shadow (light surfaces)** `--shadow-card: 0 12px 32px rgba(15, 20, 25, 0.06), 0 2px 8px rgba(15, 20, 25, 0.04)`. Used as the resting state on light cards to lift from the pale paper.
 - **Glow (the brand's signature)** `--shadow-glow: 0 0 24px rgba(57, 255, 20, 0.45), 0 0 64px rgba(57, 255, 20, 0.18)`. Applied to the primary button on hover, the program-card hover, the favicon dot, and as a halo behind the hero number on light pages.
 - **Dark-section lift shadow** `--shadow-dark: 0 24px 64px rgba(0, 0, 0, 0.45)` — used on `.program-card:hover` and inside dark sections to amplify the `translateY(-4px)` lift. Never used as a resting state on light surfaces.
+- **Map pin shadow** `--shadow-map-pin: 0 14px 34px rgba(0, 0, 0, 0.18)` — `.map-pin` 핀 부유 효과. festival-map 위 핀 카드의 입체감을 표현.
+- **Program detail card shadow** `--shadow-program-detail: 0 16px 44px rgba(15, 20, 25, 0.045)` — `.program-detail` 카드 그림자. 라이트 페이지에서 `shadow-card`보다 살짝 더 강한 lift (카드 높이 차이 반영).
 - **Hero gradients** Hero photos live inside dark container panels that sit on the light page. Inside the dark container: a `linear-gradient(180deg, transparent 50%, var(--color-dark-surface) 100%)` fade plus a right-side scrim `linear-gradient(90deg, ... 80% rgba(5,8,22,0.85))` under the text card.
 
 ## Shapes
@@ -466,6 +523,24 @@ Not yet defined — awaiting designer hand-off. When introduced, inputs should f
 ### CTA row
 
 `cta-row` is a flex row of call-to-action links inside `program-copy`. Primary action uses `dark-surface` background with neon-on-dark hover; secondary action uses `surface` background with hairline border and neon hover. Both sizes follow `sizes.button-action` (48 px min-height). Pending links (URL not yet confirmed by operations team) are rendered with `aria-disabled="true"` and reduced opacity.
+
+### Overview layout (event pages)
+
+`overview-hero` is a sub-page hero strip overlaid on the `sub-visual` image. It uses a `radial-gradient` neon accent on a `neutral` background and renders the page `section-label` (Montserrat caps, `primary-text`) plus the H1 and lead paragraph. It sits directly above `overview-section`.
+
+`overview-section` wraps the tab navigation and the main content card. Background is `surface` (white). The inner `overview-layout` is a single-column grid providing consistent gap between the tabs and the card.
+
+`overview-tabs` is a flex pill-row of sub-navigation anchors. Resting state: `surface` background, hairline `color-border`, `on-surface` text. Active/hover: `dark-surface` background, `on-dark` text. Pill shape (`rounded.full`).
+
+`overview-card` is the primary content panel on event sub-pages. It uses `surface` background with a subtle neon-tinted gradient, a `rounded.lg` corner, and `shadow-card` lift. Paragraph text uses `on-surface-body` at 18 px. The `.lead` inside uses `on-surface` at a larger fluid size and heavy weight.
+
+### Festival map
+
+`festival-map` is a CSS-only decorative map placeholder showing the three festival venues as pins on a grid-patterned background. Background uses `neutral` with a neon radial accent. Three `.map-pin` spans are absolutely positioned: `.pin-fun` (`map-pin-fun`) uses `primary` (neon) background with `dark-surface` text; `.pin-night` (`map-pin-night`) uses `dark-surface` background with `on-dark` text; `.pin-garden` (`map-pin-garden`) uses `primary-text` (#107010) background with `on-dark` text. All three pins share `rounded.md` shape. The `.map-route` element is a decorative line using `primary` (neon) background. Decorative arcs use `--color-map-arc-light` (`.festival-map::before`) and `--color-map-arc-dark` (`.festival-map::after`).
+
+### Program detail list
+
+`program-detail` is a rounded card rendering one festival program's detail: a `.program-number` circle badge (Anton, `primary` neon text on `dark-surface`), an H3 heading, a lead `<strong>`, an optional conflict notice `<p>`, a `<dl>` info table (120 px label column), and a `.button-row` of CTAs. Odd-indexed cards receive a subtle neon-tinted gradient background. `program-number` uses the `program-number` size (42 × 42 px circle, `dark-surface` fill, `primary` text).
 
 ## Do's and Don'ts
 

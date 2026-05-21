@@ -8,10 +8,21 @@ import { mountMapLinks } from './modules/map-links.js';
 import { mountMapEmbeds } from './modules/map-embed.js';
 import { renderSponsorList } from './modules/sponsor-list.js';
 import { renderProgramSummaries } from './modules/program-summary.js';
+import { renderEventOverview } from './modules/event-overview.js';
+import { renderProgramDetail } from './modules/program-detail.js';
 
 (async () => {
   // Custom elements self-hydrate; no orchestration needed for partials.
-  await Promise.allSettled([renderNoticeList(), renderSponsorList(), renderProgramSummaries(), initImageSlots(), mountMapLinks(), mountMapEmbeds()]);
+  await Promise.allSettled([
+    renderNoticeList(),
+    renderSponsorList(),
+    renderProgramSummaries(),
+    initImageSlots(),
+    mountMapLinks(),
+    mountMapEmbeds(),
+    renderEventOverview(),
+    renderProgramDetail(),
+  ]);
   try { initFadeIn(); } catch (e) { console.error('[main] initFadeIn:', e); }
   resolveHashAfterRender();
 })();

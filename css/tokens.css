@@ -158,6 +158,16 @@
   /* Sizes — DESIGN.md sizes 신규 키 동기화 */
   --size-button-action:        48px;
   --size-button-action-small:  40px;
+  --size-program-number:       42px;  /* .program-number circle badge (program-detail 01/02/03) */
+
+  /* ============================================================
+     Festival-map + program-detail 데코레이션 알파값
+     (컴포넌트 CSS에 raw rgba 금지 — tokens.css에서 SSOT 관리)
+     ============================================================ */
+  --color-map-arc-light:   rgba(30, 160, 18, 0.5);   /* .festival-map::before 데코 호 (neon-deep 계열) */
+  --color-map-arc-dark:    rgba(8, 8, 8, 0.22);      /* .festival-map::after 데코 호 (dark surface 계열) */
+  --shadow-map-pin:        0 14px 34px rgba(0, 0, 0, 0.18);     /* .map-pin 부유 효과 */
+  --shadow-program-detail: 0 16px 44px rgba(15, 20, 25, 0.045); /* .program-detail 카드 그림자 */
 }
 
 @media (max-width: 768px) {
