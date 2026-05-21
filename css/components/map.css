@@ -1,0 +1,305 @@
+@layer components {
+  /* ============================================================
+     Festival map (info overview) — 3 pins on grid
+     ============================================================ */
+  .overview-map-block {
+    margin-block-start: var(--space-4xl);
+  }
+
+  .overview-map-block h3,
+  .directions h3 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--fs-headline-md);
+    font-weight: var(--fw-headline);
+  }
+
+  .festival-map {
+    position: relative;
+    min-height: 360px;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, var(--color-neon-soft) 1px, transparent 1px) 0 0 / 54px 54px,
+      linear-gradient(var(--color-neon-soft) 1px, transparent 1px) 0 0 / 54px 54px,
+      radial-gradient(circle at 78% 20%, var(--color-neon-soft), transparent 28%),
+      var(--color-soft);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  .festival-map::before,
+  .festival-map::after {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border: 3px solid rgba(30, 160, 18, 0.5);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    transform: rotate(18deg);
+  }
+
+  .festival-map::after {
+    inset: 23% 18% 18% 30%;
+    transform: rotate(-24deg);
+    border-color: rgba(8, 8, 8, 0.22);
+    border-right-color: transparent;
+  }
+
+  .map-route {
+    position: absolute;
+    left: 14%;
+    right: 16%;
+    top: 46%;
+    height: 4px;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    transform: rotate(-8deg);
+    box-shadow: 0 0 0 6px var(--color-neon-soft);
+  }
+
+  .map-pin {
+    position: absolute;
+    display: inline-grid;
+    place-items: center;
+    min-width: 128px;
+    min-height: 58px;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-black);
+    color: var(--color-paper);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-display);
+    line-height: 1.25;
+    text-align: center;
+    box-shadow: var(--shadow-pin);
+  }
+
+  .map-pin.pin-fun {
+    left: 10%;
+    top: 24%;
+    background: var(--color-primary);
+    color: var(--color-black);
+  }
+
+  .map-pin.pin-night {
+    left: 43%;
+    top: 42%;
+  }
+
+  .map-pin.pin-garden {
+    right: 10%;
+    bottom: 16%;
+    background: var(--color-map-garden);
+    color: var(--color-black);
+  }
+
+  .directions {
+    margin-block-start: var(--space-4xl);
+    padding-block-start: var(--space-3xl);
+    border-block-start: 1px solid var(--color-border-soft);
+  }
+
+  .directions h4 {
+    margin: var(--space-2xl) 0 var(--space-lg);
+    font-size: var(--fs-headline-sm);
+    font-weight: var(--fw-headline);
+  }
+
+  .directions ul {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .directions li {
+    font-size: 1.0625rem;
+    font-weight: var(--fw-emphasis);
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     Course map (Fun&Walk) — 6 km route, 5 labels
+     ============================================================ */
+  .course-map-block {
+    margin-block-start: var(--space-4xl);
+  }
+
+  .course-map-block h3 {
+    margin: 0 0 var(--space-xl);
+    font-size: var(--fs-headline-md);
+    font-weight: var(--fw-headline);
+  }
+
+  .course-map {
+    position: relative;
+    min-height: 520px;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.055) 1px, transparent 1px) 0 0 / 70px 70px,
+      linear-gradient(rgba(0, 0, 0, 0.055) 1px, transparent 1px) 0 0 / 70px 70px,
+      radial-gradient(circle at 64% 44%, rgba(57, 255, 20, 0.25), transparent 22%),
+      radial-gradient(circle at 34% 58%, var(--color-neon-soft), transparent 30%),
+      var(--color-soft);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  .course-map::before {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    border: 5px solid rgba(38, 131, 255, 0.8);
+    border-left-color: transparent;
+    border-radius: 46% 54% 50% 50%;
+    transform: rotate(14deg);
+  }
+
+  .course-map::after {
+    content: '';
+    position: absolute;
+    left: 14%;
+    right: 12%;
+    bottom: 0;
+    min-height: 54px;
+    background: rgba(0, 115, 70, 0.92);
+  }
+
+  .course-path {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    width: 58%;
+    height: 58%;
+    border: 5px solid var(--color-map-course);
+    border-top-color: transparent;
+    border-radius: 44% 56% 48% 52%;
+    transform: rotate(-28deg);
+  }
+
+  .course-label {
+    position: absolute;
+    z-index: var(--z-overlay-fg);
+    min-width: 112px;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-map-finish);
+    color: var(--color-paper);
+    border-radius: var(--radius-xs);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-display);
+    text-align: center;
+    box-shadow: var(--shadow-course-label);
+  }
+
+  .label-start    { left: 9%;  top: 12%; }
+  .label-hohyeon  { left: 36%; top: 46%; }
+  .label-north    { right: 20%; top: 28%; }
+  .label-south    { right: 10%; bottom: 21%; }
+  .label-finish   { right: 9%;  top: 9%; }
+
+  .course-caption {
+    position: absolute;
+    z-index: var(--z-overlay-fg);
+    left: 24px;
+    right: 24px;
+    bottom: 15px;
+    color: var(--color-paper);
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-display);
+    text-align: center;
+  }
+
+  /* ============================================================
+     Garden map (Summer Garden) — 5 zones
+     ============================================================ */
+  .garden-course {
+    margin-block-start: var(--space-4xl);
+  }
+
+  .garden-course h3 {
+    margin: 0 0 var(--space-xl);
+    font-size: var(--fs-headline-md);
+    font-weight: var(--fw-headline);
+  }
+
+  .garden-map {
+    position: relative;
+    min-height: 430px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 25% 45%, rgba(35, 122, 58, 0.28) 0 18%, transparent 19%),
+      radial-gradient(ellipse at 58% 42%, rgba(102, 185, 66, 0.35) 0 20%, transparent 21%),
+      radial-gradient(ellipse at 76% 58%, rgba(22, 112, 66, 0.25) 0 18%, transparent 19%),
+      linear-gradient(135deg, var(--color-soft), var(--color-paper));
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  .garden-map::before,
+  .garden-map::after {
+    content: '';
+    position: absolute;
+    inset: 13% 8%;
+    border: 4px solid rgba(6, 120, 70, 0.55);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    transform: rotate(16deg);
+  }
+
+  .garden-map::after {
+    inset: 28% 18% 18% 24%;
+    transform: rotate(-18deg);
+    border-color: rgba(57, 255, 20, 0.55);
+    border-top-color: transparent;
+  }
+
+  .garden-route {
+    position: absolute;
+    left: 16%;
+    right: 16%;
+    top: 52%;
+    height: 5px;
+    background: var(--color-garden-route);
+    border-radius: var(--radius-full);
+    transform: rotate(-7deg);
+    box-shadow: 0 0 0 6px rgba(0, 111, 74, 0.12);
+  }
+
+  .garden-zone {
+    position: absolute;
+    z-index: var(--z-overlay-fg);
+    min-width: 92px;
+    padding: var(--space-sm) 10px;
+    background: var(--color-primary);
+    color: var(--color-black);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-display);
+    text-align: center;
+  }
+
+  .zone-a { left: 18%;  top: 28%; }
+  .zone-b { left: 44%;  top: 22%; }
+  .zone-c { right: 25%; top: 36%; }
+  .zone-d { right: 16%; bottom: 25%; }
+  .zone-e { left: 28%;  bottom: 22%; }
+
+  .garden-legend {
+    position: absolute;
+    right: 22px;
+    bottom: 22px;
+    display: grid;
+    gap: 6px;
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.86);
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(8px);
+  }
+
+  .garden-legend span {
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-emphasis);
+  }
+}

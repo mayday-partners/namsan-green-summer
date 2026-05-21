@@ -1,0 +1,14 @@
+@layer components {
+  .wire-section {
+    background: var(--color-paper);
+  }
+
+  .wire-inner {
+    width: min(var(--size-container-max), calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  .wire-section .wire-inner {
+    padding-block: clamp(72px, 8vw, 108px);
+  }
+}

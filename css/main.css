@@ -4,30 +4,40 @@
  */
 @layer reset, tokens, base, components, pages, utilities;
 
-@import url('reset.css')                  layer(reset);
-@import url('tokens.css')                 layer(tokens);
-@import url('base.css')                   layer(base);
+@import url('reset.css')                              layer(reset);
+@import url('tokens.css')                             layer(tokens);
+@import url('base.css')                               layer(base);
 
-@import url('components/header.css')      layer(components);
-@import url('components/button.css')      layer(components);
-@import url('components/card.css')        layer(components);
-@import url('components/footer.css')      layer(components);
-@import url('components/image-slot.css')  layer(components);
-@import url('components/dark-section.css') layer(components);
-@import url('components/page-tabs.css')   layer(components);
-@import url('components/info-box.css')    layer(components);
-@import url('components/cta-group.css')   layer(components);
-@import url('components/sponsor.css')     layer(components);
-@import url('components/kit-grid.css')    layer(components);
-@import url('components/notice-table.css') layer(components);
-@import url('components/brand-mark.css')     layer(components);
-@import url('components/sub-visual.css')     layer(components);
-@import url('components/radial-pattern.css') layer(components);
+/* Site chrome */
+@import url('components/site-header.css')             layer(components);
+@import url('components/footer.css')                  layer(components);
 
-@import url('home.css')                   layer(pages);
-@import url('page.css')                   layer(pages);
+/* Generic UI */
+@import url('components/button.css')                  layer(components);
+@import url('components/radial-pattern.css')          layer(components);
 
-/* Animations and utility classes share the strongest layer so they
-   reliably win over component/page rules (e.g., .fade-in opacity:0). */
-@import url('animations.css')             layer(utilities);
-@import url('utilities.css')              layer(utilities);
+/* Home layout */
+@import url('components/wire-section.css')            layer(components);
+@import url('components/sponsor.css')                 layer(components);
+@import url('components/notice.css')                  layer(components);
+
+/* Sub-page layout */
+@import url('components/sub-visual.css')              layer(components);
+@import url('components/overview.css')                layer(components);
+
+/* Sub-page content blocks */
+@import url('components/info-panel.css')              layer(components);
+@import url('components/program-detail.css')          layer(components);
+@import url('components/reserve-button.css')          layer(components);
+@import url('components/map.css')                     layer(components);
+@import url('components/lineup.css')                  layer(components);
+@import url('components/seat-guide.css')              layer(components);
+@import url('components/experience-grid.css')         layer(components);
+@import url('components/community.css')               layer(components);
+
+/* Page-level wrappers (home + sub-page common) */
+@import url('home.css')                               layer(pages);
+@import url('page.css')                               layer(pages);
+
+/* Strongest layer: utilities */
+@import url('utilities.css')                          layer(utilities);

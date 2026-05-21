@@ -1,97 +1,67 @@
-/* ===== Button ===== */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-  font-size: var(--fs-sm);
-  letter-spacing: 0.04em;
-  transition: transform var(--dur-fast) var(--ease-out),
-              background var(--dur-fast) var(--ease-out),
-              color var(--dur-fast) var(--ease-out),
-              border-color var(--dur-fast) var(--ease-out),
-              box-shadow var(--dur-base) var(--ease-out);
-}
+@layer components {
+  /* Primary & secondary actions — pill CTAs (시안 .primary-action / .secondary-action) */
+  .primary-action,
+  .secondary-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--size-cta-min-w);
+    min-height: var(--size-cta-min-h);
+    padding: 0 var(--space-xl);
+    border: 1px solid var(--color-black);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-display);
+    line-height: 1;
+    text-align: center;
+    transition: background var(--dur-fast) var(--ease-out),
+                color var(--dur-fast) var(--ease-out);
+  }
 
-.btn--primary {
-  background: var(--color-dark-surface);
-  color: var(--color-on-dark);
-  border: 1px solid var(--color-dark-surface);
-  min-height: var(--size-button-action);
-}
-.btn--primary:hover,
-.btn--primary:focus-visible {
-  background: var(--color-primary);
-  color: var(--color-dark-surface);
-  border-color: var(--color-dark-surface);
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-2px);
-}
+  .primary-action {
+    background: var(--color-black);
+    color: var(--color-paper);
+  }
 
-.btn--ghost {
-  background: transparent;
-  color: var(--color-on-surface);
-  border: 1px solid var(--color-border);
-  min-height: var(--size-button-action);
-}
-/* intentionally no glow/lift — secondary actions stay subtle (matches 시안 .secondary-action) */
-.btn--ghost:hover,
-.btn--ghost:focus-visible {
-  background: var(--color-primary);
-  color: var(--color-dark-surface);
-  border-color: var(--color-dark-surface);
-}
+  .primary-action:hover,
+  .primary-action:focus-visible {
+    background: var(--color-primary);
+    color: var(--color-black);
+  }
 
-.btn__arrow { transition: transform var(--dur-fast) var(--ease-out); }
-.btn:hover .btn__arrow { transform: translateX(4px); }
+  .secondary-action {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
 
-.btn--compact {
-  padding: var(--space-3) var(--space-4);
-  font-size: var(--fs-sm);
-  line-height: 1;
-}
+  .secondary-action:hover,
+  .secondary-action:focus-visible {
+    background: var(--color-primary);
+    color: var(--color-ink);
+  }
 
-.btn--small {
-  min-height: var(--size-button-action-small);
-  padding-inline: var(--space-4);  /* block padding inherits from .btn base */
-  font-size: var(--fs-sm);
-}
+  /* .small modifier — inline CTAs inside cards (program-detail button-row) */
+  .primary-action.small,
+  .secondary-action.small {
+    min-width: 120px;
+    min-height: var(--size-cta-min-h-small);
+    padding: 0 var(--space-lg);
+  }
 
-/* ===== External deep-link buttons (map apps) ===== */
-.btn--map-kakao {
-  background: var(--color-brand-kakao);
-  color: var(--color-dark-surface);
-}
-.btn--map-kakao:hover {
-  transform: translateY(-2px);
-}
+  /* button-row / cta-row — CTA grouping inside cards */
+  .button-row,
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-block-start: var(--space-2xl);
+  }
 
-.btn--map-google {
-  background: var(--color-brand-google-blue);
-  color: var(--color-on-dark);
-}
-.btn--map-google:hover {
-  transform: translateY(-2px);
-}
-
-.btn--map-naver {
-  background: var(--color-brand-naver);
-  color: var(--color-dark-surface);
-}
-.btn--map-naver:hover {
-  transform: translateY(-2px);
-}
-
-/* Layout slot for map-link button row */
-.map-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-block-start: var(--space-5);
-}
-.map-links .btn {
-  flex: 1 1 auto;
-  justify-content: center;
+  @media (max-width: 620px) {
+    .primary-action,
+    .secondary-action {
+      width: 100%;
+      min-width: 0;
+    }
+  }
 }

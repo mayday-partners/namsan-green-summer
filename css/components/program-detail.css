@@ -1,0 +1,99 @@
+@layer components {
+  .program-detail-list {
+    display: grid;
+    gap: var(--space-xl);
+    margin-block-start: var(--space-4xl);
+  }
+
+  .program-detail {
+    position: relative;
+    padding: clamp(24px, 4vw, 38px);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card-lift);
+  }
+
+  .program-detail:nth-child(odd) {
+    background: linear-gradient(135deg, var(--color-neon-soft), var(--color-paper) 44%);
+  }
+
+  .program-number {
+    display: inline-grid;
+    place-items: center;
+    width: var(--size-program-number);
+    height: var(--size-program-number);
+    margin-block-end: var(--space-lg);
+    background: var(--color-black);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-weight: var(--fw-display);
+  }
+
+  .program-detail h3 {
+    margin: 0 0 var(--space-xs);
+    font-size: clamp(1.5rem, 3vw, 2.125rem);
+    font-weight: var(--fw-display);
+    line-height: 1.18;
+  }
+
+  .program-detail strong {
+    display: block;
+    margin-block-end: var(--space-lg);
+    font-size: var(--fs-headline-sm);
+    font-weight: var(--fw-headline);
+    line-height: 1.5;
+  }
+
+  .program-detail p {
+    margin-block-end: var(--space-xl);
+    font-size: var(--fs-body-sm);
+  }
+
+  .program-detail dl {
+    display: grid;
+    gap: 0;
+    margin: var(--space-xl) 0 0;
+  }
+
+  .program-detail dl div {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--space-lg);
+    padding-block: var(--space-md);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .program-detail dt {
+    color: var(--color-muted);
+    font-weight: var(--fw-display);
+  }
+
+  .program-detail dd {
+    margin: 0;
+    font-weight: var(--fw-emphasis);
+  }
+
+  .program-detail .button-row {
+    margin-block-start: var(--space-xl);
+  }
+
+  /* Program guide intro card on /info/programs.html */
+  .program-guide-card .notice-copy {
+    display: inline-block;
+    margin-block-start: var(--space-xs);
+    padding: 10px 14px;
+    background: var(--color-neon-soft);
+    color: var(--color-black);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-display);
+  }
+
+  @media (max-width: 620px) {
+    .program-detail dl div {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+  }
+}

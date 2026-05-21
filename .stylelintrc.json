@@ -11,8 +11,8 @@
       }
     ],
     "media-feature-name-value-allowed-list": {
-      "max-width": ["768px", "900px"],
-      "min-width": ["769px", "901px"]
+      "max-width": ["620px", "980px"],
+      "min-width": ["621px", "981px"]
     },
     "color-no-invalid-hex": true,
     "no-duplicate-selectors": true,

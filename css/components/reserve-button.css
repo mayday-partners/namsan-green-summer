@@ -1,0 +1,51 @@
+@layer components {
+  .reservation-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl);
+    margin-block-start: var(--space-4xl);
+  }
+
+  .reserve-button {
+    min-height: var(--size-reserve-btn-h);
+    display: grid;
+    place-items: center;
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-sm);
+    color: var(--color-black);
+    font-size: var(--fs-headline-sm);
+    font-weight: var(--fw-display);
+    line-height: 1.2;
+    text-align: center;
+    box-shadow: var(--shadow-reserve);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .reserve-button span {
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-emphasis);
+  }
+
+  .reserve-button.local {
+    background: var(--color-reserve-local);
+  }
+
+  .reserve-button.global {
+    background: var(--color-reserve-global);
+  }
+
+  .reserve-button:hover,
+  .reserve-button:focus-visible {
+    transform: translateY(-2px);
+  }
+
+  .funwalk-card > p {
+    max-width: 900px;
+  }
+
+  @media (max-width: 620px) {
+    .reservation-actions {
+      grid-template-columns: 1fr;
+    }
+  }
+}

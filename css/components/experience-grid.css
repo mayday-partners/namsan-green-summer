@@ -1,0 +1,53 @@
+@layer components {
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+    margin-block-start: var(--space-xl);
+  }
+
+  .experience-grid article {
+    min-height: 138px;
+    display: grid;
+    align-content: end;
+    padding: var(--space-lg);
+    background:
+      radial-gradient(circle at 25% 22%, rgba(57, 255, 20, 0.55), transparent 26%),
+      linear-gradient(135deg, var(--color-black), var(--color-experience-deep));
+    color: var(--color-paper);
+    border-radius: var(--radius-md);
+  }
+
+  .experience-grid article span {
+    color: var(--color-primary);
+    font-size: var(--fs-headline-sm);
+    font-weight: var(--fw-display);
+  }
+
+  .experience-grid article p {
+    margin: var(--space-xs) 0 0;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-emphasis);
+    line-height: 1.5;
+  }
+
+  .experience-image {
+    margin-block-start: var(--space-xl);
+  }
+
+  .experience-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: var(--color-black);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  @media (max-width: 620px) {
+    .experience-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

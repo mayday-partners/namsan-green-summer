@@ -1,125 +1,37 @@
 /* Pretendard Variable — CDN-hosted variable font.
    Supports weight 100–900 via font-variation-settings.
-   CSP: cdn.jsdelivr.net is already whitelisted in _headers.
-   Local woff2-subset (300-700) below remains as fallback. */
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+   CSP: cdn.jsdelivr.net is whitelisted in _headers. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 
-@font-face {
-  font-family: 'Pretendard';
-  font-weight: 300;
-  font-display: swap;
-  src: url('../fonts/pretendard/woff2-subset/Pretendard-Light.subset.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Pretendard';
-  font-weight: 400;
-  font-display: swap;
-  src: url('../fonts/pretendard/woff2-subset/Pretendard-Regular.subset.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Pretendard';
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/pretendard/woff2-subset/Pretendard-Medium.subset.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Pretendard';
-  font-weight: 600;
-  font-display: swap;
-  src: url('../fonts/pretendard/woff2-subset/Pretendard-SemiBold.subset.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Pretendard';
-  font-weight: 700;
-  font-display: swap;
-  src: url('../fonts/pretendard/woff2-subset/Pretendard-Bold.subset.woff2') format('woff2');
-}
+@layer base {
+  body {
+    color: var(--color-ink);
+    font-family: var(--font-kr);
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-body);
+    line-height: var(--lh-body-md);
+    background: var(--color-paper);
+    word-break: keep-all;
+  }
 
-body {
-  font-family: var(--font-kr);
-  font-size: var(--fs-base);
-  font-weight: 400;
-  color: var(--color-on-surface-body);
-  background: var(--color-neutral);
-  letter-spacing: -0.01em;
-}
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    letter-spacing: 0;
+  }
 
-.container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding-inline: var(--container-pad);
-}
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-black);
+  }
 
-.section {
-  position: relative;
-  padding-block: var(--space-10);
-}
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 
-@media (max-width: 768px) {
-  .section { padding-block: var(--space-9); }
-}
-
-.eyebrow {
-  font-family: var(--font-en);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-primary-text);
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-size: var(--fs-3xl);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: var(--color-on-surface);
-  margin-block-start: var(--space-3);
-  line-height: 1;
-}
-
-@media (max-width: 768px) {
-  .section-title { font-size: var(--fs-2xl); }
-}
-
-.section-desc {
-  font-size: var(--fs-md);
-  color: var(--color-on-surface-muted);
-  margin-block-start: var(--space-5);
-  max-width: 56ch;
-}
-
-::selection {
-  background: var(--color-primary);
-  color: var(--color-dark-surface);
-}
-
-:focus-visible {
-  outline: 2px solid var(--color-primary-text);
-  outline-offset: 4px;
-  border-radius: 2px;
-}
-
-.btn--primary:focus-visible {
-  outline-color: var(--color-dark-surface);
-  outline-offset: 4px;
-}
-
-.skip-link {
-  position: fixed;
-  top: -100px;
-  left: var(--space-3);
-  background: var(--color-primary);
-  color: var(--color-dark-surface);
-  padding: var(--space-3) var(--space-5);
-  z-index: var(--z-skip-link);
-  font-weight: 700;
-  font-size: var(--fs-sm);
-  border-radius: var(--radius-sm);
-  transition: top var(--dur-fast) var(--ease-out);
-}
-.skip-link:focus {
-  top: var(--space-3);
-  outline: 2px solid var(--color-dark-surface);
-  outline-offset: 2px;
+  .container {
+    width: min(var(--size-container-max), calc(100% - 40px));
+    margin-inline: auto;
+  }
 }

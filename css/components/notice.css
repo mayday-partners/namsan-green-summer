@@ -1,0 +1,160 @@
+@layer components {
+  /* Notice list — used on home + community/index.html */
+  .notice-list {
+    width: 100%;
+    margin: 0;
+    display: grid;
+  }
+
+  .notice {
+    display: grid;
+    grid-template-columns: 52px 1fr 110px;
+    gap: var(--space-lg);
+    align-items: center;
+    padding-block: var(--space-lg);
+    border-bottom: 1px solid var(--color-line);
+    font-size: var(--fs-body-sm);
+  }
+
+  .notice span {
+    display: inline-grid;
+    place-items: center;
+    min-height: 24px;
+    background: var(--color-primary);
+    color: var(--color-black);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--tracking-badge);
+  }
+
+  .notice strong {
+    font-weight: var(--fw-emphasis);
+  }
+
+  .notice time {
+    color: var(--color-muted);
+    font-size: var(--fs-badge-en);
+    text-align: right;
+  }
+
+  .more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-block-start: var(--space-2xl);
+  }
+
+  /* Notice area block (home) */
+  .notice-area {
+    background: var(--color-soft);
+  }
+
+  .notice-area .wire-inner {
+    padding-block: clamp(70px, 8vw, 104px);
+  }
+
+  .notice-area h2 {
+    margin: 0 0 var(--space-xl);
+    color: var(--color-black);
+    font-size: clamp(1.75rem, 3.2vw, 2.625rem);
+    font-weight: var(--fw-display);
+    line-height: 1.2;
+  }
+
+  .notice-area .notice {
+    grid-template-columns: 54px 1fr 116px;
+    padding-block: var(--space-xl);
+  }
+
+  /* Notice panel — boxed warning inside course/garden cards */
+  .notice-panel {
+    margin-block-start: var(--space-4xl);
+    padding: clamp(20px, 3vw, 30px);
+    background: var(--color-soft);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+  }
+
+  .notice-panel h3 {
+    margin: 0 0 var(--space-md);
+    font-size: var(--fs-headline-md);
+    font-weight: var(--fw-headline);
+  }
+
+  .notice-panel ul {
+    display: grid;
+    gap: var(--space-sm);
+    padding-inline-start: 18px;
+  }
+
+  .notice-panel li {
+    font-weight: var(--fw-emphasis);
+    line-height: 1.6;
+  }
+
+  /* Notice guide — long item list (FAQ-style guide sections) */
+  .notice-guide-card > p {
+    max-width: 900px;
+  }
+
+  .notice-guide-list {
+    display: grid;
+    gap: var(--space-xl);
+    margin-block-start: var(--space-4xl);
+  }
+
+  .notice-guide-item {
+    padding: clamp(22px, 3vw, 32px);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+  }
+
+  .notice-guide-item:nth-child(odd) {
+    background: linear-gradient(135deg, var(--color-neon-soft), var(--color-paper) 48%);
+  }
+
+  .notice-guide-item h3 {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--fs-headline-md);
+    font-weight: var(--fw-headline);
+  }
+
+  .notice-guide-item p {
+    margin: 0 0 var(--space-md);
+    color: var(--color-ink);
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-emphasis);
+    line-height: 1.7;
+  }
+
+  .notice-guide-item ul,
+  .notice-guide-item ol {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding-inline-start: 20px;
+  }
+
+  .notice-guide-item li {
+    color: var(--color-ink);
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-emphasis);
+    line-height: 1.65;
+  }
+
+  .notice-guide-item ol li::marker {
+    font-weight: var(--fw-display);
+  }
+
+  @media (max-width: 620px) {
+    .notice,
+    .notice-area .notice {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+
+    .notice time {
+      text-align: left;
+    }
+  }
+}

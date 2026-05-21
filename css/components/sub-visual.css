@@ -1,37 +1,15 @@
-/* sub-visual.css — sub-page hero image strip (시안 .sub-visual + .sub-hero)
-   Sub-pages mount a full-bleed image strip via .sub-visual, with text
-   overlaid via .sub-hero (positioned negative-margin trick to avoid
-   doubling the vertical space). */
+@layer components {
+  .sub-visual {
+    overflow: hidden;
+    background: var(--color-soft);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
 
-.sub-visual {
-  position: relative;
-  inline-size: 100%;
-  block-size: var(--sub-visual-height);
-  overflow: hidden;
-  background: var(--color-neutral);
-  border-block-end: 1px solid var(--color-border);
-}
-
-.sub-visual > img {
-  position: absolute;
-  inset: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.sub-hero {
-  position: relative;
-  z-index: 1;
-  min-block-size: var(--sub-visual-height);
-  margin-block-start: calc(var(--sub-visual-height) * -1);
-  padding-block: var(--space-7);
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent 0%, var(--color-scrim-on-dark) 100%);  /* 55% scrim — lighter images may need --color-scrim-on-dark-heavy */
-  color: var(--color-on-dark);
-}
-
-.sub-hero > * {
-  pointer-events: auto;
+  .sub-visual img {
+    width: 100%;
+    height: var(--sub-visual-height);
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
 }

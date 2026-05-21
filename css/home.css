@@ -1,238 +1,121 @@
-/* ---------------------------------------------------------------
-   .poster-hero — full-bleed keyvisual image (시안 .poster-hero).
-   Image fills the section; no text overlay. The image carries
-   typography baked-in.
-   --------------------------------------------------------------- */
-.poster-hero {
-  display: block;
-  inline-size: 100%;
-  background: var(--color-dark-surface);  /* fallback while image loads */
-  border-block-end: 1px solid var(--color-border);
-}
-
-.poster-hero img {
-  display: block;
-  inline-size: 100%;
-  block-size: auto;
-}
-
-/* ---------------------------------------------------------------
-   .wire-section — 시안 공통 섹션 컨테이너 (sponsor-area, program-summary, notice-area).
-   .wire-inner — 최대폭 제한 + 수평 여백.
-   --------------------------------------------------------------- */
-.wire-section {
-  background: var(--color-surface);
-  border-block-end: 1px solid var(--color-border);
-}
-
-.wire-inner {
-  max-inline-size: 980px;
-  margin-inline: auto;
-  padding-inline: var(--space-5);
-  padding-block: clamp(4.5rem, 8vw, 6.75rem);
-}
-
-/* ---------------------------------------------------------------
-   sponsor-area — 후원사 섹션
-   --------------------------------------------------------------- */
-.wire-section.sponsor-area .wire-inner {
-  padding-block: clamp(3.375rem, 6vw, 4.75rem);
-}
-
-/* ---------------------------------------------------------------
-   .program-summary / .program-copy — 시안 program-summary 패턴.
-   텍스트 카피 + CTA 버튼 행. 짝수 섹션 배경 분리.
-   --------------------------------------------------------------- */
-.wire-section.program-summary--alt {
-  background-color: var(--color-surface-alt);
-}
-
-.program-copy {
-  display: grid;
-  gap: 0;
-}
-
-.program-copy h2 {
-  margin: 0 0 var(--space-2);
-  font-family: var(--font-kr);
-  font-weight: 900;
-  font-size: clamp(1.75rem, 3.2vw, 2.625rem);
-  line-height: 1.2;
-  color: var(--color-on-surface);
-}
-
-.program-copy strong {
-  display: block;
-  max-inline-size: 780px;
-  margin-block-end: var(--space-7);
-  font-size: clamp(1.3125rem, 2.1vw, 1.6875rem);
-  font-weight: 800;
-  line-height: 1.48;
-  color: var(--color-on-surface-body);
-}
-
-.program-copy p {
-  max-inline-size: 760px;
-  margin: 0 0 var(--space-3);
-  font-size: clamp(1rem, 1.25vw, 1.125rem);
-  font-weight: 500;
-  line-height: 1.82;
-  color: var(--color-on-surface-body);
-}
-
-/* CTA 버튼 행 */
-.cta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-block-start: var(--space-6);
-}
-
-.cta-row .primary-action,
-.cta-row .secondary-action {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-inline-size: 200px;
-  min-block-size: 52px;
-  padding-inline: var(--space-6);
-  border-radius: var(--radius-pill);
-  font-size: var(--fs-sm);
-  font-weight: 800;
-  line-height: 1.35;
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
-}
-
-.cta-row .primary-action {
-  background: var(--color-dark-surface);
-  color: var(--color-on-dark);
-  border: 1px solid var(--color-dark-surface);
-}
-
-.cta-row .primary-action:hover,
-.cta-row .primary-action:focus-visible {
-  background: var(--color-primary);
-  color: var(--color-dark-surface);
-  border-color: var(--color-dark-surface);
-}
-
-.cta-row .secondary-action {
-  background: var(--color-surface);
-  color: var(--color-on-surface);
-  border: 1px solid var(--color-border);
-}
-
-.cta-row .secondary-action:hover,
-.cta-row .secondary-action:focus-visible {
-  background: var(--color-primary);
-  color: var(--color-dark-surface);
-  border-color: var(--color-primary);
-}
-
-/* aria-disabled 처리 — 운영팀 URL 미확정 링크 */
-.cta-row [aria-disabled="true"] {
-  opacity: 0.55;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* ---------------------------------------------------------------
-   notice-area — 공지사항 섹션
-   --------------------------------------------------------------- */
-.wire-section.notice-area {
-  background: var(--color-surface-alt);
-}
-
-.wire-section.notice-area .wire-inner {
-  padding-block: clamp(4.375rem, 8vw, 6.5rem);
-}
-
-/* ===== NOTICE LIST ===== */
-.bottom-block__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-block-end: var(--space-4);
-}
-.bottom-block__title {
-  font-family: var(--font-display);
-  font-size: var(--fs-xl);
-  color: var(--color-on-surface);
-  letter-spacing: 0.02em;
-  margin: 0;
-}
-.bottom-block__more {
-  font-family: var(--font-en);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-on-surface-muted);
-}
-.bottom-block__more:hover { color: var(--color-primary-text); }
-
-.bottom-list {
-  display: grid;
-  border-block-start: 1px solid var(--color-border);
-}
-.bottom-list li { border-block-end: 1px solid var(--color-border); }
-.bottom-list a {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--space-4);
-  align-items: baseline;
-  padding-block: var(--space-4);
-  color: var(--color-on-surface);
-  font-size: var(--fs-sm);
-  transition: color var(--dur-fast) var(--ease-out);
-}
-
-.page-home .bottom-list a {
-  grid-template-columns: 18px 1fr auto;
-  gap: var(--space-3);
-  align-items: center;
-}
-.bottom-list a:hover { color: var(--color-primary-text); }
-
-.notice__icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-color: var(--color-on-surface-muted);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-size: contain;
-  transition: background-color var(--dur-fast) var(--ease-out);
-}
-
-.notice__icon--notice {
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M14 2v12L4 11H2V5h2L14 2zM4.5 11.6l1 2.4h2l-1.2-3z'/></svg>");
-          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M14 2v12L4 11H2V5h2L14 2zM4.5 11.6l1 2.4h2l-1.2-3z'/></svg>");
-}
-
-.bottom-list a:hover .notice__icon { background-color: var(--color-primary-text); }
-.bottom-list__meta {
-  font-family: var(--font-en);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.1em;
-  color: var(--color-on-surface-muted);
-}
-
-/* ---------------------------------------------------------------
-   Homepage-only overrides.
-   --------------------------------------------------------------- */
-@media (max-width: 768px) {
-  .wire-inner {
-    padding-inline: var(--space-4);
+@layer pages {
+  /* Poster hero — full-bleed keyvisual on home */
+  .poster-hero {
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-border-soft);
   }
-  .cta-row .primary-action,
-  .cta-row .secondary-action {
-    min-inline-size: 0;
-    inline-size: 100%;
+
+  .poster-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Home body baseline */
+  .home-page {
+    line-height: 1.68;
+  }
+
+  /* Home section padding (clamp pattern) */
+  .home-page .wire-section .wire-inner {
+    padding-block: clamp(72px, 8vw, 108px);
+  }
+
+  .home-page .sponsor-area .wire-inner {
+    padding-block: clamp(54px, 6vw, 76px);
+  }
+
+  .home-page .notice-area .wire-inner {
+    padding-block: clamp(70px, 8vw, 104px);
+  }
+
+  /* Section headings on home — slightly tighter than overview */
+  .home-page .sponsor-area h2,
+  .home-page .notice-area h2,
+  .home-page .program-copy h2 {
+    font-size: clamp(1.75rem, 3.2vw, 2.625rem);
+    font-weight: var(--fw-display);
+    line-height: 1.2;
+  }
+
+  .home-page .sponsor-area p {
+    max-width: 640px;
+    margin: 10px auto 30px;
+    color: var(--color-muted);
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-body);
+    line-height: 1.7;
+  }
+
+  /* Program summary blocks on home — alternating background */
+  .program-summary {
+    background: var(--color-paper);
+  }
+
+  .home-page .program-summary:nth-of-type(odd) {
+    background: linear-gradient(135deg, var(--color-soft), var(--color-paper) 62%);
+  }
+
+  .program-copy {
+    min-height: 0;
+    display: grid;
+    align-content: center;
+    padding-block: var(--space-6xl);
+  }
+
+  .home-page .program-copy {
+    gap: 0;
+  }
+
+  .home-page .program-copy h2 {
+    margin-block-end: var(--space-md);
+  }
+
+  .home-page .program-copy strong {
+    display: block;
+    max-width: 780px;
+    margin-block-end: var(--space-2xl);
+    color: var(--color-ink);
+    font-size: clamp(1.3125rem, 2.1vw, 1.6875rem);
+    font-weight: var(--fw-headline);
+    line-height: 1.48;
+  }
+
+  .home-page .program-copy p {
+    max-width: 760px;
+    margin: 0 0 var(--space-md);
+    color: var(--color-ink);
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    font-weight: var(--fw-body);
+    line-height: 1.82;
+  }
+
+  .home-page .cta-row {
+    margin-block-start: var(--space-2xl);
+  }
+
+  .home-page .primary-action,
+  .home-page .secondary-action {
+    min-height: 52px;
+    padding-inline: 28px;
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-headline);
+  }
+
+  /* Home notice rows — slightly wider date column */
+  .home-page .notice-area h2 {
+    margin-block-end: var(--space-2xl);
+  }
+
+  .home-page .notice {
+    grid-template-columns: 54px 1fr 116px;
+    gap: var(--space-lg);
+    padding-block: var(--space-xl);
+    font-size: var(--fs-body-md);
+    line-height: 1.55;
+  }
+
+  .home-page .notice strong {
+    font-weight: var(--fw-emphasis);
   }
 }

@@ -1,11 +1,13 @@
-/* ===== Utilities (single-purpose helpers — BEM exception by intent) ===== */
+/* Utilities — single-purpose helpers (BEM exception by intent). */
 
-/* Used by notice-list.js / faq-list.js to render an inline error message
- * inside the list slot when fetch fails or templates are missing. */
+/* Inline error slot rendered by JS modules (notice-list, faq-list)
+   when fetch fails or templates are missing. */
 .fallback-error {
-  padding: var(--space-4);
-  color: var(--color-primary-text);
-  font-size: var(--fs-sm);
+  padding: var(--space-lg);
+  color: var(--color-neon-deep);
+  font-size: var(--fs-body-sm);
 }
 
-.mt-7 { margin-block-start: var(--space-7); }
+/* Spacing utilities — use sparingly, prefer component padding. */
+.mt-3xl { margin-block-start: var(--space-3xl); }
+.mt-4xl { margin-block-start: var(--space-4xl); }

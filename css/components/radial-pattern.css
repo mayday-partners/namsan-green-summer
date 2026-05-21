@@ -1,24 +1,22 @@
-/* radial-pattern.css — decorative concentric rings.
-   Use as a positioned, contained decoration (overflow:hidden parent).
-   --pattern-radial-light has a neon base; --pattern-radial-dark has a
-   dark-surface base. Apply --soft for half-opacity. */
+@layer components {
+  /* Radial pattern utilities — apply on positioned absolute decorations only.
+     Documented in DESIGN.md "Radial pattern motif (CSS only)". */
+  .radial-pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.38;
+  }
 
-.radial-pattern {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.38;
-}
+  .radial-pattern--light {
+    background: var(--pattern-radial-light);
+  }
 
-.radial-pattern--light {
-  background: var(--pattern-radial-light);
-}
+  .radial-pattern--dark {
+    background: var(--pattern-radial-dark);
+  }
 
-.radial-pattern--dark {
-  background: var(--pattern-radial-dark);
-}
-
-/* must remain last in source to override --light/--dark base opacity */
-.radial-pattern--soft {
-  opacity: 0.18;
+  .radial-pattern--soft {
+    opacity: 0.18;
+  }
 }

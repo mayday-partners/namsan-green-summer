@@ -1,0 +1,43 @@
+@layer components {
+  .seat-guide {
+    position: relative;
+    min-height: 260px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    padding: 72px var(--space-xl) var(--space-xl);
+    background: var(--color-ink);
+    border-radius: var(--radius-md);
+  }
+
+  .seat-guide span {
+    position: absolute;
+    left: var(--space-xl);
+    right: var(--space-xl);
+    top: 22px;
+    min-height: 36px;
+    display: grid;
+    place-items: center;
+    background: var(--color-primary);
+    color: var(--color-black);
+    border-radius: var(--radius-full);
+    font-weight: var(--fw-display);
+  }
+
+  .seat-guide i {
+    display: block;
+    min-height: 58px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-xs);
+  }
+
+  .seat-guide strong {
+    grid-column: 1 / -1;
+    display: grid;
+    place-items: center;
+    min-height: 44px;
+    color: var(--color-paper);
+    border: 1px dashed rgba(255, 255, 255, 0.28);
+    border-radius: var(--radius-sm);
+  }
+}

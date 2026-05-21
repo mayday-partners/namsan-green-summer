@@ -1,0 +1,193 @@
+@layer components {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    display: grid;
+    grid-template-columns: 210px 1fr var(--size-menu-icon);
+    align-items: center;
+    min-height: var(--size-header-h);
+    background: var(--color-overlay-paper);
+    border-bottom: 1px solid var(--color-line);
+    backdrop-filter: blur(16px);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding-inline: var(--space-2xl);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-display);
+    line-height: 1.08;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: var(--size-brand-mark-w);
+    height: var(--size-brand-mark-h);
+    background: var(--color-black);
+    color: var(--color-primary);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-display);
+    transform: skewX(var(--skew-brand-mark));
+  }
+
+  .gnb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(22px, 4vw, 62px);
+  }
+
+  .gnb-item {
+    position: relative;
+  }
+
+  .gnb-item > a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--size-header-h);
+    color: var(--color-ink);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-headline);
+  }
+
+  .gnb-item:hover > a,
+  .gnb-item:focus-within > a,
+  .gnb-item > a[aria-current='page'] {
+    color: var(--color-neon-deep);
+  }
+
+  .submenu {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    min-width: 210px;
+    padding: 10px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-black);
+    box-shadow: var(--shadow-base);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -6px);
+    transition: opacity var(--dur-fast) var(--ease-out),
+                transform var(--dur-fast) var(--ease-out),
+                visibility var(--dur-fast) var(--ease-out);
+  }
+
+  .gnb-item:hover .submenu,
+  .gnb-item:focus-within .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+
+  .submenu a {
+    display: block;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--color-line);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-emphasis);
+  }
+
+  .submenu a:last-child {
+    border-bottom: 0;
+  }
+
+  .submenu a:hover {
+    background: var(--color-primary);
+  }
+
+  .menu-icon {
+    width: var(--size-menu-icon);
+    height: var(--size-header-h);
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    border-left: 1px solid var(--color-line);
+  }
+
+  .menu-icon span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--color-black);
+  }
+
+  .skip-link {
+    position: fixed;
+    top: -100px;
+    left: var(--space-md);
+    z-index: var(--z-skip-link);
+    padding: var(--space-md) var(--space-xl);
+    background: var(--color-primary);
+    color: var(--color-black);
+    font-size: var(--fs-label-en);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--tracking-label);
+    border-radius: var(--radius-xs);
+    transition: top var(--dur-fast) var(--ease-out);
+  }
+
+  .skip-link:focus {
+    top: var(--space-md);
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 980px) {
+    .site-header {
+      grid-template-columns: 1fr 64px;
+    }
+    .brand {
+      min-height: var(--size-header-h);
+    }
+    .gnb {
+      grid-column: 1 / -1;
+      order: 3;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      padding: 0 18px 16px;
+    }
+    .gnb-item > a {
+      min-height: 38px;
+    }
+    .submenu {
+      position: static;
+      display: none;
+      min-width: 100%;
+      transform: none;
+      box-shadow: none;
+    }
+    .gnb-item:hover .submenu,
+    .gnb-item:focus-within .submenu {
+      display: block;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .site-header {
+      position: relative;
+    }
+    .brand {
+      padding-inline: 18px;
+    }
+    .gnb {
+      justify-content: flex-start;
+    }
+    .gnb-item {
+      width: calc(50% - 9px);
+    }
+    .gnb-item:last-child {
+      width: 100%;
+    }
+    .gnb-item > a {
+      width: 100%;
+      justify-content: center;
+      border: 1px solid var(--color-line);
+    }
+  }
+}

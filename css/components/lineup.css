@@ -1,0 +1,92 @@
+@layer components {
+  .lineup-image {
+    margin-block-start: var(--space-xl);
+  }
+
+  .lineup-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: var(--color-black);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Decorative lineup grid (cards + heading) — kept for reference; the canonical
+     Summer Night page uses .lineup-image (baked-in PNG) instead. */
+  .lineup-visual {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-lg);
+    margin-block-start: var(--space-xl);
+    padding: var(--space-xl);
+    background:
+      radial-gradient(circle at 20% 24%, rgba(255, 180, 0, 0.24), transparent 26%),
+      radial-gradient(circle at 70% 24%, rgba(57, 255, 20, 0.24), transparent 28%),
+      var(--color-lineup-card-bg);
+    border-radius: var(--radius-lg);
+  }
+
+  .lineup-heading {
+    grid-column: 1 / -1;
+    color: var(--color-black);
+    font-size: clamp(2.125rem, 5vw, 3.625rem);
+    font-weight: var(--fw-display);
+    line-height: 0.9;
+    text-decoration: underline;
+    text-decoration-color: var(--color-lineup-live);
+    text-decoration-thickness: 8px;
+    text-underline-offset: 4px;
+  }
+
+  .lineup-card {
+    min-height: 230px;
+    display: grid;
+    align-content: end;
+    justify-items: center;
+    padding: var(--space-xl);
+    background:
+      radial-gradient(circle at 50% 28%, rgba(57, 255, 20, 0.72) 0 64px, transparent 65px),
+      var(--color-lineup-card-bg);
+    border-radius: var(--radius-xl);
+    text-align: center;
+  }
+
+  .lineup-card.live {
+    background:
+      radial-gradient(circle at 50% 34%, var(--color-lineup-live) 0 74px, transparent 75px),
+      var(--color-lineup-card-bg);
+  }
+
+  .lineup-card span {
+    color: var(--color-muted);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-display);
+  }
+
+  .lineup-card strong {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+    min-height: 42px;
+    margin-block-start: var(--space-md);
+    padding: 0 var(--space-lg);
+    background: var(--color-lineup-base);
+    color: var(--color-paper);
+    font-size: var(--fs-headline-sm);
+    font-weight: var(--fw-display);
+  }
+
+  .lineup-card.live strong {
+    background: var(--color-black);
+    color: var(--color-lineup-live);
+  }
+
+  .lineup-card p {
+    margin: var(--space-md) 0 0;
+    color: var(--color-black);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-emphasis);
+  }
+}
