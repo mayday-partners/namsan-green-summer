@@ -14,6 +14,7 @@
   --color-primary:    #39ff14;   /* Neon Green — single brand accent */
   --color-neon-deep:  #22c40f;   /* Active text variant (gnb-link-active, --shadow-text-hard) */
   --color-black:      #080808;   /* Brand-mark surface, footer, primary-CTA base */
+  --color-brand-ink:  #111111;   /* Quiet wordmark text and line icon */
 
   /* Program callouts — scoped per DESIGN.md */
   --color-reserve-local:   #ffbd00;   /* Fun&Walk reserve-button-local only */
@@ -109,8 +110,8 @@
   --size-brand-mark-w:     42px;
   --size-brand-mark-h:     28px;
   --size-menu-icon:        72px;
-  --size-header-h:         66px;
-  --size-header-h-mobile:  60px;
+  --size-header-h:         56px;
+  --size-header-h-mobile:  52px;
   --size-cta-min-h:        48px;
   --size-cta-min-h-small:  40px;
   --size-cta-min-w:        250px;

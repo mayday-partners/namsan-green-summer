@@ -1,8 +1,19 @@
 @layer components {
   .sub-visual {
+    position: relative;
     overflow: hidden;
-    background: var(--color-soft);
+    background: var(--color-black);
     border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .sub-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.54) 34%, rgba(0, 0, 0, 0.20) 68%, rgba(0, 0, 0, 0.34) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.46));
+    pointer-events: none;
   }
 
   .sub-visual img {
