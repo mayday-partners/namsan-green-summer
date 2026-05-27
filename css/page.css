@@ -60,6 +60,56 @@
     margin-block-start: var(--space-2xl);
   }
 
+  .operation-overview > p {
+    max-width: 900px;
+    margin: 0 0 var(--space-xl);
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-headline);
+  }
+
+  .operation-card-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .operation-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-xl);
+    background: var(--color-paper);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+  }
+
+  .operation-card h4 {
+    margin: 0 0 var(--space-md);
+    font-size: var(--fs-headline-sm);
+    font-weight: var(--fw-headline);
+  }
+
+  .operation-card p {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-body);
+    line-height: var(--lh-body-sm);
+  }
+
+  .operation-card strong {
+    display: block;
+    margin-block-start: auto;
+    color: var(--color-neon-deep);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-display);
+    line-height: var(--lh-body-sm);
+  }
+
+  @media (max-width: 620px) {
+    .operation-card-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* Course card — Fun&Walk course.html */
   .course-card > p {
     max-width: 880px;

@@ -6,6 +6,10 @@
     margin-block-start: var(--space-4xl);
   }
 
+  .reservation-actions--single {
+    grid-template-columns: minmax(220px, 420px);
+  }
+
   .reserve-button {
     min-height: var(--size-reserve-btn-h);
     display: grid;
