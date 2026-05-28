@@ -3,10 +3,21 @@
 // 동적 렌더 모듈은 없음 (data/*.json + 모듈 시스템 폐기 — Phase 7).
 import './components/site-header.js';
 import './components/site-footer.js';
+import { initScrollToTop } from './components/scroll-to-top.js';
 
 // Hash navigation — 페이지 로드 직후 / hashchange 시 anchor 스크롤 보정.
 window.addEventListener('hashchange', resolveHash);
-document.addEventListener('DOMContentLoaded', resolveHash);
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPageBehavior);
+} else {
+  initPageBehavior();
+}
+
+function initPageBehavior() {
+  resolveHash();
+  initScrollToTop();
+}
 
 function resolveHash() {
   if (!location.hash) return;

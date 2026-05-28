@@ -140,6 +140,17 @@
     font-weight: var(--fw-headline);
   }
 
+  .course-map-image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 68vh;
+    margin-inline: auto;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+  }
+
   .course-map {
     position: relative;
     min-height: 520px;
@@ -229,6 +240,17 @@
     margin: 0 0 var(--space-xl);
     font-size: var(--fs-headline-md);
     font-weight: var(--fw-headline);
+  }
+
+  .garden-map-image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 68vh;
+    margin-inline: auto;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
   }
 
   .garden-map {

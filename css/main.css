@@ -15,6 +15,7 @@
 /* Generic UI */
 @import url('components/button.css')                  layer(components);
 @import url('components/radial-pattern.css')          layer(components);
+@import url('components/scroll-to-top.css')           layer(components);
 
 /* Home layout */
 @import url('components/wire-section.css')            layer(components);
