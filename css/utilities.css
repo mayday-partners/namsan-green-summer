@@ -8,6 +8,59 @@
   font-size: var(--fs-body-sm);
 }
 
-/* Spacing utilities — use sparingly, prefer component padding. */
+/* Spacing utilities — use sparingly, prefer component padding.
+   Logical properties: mt = block-start(위), mb = block-end(아래),
+   ml = inline-start(좌, LTR), mr = inline-end(우, LTR).
+   Scale matches --space-* tokens (xs ~ 6xl). */
+
+/* margin-top */
+.mt-0   { margin-block-start: 0; }
+.mt-xs  { margin-block-start: var(--space-xs); }
+.mt-sm  { margin-block-start: var(--space-sm); }
+.mt-md  { margin-block-start: var(--space-md); }
+.mt-lg  { margin-block-start: var(--space-lg); }
+.mt-xl  { margin-block-start: var(--space-xl); }
+.mt-2xl { margin-block-start: var(--space-2xl); }
 .mt-3xl { margin-block-start: var(--space-3xl); }
 .mt-4xl { margin-block-start: var(--space-4xl); }
+.mt-5xl { margin-block-start: var(--space-5xl); }
+.mt-6xl { margin-block-start: var(--space-6xl); }
+
+/* margin-bottom */
+.mb-0   { margin-block-end: 0; }
+.mb-xs  { margin-block-end: var(--space-xs); }
+.mb-sm  { margin-block-end: var(--space-sm); }
+.mb-md  { margin-block-end: var(--space-md); }
+.mb-lg  { margin-block-end: var(--space-lg); }
+.mb-xl  { margin-block-end: var(--space-xl); }
+.mb-2xl { margin-block-end: var(--space-2xl); }
+.mb-3xl { margin-block-end: var(--space-3xl); }
+.mb-4xl { margin-block-end: var(--space-4xl); }
+.mb-5xl { margin-block-end: var(--space-5xl); }
+.mb-6xl { margin-block-end: var(--space-6xl); }
+
+/* margin-left */
+.ml-0   { margin-inline-start: 0; }
+.ml-xs  { margin-inline-start: var(--space-xs); }
+.ml-sm  { margin-inline-start: var(--space-sm); }
+.ml-md  { margin-inline-start: var(--space-md); }
+.ml-lg  { margin-inline-start: var(--space-lg); }
+.ml-xl  { margin-inline-start: var(--space-xl); }
+.ml-2xl { margin-inline-start: var(--space-2xl); }
+.ml-3xl { margin-inline-start: var(--space-3xl); }
+.ml-4xl { margin-inline-start: var(--space-4xl); }
+.ml-5xl { margin-inline-start: var(--space-5xl); }
+.ml-6xl { margin-inline-start: var(--space-6xl); }
+
+/* margin-right */
+.mr-0   { margin-inline-end: 0; }
+.mr-xs  { margin-inline-end: var(--space-xs); }
+.mr-sm  { margin-inline-end: var(--space-sm); }
+.mr-md  { margin-inline-end: var(--space-md); }
+.mr-lg  { margin-inline-end: var(--space-lg); }
+.mr-xl  { margin-inline-end: var(--space-xl); }
+.mr-2xl { margin-inline-end: var(--space-2xl); }
+.mr-3xl { margin-inline-end: var(--space-3xl); }
+.mr-4xl { margin-inline-end: var(--space-4xl); }
+.mr-5xl { margin-inline-end: var(--space-5xl); }
+.mr-6xl { margin-inline-end: var(--space-6xl); }
