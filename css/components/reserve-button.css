@@ -38,6 +38,10 @@
     background: var(--color-reserve-global);
   }
 
+  .reserve-button.primary {
+    background: var(--color-primary);
+  }
+
   .reserve-button:hover,
   .reserve-button:focus-visible {
     transform: translateY(-2px);
