@@ -122,6 +122,7 @@ sizes:
   sub-visual-h-min:   300px  # sub-page hero image min height (clamp lower)
   sub-visual-h-max:   430px  # sub-page hero image max height (clamp upper)
   container-max:      980px  # global content column width
+  venue-map-h:        280px  # info 오시는 길 venue 지도(Kakao SDK) 임베드 높이
 components:
   site-header:
     backgroundColor: "{colors.paper}"
@@ -512,6 +513,7 @@ Dimension primitives for component fixtures. Defined in the YAML `sizes:` block 
 - **`reserve-btn-h`** (76 px) — Fun&Walk reserve-button tall card. Large emphasis CTA.
 - **`sub-visual-h-min` / `sub-visual-h-max`** (300 / 430 px) — sub-page hero image strip height via `clamp(300px, 30vw, 430px)`.
 - **`container-max`** (980 px) — global content column width.
+- **`venue-map-h`** (280 px) — info 오시는 길 venue 지도(Kakao SDK 임베드) 높이. `*-map` 표면 규칙대로 `radius-lg` 모서리.
 
 ## Components
 

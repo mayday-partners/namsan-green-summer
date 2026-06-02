@@ -120,6 +120,7 @@
   --size-sub-visual-h-min: 300px;
   --size-sub-visual-h-max: 430px;
   --size-container-max:    980px;
+  --size-venue-map-h:      280px;
 
   /* Computed: sub-page hero height */
   --sub-visual-height: clamp(var(--size-sub-visual-h-min), 30vw, var(--size-sub-visual-h-max));
