@@ -28,5 +28,16 @@ function resolveHash() {
   const target = document.getElementById(id);
   if (!target) return;
   if (target instanceof HTMLDetailsElement) target.open = true;
-  target.scrollIntoView({ behavior: 'auto', block: 'start' });
+  scrollToWithHeaderOffset(target);
+}
+
+// 헤더가 sticky/fixed로 콘텐츠 위에 떠 있을 때 그 높이만큼 덜 스크롤한다.
+// 실제 .site-header 높이를 측정하므로 gnb wrap(2행) 등 가변 높이도 정확히 보정.
+function scrollToWithHeaderOffset(target) {
+  const header = document.querySelector('.site-header');
+  const stuck =
+    header && ['sticky', 'fixed'].includes(getComputedStyle(header).position);
+  const offset = stuck ? header.offsetHeight : 0;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(top, 0), behavior: 'auto' });
 }
