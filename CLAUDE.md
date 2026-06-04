@@ -20,7 +20,7 @@
 2. **공지/FAQ 콘텐츠는 HTML에 직접 작성** — 시안 단순화 방침에 따라 정적 마크업으로 작성. 같은 콘텐츠가 두 페이지에 들어갈 경우 review 의무 (lint 자동 검출 없음). 동적 시스템 재도입은 사용자 명시 승인 필요.
 3. **동일 콘텐츠 중복 시 review 의무** — 홈의 공지 미리보기와 `community/index.html` 전체 목록이 같은 항목이면 두 곳 모두 동시 갱신. drift 발생 시 사용자 보고.
 4. **인라인 `style` 속성 금지** — 색상/그라데이션은 컴포넌트 modifier 또는 CSS 변수로.
-5. **`<script type="module">` 사용. 전역 `<script src>` 금지**, 전역 변수 금지.
+5. **`<script type="module">` 사용. 전역 `<script src>` 금지**, 전역 변수 금지. 예외: FOUC(언어 깜빡임) 방지용 `js/lang-init.js` 단 1개만 모든 페이지 head에서 stylesheet `<link>` 앞에 동기 `<script src>`로 로드 (전역 변수 없는 IIFE — CSP `script-src 'self'`가 인라인을 차단하므로 외부 파일이어야 함). 신규 기능 스크립트는 이 예외를 확장하지 말 것.
 6. **`DESIGN.md`/`tokens.css`에 없는 값 직접 사용 금지** — 대상: 색상·spacing·radius·typography·**size**(고정 dimension, 예: 48px icon)·**alpha 변형**(dark-context 또는 program color soft variant 등 rgba 패턴). `DESIGN.md` 먼저 등록 → `tokens.css`에 동일 이름으로 매핑 → 컴포넌트 적용. 단 다음은 예외: (a) `?spec=1` dev tooling 내부 매직값, (b) 컴포넌트 내부 좌표(hamburger lines 등 1회 사용 절대좌표).
 7. **`!important` 금지** (접근성 fallback 제외).
 8. **빌드 도구·npm 의존성 추가 금지** — 사용자가 명시 승인하기 전까지 No-build 원칙 유지.
@@ -122,6 +122,8 @@
 전 페이지에 영어/한국어 인라인 토글이 적용돼 있다 (2026-06-04 도입). **빌드 도구 없이 정적 HTML에 두 언어를 모두 마크업**하고 비활성 언어를 CSS로 숨기는 방식 (JSON 사전·동적 시스템 아님 — 룰 2 정합).
 
 - **메커니즘**: `<html lang="ko" data-lang="ko">` → `js/components/i18n.js`가 토글·localStorage(`ns-lang`)·`<title>` 교체 담당. 비활성 언어 숨김 규칙은 `css/utilities.css`(**utilities 레이어 필수** — pages 레이어 `display` 규칙을 이겨야 함, components 레이어에 두면 home.css/page.css에 가려짐). 토글 컴포넌트 스타일은 `css/components/i18n.css`. 토글 버튼은 `partials/header.html`에만 존재(JS 필요).
+- **FOUC(언어 깜빡임) 방지(2026-06-04 적용)**: `js/lang-init.js`를 모든 페이지 head의 stylesheet `<link>` **앞**에서 동기 `<script src>`로 로드. 첫 페인트 전에 (1) 저장 언어(`localStorage('ns-lang')`)를 `<html data-lang>`에 확정, (2) 비활성 언어 숨김 규칙을 크리티컬 `<style>`로 head에 선주입. (2)가 필수인 이유: 숨김 규칙이 `css/utilities.css`(main.css `@import` 체인 끝)에 있어 느린 네트워크에선 `data-lang`만으로는 첫 페인트 때 ko/en이 둘 다 보였다 사라지는 깜빡임이 남는다. 인라인 스크립트는 CSP(`script-src 'self'`)가 차단하므로 외부 파일 사용. STORAGE_KEY(`ns-lang`)·허용값(`ko`/`en`)은 `js/components/i18n.js`와, 주입 숨김 규칙은 `css/utilities.css`와 각각 1:1 동기 의무. 신규 페이지 추가 시 이 `<script src>` 한 줄도 head에 포함.
+- **fallback 헤더/푸터도 이중언어(2026-06-04 적용)**: `<site-header>`/`<site-footer>` fallback 마크업(하이드레이션 전 첫 페인트 baseline)도 `partials/header.html`/`partials/footer.html`와 동일하게 ko/en 양쪽 span을 가진다 — 그래야 partial fetch 전에도 헤더/푸터가 깜빡임 없이 올바른 언어로 표시됨. 메뉴/브랜드/주소 문구 변경 시 partial 1곳 + fallback 14곳(페이지별) 모두 동시 갱신 의무 (lint 자동 검출 없음 → review 필수). 단 `aria-label`은 한국어 고정.
 - **콘텐츠 편집 시 두 언어 동시 갱신 의무** (lint 자동 검출 없음 → review 필수). 한국어 블록을 추가/수정하면 대응 영어 블록도 같은 PR에서. 패턴:
   ```html
   <p lang="ko">한국어</p>
@@ -129,7 +131,7 @@
   ```
   헤딩 내부 일부만이면 `<span lang="ko">/<span lang="en">`. `<dl>` dt/dd, `<ul>/<ol>` li도 각각 두 벌.
 - **복제 불필요**: 고유명사(`Fun&Walk`/`Summer Night`/`Summer Garden`/`NS`), 순수 숫자·시각, 지번 주소 단독, `2026.05.20` 형식 날짜.
-- **v1 미적용(추후 과제)**: `img[alt]`·`aria-label`·`og`/`description` 메타·fallback 헤더/푸터는 한국어 고정. FOUC 방지 인라인 스크립트 미적용(htmlhint `inline-script-disabled` 때문 — 기본 ko라 영향 미미).
+- **v1 미적용(추후 과제)**: `img[alt]`·`aria-label`·`og`/`description` 메타는 한국어 고정.
 - `aria-labelledby` 타깃 heading을 ko/en으로 복제할 땐 en heading id는 `<원래id>-en` (id-unique).
 
 ---
