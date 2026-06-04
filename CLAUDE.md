@@ -117,6 +117,23 @@
 
 ---
 
+## 다국어(i18n) 작업 시 — ko/en 인라인 토글
+
+전 페이지에 영어/한국어 인라인 토글이 적용돼 있다 (2026-06-04 도입). **빌드 도구 없이 정적 HTML에 두 언어를 모두 마크업**하고 비활성 언어를 CSS로 숨기는 방식 (JSON 사전·동적 시스템 아님 — 룰 2 정합).
+
+- **메커니즘**: `<html lang="ko" data-lang="ko">` → `js/components/i18n.js`가 토글·localStorage(`ns-lang`)·`<title>` 교체 담당. 비활성 언어 숨김 규칙은 `css/utilities.css`(**utilities 레이어 필수** — pages 레이어 `display` 규칙을 이겨야 함, components 레이어에 두면 home.css/page.css에 가려짐). 토글 컴포넌트 스타일은 `css/components/i18n.css`. 토글 버튼은 `partials/header.html`에만 존재(JS 필요).
+- **콘텐츠 편집 시 두 언어 동시 갱신 의무** (lint 자동 검출 없음 → review 필수). 한국어 블록을 추가/수정하면 대응 영어 블록도 같은 PR에서. 패턴:
+  ```html
+  <p lang="ko">한국어</p>
+  <p lang="en">English</p>
+  ```
+  헤딩 내부 일부만이면 `<span lang="ko">/<span lang="en">`. `<dl>` dt/dd, `<ul>/<ol>` li도 각각 두 벌.
+- **복제 불필요**: 고유명사(`Fun&Walk`/`Summer Night`/`Summer Garden`/`NS`), 순수 숫자·시각, 지번 주소 단독, `2026.05.20` 형식 날짜.
+- **v1 미적용(추후 과제)**: `img[alt]`·`aria-label`·`og`/`description` 메타·fallback 헤더/푸터는 한국어 고정. FOUC 방지 인라인 스크립트 미적용(htmlhint `inline-script-disabled` 때문 — 기본 ko라 영향 미미).
+- `aria-labelledby` 타깃 heading을 ko/en으로 복제할 땐 en heading id는 `<원래id>-en` (id-unique).
+
+---
+
 ## 응답·작업 스타일
 
 - 한국어. 간결. 이모지 금지.

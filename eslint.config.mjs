@@ -40,6 +40,8 @@ export default [
         cancelAnimationFrame: 'readonly',
         // Web Components
         customElements: 'readonly',
+        CustomEvent: 'readonly',
+        localStorage: 'readonly',
         // Standard library
         Promise: 'readonly',
         Map: 'readonly',

@@ -147,6 +147,14 @@ components:
   submenu-item-hover:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.ink}"
+  lang-toggle:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.full}"
+  lang-toggle-active:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.primary}"
+    rounded: "{rounded.full}"
   poster-hero:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
@@ -520,6 +528,10 @@ Dimension primitives for component fixtures. Defined in the YAML `sizes:` block 
 ### Site header
 
 Sticky three-column grid on desktop (`210px 1fr 72px`). Left column holds the brand (NS inlay + two-line title). Center column holds the gnb (five items, hover-reveal submenus). Right column holds the hamburger trigger. Submenu drops from the gnb-item with `opacity / transform` transition (no JS — pure CSS). On screens < 980 px the gnb wraps into a second row; submenu becomes static. On screens < 620 px the header becomes non-sticky and gnb items become 50%-wide tiles.
+
+### Language toggle
+
+Segmented pill control at the header's right column (KO / EN). Resting buttons are transparent over a `paper` pill with a 1 px `--color-line` border and `ink` text. The active language button mirrors the brand-mark pair — `black` bg with `primary` text. The whole site renders both Korean and English inline; `html[data-lang]` decides which language is visible (the inactive one is `display:none`). The toggle lives only in the hydrated header partial (requires JS); the no-JS fallback stays Korean-only.
 
 ### Brand mark
 

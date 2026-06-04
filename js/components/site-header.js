@@ -19,6 +19,8 @@ class SiteHeader extends HTMLElement {
       this.innerHTML = await res.text();
       this.#hydrated = true;
       this.#markCurrent();
+      // 언어 토글 등 partial 내부 컨트롤을 i18n 모듈이 재동기화하도록 알림.
+      document.dispatchEvent(new CustomEvent('ns:hydrated'));
     } catch (err) {
       console.error('[site-header] partial load failed:', err);
       // fallback content stays visible

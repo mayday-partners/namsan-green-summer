@@ -3,6 +3,7 @@
 // 동적 렌더 모듈(data/*.json + 모듈 시스템)은 폐기 — venue-map은 HTML data-* 속성만 읽는다.
 import './components/site-header.js';
 import './components/site-footer.js';
+import { initI18n } from './components/i18n.js';
 import { initScrollToTop } from './components/scroll-to-top.js';
 import { mountVenueMaps } from './components/venue-map.js';
 
@@ -16,6 +17,7 @@ if (document.readyState === 'loading') {
 }
 
 function initPageBehavior() {
+  initI18n();
   resolveHash();
   initScrollToTop();
   mountVenueMaps();

@@ -1,5 +1,13 @@
 /* Utilities — single-purpose helpers (BEM exception by intent). */
 
+/* 인라인 다국어(ko/en): 본문에 두 언어가 모두 존재하고 비활성 언어를 숨긴다.
+   html[data-lang]는 js/components/i18n.js가 설정. 기본값 ko이므로 한국어 방문자는 깜빡임 없음.
+   utilities 레이어(최강)에 둬서 pages 레이어의 display 규칙을 확실히 이긴다. */
+html[data-lang='ko'] [lang='en'],
+html[data-lang='en'] [lang='ko'] {
+  display: none;
+}
+
 /* Inline error slot rendered by JS modules (notice-list, faq-list)
    when fetch fails or templates are missing. */
 .fallback-error {

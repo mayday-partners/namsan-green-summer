@@ -4,7 +4,7 @@
     top: 0;
     z-index: var(--z-header);
     display: grid;
-    grid-template-columns: 190px 1fr;
+    grid-template-columns: 190px 1fr auto;
     align-items: center;
     min-height: var(--size-header-h);
     background: var(--color-overlay-paper);
@@ -188,7 +188,7 @@
 
   @media (max-width: 760px) {
     .site-header {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr auto;
     }
     .brand,
     .site-brand {

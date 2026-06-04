@@ -11,6 +11,7 @@
 /* Site chrome */
 @import url('components/site-header.css')             layer(components);
 @import url('components/footer.css')                  layer(components);
+@import url('components/i18n.css')                     layer(components);
 
 /* Generic UI */
 @import url('components/button.css')                  layer(components);

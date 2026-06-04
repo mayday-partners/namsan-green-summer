@@ -1,0 +1,54 @@
+@layer components {
+  /* 비활성 언어 숨김 규칙은 css/utilities.css(utilities 레이어)에 있다.
+     pages 레이어(home.css/page.css)의 display 규칙을 이기려면 최강 레이어가 필요하기 때문. */
+
+  /* 언어 토글 — 헤더 우측 segmented control (partial에만 존재, JS 필요) */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    justify-self: end;
+    align-self: center;
+    margin-inline-end: var(--space-2xl);
+    padding: var(--space-xs);
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-full);
+  }
+
+  .lang-toggle__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 28px;
+    padding: 0 var(--space-md);
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-kr);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-headline);
+    letter-spacing: var(--tracking-badge);
+    border: 0;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+  }
+
+  /* 활성 언어 버튼 — brand-mark와 동일 (black bg + primary text, 검증된 대비쌍) */
+  html[data-lang='ko'] .lang-toggle__btn[data-lang-opt='ko'],
+  html[data-lang='en'] .lang-toggle__btn[data-lang-opt='en'] {
+    background: var(--color-black);
+    color: var(--color-primary);
+  }
+
+  .lang-toggle__btn:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 620px) {
+    .lang-toggle {
+      margin-inline-end: var(--container-pad);
+    }
+  }
+}
