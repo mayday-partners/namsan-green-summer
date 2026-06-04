@@ -2,12 +2,14 @@
   /* Poster hero — full-bleed keyvisual on home */
   .poster-hero {
     background: var(--color-paper);
-    border-bottom: 1px solid var(--color-border-soft);
+    /* border-bottom: 1px solid var(--color-border-soft); */
   }
 
   .poster-hero img {
     width: 100%;
+    max-width: 1200px;
     height: auto;
+    margin-inline: auto;
     display: block;
   }
 
@@ -53,7 +55,11 @@
   }
 
   .home-page .program-summary:nth-of-type(odd) {
-    background: linear-gradient(135deg, var(--color-soft), var(--color-paper) 62%);
+    background: linear-gradient(
+      135deg,
+      var(--color-soft),
+      var(--color-paper) 62%
+    );
   }
 
   .program-copy {
