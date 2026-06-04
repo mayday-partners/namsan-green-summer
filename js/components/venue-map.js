@@ -11,6 +11,14 @@ const SDK_SRC =
   `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_JS_KEY}&autoload=false&libraries=services`;
 
 let sdkPromise = null;
+// 이미 지도를 렌더한 슬롯 — 중복 초기화 방지 (언어 토글 시 재호출되므로 필요).
+const mounted = new WeakSet();
+
+// display:none(비활성 언어) 슬롯 판별. Kakao 지도는 크기 0 컨테이너에서
+// 타일 레이아웃을 못 잡으므로, 보이는 슬롯만 렌더해야 한다.
+function isVisible(el) {
+  return el.offsetParent !== null;
+}
 
 function loadKakaoSdk() {
   if (sdkPromise) return sdkPromise;
@@ -65,8 +73,13 @@ async function renderMap(kakao, slot) {
   kakao.maps.event.addListener(map, 'tilesloaded', () => map.relayout());
 }
 
+// 보이는(활성 언어) 슬롯 중 아직 렌더하지 않은 것만 마운트한다.
+// 언어 토글 시 다시 호출되면 새로 보이게 된 슬롯이 그때 렌더된다 — 숨겨진 채
+// 0px로 초기화돼 깨지는 현상(ko/en 중복 마크업)을 막는다.
 export async function mountVenueMaps(root = document) {
-  const slots = root.querySelectorAll('.venue-map');
+  const slots = Array.from(root.querySelectorAll('.venue-map')).filter(
+    (slot) => isVisible(slot) && !mounted.has(slot),
+  );
   if (!slots.length) return;
 
   let kakao;
@@ -78,6 +91,12 @@ export async function mountVenueMaps(root = document) {
   }
 
   slots.forEach((slot) => {
-    renderMap(kakao, slot).catch((err) => console.warn('[venue-map]', err));
+    // SDK 로드(await) 사이 언어가 다시 바뀌어 숨겨졌을 수 있으니 재확인.
+    if (!isVisible(slot) || mounted.has(slot)) return;
+    mounted.add(slot);
+    renderMap(kakao, slot).catch((err) => {
+      mounted.delete(slot); // 실패 시 다음 호출에서 재시도 가능하도록.
+      console.warn('[venue-map]', err);
+    });
   });
 }

@@ -30,6 +30,9 @@ function applyLang(lang) {
   root.setAttribute('lang', lang);
   swapTitle(lang);
   syncControls();
+  // 비활성 언어 슬롯의 가시성이 바뀌었음을 알린다 — venue-map이 새로 보이게 된
+  // 지도를 그 시점에 렌더한다(숨겨진 채 초기화돼 깨지는 현상 방지).
+  document.dispatchEvent(new CustomEvent('ns:langchange', { detail: { lang } }));
 }
 
 // <title data-en="English title">한국어 제목</title> 형태일 때만 교체.

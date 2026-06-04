@@ -21,6 +21,8 @@ function initPageBehavior() {
   resolveHash();
   initScrollToTop();
   mountVenueMaps();
+  // 언어 토글로 새로 보이게 된 지도 슬롯을 그 시점에 렌더(중복 마운트는 내부에서 무시).
+  document.addEventListener('ns:langchange', () => mountVenueMaps());
 }
 
 function resolveHash() {
