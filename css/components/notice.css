@@ -132,7 +132,8 @@
     display: grid;
     gap: var(--space-sm);
     margin: 0;
-    padding-inline-start: 20px;
+    padding-inline-start: 0;
+    list-style: none;
   }
 
   .notice-guide-item li {
@@ -140,10 +141,7 @@
     font-size: var(--fs-body-md);
     font-weight: var(--fw-emphasis);
     line-height: 1.65;
-  }
-
-  .notice-guide-item ol li::marker {
-    font-weight: var(--fw-display);
+    text-align: left;
   }
 
   @media (max-width: 620px) {
