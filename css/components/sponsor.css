@@ -45,6 +45,11 @@
     font-weight: var(--fw-display);
   }
 
+  .sponsor a {
+    display: grid;
+    place-items: center;
+  }
+
   .sponsor img {
     display: block;
     max-width: min(210px, 86%);
