@@ -138,9 +138,10 @@
 
   .notice-guide-item li {
     color: var(--color-ink);
-    font-size: var(--fs-body-md);
-    font-weight: var(--fw-emphasis);
-    line-height: 1.65;
+    /* 본문 단락(.overview-card p)과 동일한 타이포로 정렬: 18px / fw-body / lh 1.8 */
+    font-size: 1.125rem;
+    font-weight: var(--fw-body);
+    line-height: 1.8;
     text-align: left;
   }
 
