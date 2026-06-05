@@ -237,9 +237,6 @@
     .gnb-item {
       width: calc(50% - 9px);
     }
-    .gnb-item:last-child {
-      width: 100%;
-    }
     .gnb-item > a {
       width: 100%;
       justify-content: center;
