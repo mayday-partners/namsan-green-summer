@@ -25,10 +25,18 @@
     font-weight: var(--fw-body);
   }
 
+  .footer-copy__part {
+    display: inline;
+  }
+
   @media (max-width: 620px) {
     .footer-inner {
       display: grid;
       gap: var(--space-lg);
+    }
+
+    .footer-copy__part {
+      display: block;
     }
   }
 
