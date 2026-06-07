@@ -1,0 +1,83 @@
+@layer components {
+  .reservation-notice {
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-header) + 10);
+    display: grid;
+    place-items: center;
+    padding: var(--space-xl);
+    background: rgb(0 0 0 / 45%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .reservation-notice[data-open='true'] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .reservation-notice[hidden] {
+    display: none;
+  }
+
+  .reservation-notice__panel {
+    width: min(100%, 420px);
+    padding: clamp(24px, 5vw, 34px);
+    background: var(--color-paper);
+    border: 1px solid var(--color-black);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-base);
+    text-align: center;
+    transform: translateY(8px);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .reservation-notice[data-open='true'] .reservation-notice__panel {
+    transform: translateY(0);
+  }
+
+  .reservation-notice__eyebrow {
+    margin: 0 0 var(--space-sm);
+    color: var(--color-neon-deep);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-display);
+    letter-spacing: var(--tracking-badge);
+    text-transform: uppercase;
+  }
+
+  .reservation-notice__panel h2 {
+    margin: 0;
+    color: var(--color-black);
+    font-size: var(--fs-headline-md);
+    font-weight: var(--fw-display);
+    line-height: 1.2;
+  }
+
+  .reservation-notice__message {
+    margin: var(--space-lg) 0 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-md);
+    font-weight: var(--fw-emphasis);
+    line-height: 1.6;
+  }
+
+  .reservation-notice__close {
+    min-width: 120px;
+    min-height: 44px;
+    margin-block-start: var(--space-xl);
+    padding: 0 var(--space-xl);
+    background: var(--color-primary);
+    border: 1px solid var(--color-black);
+    border-radius: var(--radius-xs);
+    color: var(--color-black);
+    font: inherit;
+    font-weight: var(--fw-display);
+    cursor: pointer;
+  }
+
+  .reservation-notice__close:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 3px;
+  }
+}

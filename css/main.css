@@ -31,6 +31,7 @@
 @import url('components/info-panel.css')              layer(components);
 @import url('components/program-detail.css')          layer(components);
 @import url('components/reserve-button.css')          layer(components);
+@import url('components/reservation-notice.css')      layer(components);
 @import url('components/map.css')                     layer(components);
 @import url('components/lineup.css')                  layer(components);
 @import url('components/seat-guide.css')              layer(components);
