@@ -40,7 +40,7 @@
 
 /* Page-level wrappers (home + sub-page common) */
 @import url('home.css')                               layer(pages);
-@import url('page.css')                               layer(pages);
+@import url('page.css?v=20260608-zone')               layer(pages);
 
 /* Strongest layer: utilities */
 @import url('utilities.css')                          layer(utilities);
