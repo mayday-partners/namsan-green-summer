@@ -1,5 +1,6 @@
 const NOTICE_SELECTOR = '[data-reservation-pending]';
 const MODAL_ID = 'reservation-notice';
+const DEFAULT_MESSAGE = '2026년 6월 12일 부터 예약 가능합니다';
 let activeTrigger = null;
 
 export function initReservationNotice() {
@@ -12,8 +13,10 @@ export function initReservationNotice() {
 
   triggers.forEach(trigger => {
     trigger.addEventListener('click', event => {
+      if (isReservationOpen(trigger)) return;
       event.preventDefault();
       activeTrigger = trigger;
+      updateNoticeMessage(modal, trigger);
       openNoticeModal(modal, closeButton);
     });
   });
@@ -57,7 +60,7 @@ function ensureNoticeModal() {
 
   const message = document.createElement('p');
   message.className = 'reservation-notice__message';
-  message.textContent = '2026년 6월 12일 부터 예약 가능합니다';
+  message.textContent = DEFAULT_MESSAGE;
 
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
@@ -69,6 +72,20 @@ function ensureNoticeModal() {
   document.body.append(modal);
 
   return modal;
+}
+
+function isReservationOpen(trigger) {
+  const openAt = trigger.dataset.reservationOpenAt;
+  if (!openAt) return false;
+
+  const openAtTime = Date.parse(openAt);
+  return Number.isFinite(openAtTime) && Date.now() >= openAtTime;
+}
+
+function updateNoticeMessage(modal, trigger) {
+  const message = modal.querySelector('.reservation-notice__message');
+  if (!message) return;
+  message.textContent = trigger.dataset.reservationMessage || DEFAULT_MESSAGE;
 }
 
 function openNoticeModal(modal, closeButton) {
