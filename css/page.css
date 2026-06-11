@@ -157,6 +157,110 @@
     object-position: center bottom;
   }
 
+  .funwalk-card :is(
+    #funwalk-card-heading,
+    #funwalk-course,
+    #funwalk-sponsors,
+    #funwalk-notice
+  ) {
+    scroll-margin-top: calc(var(--size-header-h) + var(--space-2xl));
+  }
+
+  .funwalk-sponsor-guide > p {
+    max-width: 860px;
+  }
+
+  .sponsor-item-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+    margin-block-start: var(--space-xl);
+  }
+
+  .sponsor-item-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, var(--color-soft), var(--color-paper) 58%);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  .sponsor-item-card__logo {
+    display: grid;
+    aspect-ratio: 5 / 2;
+    place-items: center;
+    margin-block-end: var(--space-md);
+    padding: var(--space-sm);
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+
+  .sponsor-item-card__logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .sponsor-item-card__label {
+    align-self: flex-start;
+    margin-block-end: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm);
+    color: var(--color-black);
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-display);
+    line-height: var(--lh-badge-en);
+  }
+
+  .sponsor-item-card h4 {
+    margin: 0 0 var(--space-md);
+    color: var(--color-ink);
+    font-size: var(--fs-headline-sm);
+    font-weight: var(--fw-headline);
+    line-height: var(--lh-headline-sm);
+    word-break: keep-all;
+  }
+
+  .sponsor-item-card dl {
+    display: grid;
+    gap: var(--space-md);
+    margin: 0;
+  }
+
+  .sponsor-item-card dl div {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .sponsor-item-card dt {
+    color: var(--color-neon-deep);
+    font-size: var(--fs-badge-en);
+    font-weight: var(--fw-display);
+    line-height: var(--lh-badge-en);
+  }
+
+  .sponsor-item-card dd {
+    min-width: 0;
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-emphasis);
+    line-height: var(--lh-body-sm);
+    overflow-wrap: anywhere;
+    word-break: keep-all;
+  }
+
+  @media (max-width: 980px) {
+    .sponsor-item-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (max-width: 620px) {
     .funwalk-card {
       padding-inline: var(--space-lg);
@@ -167,7 +271,8 @@
     }
 
     .operation-card-list,
-    .zone-program-list {
+    .zone-program-list,
+    .sponsor-item-grid {
       grid-template-columns: 1fr;
     }
 

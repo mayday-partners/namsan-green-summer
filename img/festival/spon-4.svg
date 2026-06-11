@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 140" role="img" aria-labelledby="title">
+  <title id="title">GC녹십자웰빙</title>
+  <defs>
+    <linearGradient id="gcwb-red" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff0032" />
+      <stop offset="0.45" stop-color="#ff3d2f" />
+      <stop offset="1" stop-color="#ffd000" />
+    </linearGradient>
+    <linearGradient id="gcwb-green" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#07883b" />
+      <stop offset="0.55" stop-color="#91c90f" />
+      <stop offset="1" stop-color="#ffd500" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(24 28)">
+    <path d="M47 0C61 0 72 11 72 25v14h14c14 0 25 11 25 25S100 89 86 89H72v14c0 14-11 25-25 25s-25-11-25-25V89H8c-14 0-25-11-25-25s11-25 25-25h14V25C22 11 33 0 47 0Z" fill="url(#gcwb-green)" />
+    <path d="M47 0C61 0 72 11 72 25v31H47C33 56 22 45 22 31v-6C22 11 33 0 47 0Z" fill="url(#gcwb-red)" />
+    <path d="M8 39h39c14 0 25 11 25 25v25H8c-14 0-25-11-25-25s11-25 25-25Z" fill="url(#gcwb-green)" opacity="0.96" />
+  </g>
+  <text x="152" y="90" fill="#073a68" font-family="Pretendard Variable, Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif" font-size="56" font-weight="900" letter-spacing="-2">GC녹십자웰빙</text>
+</svg>

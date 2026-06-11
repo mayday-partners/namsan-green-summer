@@ -20,7 +20,7 @@
 
 /* Home layout */
 @import url('components/wire-section.css')            layer(components);
-@import url('components/sponsor.css')                 layer(components);
+@import url('components/sponsor.css?v=20260611-sponsor-size') layer(components);
 @import url('components/notice.css')                  layer(components);
 
 /* Sub-page layout */
@@ -40,7 +40,7 @@
 
 /* Page-level wrappers (home + sub-page common) */
 @import url('home.css')                               layer(pages);
-@import url('page.css?v=20260608-zone')               layer(pages);
+@import url('page.css?v=20260611-funwalk-sponsor')    layer(pages);
 
 /* Strongest layer: utilities */
 @import url('utilities.css')                          layer(utilities);
