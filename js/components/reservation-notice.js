@@ -1,6 +1,6 @@
 const NOTICE_SELECTOR = '[data-reservation-pending]';
 const MODAL_ID = 'reservation-notice';
-const DEFAULT_MESSAGE = '2026년 6월 12일 부터 예약 가능합니다';
+const DEFAULT_MESSAGE = '2026년 6월 12일 부터 예약이 가능합니다.';
 let activeTrigger = null;
 
 export function initReservationNotice() {
