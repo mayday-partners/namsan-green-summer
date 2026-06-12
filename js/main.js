@@ -7,6 +7,7 @@ import { initI18n } from './components/i18n.js';
 import { initScrollToTop } from './components/scroll-to-top.js';
 import { mountVenueMaps } from './components/venue-map.js';
 import { initReservationNotice } from './components/reservation-notice.js';
+import { initHomeNoticePopup } from './components/home-notice-popup.js';
 
 // Hash navigation — 페이지 로드 직후 / hashchange 시 anchor 스크롤 보정.
 window.addEventListener('hashchange', resolveHash);
@@ -23,6 +24,7 @@ function initPageBehavior() {
   initScrollToTop();
   mountVenueMaps();
   initReservationNotice();
+  initHomeNoticePopup();
   // 언어 토글로 새로 보이게 된 지도 슬롯을 그 시점에 렌더(중복 마운트는 내부에서 무시).
   document.addEventListener('ns:langchange', () => mountVenueMaps());
 }

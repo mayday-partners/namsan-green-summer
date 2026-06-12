@@ -34,7 +34,7 @@
       href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080808'/><text x='16' y='22' font-family='Pretendard,sans-serif' font-size='14' font-weight='900' fill='%2339ff14' text-anchor='middle'>NS</text></svg>"
     />
     <script src="/js/lang-init.js"></script>
-    <link rel="stylesheet" href="/css/main.css?v=20260612-sponsor-ytn-lg" />
+    <link rel="stylesheet" href="/css/main.css?v=20260612-ticket-notice-strong" />
     <link
       rel="preload"
       as="image"
@@ -365,6 +365,69 @@
       </footer>
     </site-footer>
 
-    <script type="module" src="/js/main.js"></script>
+    <template id="home-notice-popup-template">
+      <div
+        class="home-notice-popup"
+        data-home-notice-popup
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="home-notice-popup-title"
+        aria-describedby="home-notice-popup-desc"
+        aria-hidden="true"
+        hidden
+      >
+        <div class="home-notice-popup__panel">
+          <button
+            class="home-notice-popup__icon-close"
+            type="button"
+            data-home-notice-close
+            aria-label="팝업 닫기"
+          >
+            ×
+          </button>
+          <div class="home-notice-popup__content">
+            <p class="home-notice-popup__eyebrow">NOTICE</p>
+            <h2 id="home-notice-popup-title">
+              남산페스티벌 티켓 예매 관련 중요 공지
+            </h2>
+            <div id="home-notice-popup-desc" class="home-notice-popup__text">
+              <p>남산페스티벌을 기대해 주시는 관객 여러분께 안내드립니다.</p>
+              <p>본 공연은 모든 좌석이 무료로 제공되는 공연입니다.</p>
+              <p>
+                현재 발생하고 있는 암표 거래로 인한 피해를 방지하고자,
+                공연 당일 좌석 배정 및 입장 시 예매자 본인 확인 절차가
+                엄격하게 진행됩니다.
+              </p>
+              <p>
+                예매자 본인의 실물 신분증을 반드시 지참해 주시기 바랍니다.
+                <strong>(타인 양도 및 대리 입장 불가)</strong>
+              </p>
+              <p>
+                프리미엄 거래 등 불법 암표는 구매도 판매도 하지 말아주시길
+                간곡히 부탁드립니다.
+              </p>
+              <p>
+                모두가 즐거운 축제를 만들기 위해 관객 여러분의 동참이
+                필요합니다.
+              </p>
+              <p>감사합니다.</p>
+            </div>
+            <label class="home-notice-popup__check">
+              <input type="checkbox" data-home-notice-hide-today />
+              <span>오늘 하루 보지 않기</span>
+            </label>
+            <button
+              class="home-notice-popup__close"
+              type="button"
+              data-home-notice-close
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <script type="module" src="/js/main.js?v=20260612-ticket-notice"></script>
   </body>
 </html>
