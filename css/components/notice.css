@@ -127,6 +127,29 @@
     line-height: 1.7;
   }
 
+  .faq-group {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .faq-entry {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .faq-entry h4 {
+    margin: 0;
+    color: var(--color-black);
+    font-size: var(--fs-body-lg);
+    font-weight: var(--fw-headline);
+    line-height: 1.5;
+  }
+
+  .faq-entry p {
+    margin: 0;
+    font-weight: var(--fw-body);
+  }
+
   .notice-guide-item ul,
   .notice-guide-item ol {
     display: grid;

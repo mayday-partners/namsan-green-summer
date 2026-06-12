@@ -255,6 +255,25 @@
     word-break: keep-all;
   }
 
+  .shirt-size-guide {
+    margin: var(--space-xl) 0 0;
+  }
+
+  .shirt-size-guide img {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    margin-inline: auto;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-paper);
+  }
+
+  .shirt-size-guide img + img {
+    margin-block-start: var(--space-lg);
+  }
+
   @media (max-width: 980px) {
     .sponsor-item-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
