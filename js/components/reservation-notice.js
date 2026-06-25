@@ -1,6 +1,7 @@
 const NOTICE_SELECTOR = '[data-reservation-pending]';
 const MODAL_ID = 'reservation-notice';
 const DEFAULT_MESSAGE = '2026년 6월 12일 부터 예약이 가능합니다.';
+const DEFAULT_CLOSED_MESSAGE = '사전신청이 마감되었습니다';
 let activeTrigger = null;
 
 export function initReservationNotice() {
@@ -13,10 +14,12 @@ export function initReservationNotice() {
 
   triggers.forEach(trigger => {
     trigger.addEventListener('click', event => {
-      if (isReservationOpen(trigger)) return;
+      const noticeMessage = getReservationNoticeMessage(trigger);
+      if (!noticeMessage) return;
+
       event.preventDefault();
       activeTrigger = trigger;
-      updateNoticeMessage(modal, trigger);
+      updateNoticeMessage(modal, noticeMessage);
       openNoticeModal(modal, closeButton);
     });
   });
@@ -74,18 +77,31 @@ function ensureNoticeModal() {
   return modal;
 }
 
-function isReservationOpen(trigger) {
-  const openAt = trigger.dataset.reservationOpenAt;
-  if (!openAt) return false;
+function getReservationNoticeMessage(trigger) {
+  const now = Date.now();
+  const closeAtTime = parseReservationTime(trigger.dataset.reservationCloseAt);
 
-  const openAtTime = Date.parse(openAt);
-  return Number.isFinite(openAtTime) && Date.now() >= openAtTime;
+  if (Number.isFinite(closeAtTime) && now >= closeAtTime) {
+    return trigger.dataset.reservationClosedMessage || DEFAULT_CLOSED_MESSAGE;
+  }
+
+  const openAtTime = parseReservationTime(trigger.dataset.reservationOpenAt);
+  if (!Number.isFinite(openAtTime) || now < openAtTime) {
+    return trigger.dataset.reservationMessage || DEFAULT_MESSAGE;
+  }
+
+  return '';
 }
 
-function updateNoticeMessage(modal, trigger) {
+function parseReservationTime(value) {
+  if (!value) return NaN;
+  return Date.parse(value);
+}
+
+function updateNoticeMessage(modal, noticeMessage) {
   const message = modal.querySelector('.reservation-notice__message');
   if (!message) return;
-  message.textContent = trigger.dataset.reservationMessage || DEFAULT_MESSAGE;
+  message.textContent = noticeMessage;
 }
 
 function openNoticeModal(modal, closeButton) {

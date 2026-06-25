@@ -7,7 +7,7 @@ import { initI18n } from './components/i18n.js';
 import { initScrollToTop } from './components/scroll-to-top.js';
 import { mountVenueMaps } from './components/venue-map.js';
 import { initReservationNotice } from './components/reservation-notice.js';
-import { initHomeNoticePopup } from './components/home-notice-popup.js';
+import { initHomeNoticePopup } from './components/home-notice-popup.js?v=20260625-night-admission-popup-2';
 
 // Hash navigation — 페이지 로드 직후 / hashchange 시 anchor 스크롤 보정.
 window.addEventListener('hashchange', resolveHash);

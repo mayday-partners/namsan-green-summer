@@ -16,6 +16,13 @@ const POPUP_CONFIGS = [
       location.pathname === '/funwalk/' ||
       location.pathname === '/funwalk/index.html',
   },
+  {
+    templateId: 'night-admission-popup-template',
+    storageKey: 'namsan-night-admission-notice-hidden-date',
+    matches: () =>
+      location.pathname === '/night/' ||
+      location.pathname === '/night/index.html',
+  },
 ];
 
 let previousFocus = null;
@@ -27,7 +34,7 @@ export function initHomeNoticePopup() {
   }
 
   const template = document.getElementById(config.templateId);
-  if (!(template instanceof HTMLTemplateElement)) return;
+  if (!template || template.tagName !== 'TEMPLATE') return;
 
   const fragment = template.content.cloneNode(true);
   const popup = fragment.querySelector(POPUP_SELECTOR);
@@ -68,13 +75,13 @@ function openPopup(popup) {
   requestAnimationFrame(() => {
     popup.dataset.open = 'true';
     const closeButton = popup.querySelector(CLOSE_SELECTOR);
-    if (closeButton instanceof HTMLElement) closeButton.focus();
+    if (typeof closeButton?.focus === 'function') closeButton.focus();
   });
 }
 
 function closePopup(popup, storageKey) {
   const hideToday = popup.querySelector(HIDE_TODAY_SELECTOR);
-  if (hideToday instanceof HTMLInputElement && hideToday.checked) {
+  if (hideToday?.checked) {
     saveHiddenToday(storageKey);
   }
 
@@ -83,7 +90,7 @@ function closePopup(popup, storageKey) {
 
   window.setTimeout(() => {
     popup.remove();
-    if (previousFocus instanceof HTMLElement) previousFocus.focus();
+    if (typeof previousFocus?.focus === 'function') previousFocus.focus();
   }, 160);
 }
 
